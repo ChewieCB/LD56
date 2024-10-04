@@ -17,10 +17,10 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GuiTransitions="*res://addons/simple-gui-transitions/singleton.gd"
-SoundManager="*res://addons/sound_manager/sound_manager.gd"
 BuildTag="*res://config/build_tag/build_tag.gd"
 GlobalSFX="*res://src/utils/singletons/global_sfx/GlobalSFX.tscn"
+GuiTransitions="*res://addons/simple-gui-transitions/singleton.gd"
+SoundManager="*res://addons/sound_manager/sound_manager.gd"
 
 [display]
 
