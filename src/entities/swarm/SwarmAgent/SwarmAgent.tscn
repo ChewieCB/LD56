@@ -31,5 +31,7 @@ shape = SubResource("CircleShape2D_tbyxv")
 
 [node name="Node2D" type="Node2D" parent="."]
 
+[node name="Line2D" type="Line2D" parent="."]
+
 [connection signal="body_entered" from="FlockView" to="." method="_on_flock_view_body_entered"]
 [connection signal="body_exited" from="FlockView" to="." method="_on_flock_view_body_exited"]

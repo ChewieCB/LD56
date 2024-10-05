@@ -34,6 +34,7 @@ func _physics_process(delta: float) -> void:
 	direction = Input.get_vector("left", "right", "up", "down")
 
 	target.global_position = target.global_position.lerp(target.global_position + direction * 800, delta * 0.4)
+	get_nav_path_for_swarm_agents(delta)
 
 
 func _process(delta):
@@ -51,6 +52,14 @@ func _process(delta):
 		add_agent()
 	elif Input.is_action_just_pressed("DEBUG_remove_agent"):
 		remove_agent(swarm_agents[randi_range(0, swarm_agents.size() - 1)])
+
+
+func get_nav_path_for_swarm_agents(delta: float) -> void:
+	var nav_map: RID = get_world_2d().get_navigation_map()
+	for agent in swarm_agents:
+		var from_pos: Vector2 = agent.global_position
+		var to_pos: Vector2 = target.global_position
+		agent.target_path = NavigationServer2D.map_get_path(nav_map, from_pos, to_pos, true)
 
 
 func add_agent(new_position: Vector2 = Vector2.ZERO) -> SwarmAgent:

@@ -24,6 +24,19 @@ var _flock: Array = []
 var _mouse_target: Vector2
 var _velocity: Vector2
 
+const ARRIVE_DISTANCE = 10.0
+var target_path: PackedVector2Array:
+	set(value):
+		target_path = value
+		if target_path:
+			local_tracking_target = target_path[1]
+		$Line2D.clear_points()
+		for point in target_path:
+			$Line2D.add_point(to_local(point))
+			$Line2D.default_color = Color.RED
+			$Line2D.width = 0.5
+var local_tracking_target: Vector2
+
 
 func _ready():
 	randomize()
@@ -32,9 +45,12 @@ func _ready():
 
 
 func _physics_process(_delta):
-	var mouse_vector = Vector2.ZERO
-	if target:
-		mouse_vector = global_position.direction_to(target.global_position) * max_speed * mouse_follow_force
+	_move_boid()
+	
+
+
+func _move_boid() -> void:
+	var path_vector = global_position.direction_to(local_tracking_target) * max_speed * mouse_follow_force
 	
 	# get cohesion, alginment, and separation vectors
 	var vectors = get_flock_status(_flock)
@@ -44,13 +60,18 @@ func _physics_process(_delta):
 	var align_vector = vectors[1] * algin_force
 	var separation_vector = vectors[2] * separation_force
 
-	var acceleration = cohesion_vector + align_vector + separation_vector + mouse_vector
+	var acceleration = cohesion_vector + align_vector + separation_vector + path_vector
 	
 	_velocity = (_velocity + acceleration).limit_length(max_speed)
 	
 	set_velocity(_velocity)
 	move_and_slide()
 	_velocity = velocity
+
+func _move_to(path_position: Vector2) -> bool:
+	
+	
+	return global_position.distance_to(path_position) < ARRIVE_DISTANCE
 
 
 func get_flock_status(flock: Array):
