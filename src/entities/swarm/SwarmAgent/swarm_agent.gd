@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name SwarmAgent
 
 @export var target: Marker2D
 @export var max_speed: = 200.0

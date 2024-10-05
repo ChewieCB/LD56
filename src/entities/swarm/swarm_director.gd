@@ -45,6 +45,30 @@ func _process(delta):
 		state_chart.send_event("spread_out")
 	elif Input.is_action_just_released("spread"):
 		state_chart.send_event("reset_distribution")
+	
+	
+	if Input.is_action_just_pressed("DEBUG_add_agent"):
+		add_agent()
+	elif Input.is_action_just_pressed("DEBUG_remove_agent"):
+		remove_agent(swarm_agents[randi_range(0, swarm_agents.size() - 1)])
+
+
+func add_agent(new_position: Vector2 = Vector2.ZERO) -> SwarmAgent:
+	var new_agent = swarm_agent_scene.instantiate()
+	new_agent.position = new_position
+	new_agent.target = target
+	add_child(new_agent)
+	if new_agent not in swarm_agents:
+		swarm_agents.append(new_agent)
+		swarm_agent_count = swarm_agents.size()
+	
+	return new_agent
+
+
+func remove_agent(agent: SwarmAgent) -> void:
+	swarm_agents.erase(agent)
+	swarm_agent_count = swarm_agents.size()
+	agent.queue_free()
 
 
 func set_swarm_attributes(attributes: Dictionary) -> void:
