@@ -127,6 +127,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SettingUI" parent="." instance=ExtResource("2_ontx6")]
+visible = false
 layout_mode = 1
 offset_left = 461.0
 
