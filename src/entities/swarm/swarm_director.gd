@@ -9,7 +9,7 @@ class_name SwarmDirector
 @export var close_separation: float = 0.2
 @export var far_separation: float = 4.0
 
-var swarm_agents: Array[Node]:
+var swarm_agents: Array:
 	set(value):
 		swarm_agents = value
 		swarm_agent_count = swarm_agents.size()
@@ -21,6 +21,8 @@ var swarm_agents: Array[Node]:
 @export var target_acceleration: float = 0.82
 @export var target_friction: float = 0.06
 
+var removed_agent_debug: Vector2
+
 
 func _ready() -> void:
 	for _i in range(swarm_agent_count):
@@ -28,9 +30,14 @@ func _ready() -> void:
 		var agent = swarm_agent_scene.instantiate()
 		agent.position = Vector2(randf_range(-100, 100), randf_range(-100, 100))
 		agent.target = target
+		agent.died.connect(remove_agent)
 		add_child(agent)
 		if agent not in swarm_agents:
 			swarm_agents.append(agent)
+	
+	await get_tree().physics_frame
+	for obstacle in get_tree().get_nodes_in_group("obstacles"):
+		obstacle.damage_swarm_agent.connect(damage_agent)
 
 
 func _physics_process(delta: float) -> void:
@@ -47,10 +54,14 @@ func _physics_process(delta: float) -> void:
 	
 	# Get centroid position of swarm
 	var avg_agent_pos := Vector2.ZERO
-	for agent in swarm_agents:
-		avg_agent_pos += agent.global_position
-	avg_agent_pos /= swarm_agents.size()
-	centroid.global_position = avg_agent_pos
+	if swarm_agents:
+		for agent in swarm_agents:
+			avg_agent_pos += agent.global_position
+		avg_agent_pos /= swarm_agents.size()
+		
+		centroid.global_position = avg_agent_pos
+	else:
+		centroid.global_position = target.global_position
 
 
 func _process(delta):
@@ -67,11 +78,15 @@ func _process(delta):
 	if Input.is_action_just_pressed("DEBUG_add_agent"):
 		add_agent()
 	elif Input.is_action_just_pressed("DEBUG_remove_agent"):
-		remove_agent(swarm_agents[randi_range(0, swarm_agents.size() - 1)])
+		if swarm_agents:
+			damage_agent(swarm_agents[randi_range(0, swarm_agents.size() - 1)], 2000)
+	
+	queue_redraw()
 
 
 func get_nav_path_for_swarm_agents(delta: float) -> void:
 	var nav_map: RID = get_world_2d().get_navigation_map()
+	swarm_agents = GameManager.clean_array(swarm_agents)
 	for agent in swarm_agents:
 		var from_pos: Vector2 = agent.global_position
 		var to_pos: Vector2 = target.global_position
@@ -83,6 +98,7 @@ func add_agent(new_position: Vector2 = centroid.position) -> SwarmAgent:
 	new_agent.position = new_position
 	new_agent.target = target
 	add_child(new_agent)
+	
 	if new_agent not in swarm_agents:
 		swarm_agents.append(new_agent)
 		swarm_agent_count = swarm_agents.size()
@@ -90,16 +106,20 @@ func add_agent(new_position: Vector2 = centroid.position) -> SwarmAgent:
 	return new_agent
 
 
+func damage_agent(agent: SwarmAgent, damage: float) -> void:
+	agent.damage(damage)
+
+
 func remove_agent(agent: SwarmAgent) -> void:
 	swarm_agents.erase(agent)
 	swarm_agent_count = swarm_agents.size()
-	agent.queue_free()
 
 
 func set_swarm_attributes(attributes: Dictionary) -> void:
 	for agent in swarm_agents:
-		for key in attributes.keys():
-			agent.set(key, attributes[key])
+		if is_instance_valid(agent):
+			for key in attributes.keys():
+				agent.set(key, attributes[key])
 
 
 func _on_distribution_normal_state_entered() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvg4r2wbo4tlj"]
+[gd_scene load_steps=10 format=3 uid="uid://dvg4r2wbo4tlj"]
 
 [ext_resource type="Texture2D" uid="uid://ch2pnl1s0tl1n" path="res://assets/sprite/placeholder/square.png" id="1_3kvaa"]
 [ext_resource type="PackedScene" uid="uid://vuj168p2lkjx" path="res://src/entities/swarm/SwarmAgent/SwarmAgent.tscn" id="2_ghrsu"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://1bwiqif7rpyi" path="res://src/entities/swarm/SwarmDirector.tscn" id="4_tedsl"]
 [ext_resource type="Texture2D" uid="uid://q5pp8mltm8v8" path="res://assets/sprite/bg1.png" id="5_rabt8"]
 [ext_resource type="PackedScene" uid="uid://byj1y3wrwtdtq" path="res://src/ui/pause_ui/PauseUI.tscn" id="6_5iwdd"]
+[ext_resource type="PackedScene" uid="uid://y766oblqkpts" path="res://src/entities/obstacle/core/Obstacle.tscn" id="7_ckelm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6fjwu"]
 size = Vector2(63.9026, 68.9233)
@@ -16,6 +17,8 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(
 outlines = Array[PackedVector2Array]([PackedVector2Array(192, 649, 211, 681, 467, 682, 451, 484, 503, 489, 513, 678, 673, 683, 669, 546, 677, 546, 772, 449, 810, 483, 716, 580, 720, 683, 899, 683, 1028, 527, 975, 420, 1032, 405, 1074, 510, 1172, 527, 1193, 522, 1258, 647, 1273, 751, 1340, 756, 1359, 531, 1128, 341, 905, 267, 858, 378, 817, 364, 807, 342, 851, 264, 742, 276, 728, 265, 718, 161, 668, 161, 658, 269, 568, 262, 589, 333, 539, 344, 513, 255, 413, 216, 391, 398, 344, 385, 342, 370, 368, 200, 204, 137, 117, 259, 98, 413, 15, 408, -90, 418, -32, 557, 39, 568, 125, 521, 165, 607, 284, 520, 308, 560, 198, 645)])
 
 [node name="Demo" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [43.0]
+metadata/_edit_vertical_guides_ = [-153.0]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -429,12 +432,42 @@ target = NodePath("../SwarmDirector/SwarmCentroidMarker")
 [node name="SwarmDirector" parent="." instance=ExtResource("4_tedsl")]
 position = Vector2(615, 551)
 swarm_agent_scene = ExtResource("2_ghrsu")
-swarm_agent_count = 1
+swarm_agent_count = 0
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 visible = false
 
 [node name="PauseUI" parent="CanvasLayer2" instance=ExtResource("6_5iwdd")]
+
+[node name="Obstacle" parent="." instance=ExtResource("7_ckelm")]
+position = Vector2(789, 474)
+rotation = 1.3417
+scale = Vector2(0.564141, 0.564141)
+
+[node name="Obstacle2" parent="." instance=ExtResource("7_ckelm")]
+position = Vector2(1003, 416)
+rotation = 0.186735
+scale = Vector2(0.564141, 0.564141)
+
+[node name="Obstacle3" parent="." instance=ExtResource("7_ckelm")]
+position = Vector2(909, 259)
+rotation = -2.57928
+scale = Vector2(0.564141, 0.564141)
+
+[node name="Obstacle4" parent="." instance=ExtResource("7_ckelm")]
+position = Vector2(559, 332)
+rotation = -2.72506
+scale = Vector2(0.564141, 0.564141)
+
+[node name="Obstacle5" parent="." instance=ExtResource("7_ckelm")]
+position = Vector2(484, 495)
+rotation = 0.507711
+scale = Vector2(0.564141, 0.564141)
+
+[node name="Obstacle6" parent="." instance=ExtResource("7_ckelm")]
+position = Vector2(293, 546)
+rotation = 1.52899
+scale = Vector2(0.564141, 0.564141)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_ocdpm")

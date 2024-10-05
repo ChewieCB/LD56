@@ -93,6 +93,14 @@ DEBUG_remove_agent={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Environment"
+2d_physics/layer_2="Swarm Node"
+2d_physics/layer_3="Swarm Target"
+2d_physics/layer_4="World Boundary"
+2d_physics/layer_5="Area of Effect"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
