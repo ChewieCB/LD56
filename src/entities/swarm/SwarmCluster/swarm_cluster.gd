@@ -4,7 +4,8 @@ class_name SwarmCluster
 @onready var collider = $CollisionShape2D
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 
-@onready var agents: Array[SwarmAgent] = []:
+@onready var agent_parent: Node2D = $Agents
+@onready var agents: Array[Node] = []:
 	set(value):
 		agents = value
 		agent_count = agents.size()
@@ -22,8 +23,11 @@ var agent_count: int
 var speed = 2000
 var accel = 8
 
+
 func _ready() -> void:
 	add_to_group("swarm_cluster")
+	agents = agent_parent.get_children()
+
 
 func set_target(target: Vector2) -> void:
 	nav_agent.target_position = target

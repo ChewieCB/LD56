@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnwna3elypv5f"]
+[gd_scene load_steps=5 format=3 uid="uid://bnwna3elypv5f"]
 
 [ext_resource type="Script" path="res://src/entities/swarm/SwarmCluster/swarm_cluster.gd" id="1_x8o5u"]
 [ext_resource type="Texture2D" uid="uid://d2an8sg7yxult" path="res://icon.svg" id="2_eoe5y"]
+[ext_resource type="PackedScene" uid="uid://vuj168p2lkjx" path="res://src/entities/swarm/SwarmAgent/SwarmAgent.tscn" id="3_psj0k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1xa8m"]
 radius = 16.0
@@ -26,5 +27,49 @@ avoidance_enabled = true
 radius = 16.0
 max_speed = 400.0
 debug_enabled = true
+
+[node name="Agents" type="Node2D" parent="."]
+
+[node name="SwarmAgent" parent="Agents" instance=ExtResource("3_psj0k")]
+position = Vector2(-13, -12)
+
+[node name="SwarmAgent2" parent="Agents" instance=ExtResource("3_psj0k")]
+position = Vector2(-6, -12)
+
+[node name="SwarmAgent3" parent="Agents" instance=ExtResource("3_psj0k")]
+position = Vector2(-11, -3)
+
+[node name="SwarmAgent4" parent="Agents" instance=ExtResource("3_psj0k")]
+position = Vector2(-12, 6)
+
+[node name="SwarmAgent5" parent="Agents" instance=ExtResource("3_psj0k")]
+position = Vector2(0, 10)
+
+[node name="SwarmAgent6" parent="Agents" instance=ExtResource("3_psj0k")]
+position = Vector2(-6, -8)
+
+[node name="SwarmAgent7" parent="Agents" instance=ExtResource("3_psj0k")]
+position = Vector2(9, -13)
+
+[node name="SwarmAgent8" parent="Agents" instance=ExtResource("3_psj0k")]
+position = Vector2(14, -5)
+
+[node name="SwarmAgent9" parent="Agents" instance=ExtResource("3_psj0k")]
+position = Vector2(2, -10)
+
+[node name="SwarmAgent10" parent="Agents" instance=ExtResource("3_psj0k")]
+position = Vector2(7, 1)
+
+[node name="SwarmAgent11" parent="Agents" instance=ExtResource("3_psj0k")]
+position = Vector2(13, 10)
+
+[node name="SwarmAgent12" parent="Agents" instance=ExtResource("3_psj0k")]
+position = Vector2(5, 7)
+
+[node name="SwarmAgent13" parent="Agents" instance=ExtResource("3_psj0k")]
+position = Vector2(-7, 7)
+
+[node name="SwarmAgent14" parent="Agents" instance=ExtResource("3_psj0k")]
+position = Vector2(-11, 11)
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
