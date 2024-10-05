@@ -110,7 +110,7 @@ shape = SubResource("RectangleShape2D_2w7pf")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="StateChartDebugger" parent="CanvasLayer" instance=ExtResource("5_sgetf")]
-offset_left = 960.0
+offset_left = 832.0
 offset_right = -8.0
 offset_bottom = -336.0
 initial_node_to_watch = NodePath("../../BasicEnemy")

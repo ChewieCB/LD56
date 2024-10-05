@@ -16,7 +16,6 @@ radius = 256.0
 
 [node name="BasicEnemy" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 3
 script = ExtResource("1_os4t1")
 
 [node name="Eye" type="Sprite2D" parent="."]
@@ -32,16 +31,14 @@ texture = ExtResource("1_ghanf")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ddoed")
 
-[node name="DetectRange" type="Area2D" parent="."]
+[node name="PlayerDetectRange" type="Area2D" parent="."]
 collision_layer = 0
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectRange"]
 shape = SubResource("CircleShape2D_f2j72")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-
-[node name="NewWanderPosTimer" type="Timer" parent="."]
-wait_time = 0.1
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("2_kalrn")
@@ -59,13 +56,13 @@ script = ExtResource("5_hfphn")
 [node name="toWander" type="Node" parent="StateChart/Root/Movement/Idle"]
 script = ExtResource("7_2dfcw")
 to = NodePath("../../Wander")
-event = &"start_wander"
+event = &"wander_started"
 delay_in_seconds = "0.0"
 
 [node name="toTrack" type="Node" parent="StateChart/Root/Movement/Idle"]
 script = ExtResource("7_2dfcw")
 to = NodePath("../../Track")
-event = &"spot_player"
+event = &"player_spotted"
 delay_in_seconds = "0.0"
 
 [node name="Wander" type="Node" parent="StateChart/Root/Movement"]
@@ -74,13 +71,13 @@ script = ExtResource("5_hfphn")
 [node name="toTrack" type="Node" parent="StateChart/Root/Movement/Wander"]
 script = ExtResource("7_2dfcw")
 to = NodePath("../../Track")
-event = &"spot_player"
+event = &"player_spotted"
 delay_in_seconds = "0.0"
 
 [node name="toFlee" type="Node" parent="StateChart/Root/Movement/Wander"]
 script = ExtResource("7_2dfcw")
 to = NodePath("../../Flee")
-event = &"flee_player"
+event = &"flee_from_player"
 delay_in_seconds = "0.0"
 
 [node name="toIdle" type="Node" parent="StateChart/Root/Movement/Wander"]
@@ -124,9 +121,10 @@ script = ExtResource("5_hfphn")
 [node name="Attacking" type="Node" parent="StateChart/Root/Attack"]
 script = ExtResource("5_hfphn")
 
-[connection signal="body_entered" from="DetectRange" to="." method="_on_detect_range_body_entered"]
+[connection signal="body_entered" from="PlayerDetectRange" to="." method="_on_detect_range_body_entered"]
 [connection signal="target_reached" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_target_reached"]
-[connection signal="timeout" from="NewWanderPosTimer" to="." method="_on_new_wander_pos_timer_timeout"]
 [connection signal="state_entered" from="StateChart/Root/Movement/Idle" to="." method="_on_idle_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Movement/Wander" to="." method="_on_wander_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Wander" to="." method="_on_wander_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Movement/Track" to="." method="_on_track_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/Movement/Track" to="." method="_on_track_state_physics_processing"]
