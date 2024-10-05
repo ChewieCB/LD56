@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://naoexqroboiq"]
+
+[ext_resource type="Script" path="res://src/entities/camera/follow_camera.gd" id="1_1242p"]
+
+[node name="FollowCamera" type="Camera2D"]
+position_smoothing_enabled = true
+script = ExtResource("1_1242p")

@@ -11,26 +11,26 @@ config_version=5
 [application]
 
 config/name="LD56"
-run/main_scene="res://src/ui/main_menu/MainMenu.tscn"
+run/main_scene="res://src/scenes/main/title_screen/TitleScreen.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
+EnumAutoload="*res://src/utils/singletons/enum_autoload.gd"
+GameManager="*res://src/utils/singletons/game_manager/GameManager.tscn"
+SoundManager="*res://addons/sound_manager/sound_manager.gd"
 BuildTag="*res://config/build_tag/build_tag.gd"
 GlobalSFX="*res://src/utils/singletons/global_sfx/GlobalSFX.tscn"
-GuiTransitions="*res://addons/simple-gui-transitions/singleton.gd"
-SoundManager="*res://addons/sound_manager/sound_manager.gd"
 
 [display]
 
-window/size/viewport_width=1080
-window/size/viewport_height=1920
-window/size/mode=2
+window/size/viewport_width=1280
+window/size/viewport_height=720
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg", "res://addons/simple-gui-transitions/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
 
 [gui_transitions]
 
@@ -43,6 +43,34 @@ config/default/transition_type="QUAD"
 config/default/ease_type="IN_OUT"
 config/default/animation_enter=4
 config/default/animation_leave=4
+
+[input]
+
+up={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":119,"location":0,"echo":false,"script":null)
+]
+}
+down={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"location":0,"echo":false,"script":null)
+]
+}
+left={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":97,"location":0,"echo":false,"script":null)
+]
+}
+right={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"location":0,"echo":false,"script":null)
+]
+}
+pause_menu={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
 
 [rendering]
 
