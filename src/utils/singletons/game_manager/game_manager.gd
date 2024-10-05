@@ -3,7 +3,7 @@ extends Node
 @export var level_list: Array[PackedScene]
 @export var title_screen: PackedScene
 
-# var player: Player
+var player: Player
 var pause_ui: PauseUI
 
 # Setting

@@ -1,3 +1,19 @@
-[gd_scene format=3 uid="uid://dvg4r2wbo4tlj"]
+[gd_scene load_steps=4 format=3 uid="uid://dvg4r2wbo4tlj"]
+
+[ext_resource type="Texture2D" uid="uid://ch2pnl1s0tl1n" path="res://assets/sprite/placeholder/square.png" id="1_3kvaa"]
+[ext_resource type="PackedScene" uid="uid://dlrrd5eewdj3p" path="res://src/entities/player/Player.tscn" id="2_e1e40"]
+[ext_resource type="PackedScene" uid="uid://naoexqroboiq" path="res://src/entities/camera/FollowCamera.tscn" id="3_jlwge"]
 
 [node name="Demo" type="Node2D"]
+
+[node name="Ground" type="Sprite2D" parent="."]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(640, 693.75)
+scale = Vector2(20.5156, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="Player" parent="." instance=ExtResource("2_e1e40")]
+position = Vector2(608, 472)
+
+[node name="FollowCamera" parent="." instance=ExtResource("3_jlwge")]
+position = Vector2(584, 376)
