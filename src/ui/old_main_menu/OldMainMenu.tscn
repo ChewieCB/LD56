@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://yqaf1cxr4njr"]
 
-[ext_resource type="Script" path="res://src/ui/main_menu/main_menu.gd" id="1_vnu07"]
-[ext_resource type="Texture2D" uid="uid://shqr2qbcyems" path="res://src/ui/main_menu/assets/menu_background.jpg" id="2_yner8"]
+[ext_resource type="Script" path="res://src/ui/old_main_menu/old_main_menu.gd" id="1_vnu07"]
+[ext_resource type="Texture2D" uid="uid://c7abrfwdcoqdf" path="res://src/ui/old_main_menu/assets/menu_background.jpg" id="2_yner8"]
 [ext_resource type="PackedScene" uid="uid://dj18tmsspff4d" path="res://src/ui/common/styled_button/StyledButton.tscn" id="4_df5ml"]
 [ext_resource type="FontFile" uid="uid://cxrrybs1vtjsh" path="res://assets/fonts/AvQest.ttf" id="5_7ycku"]
 [ext_resource type="Texture2D" uid="uid://cahh042xli854" path="res://src/ui/common/styled_button/assets/kenney_borders/Default/Border/panel-border-000.png" id="6_22r4t"]
-[ext_resource type="Texture2D" uid="uid://b3dfr7ossmu02" path="res://src/ui/main_menu/assets/tutorial.png" id="7_o14j8"]
+[ext_resource type="Texture2D" uid="uid://cpdbyaipup6ys" path="res://src/ui/old_main_menu/assets/tutorial.png" id="7_o14j8"]
 
 [sub_resource type="Animation" id="Animation_5y77p"]
 length = 0.001
@@ -70,7 +70,7 @@ _data = {
 [node name="MainScene" type="Node2D" node_paths=PackedStringArray("animated_buttons", "tutorial_node", "subtitle_label", "build_tag_label")]
 process_mode = 3
 script = ExtResource("1_vnu07")
-animated_buttons = [NodePath("CanvasLayer/Menu/ButtonBackgroundWrapper/ButtonBackground/VBoxContainer/StartButton"), NodePath("CanvasLayer/Menu/ButtonBackgroundWrapper/ButtonBackground/VBoxContainer/TutorialButton"), NodePath("CanvasLayer/Menu/ButtonBackgroundWrapper/ButtonBackground/VBoxContainer/SpellbookButton"), NodePath("CanvasLayer/Menu/ButtonBackgroundWrapper/ButtonBackground/VBoxContainer/QuitButton")]
+animated_buttons = [NodePath("CanvasLayer/Menu/ButtonBackgroundWrapper/ButtonBackground/VBoxContainer/StartButton"), NodePath("CanvasLayer/Menu/ButtonBackgroundWrapper/ButtonBackground/VBoxContainer/TutorialButton"), NodePath("CanvasLayer/Menu/ButtonBackgroundWrapper/ButtonBackground/VBoxContainer/SettingButton"), NodePath("CanvasLayer/Menu/ButtonBackgroundWrapper/ButtonBackground/VBoxContainer/QuitButton")]
 tutorial_node = NodePath("CanvasLayer/Tutorial")
 subtitle_label = NodePath("CanvasLayer/Menu/Subtitle")
 build_tag_label = NodePath("CanvasLayer/Menu/ButtonBackgroundWrapper/ButtonBackground/VersionLabel")
@@ -169,7 +169,7 @@ text = "Start"
 layout_mode = 2
 text = "Tutorial"
 
-[node name="SpellbookButton" parent="CanvasLayer/Menu/ButtonBackgroundWrapper/ButtonBackground/VBoxContainer" instance=ExtResource("4_df5ml")]
+[node name="SettingButton" parent="CanvasLayer/Menu/ButtonBackgroundWrapper/ButtonBackground/VBoxContainer" instance=ExtResource("4_df5ml")]
 layout_mode = 2
 text = "Spellbook"
 
@@ -285,5 +285,5 @@ autoplay = "start"
 
 [connection signal="pressed" from="CanvasLayer/Menu/ButtonBackgroundWrapper/ButtonBackground/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Menu/ButtonBackgroundWrapper/ButtonBackground/VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Menu/ButtonBackgroundWrapper/ButtonBackground/VBoxContainer/SpellbookButton" to="." method="_on_spellbook_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Menu/ButtonBackgroundWrapper/ButtonBackground/VBoxContainer/SettingButton" to="." method="_on_spellbook_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Menu/ButtonBackgroundWrapper/ButtonBackground/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
