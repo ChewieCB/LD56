@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvg4r2wbo4tlj"]
+[gd_scene load_steps=6 format=3 uid="uid://dvg4r2wbo4tlj"]
 
 [ext_resource type="Texture2D" uid="uid://ch2pnl1s0tl1n" path="res://assets/sprite/placeholder/square.png" id="1_3kvaa"]
 [ext_resource type="PackedScene" uid="uid://dlrrd5eewdj3p" path="res://src/entities/player/Player.tscn" id="2_e1e40"]
 [ext_resource type="PackedScene" uid="uid://naoexqroboiq" path="res://src/entities/camera/FollowCamera.tscn" id="3_jlwge"]
+[ext_resource type="PackedScene" uid="uid://1bwiqif7rpyi" path="res://src/entities/swarm/SwarmDirector.tscn" id="4_tedsl"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_nr2xj"]
+vertices = PackedVector2Array(79.5625, 637, -102.344, 654.039, -125.867, -84.0469, 1349.33, 644.953, -42.5703, -169.242, 569.094, -368.508, 1509, -80.6016, 1509, 260)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 0, 2, 4, 5, 6, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-136, -88, -112, 665, 80, 647, 1356, 655, 1519, 262, 1519, -88, 569, -379, -48, -178)])
 
 [node name="Demo" type="Node2D"]
 
@@ -17,3 +23,9 @@ position = Vector2(608, 472)
 
 [node name="FollowCamera" parent="." instance=ExtResource("3_jlwge")]
 position = Vector2(584, 376)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_nr2xj")
+
+[node name="SwarmDirector" parent="." instance=ExtResource("4_tedsl")]
+position = Vector2(614, 255)

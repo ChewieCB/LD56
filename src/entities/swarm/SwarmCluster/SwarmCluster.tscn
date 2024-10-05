@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnwna3elypv5f"]
+
+[ext_resource type="Script" path="res://src/entities/swarm/SwarmCluster/swarm_cluster.gd" id="1_x8o5u"]
+[ext_resource type="Texture2D" uid="uid://d2an8sg7yxult" path="res://icon.svg" id="2_eoe5y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1xa8m"]
+radius = 16.0
+
+[node name="SwarmCluster" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_x8o5u")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_eoe5y")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1xa8m")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 32.0
+target_desired_distance = 16.0
+avoidance_enabled = true
+radius = 16.0
+max_speed = 400.0
+debug_enabled = true
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

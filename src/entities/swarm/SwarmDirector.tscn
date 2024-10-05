@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://1bwiqif7rpyi"]
+
+[ext_resource type="Script" path="res://src/entities/swarm/swarm_director.gd" id="1_ol7n7"]
+[ext_resource type="PackedScene" uid="uid://bnwna3elypv5f" path="res://src/entities/swarm/SwarmCluster/SwarmCluster.tscn" id="2_8lsg4"]
+
+[node name="SwarmDirector" type="Node2D"]
+script = ExtResource("1_ol7n7")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="SwarmCluster" parent="." instance=ExtResource("2_8lsg4")]
+
+[node name="SwarmCluster2" parent="." instance=ExtResource("2_8lsg4")]
+position = Vector2(31, 31)
+
+[node name="SwarmCluster3" parent="." instance=ExtResource("2_8lsg4")]
+position = Vector2(-20, 33)
+
+[node name="SwarmCluster4" parent="." instance=ExtResource("2_8lsg4")]
+position = Vector2(-43, -16)
+
+[node name="SwarmCluster5" parent="." instance=ExtResource("2_8lsg4")]
+position = Vector2(12, -47)
