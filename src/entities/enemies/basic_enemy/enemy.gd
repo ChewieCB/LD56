@@ -7,7 +7,7 @@ class_name Enemy
 @export var max_wander_range = 500
 @export var detect_range = 256
 @export var dash_speed = 600
-@export var dash_duration = 3.0
+@export var dash_duration = 2.5
 @export var dash_decel_rate = 1.0
 
 @onready var state_chart: StateChart = $StateChart
@@ -20,8 +20,11 @@ var spawn_pos: Vector2
 var found_wander_pos = false
 var dash_timer = 0
 var dash_velocity: Vector2 = Vector2.ZERO
+var player_within_range = false
 
 const ROTATION_SPEED = 2.0
+const TRACKING_ROTATION_SPEED = 3.0
+const FLEE_SPEED_MODIFIER = 0.75
 
 func _ready() -> void:
 	await get_tree().physics_frame
@@ -30,6 +33,7 @@ func _ready() -> void:
 	spawn_pos = global_position
 	detect_collision_shape.shape.radius = detect_range
 	call_deferred("actor_setup")
+	GameManager.player.change_status.connect(check_player_status)
 
 
 func actor_setup():
@@ -50,7 +54,17 @@ func _on_idle_state_entered() -> void:
 
 func _on_detect_range_body_entered(body: Node2D) -> void:
 	if body is Player:
-		state_chart.send_event("player_spotted")
+		player_within_range = true
+		var player: Player = body as Player
+		if player.is_fire:
+			state_chart.send_event("flee_from_player")
+		else:
+			state_chart.send_event("player_spotted")
+
+func _on_player_detect_range_body_exited(body: Node2D) -> void:
+	if body is Player:
+		player_within_range = false
+		state_chart.send_event("player_faraway")
 
 
 func _on_wander_state_entered() -> void:
@@ -68,7 +82,10 @@ func _on_wander_state_physics_processing(delta: float) -> void:
 	var next_position = nav_agent.get_next_path_position()
 	var move_dir = (next_position - current_position).normalized()
 	velocity = move_dir * speed
-	keep_looking_at_player(delta)
+	# Look at moving position
+	var target_angle = velocity.angle()
+	rotation = lerp_angle(rotation, target_angle, TRACKING_ROTATION_SPEED * delta)
+	move_and_slide()
 
 
 func get_new_wander_pos():
@@ -120,4 +137,14 @@ func _on_dash_state_physics_processing(delta: float) -> void:
 func keep_looking_at_player(delta: float):
 	var player_dir = GameManager.player.global_position - global_position
 	var target_angle = player_dir.angle()
-	rotation = lerp_angle(rotation, target_angle, ROTATION_SPEED * 1.5 * delta)
+	rotation = lerp_angle(rotation, target_angle, TRACKING_ROTATION_SPEED * delta)
+
+func check_player_status():
+	if GameManager.player.is_fire and player_within_range:
+		state_chart.send_event("flee_from_player")
+
+func _on_flee_state_physics_processing(delta: float) -> void:
+	keep_looking_at_player(delta)
+	var direction_away = (global_position - GameManager.player.global_position).normalized()
+	velocity = direction_away * speed * FLEE_SPEED_MODIFIER
+	move_and_slide()
