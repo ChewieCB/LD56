@@ -9,6 +9,7 @@ class_name Enemy
 @export var dash_speed = 600
 @export var dash_duration = 2.5
 @export var dash_decel_rate = 1.0
+@export var max_chase_range = 1000
 
 @onready var state_chart: StateChart = $StateChart
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
@@ -27,23 +28,27 @@ const TRACKING_ROTATION_SPEED = 3.0
 const FLEE_SPEED_MODIFIER = 0.75
 
 func _ready() -> void:
+	# Wait for GameManager finished finding important nodes
 	await get_tree().physics_frame
 	await get_tree().physics_frame
+	GameManager.player.change_status.connect(check_player_status)
 	current_hp = max_hp
 	spawn_pos = global_position
 	detect_collision_shape.shape.radius = detect_range
 	call_deferred("actor_setup")
-	GameManager.player.change_status.connect(check_player_status)
 
 
 func actor_setup():
+	# Wait for navigation map finished initialize
 	await get_tree().physics_frame
 	await get_tree().physics_frame
 	navigation_initialized = true
 
 
 func _physics_process(_delta: float) -> void:
-	return
+	var dist_from_spawn = global_position.distance_to(spawn_pos)
+	if dist_from_spawn >= max_chase_range:
+		state_chart.send_event("stop_chase")
 
 
 func _on_idle_state_entered() -> void:

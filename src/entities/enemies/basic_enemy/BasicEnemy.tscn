@@ -107,6 +107,12 @@ to = NodePath("../../Idle")
 event = &"lost_player_sight"
 delay_in_seconds = "0.0"
 
+[node name="toIdle2" type="Node" parent="StateChart/Root/Movement/Track"]
+script = ExtResource("7_2dfcw")
+to = NodePath("../../Idle")
+event = &"stop_chase"
+delay_in_seconds = "0.0"
+
 [node name="toFlee" type="Node" parent="StateChart/Root/Movement/Track"]
 script = ExtResource("7_2dfcw")
 to = NodePath("../../Flee")

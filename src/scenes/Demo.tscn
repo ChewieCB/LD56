@@ -30,7 +30,7 @@ position = Vector2(587, 350)
 position = Vector2(586, 316)
 
 [node name="BasicEnemy" parent="." instance=ExtResource("4_0er54")]
-position = Vector2(216, 464)
+position = Vector2(176, 536)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_h6ckw")
