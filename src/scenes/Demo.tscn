@@ -424,7 +424,7 @@ shape = SubResource("RectangleShape2D_6fjwu")
 
 [node name="FollowCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_jlwge")]
 position = Vector2(584, 376)
-target = NodePath("../SwarmDirector/TargetMarker")
+target = NodePath("../SwarmDirector/SwarmCentroidMarker")
 
 [node name="SwarmDirector" parent="." instance=ExtResource("4_tedsl")]
 position = Vector2(615, 551)
@@ -438,5 +438,291 @@ visible = false
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_ocdpm")
+
+[node name="WorldBoundary" type="Node2D" parent="."]
+
+[node name="Bound1" type="Sprite2D" parent="WorldBoundary"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(620, 734)
+scale = Vector2(16.7156, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary/Bound1"]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/Bound1/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Bound2" type="Sprite2D" parent="WorldBoundary"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(-65.5199, 575.722)
+rotation = 0.612
+scale = Vector2(6.45061, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary/Bound2"]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/Bound2/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Bound3" type="Sprite2D" parent="WorldBoundary"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(-144, 373)
+rotation = 1.56736
+scale = Vector2(6.45061, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary/Bound3"]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/Bound3/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Bound4" type="Sprite2D" parent="WorldBoundary"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(58, 202)
+rotation = 1.56736
+scale = Vector2(6.45061, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary/Bound4"]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/Bound4/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Bound5" type="Sprite2D" parent="WorldBoundary"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(184, 65)
+rotation = 2.14052
+scale = Vector2(6.45061, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary/Bound5"]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/Bound5/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Bound6" type="Sprite2D" parent="WorldBoundary"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(-101, 359)
+rotation = 3.15568
+scale = Vector2(6.45061, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary/Bound6"]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/Bound6/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Bound7" type="Sprite2D" parent="WorldBoundary"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(359, 139)
+rotation = 3.50888
+scale = Vector2(6.45061, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary/Bound7"]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/Bound7/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Bound8" type="Sprite2D" parent="WorldBoundary"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(587, 210)
+rotation = 3.19122
+scale = Vector2(2.34765, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary/Bound8"]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/Bound8/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Bound9" type="Sprite2D" parent="WorldBoundary"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(587, 210)
+rotation = 3.19122
+scale = Vector2(2.34765, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary/Bound9"]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/Bound9/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Bound10" type="Sprite2D" parent="WorldBoundary"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(618, 104)
+rotation = 1.59972
+scale = Vector2(2.34765, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary/Bound10"]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/Bound10/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Bound11" type="Sprite2D" parent="WorldBoundary"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(773.112, 91.1163)
+rotation = 1.59972
+scale = Vector2(2.22624, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary/Bound11"]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/Bound11/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Bound12" type="Sprite2D" parent="WorldBoundary"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(771, 194)
+rotation = 1.51859
+scale = Vector2(2.22624, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary/Bound12"]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/Bound12/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Bound13" type="Sprite2D" parent="WorldBoundary"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(695, 73)
+rotation = 1.58866
+scale = Vector2(2.22624, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary/Bound13"]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/Bound13/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Bound14" type="Sprite2D" parent="WorldBoundary"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(885, 210)
+rotation = 3.09455
+scale = Vector2(2.22624, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary/Bound14"]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/Bound14/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Bound15" type="Sprite2D" parent="WorldBoundary"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(1031, 253)
+rotation = 3.45533
+scale = Vector2(3.93082, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary/Bound15"]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/Bound15/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Bound16" type="Sprite2D" parent="WorldBoundary"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(1270.82, 395.031)
+rotation = 3.8371
+scale = Vector2(7.31694, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary/Bound16"]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/Bound16/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Bound17" type="Sprite2D" parent="WorldBoundary"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(1400.68, 677.186)
+rotation = 4.8194
+scale = Vector2(4.58168, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary/Bound17"]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/Bound17/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Bound18" type="Sprite2D" parent="WorldBoundary"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(1241, 795)
+rotation = 6.43201
+scale = Vector2(4.58168, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary/Bound18"]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/Bound18/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Bound19" type="Sprite2D" parent="WorldBoundary"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(1118, 736)
+rotation = 6.31018
+scale = Vector2(4.58168, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary/Bound19"]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/Bound19/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
 
 [editable path="SwarmDirector"]

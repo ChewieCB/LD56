@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name SwarmAgent
 
-@export var target: Marker2D
+@export var target: CharacterBody2D
 @export var max_speed: = 200.0
 @export var mouse_follow_force: = 0.05
 @export var cohesion_force: = 0.05
@@ -68,11 +68,6 @@ func _move_boid() -> void:
 	move_and_slide()
 	_velocity = velocity
 
-func _move_to(path_position: Vector2) -> bool:
-	
-	
-	return global_position.distance_to(path_position) < ARRIVE_DISTANCE
-
 
 func get_flock_status(flock: Array):
 	var center_vector: = Vector2()
@@ -112,11 +107,11 @@ func set_collision_radius(radius: float):
 
 
 func _on_flock_view_body_entered(body: Node2D) -> void:
-	if body is CharacterBody2D:
+	if body is SwarmAgent:
 		if self != body:
 			_flock.append(body)
 
 
 func _on_flock_view_body_exited(body: Node2D) -> void:
-	if body is CharacterBody2D:
+	if body is SwarmAgent:
 		_flock.remove_at(_flock.find(body))

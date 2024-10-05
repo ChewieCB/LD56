@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://1bwiqif7rpyi"]
+[gd_scene load_steps=9 format=3 uid="uid://1bwiqif7rpyi"]
 
 [ext_resource type="Script" path="res://src/entities/swarm/swarm_director.gd" id="1_ol7n7"]
 [ext_resource type="Texture2D" uid="uid://d2an8sg7yxult" path="res://icon.svg" id="2_luj07"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_02wus"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_s0myw"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_unkdd"]
+
 [node name="SwarmDirector" type="Node2D" node_paths=PackedStringArray("state_chart")]
 script = ExtResource("1_ol7n7")
 state_chart = NodePath("StateChart")
@@ -16,12 +18,17 @@ close_separation = 0.05
 far_separation = 0.2
 swarm_agent_count = 60
 
-[node name="TargetMarker" type="Marker2D" parent="."]
+[node name="TargetMarker" type="CharacterBody2D" parent="."]
+collision_layer = 4
+collision_mask = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="TargetMarker"]
 visible = false
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_luj07")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetMarker"]
+shape = SubResource("CircleShape2D_unkdd")
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("2_od00x")
@@ -99,6 +106,8 @@ script = ExtResource("6_s0myw")
 to = NodePath("../../Close")
 event = &"clump_together"
 delay_in_seconds = "0.0"
+
+[node name="SwarmCentroidMarker" type="Marker2D" parent="."]
 
 [connection signal="state_entered" from="StateChart/Root/Distribution/Normal" to="." method="_on_distribution_normal_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Distribution/Close" to="." method="_on_distribution_close_state_entered"]

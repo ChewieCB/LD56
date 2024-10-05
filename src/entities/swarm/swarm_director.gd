@@ -15,7 +15,11 @@ var swarm_agents: Array[Node]:
 		swarm_agent_count = swarm_agents.size()
 @export var swarm_agent_count: int = 50
 
-@onready var target: Marker2D = $TargetMarker
+@onready var target: CharacterBody2D = $TargetMarker
+@onready var centroid: Marker2D = $SwarmCentroidMarker
+@export var target_movement_speed: float = 250.0
+@export var target_acceleration: float = 0.82
+@export var target_friction: float = 0.06
 
 
 func _ready() -> void:
@@ -31,10 +35,22 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var direction = Vector2.ZERO
-	direction = Input.get_vector("left", "right", "up", "down")
-
-	target.global_position = target.global_position.lerp(target.global_position + direction * 500, delta * 0.4)
+	direction = Input.get_vector("left", "right", "up", "down").normalized()
+	
+	if direction != Vector2.ZERO:
+		target.velocity = lerp(target.velocity, direction * target_movement_speed, target_acceleration)
+	else:
+		target.velocity = lerp(target.velocity, Vector2.ZERO, target_friction)
+	
+	target.move_and_slide()
 	get_nav_path_for_swarm_agents(delta)
+	
+	# Get centroid position of swarm
+	var avg_agent_pos := Vector2.ZERO
+	for agent in swarm_agents:
+		avg_agent_pos += agent.global_position
+	avg_agent_pos /= swarm_agents.size()
+	centroid.global_position = avg_agent_pos
 
 
 func _process(delta):
@@ -62,7 +78,7 @@ func get_nav_path_for_swarm_agents(delta: float) -> void:
 		agent.target_path = NavigationServer2D.map_get_path(nav_map, from_pos, to_pos, true)
 
 
-func add_agent(new_position: Vector2 = Vector2.ZERO) -> SwarmAgent:
+func add_agent(new_position: Vector2 = centroid.position) -> SwarmAgent:
 	var new_agent = swarm_agent_scene.instantiate()
 	new_agent.position = new_position
 	new_agent.target = target
@@ -89,6 +105,8 @@ func set_swarm_attributes(attributes: Dictionary) -> void:
 func _on_distribution_normal_state_entered() -> void:
 	set_swarm_attributes(
 		{
+			"mouse_follow_force": 0.05,
+			"cohesive_force": 0.05,
 			"separation_force": normal_separation,
 			"max_speed": 270,
 			"avoid_distance": 10.,
@@ -100,6 +118,8 @@ func _on_distribution_normal_state_entered() -> void:
 func _on_distribution_close_state_entered() -> void:
 	set_swarm_attributes(
 		{
+			"mouse_follow_force": 0.08,
+			"cohesive_force": 0.1,
 			"separation_force": close_separation,
 			"max_speed": 380,
 			"avoid_distance": 5.,
@@ -111,6 +131,8 @@ func _on_distribution_close_state_entered() -> void:
 func _on_distribution_far_state_entered() -> void:
 	set_swarm_attributes(
 		{
+			"mouse_follow_force": 0.03,
+			"cohesion_force": 0.04,
 			"separation_force": far_separation,
 			"max_speed": 200,
 			"avoid_distance": 15.,

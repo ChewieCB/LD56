@@ -24,6 +24,7 @@ texture = ExtResource("2_bki8k")
 shape = SubResource("CircleShape2D_sdb67")
 
 [node name="FlockView" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FlockView"]
