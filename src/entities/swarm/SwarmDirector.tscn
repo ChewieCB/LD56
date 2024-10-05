@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://src/entities/swarm/swarm_director.gd" id="1_ol7n7"]
 
-[node name="Swarm" type="Node2D"]
+[node name="SwarmDirector" type="Node2D"]
 script = ExtResource("1_ol7n7")

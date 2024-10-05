@@ -1,5 +1,5 @@
 extends Node2D
-class_name Swarm
+class_name SwarmDirector
 
 @export var swarm_agent_scene: PackedScene
 

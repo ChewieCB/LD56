@@ -88,10 +88,12 @@ func get_random_target():
 	return Vector2(randf_range(0, spawn_width), randf_range(0, spawn_height))
 
 
-func _on_flock_view_body_entered(body: CharacterBody2D) -> void:
-	if self != body:
-		_flock.append(body)
+func _on_flock_view_body_entered(body: Node2D) -> void:
+	if body is CharacterBody2D:
+		if self != body:
+			_flock.append(body)
 
 
-func _on_flock_view_body_exited(body: CharacterBody2D) -> void:
-	_flock.remove_at(_flock.find(body))
+func _on_flock_view_body_exited(body: Node2D) -> void:
+	if body is CharacterBody2D:
+		_flock.remove_at(_flock.find(body))
