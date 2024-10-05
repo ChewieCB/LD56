@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvg4r2wbo4tlj"]
+[gd_scene load_steps=5 format=3 uid="uid://dvg4r2wbo4tlj"]
 
 [ext_resource type="Texture2D" uid="uid://ch2pnl1s0tl1n" path="res://assets/sprite/placeholder/square.png" id="1_3kvaa"]
 [ext_resource type="PackedScene" uid="uid://dlrrd5eewdj3p" path="res://src/entities/player/Player.tscn" id="2_e1e40"]
 [ext_resource type="PackedScene" uid="uid://naoexqroboiq" path="res://src/entities/camera/FollowCamera.tscn" id="3_jlwge"]
+[ext_resource type="PackedScene" uid="uid://bm3vo4ufjrs7q" path="res://src/entities/enemies/basic_enemy/BasicEnemy.tscn" id="4_0er54"]
 
 [node name="Demo" type="Node2D"]
 
@@ -17,3 +18,6 @@ position = Vector2(608, 472)
 
 [node name="FollowCamera" parent="." instance=ExtResource("3_jlwge")]
 position = Vector2(584, 376)
+
+[node name="BasicEnemy" parent="." instance=ExtResource("4_0er54")]
+position = Vector2(216, 464)

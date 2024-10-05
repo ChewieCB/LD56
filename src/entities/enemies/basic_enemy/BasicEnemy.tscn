@@ -1,0 +1,103 @@
+[gd_scene load_steps=10 format=3 uid="uid://bm3vo4ufjrs7q"]
+
+[ext_resource type="Texture2D" uid="uid://bvhed0lxktwe0" path="res://assets/sprite/placeholder/circle.png" id="1_ghanf"]
+[ext_resource type="Script" path="res://src/entities/enemies/basic_enemy/enemy.gd" id="1_os4t1"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_kalrn"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="3_uci3j"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_gwh43"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_hfphn"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="7_2dfcw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ddoed"]
+radius = 31.0161
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f2j72"]
+radius = 256.0
+
+[node name="BasicEnemy" type="CharacterBody2D"]
+script = ExtResource("1_os4t1")
+
+[node name="Eye" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(24, 0)
+scale = Vector2(0.375, 0.5)
+texture = ExtResource("1_ghanf")
+
+[node name="Body" type="Sprite2D" parent="."]
+self_modulate = Color(0.789063, 0.0515291, 0, 1)
+texture = ExtResource("1_ghanf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ddoed")
+
+[node name="DetectRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange"]
+shape = SubResource("CircleShape2D_f2j72")
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("2_kalrn")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("3_uci3j")
+
+[node name="Movement" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_gwh43")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Root/Movement"]
+script = ExtResource("5_hfphn")
+
+[node name="toWander" type="Node" parent="StateChart/Root/Movement/Idle"]
+script = ExtResource("7_2dfcw")
+to = NodePath("../../Wander")
+delay_in_seconds = "0.0"
+
+[node name="Wander" type="Node" parent="StateChart/Root/Movement"]
+script = ExtResource("5_hfphn")
+
+[node name="toTrack" type="Node" parent="StateChart/Root/Movement/Wander"]
+script = ExtResource("7_2dfcw")
+to = NodePath("../../Track")
+event = &"player_entered"
+delay_in_seconds = "0.0"
+
+[node name="toFlee" type="Node" parent="StateChart/Root/Movement/Wander"]
+script = ExtResource("7_2dfcw")
+to = NodePath("../../Flee")
+delay_in_seconds = "0.0"
+
+[node name="Track" type="Node" parent="StateChart/Root/Movement"]
+script = ExtResource("5_hfphn")
+
+[node name="Dash" type="Node" parent="StateChart/Root/Movement"]
+script = ExtResource("5_hfphn")
+
+[node name="Flee" type="Node" parent="StateChart/Root/Movement"]
+script = ExtResource("5_hfphn")
+
+[node name="Health" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_gwh43")
+initial_state = NodePath("Healthy")
+
+[node name="Healthy" type="Node" parent="StateChart/Root/Health"]
+script = ExtResource("5_hfphn")
+
+[node name="Hurt" type="Node" parent="StateChart/Root/Health"]
+script = ExtResource("5_hfphn")
+
+[node name="Dead" type="Node" parent="StateChart/Root/Health"]
+script = ExtResource("5_hfphn")
+
+[node name="Attack" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_gwh43")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Root/Attack"]
+script = ExtResource("5_hfphn")
+
+[node name="Ready" type="Node" parent="StateChart/Root/Attack"]
+script = ExtResource("5_hfphn")
+
+[node name="Attacking" type="Node" parent="StateChart/Root/Attack"]
+script = ExtResource("5_hfphn")
