@@ -40,6 +40,9 @@ shape = SubResource("CircleShape2D_f2j72")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
+[node name="NewWanderPosTimer" type="Timer" parent="."]
+wait_time = 0.1
+
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("2_kalrn")
 
@@ -56,7 +59,13 @@ script = ExtResource("5_hfphn")
 [node name="toWander" type="Node" parent="StateChart/Root/Movement/Idle"]
 script = ExtResource("7_2dfcw")
 to = NodePath("../../Wander")
-event = &"toWander"
+event = &"start_wander"
+delay_in_seconds = "0.0"
+
+[node name="toTrack" type="Node" parent="StateChart/Root/Movement/Idle"]
+script = ExtResource("7_2dfcw")
+to = NodePath("../../Track")
+event = &"spot_player"
 delay_in_seconds = "0.0"
 
 [node name="Wander" type="Node" parent="StateChart/Root/Movement"]
@@ -65,13 +74,19 @@ script = ExtResource("5_hfphn")
 [node name="toTrack" type="Node" parent="StateChart/Root/Movement/Wander"]
 script = ExtResource("7_2dfcw")
 to = NodePath("../../Track")
-event = &"toTrack"
+event = &"spot_player"
 delay_in_seconds = "0.0"
 
 [node name="toFlee" type="Node" parent="StateChart/Root/Movement/Wander"]
 script = ExtResource("7_2dfcw")
 to = NodePath("../../Flee")
-event = &"toFlee"
+event = &"flee_player"
+delay_in_seconds = "0.0"
+
+[node name="toIdle" type="Node" parent="StateChart/Root/Movement/Wander"]
+script = ExtResource("7_2dfcw")
+to = NodePath("../../Idle")
+event = &"target_reached"
 delay_in_seconds = "0.0"
 
 [node name="Track" type="Node" parent="StateChart/Root/Movement"]
@@ -110,3 +125,8 @@ script = ExtResource("5_hfphn")
 script = ExtResource("5_hfphn")
 
 [connection signal="body_entered" from="DetectRange" to="." method="_on_detect_range_body_entered"]
+[connection signal="target_reached" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_target_reached"]
+[connection signal="timeout" from="NewWanderPosTimer" to="." method="_on_new_wander_pos_timer_timeout"]
+[connection signal="state_entered" from="StateChart/Root/Movement/Idle" to="." method="_on_idle_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Movement/Wander" to="." method="_on_wander_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/Movement/Wander" to="." method="_on_wander_state_physics_processing"]

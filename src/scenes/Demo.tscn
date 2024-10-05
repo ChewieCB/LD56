@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvg4r2wbo4tlj"]
+[gd_scene load_steps=10 format=3 uid="uid://dvg4r2wbo4tlj"]
 
 [ext_resource type="Texture2D" uid="uid://ch2pnl1s0tl1n" path="res://assets/sprite/placeholder/square.png" id="1_3kvaa"]
 [ext_resource type="PackedScene" uid="uid://dlrrd5eewdj3p" path="res://src/entities/player/Player.tscn" id="2_e1e40"]
 [ext_resource type="PackedScene" uid="uid://naoexqroboiq" path="res://src/entities/camera/FollowCamera.tscn" id="3_jlwge"]
 [ext_resource type="PackedScene" uid="uid://bm3vo4ufjrs7q" path="res://src/entities/enemies/basic_enemy/BasicEnemy.tscn" id="4_0er54"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="5_sgetf"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_h6ckw"]
 vertices = PackedVector2Array(1054, 550, 1250, 674, 46, 674, 866, 550, 1250, 30, 1054, 298, 46, 30, 866, 298, 414, 162, 414, 414, 226, 162, 226, 414)
@@ -105,3 +106,11 @@ texture = ExtResource("1_3kvaa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/GameMap/Rock2"]
 shape = SubResource("RectangleShape2D_2w7pf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="StateChartDebugger" parent="CanvasLayer" instance=ExtResource("5_sgetf")]
+offset_left = 960.0
+offset_right = -8.0
+offset_bottom = -336.0
+initial_node_to_watch = NodePath("../../BasicEnemy")
