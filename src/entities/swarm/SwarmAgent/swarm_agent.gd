@@ -30,11 +30,11 @@ var target_path: PackedVector2Array:
 		target_path = value
 		if target_path:
 			local_tracking_target = target_path[1]
-		$Line2D.clear_points()
-		for point in target_path:
-			$Line2D.add_point(to_local(point))
-			$Line2D.default_color = Color.RED
-			$Line2D.width = 0.5
+		#$Line2D.clear_points()
+		#for point in target_path:
+			#$Line2D.add_point(to_local(point))
+			#$Line2D.default_color = Color.RED
+			#$Line2D.width = 0.5
 var local_tracking_target: Vector2
 
 

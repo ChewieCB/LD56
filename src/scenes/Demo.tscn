@@ -19,7 +19,6 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(192, 649, 211, 681, 467
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
-visible = false
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 15
@@ -425,7 +424,7 @@ shape = SubResource("RectangleShape2D_6fjwu")
 
 [node name="FollowCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_jlwge")]
 position = Vector2(584, 376)
-target = NodePath("../SwarmDirector")
+target = NodePath("../SwarmDirector/TargetMarker")
 
 [node name="SwarmDirector" parent="." instance=ExtResource("4_tedsl")]
 position = Vector2(615, 551)
@@ -439,3 +438,5 @@ visible = false
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_ocdpm")
+
+[editable path="SwarmDirector"]

@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	var direction = Vector2.ZERO
 	direction = Input.get_vector("left", "right", "up", "down")
 
-	target.global_position = target.global_position.lerp(target.global_position + direction * 800, delta * 0.4)
+	target.global_position = target.global_position.lerp(target.global_position + direction * 500, delta * 0.4)
 	get_nav_path_for_swarm_agents(delta)
 
 
