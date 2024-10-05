@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export var target: Marker2D
 @export var max_speed: = 200.0
 @export var mouse_follow_force: = 0.05
 @export var cohesion_force: = 0.05
@@ -11,6 +12,11 @@ extends CharacterBody2D
 @export var spawn_width: float = 100
 @export var spawn_height: float = 100
 
+@onready var agent_collider: CollisionShape2D = $CollisionShape2D
+var collision_radius: float:
+	set(value):
+		collision_radius = value
+		agent_collider.shape.radius = collision_radius
 @onready var flock_view_collider: CollisionShape2D = $FlockView/CollisionShape2D
 
 var _flock: Array = []
@@ -24,19 +30,10 @@ func _ready():
 	flock_view_collider.shape.radius = view_distance
 
 
-#func _input(event):
-	#if event is InputEventMouseButton:
-		#if event.get_button_index() == MOUSE_BUTTON_LEFT:
-			#_mouse_target = event.position
-		#elif event.get_button_index() == MOUSE_BUTTON_RIGHT:
-			#_mouse_target = get_random_target()
-
-
 func _physics_process(_delta):
 	var mouse_vector = Vector2.ZERO
-	_mouse_target = get_global_mouse_position()
-	if _mouse_target != Vector2.INF:
-		mouse_vector = global_position.direction_to(_mouse_target) * max_speed * mouse_follow_force
+	if target:
+		mouse_vector = global_position.direction_to(target.global_position) * max_speed * mouse_follow_force
 	
 	# get cohesion, alginment, and separation vectors
 	var vectors = get_flock_status(_flock)
@@ -86,6 +83,15 @@ func get_flock_status(flock: Array):
 func get_random_target():
 	randomize()
 	return Vector2(randf_range(0, spawn_width), randf_range(0, spawn_height))
+
+
+func query_collision_and_move(new_collision_radius: float) -> void:
+	set_collision_radius(new_collision_radius)
+	
+
+
+func set_collision_radius(radius: float):
+	agent_collider.shape.radius =  radius
 
 
 func _on_flock_view_body_entered(body: Node2D) -> void:

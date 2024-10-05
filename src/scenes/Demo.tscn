@@ -27,4 +27,5 @@ shape = SubResource("RectangleShape2D_6fjwu")
 position = Vector2(584, 376)
 
 [node name="SwarmDirector" parent="." instance=ExtResource("4_tedsl")]
+position = Vector2(585, 371)
 swarm_agent_scene = ExtResource("2_ghrsu")
