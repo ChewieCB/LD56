@@ -89,8 +89,26 @@ delay_in_seconds = "0.0"
 [node name="Track" type="Node" parent="StateChart/Root/Movement"]
 script = ExtResource("5_hfphn")
 
+[node name="toDash" type="Node" parent="StateChart/Root/Movement/Track"]
+script = ExtResource("7_2dfcw")
+to = NodePath("../../Dash")
+event = &"dash_started"
+delay_in_seconds = "0.0"
+
+[node name="toIdle" type="Node" parent="StateChart/Root/Movement/Track"]
+script = ExtResource("7_2dfcw")
+to = NodePath("../../Idle")
+event = &"lost_player_sight"
+delay_in_seconds = "0.0"
+
 [node name="Dash" type="Node" parent="StateChart/Root/Movement"]
 script = ExtResource("5_hfphn")
+
+[node name="toTrack" type="Node" parent="StateChart/Root/Movement/Dash"]
+script = ExtResource("7_2dfcw")
+to = NodePath("../../Track")
+event = &"back_to_track"
+delay_in_seconds = "0.0"
 
 [node name="Flee" type="Node" parent="StateChart/Root/Movement"]
 script = ExtResource("5_hfphn")
@@ -128,3 +146,5 @@ script = ExtResource("5_hfphn")
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Wander" to="." method="_on_wander_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Movement/Track" to="." method="_on_track_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Track" to="." method="_on_track_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Movement/Dash" to="." method="_on_dash_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/Movement/Dash" to="." method="_on_dash_state_physics_processing"]
