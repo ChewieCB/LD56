@@ -9,12 +9,14 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="7_2dfcw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ddoed"]
-radius = 31.0161
+radius = 28.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f2j72"]
 radius = 256.0
 
 [node name="BasicEnemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_os4t1")
 
 [node name="Eye" type="Sprite2D" parent="."]
@@ -31,9 +33,12 @@ texture = ExtResource("1_ghanf")
 shape = SubResource("CircleShape2D_ddoed")
 
 [node name="DetectRange" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange"]
 shape = SubResource("CircleShape2D_f2j72")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("2_kalrn")
@@ -51,6 +56,7 @@ script = ExtResource("5_hfphn")
 [node name="toWander" type="Node" parent="StateChart/Root/Movement/Idle"]
 script = ExtResource("7_2dfcw")
 to = NodePath("../../Wander")
+event = &"toWander"
 delay_in_seconds = "0.0"
 
 [node name="Wander" type="Node" parent="StateChart/Root/Movement"]
@@ -59,12 +65,13 @@ script = ExtResource("5_hfphn")
 [node name="toTrack" type="Node" parent="StateChart/Root/Movement/Wander"]
 script = ExtResource("7_2dfcw")
 to = NodePath("../../Track")
-event = &"player_entered"
+event = &"toTrack"
 delay_in_seconds = "0.0"
 
 [node name="toFlee" type="Node" parent="StateChart/Root/Movement/Wander"]
 script = ExtResource("7_2dfcw")
 to = NodePath("../../Flee")
+event = &"toFlee"
 delay_in_seconds = "0.0"
 
 [node name="Track" type="Node" parent="StateChart/Root/Movement"]
@@ -96,8 +103,10 @@ initial_state = NodePath("Idle")
 [node name="Idle" type="Node" parent="StateChart/Root/Attack"]
 script = ExtResource("5_hfphn")
 
-[node name="Ready" type="Node" parent="StateChart/Root/Attack"]
+[node name="Prepare" type="Node" parent="StateChart/Root/Attack"]
 script = ExtResource("5_hfphn")
 
 [node name="Attacking" type="Node" parent="StateChart/Root/Attack"]
 script = ExtResource("5_hfphn")
+
+[connection signal="body_entered" from="DetectRange" to="." method="_on_detect_range_body_entered"]

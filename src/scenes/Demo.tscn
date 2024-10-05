@@ -1,23 +1,107 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvg4r2wbo4tlj"]
+[gd_scene load_steps=9 format=3 uid="uid://dvg4r2wbo4tlj"]
 
 [ext_resource type="Texture2D" uid="uid://ch2pnl1s0tl1n" path="res://assets/sprite/placeholder/square.png" id="1_3kvaa"]
 [ext_resource type="PackedScene" uid="uid://dlrrd5eewdj3p" path="res://src/entities/player/Player.tscn" id="2_e1e40"]
 [ext_resource type="PackedScene" uid="uid://naoexqroboiq" path="res://src/entities/camera/FollowCamera.tscn" id="3_jlwge"]
 [ext_resource type="PackedScene" uid="uid://bm3vo4ufjrs7q" path="res://src/entities/enemies/basic_enemy/BasicEnemy.tscn" id="4_0er54"]
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_h6ckw"]
+vertices = PackedVector2Array(1054, 550, 1250, 674, 46, 674, 866, 550, 1250, 30, 1054, 298, 46, 30, 866, 298, 414, 162, 414, 414, 226, 162, 226, 414)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0, 5), PackedInt32Array(6, 4, 5, 7, 8), PackedInt32Array(9, 8, 7, 3), PackedInt32Array(6, 8, 10), PackedInt32Array(2, 6, 10, 11), PackedInt32Array(3, 2, 11, 9)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -32, 1312, -32, 1312, 736, -16, 736)])
+agent_radius = 30.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67t4a"]
+size = Vector2(32, 736)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l4cbm"]
+size = Vector2(1328, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2w7pf"]
+size = Vector2(128, 192)
+
 [node name="Demo" type="Node2D"]
 
-[node name="Ground" type="Sprite2D" parent="."]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(640, 693.75)
-scale = Vector2(20.5156, 1.32031)
-texture = ExtResource("1_3kvaa")
-
 [node name="Player" parent="." instance=ExtResource("2_e1e40")]
-position = Vector2(608, 472)
+position = Vector2(587, 350)
 
 [node name="FollowCamera" parent="." instance=ExtResource("3_jlwge")]
-position = Vector2(584, 376)
+position = Vector2(586, 316)
 
 [node name="BasicEnemy" parent="." instance=ExtResource("4_0er54")]
 position = Vector2(216, 464)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_h6ckw")
+
+[node name="GameMap" type="Node2D" parent="NavigationRegion2D"]
+
+[node name="BorderL" type="StaticBody2D" parent="NavigationRegion2D/GameMap"]
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/GameMap/BorderL"]
+self_modulate = Color(0.431373, 0.168627, 0, 1)
+position = Vector2(4.76837e-07, 352)
+scale = Vector2(0.5, 12)
+texture = ExtResource("1_3kvaa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/GameMap/BorderL"]
+position = Vector2(0, 368)
+shape = SubResource("RectangleShape2D_67t4a")
+
+[node name="BorderR" type="StaticBody2D" parent="NavigationRegion2D/GameMap"]
+position = Vector2(1296, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/GameMap/BorderR"]
+self_modulate = Color(0.431373, 0.168627, 0, 1)
+position = Vector2(0, 352)
+scale = Vector2(0.5, 12)
+texture = ExtResource("1_3kvaa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/GameMap/BorderR"]
+position = Vector2(0, 368)
+shape = SubResource("RectangleShape2D_67t4a")
+
+[node name="BorderU" type="StaticBody2D" parent="NavigationRegion2D/GameMap"]
+position = Vector2(648, -16)
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/GameMap/BorderU"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+scale = Vector2(20.75, 0.499998)
+texture = ExtResource("1_3kvaa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/GameMap/BorderU"]
+shape = SubResource("RectangleShape2D_l4cbm")
+
+[node name="BorderD" type="StaticBody2D" parent="NavigationRegion2D/GameMap"]
+position = Vector2(648, 720)
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/GameMap/BorderD"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+scale = Vector2(20.75, 0.499998)
+texture = ExtResource("1_3kvaa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/GameMap/BorderD"]
+shape = SubResource("RectangleShape2D_l4cbm")
+
+[node name="Rock" type="StaticBody2D" parent="NavigationRegion2D/GameMap"]
+position = Vector2(320, 288)
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/GameMap/Rock"]
+self_modulate = Color(0.34375, 0.34375, 0.34375, 1)
+scale = Vector2(2, 3)
+texture = ExtResource("1_3kvaa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/GameMap/Rock"]
+shape = SubResource("RectangleShape2D_2w7pf")
+
+[node name="Rock2" type="StaticBody2D" parent="NavigationRegion2D/GameMap"]
+position = Vector2(960, 424)
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/GameMap/Rock2"]
+self_modulate = Color(0.34375, 0.34375, 0.34375, 1)
+scale = Vector2(2, 3)
+texture = ExtResource("1_3kvaa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/GameMap/Rock2"]
+shape = SubResource("RectangleShape2D_2w7pf")
