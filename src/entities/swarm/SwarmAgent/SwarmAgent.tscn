@@ -1,7 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://vuj168p2lkjx"]
+[gd_scene load_steps=10 format=3 uid="uid://vuj168p2lkjx"]
 
 [ext_resource type="Script" path="res://src/entities/swarm/SwarmAgent/swarm_agent.gd" id="1_dxyk5"]
 [ext_resource type="Texture2D" uid="uid://ccr58amjut7qw" path="res://assets/sprite/orb.png" id="2_bki8k"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_anpwf"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="4_3afhx"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="5_56egu"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_56ib3"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="6_ycc0k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sdb67"]
 radius = 6.0
@@ -9,12 +14,13 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_tbyxv"]
 radius = 15.0
 
-[node name="SwarmAgent" type="CharacterBody2D"]
+[node name="SwarmAgent" type="CharacterBody2D" node_paths=PackedStringArray("state_chart")]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 19
 motion_mode = 1
 script = ExtResource("1_dxyk5")
 max_speed = 350.0
+state_chart = NodePath("StateChart")
 
 [node name="Icon" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
@@ -34,5 +40,90 @@ shape = SubResource("CircleShape2D_tbyxv")
 
 [node name="Line2D" type="Line2D" parent="."]
 
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("3_anpwf")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("4_3afhx")
+
+[node name="Health" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_56egu")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Root/Health"]
+script = ExtResource("6_ycc0k")
+
+[node name="toHurt" type="Node" parent="StateChart/Root/Health/Idle"]
+script = ExtResource("6_56ib3")
+to = NodePath("../../Hurt")
+event = &"take_damage"
+delay_in_seconds = "0.0"
+
+[node name="toDead" type="Node" parent="StateChart/Root/Health/Idle"]
+script = ExtResource("6_56ib3")
+to = NodePath("../../Dead")
+event = &"death"
+delay_in_seconds = "0.0"
+
+[node name="Hurt" type="Node" parent="StateChart/Root/Health"]
+script = ExtResource("6_ycc0k")
+
+[node name="toIdle" type="Node" parent="StateChart/Root/Health/Hurt"]
+script = ExtResource("6_56ib3")
+to = NodePath("../../Idle")
+event = &"end_damage"
+delay_in_seconds = "0.0"
+
+[node name="toDead" type="Node" parent="StateChart/Root/Health/Hurt"]
+script = ExtResource("6_56ib3")
+to = NodePath("../../Dead")
+event = &"death"
+delay_in_seconds = "0.0"
+
+[node name="Dead" type="Node" parent="StateChart/Root/Health"]
+script = ExtResource("6_ycc0k")
+
+[node name="Movement" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_56egu")
+initial_state = NodePath("Following")
+
+[node name="Idle" type="Node" parent="StateChart/Root/Movement"]
+script = ExtResource("6_ycc0k")
+
+[node name="toFollowing" type="Node" parent="StateChart/Root/Movement/Idle"]
+script = ExtResource("6_56ib3")
+to = NodePath("../../Following")
+event = &"start_movement"
+delay_in_seconds = "0.0"
+
+[node name="toDisabled" type="Node" parent="StateChart/Root/Movement/Idle"]
+script = ExtResource("6_56ib3")
+to = NodePath("../../Disabled")
+event = &"disable_movement"
+delay_in_seconds = "0.0"
+
+[node name="Following" type="Node" parent="StateChart/Root/Movement"]
+script = ExtResource("6_ycc0k")
+
+[node name="toIdle" type="Node" parent="StateChart/Root/Movement/Following"]
+script = ExtResource("6_56ib3")
+to = NodePath("../../Idle")
+event = &"stop_movement"
+delay_in_seconds = "0.0"
+
+[node name="toDisabled" type="Node" parent="StateChart/Root/Movement/Following"]
+script = ExtResource("6_56ib3")
+to = NodePath("../../Disabled")
+event = &"disable_movement"
+delay_in_seconds = "0.0"
+
+[node name="Disabled" type="Node" parent="StateChart/Root/Movement"]
+script = ExtResource("6_ycc0k")
+
 [connection signal="body_entered" from="FlockView" to="." method="_on_flock_view_body_entered"]
 [connection signal="body_exited" from="FlockView" to="." method="_on_flock_view_body_exited"]
+[connection signal="state_entered" from="StateChart/Root/Health/Idle" to="." method="_on_health_idle_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Health/Hurt" to="." method="_on_health_hurt_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Health/Dead" to="." method="_on_health_dead_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Movement/Following" to="." method="_on_following_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/Movement/Following" to="." method="_on_movement_following_state_physics_processing"]

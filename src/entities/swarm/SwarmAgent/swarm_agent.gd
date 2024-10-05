@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name SwarmAgent
 
+signal died(agent: SwarmAgent)
+
 @export var target: CharacterBody2D
 @export var max_speed: = 200.0
 @export var mouse_follow_force: = 0.05
@@ -10,9 +12,16 @@ class_name SwarmAgent
 @export var view_distance := 50.0
 @export var avoid_distance := 20.0
 
-@export var spawn_width: float = 100
-@export var spawn_height: float = 100
+@export var state_chart: StateChart
 
+@export var max_health: float = 40.0
+var current_health: float = max_health:
+	set(value):
+		current_health = clamp(value, 0, max_health)
+		if current_health == 0:
+			state_chart.send_event("death")
+
+@onready var sprite: Sprite2D = $Icon
 @onready var agent_collider: CollisionShape2D = $CollisionShape2D
 var collision_radius: float:
 	set(value):
@@ -42,11 +51,6 @@ func _ready():
 	randomize()
 	_velocity = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * max_speed
 	flock_view_collider.shape.radius = view_distance
-
-
-func _physics_process(_delta):
-	_move_boid()
-	
 
 
 func _move_boid() -> void:
@@ -97,13 +101,14 @@ func get_flock_status(flock: Array):
 	return [center_vector, align_vector, avoid_vector]
 
 
-func get_random_target():
-	randomize()
-	return Vector2(randf_range(0, spawn_width), randf_range(0, spawn_height))
-
-
 func set_collision_radius(radius: float):
 	agent_collider.shape.radius =  radius
+
+
+func damage(damage: float) -> void:
+	if damage > 0:
+		state_chart.send_event("take_damage")
+		current_health -= damage
 
 
 func _on_flock_view_body_entered(body: Node2D) -> void:
@@ -115,3 +120,31 @@ func _on_flock_view_body_entered(body: Node2D) -> void:
 func _on_flock_view_body_exited(body: Node2D) -> void:
 	if body is SwarmAgent:
 		_flock.remove_at(_flock.find(body))
+
+
+func _on_movement_following_state_physics_processing(delta: float) -> void:
+	_move_boid()
+
+
+func _on_health_idle_state_entered() -> void:
+	sprite.modulate = Color(1, 1, 1)
+
+
+func _on_health_hurt_state_entered() -> void:
+	if current_health > 0:
+		sprite.modulate = Color.RED
+		await get_tree().create_timer(0.2).timeout
+		state_chart.send_event("end_damage")
+
+
+func _on_health_dead_state_entered() -> void:
+	state_chart.send_event("disable_movement")
+	emit_signal("died", self)
+	
+	sprite.modulate = Color.BLACK
+	await get_tree().create_timer(0.4).timeout
+	queue_free()
+
+
+func _on_following_state_entered() -> void:
+	pass # Replace with function body.
