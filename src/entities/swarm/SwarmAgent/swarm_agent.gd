@@ -85,11 +85,6 @@ func get_random_target():
 	return Vector2(randf_range(0, spawn_width), randf_range(0, spawn_height))
 
 
-func query_collision_and_move(new_collision_radius: float) -> void:
-	set_collision_radius(new_collision_radius)
-	
-
-
 func set_collision_radius(radius: float):
 	agent_collider.shape.radius =  radius
 

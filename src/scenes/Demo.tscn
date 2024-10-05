@@ -1,14 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvg4r2wbo4tlj"]
+[gd_scene load_steps=7 format=3 uid="uid://dvg4r2wbo4tlj"]
 
 [ext_resource type="Texture2D" uid="uid://ch2pnl1s0tl1n" path="res://assets/sprite/placeholder/square.png" id="1_3kvaa"]
 [ext_resource type="PackedScene" uid="uid://vuj168p2lkjx" path="res://src/entities/swarm/SwarmAgent/SwarmAgent.tscn" id="2_ghrsu"]
 [ext_resource type="PackedScene" uid="uid://naoexqroboiq" path="res://src/entities/camera/FollowCamera.tscn" id="3_jlwge"]
 [ext_resource type="PackedScene" uid="uid://1bwiqif7rpyi" path="res://src/entities/swarm/SwarmDirector.tscn" id="4_tedsl"]
+[ext_resource type="Texture2D" uid="uid://q5pp8mltm8v8" path="res://assets/sprite/bg1.png" id="5_rabt8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6fjwu"]
 size = Vector2(63.9026, 68.9233)
 
 [node name="Demo" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_rabt8")
 
 [node name="Ground" type="Sprite2D" parent="."]
 self_modulate = Color(0.429688, 0.168879, 0, 1)
