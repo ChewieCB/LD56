@@ -44,6 +44,7 @@ func open_gate():
 	if is_end_of_level:
 		GameManager.finish_level()
 	else:
+		release_all_stored_agents()
 		sealed_gate_door.open()
 
 

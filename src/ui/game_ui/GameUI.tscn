@@ -100,3 +100,7 @@ text = "Next level"
 [node name="PauseUI" parent="." instance=ExtResource("1_corso")]
 visible = false
 layout_mode = 1
+
+[connection signal="pressed" from="VictoryScreen/HBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="VictoryScreen/HBoxContainer/TitleButton" to="." method="_on_title_button_pressed"]
+[connection signal="pressed" from="VictoryScreen/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]

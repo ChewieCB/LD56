@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://yofeqq7oovkd"]
+[gd_scene load_steps=13 format=3 uid="uid://yofeqq7oovkd"]
 
 [ext_resource type="PackedScene" uid="uid://naoexqroboiq" path="res://src/entities/camera/FollowCamera.tscn" id="1_4drgy"]
 [ext_resource type="PackedScene" uid="uid://1bwiqif7rpyi" path="res://src/entities/swarm/SwarmDirector.tscn" id="2_pus5x"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://y766oblqkpts" path="res://src/entities/obstacle/core/Obstacle.tscn" id="6_k3n7i"]
 [ext_resource type="PackedScene" uid="uid://dt6pvb0caalfy" path="res://src/entities/environment/sealed_gate/SealedGateDoor.tscn" id="6_q8q3c"]
 [ext_resource type="Texture2D" uid="uid://q5pp8mltm8v8" path="res://assets/sprite/bg1.png" id="7_elaou"]
-[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="8_jpskl"]
 [ext_resource type="PackedScene" uid="uid://dosbbm6uk86ho" path="res://src/ui/game_ui/GameUI.tscn" id="12_avwj4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ofayr"]
@@ -164,10 +163,5 @@ texture = ExtResource("7_elaou")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 layer = 100
-visible = false
-
-[node name="StateChartDebugger" parent="CanvasLayer2" instance=ExtResource("8_jpskl")]
-offset_left = 832.0
-offset_bottom = -336.0
 
 [node name="GameUI" parent="CanvasLayer2" instance=ExtResource("12_avwj4")]
