@@ -1,5 +1,7 @@
 extends Camera2D
 
+@export var target: Node2D
+
 func _process(_delta: float) -> void:
-	if GameManager.player:
-		global_position = GameManager.player.global_position
+	if target:
+		global_position = target.global_position

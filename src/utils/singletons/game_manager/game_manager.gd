@@ -32,3 +32,11 @@ func go_back_to_title_screen():
 
 func reset_data():
 	pass
+
+
+func clean_array(dirty_array: Array) -> Array:
+	var clean_array := []
+	for item in dirty_array:
+		if is_instance_valid(item):
+			clean_array.append(item)
+	return clean_array
