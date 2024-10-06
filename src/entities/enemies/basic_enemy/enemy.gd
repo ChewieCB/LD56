@@ -3,15 +3,21 @@ class_name Enemy
 
 @export var speed = 100
 @export var max_health: float = 100
+# Attack
+@export var attack_damage = 50
+@export var time_between_attack = 1
+# Wander
 @export var min_wander_range = 100
 @export var max_wander_range = 500
+# Track
 @export var detect_range = 256
+@export var max_chase_range = 1000
+# Dash
 @export var range_to_dash = 150
 @export var dash_speed = 600
 @export var dash_delay = 0.5 # Aka reaction time, time the enemy need to prepare before dash
-@export var dash_duration = 2.5
+@export var dash_duration = 2
 @export var dash_decel_rate = 1.0
-@export var max_chase_range = 1000
 
 @onready var state_chart: StateChart = $StateChart
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
@@ -28,6 +34,7 @@ var spawn_pos: Vector2
 var found_wander_pos = false
 var dash_timer = 0
 var dash_delay_timer = 0
+var attack_cooldown_timer = 0
 var dash_velocity: Vector2 = Vector2.ZERO
 var swarm_agent_within_range = false
 var targeted_swarm_agent: SwarmAgent = null
@@ -42,6 +49,7 @@ func _ready() -> void:
 	current_health = max_health
 	spawn_pos = global_position
 	detect_collision_shape.shape.radius = detect_range
+	los_raycast.target_position = Vector2(range_to_dash, 0)
 	GameManager.swarm_director.swarm_status_changed.connect(check_swarm_status)
 	call_deferred("actor_setup")
 
@@ -128,7 +136,8 @@ func _on_track_state_physics_processing(delta: float) -> void:
 		return
 
 	if targeted_swarm_agent.global_position.distance_to(global_position) <= range_to_dash:
-		state_chart.send_event("dash_started")
+		if not los_raycast.is_colliding():
+			state_chart.send_event("dash_started")
 
 	# It chase until the target is within range_to_dash
 	if not navigation_initialized:
@@ -150,13 +159,6 @@ func _on_navigation_agent_2d_target_reached() -> void:
 
 func _on_dash_state_entered() -> void:
 	if targeted_swarm_agent == null:
-		state_chart.send_event("back_to_track")
-		return
-	
-	var target_dir = targeted_swarm_agent.global_position - global_position
-	target_dir = target_dir.rotated(-rotation) # Take into account current enemy rotation
-	los_raycast.target_position = target_dir
-	if los_raycast.is_colliding():
 		state_chart.send_event("back_to_track")
 		return
 
@@ -204,3 +206,27 @@ func damage(value: float) -> void:
 	if value > 0:
 		state_chart.send_event("take_damage")
 		current_health -= value
+
+func _on_attack_range_body_entered(body: Node2D) -> void:
+	if body is SwarmAgent:
+		var agent: SwarmAgent = body as SwarmAgent
+		targeted_swarm_agent = agent
+		state_chart.send_event("attack_player")
+
+
+func _on_cooldown_state_entered() -> void:
+	attack_cooldown_timer = time_between_attack
+
+func _on_cooldown_state_processing(delta: float) -> void:
+	attack_cooldown_timer -= delta
+	if attack_cooldown_timer <= 0:
+		state_chart.send_event("attack_ready")
+
+
+func _on_attacking_state_entered() -> void:
+	# Play animation or something here. For now, it will just wait 0.5s
+	if targeted_swarm_agent != null:
+		print("DAMAGE SWARM AGENT ", targeted_swarm_agent.name)
+		targeted_swarm_agent.damage(attack_damage)
+	await get_tree().create_timer(0.5).timeout
+	state_chart.send_event("attack_finished")
