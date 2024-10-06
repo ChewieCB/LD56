@@ -115,6 +115,9 @@ position = Vector2(1.19209e-07, 1.19209e-07)
 scale = Vector2(0.125, 0.125)
 texture = ExtResource("8_q1cn2")
 
+[connection signal="state_entered" from="StateChart/Root/Movement/Idle" to="." method="_on_idle_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Movement/Moving" to="." method="_on_moving_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/Movement/Moving" to="." method="_on_moving_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Distribution/Normal" to="." method="_on_distribution_normal_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Distribution/Close" to="." method="_on_distribution_close_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Distribution/Far" to="." method="_on_distribution_far_state_entered"]

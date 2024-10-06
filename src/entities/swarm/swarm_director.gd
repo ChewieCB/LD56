@@ -15,6 +15,7 @@ signal far_formation
 @export var target_friction: float = 0.06
 
 @onready var target: CharacterBody2D = $TargetMarker
+@onready var target_sprite: Sprite2D = $TargetMarker/Sprite2D
 @onready var centroid: Marker2D = $SwarmCentroidMarker
 @onready var debug_status_sprite: Sprite2D = $SwarmCentroidMarker/DEBUGStatus
 
@@ -49,17 +50,13 @@ const SWARM_ATTRIBUTES_FAR: Dictionary = {
 }
 
 func _ready() -> void:
+	randomize()
 	debug_status_sprite.self_modulate = Color.GREEN
 	GameManager.swarm_director = self
 	for _i in range(swarm_agent_count):
-		randomize()
-		var agent = swarm_agent_scene.instantiate()
-		agent.position = Vector2(randf_range(-100, 100), randf_range(-100, 100))
-		agent.target = target
-		agent.died.connect(remove_agent)
-		add_child(agent)
-		if agent not in swarm_agents:
-			swarm_agents.append(agent)
+		await get_tree().create_timer(swarm_agent_count/100).timeout
+		add_agent()
+	state_chart.send_event("start_moving")
 	
 	await get_tree().physics_frame
 	for obstacle in get_tree().get_nodes_in_group("obstacles"):
@@ -77,15 +74,6 @@ func _input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	var direction = Vector2.ZERO
-	direction = Input.get_vector("left", "right", "up", "down").normalized()
-	
-	if direction != Vector2.ZERO:
-		target.velocity = lerp(target.velocity, direction * target_movement_speed, target_acceleration)
-	else:
-		target.velocity = lerp(target.velocity, Vector2.ZERO, target_friction)
-	
-	target.move_and_slide()
 	get_nav_path_for_swarm_agents(delta)
 	
 	# Get centroid position of swarm
@@ -101,22 +89,6 @@ func _physics_process(delta: float) -> void:
 
 
 func _process(_delta):
-	if Input.is_action_pressed("huddle"):
-		state_chart.send_event("clump_together")
-	elif Input.is_action_just_released("huddle"):
-		state_chart.send_event("reset_distribution")
-	elif Input.is_action_just_pressed("spread"):
-		state_chart.send_event("spread_out")
-	elif Input.is_action_just_released("spread"):
-		state_chart.send_event("reset_distribution")
-	
-	
-	if Input.is_action_just_pressed("DEBUG_add_agent"):
-		add_agent()
-	elif Input.is_action_just_pressed("DEBUG_remove_agent"):
-		if swarm_agents:
-			damage_agent(swarm_agents[randi_range(0, swarm_agents.size() - 1)], 2000)
-	
 	queue_redraw()
 
 
@@ -194,3 +166,41 @@ func _on_distribution_far_state_entered() -> void:
 	# Hacky so we can set on agent add
 	current_swarm_attributes = SWARM_ATTRIBUTES_FAR
 	emit_signal("far_formation")
+
+
+func _on_moving_state_physics_processing(delta: float) -> void:
+	var direction = Vector2.ZERO
+	direction = Input.get_vector("left", "right", "up", "down").normalized()
+	
+	if direction != Vector2.ZERO:
+		target.velocity = lerp(target.velocity, direction * target_movement_speed, target_acceleration)
+	else:
+		target.velocity = lerp(target.velocity, Vector2.ZERO, target_friction)
+	
+	target.move_and_slide()
+	
+	if Input.is_action_pressed("huddle"):
+		state_chart.send_event("clump_together")
+	elif Input.is_action_just_released("huddle"):
+		state_chart.send_event("reset_distribution")
+	elif Input.is_action_just_pressed("spread"):
+		state_chart.send_event("spread_out")
+	elif Input.is_action_just_released("spread"):
+		state_chart.send_event("reset_distribution")
+	
+	
+	if Input.is_action_just_pressed("DEBUG_add_agent"):
+		add_agent()
+	elif Input.is_action_just_pressed("DEBUG_remove_agent"):
+		if swarm_agents:
+			damage_agent(swarm_agents[randi_range(0, swarm_agents.size() - 1)], 2000)
+
+
+func _on_moving_state_entered() -> void:
+	target_sprite.modulate = Color.GREEN
+	await get_tree().create_timer(0.5).timeout
+	target_sprite.modulate = Color(1, 1, 1)
+
+
+func _on_idle_state_entered() -> void:
+	target_sprite.modulate = Color.RED
