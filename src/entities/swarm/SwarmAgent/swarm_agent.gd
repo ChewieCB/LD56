@@ -3,7 +3,7 @@ class_name SwarmAgent
 
 signal died(agent: SwarmAgent)
 
-@export var target: CharacterBody2D
+@export var target: CharacterBody2D # Used in swarm director
 @export var max_speed := 200.0
 @export var mouse_follow_force := 0.05
 @export var cohesion_force := 0.05
@@ -11,28 +11,24 @@ signal died(agent: SwarmAgent)
 @export var separation_force := 0.05
 @export var view_distance := 50.0
 @export var avoid_distance := 20.0
-
 @export var state_chart: StateChart
-
 @export var max_health: float = 40.0
+
+@onready var flock_view_collider: CollisionShape2D = $FlockView/CollisionShape2D
+@onready var sprite: Sprite2D = $Icon
+@onready var agent_collider: CollisionShape2D = $CollisionShape2D
+
+var collision_radius: float:
+	set(value):
+		collision_radius = value
+		agent_collider.shape.radius = collision_radius
 var current_health: float = max_health:
 	set(value):
 		current_health = clamp(value, 0, max_health)
 		if current_health == 0:
 			state_chart.send_event("death")
-
-@onready var sprite: Sprite2D = $Icon
-@onready var agent_collider: CollisionShape2D = $CollisionShape2D
-var collision_radius: float:
-	set(value):
-		collision_radius = value
-		agent_collider.shape.radius = collision_radius
-@onready var flock_view_collider: CollisionShape2D = $FlockView/CollisionShape2D
-
 var _flock: Array = []
 var _velocity: Vector2
-
-const ARRIVE_DISTANCE = 10.0
 var target_path: PackedVector2Array:
 	set(value):
 		target_path = value
@@ -45,6 +41,7 @@ var target_path: PackedVector2Array:
 			#$Line2D.width = 0.5
 var local_tracking_target: Vector2
 
+const ARRIVE_DISTANCE = 10.0
 
 func _ready():
 	randomize()

@@ -36,7 +36,7 @@ func _ready() -> void:
 		add_child(agent)
 		if agent not in swarm_agents:
 			swarm_agents.append(agent)
-	
+
 	await get_tree().physics_frame
 	for obstacle in get_tree().get_nodes_in_group("obstacles"):
 		obstacle.damage_swarm_agent.connect(damage_agent)
@@ -70,7 +70,6 @@ func _physics_process(delta: float) -> void:
 		for agent in swarm_agents:
 			avg_agent_pos += agent.global_position
 		avg_agent_pos /= swarm_agents.size()
-		
 		centroid.global_position = avg_agent_pos
 	else:
 		centroid.global_position = target.global_position
@@ -85,7 +84,6 @@ func _process(_delta):
 		state_chart.send_event("spread_out")
 	elif Input.is_action_just_released("spread"):
 		state_chart.send_event("reset_distribution")
-	
 	
 	if Input.is_action_just_pressed("DEBUG_add_agent"):
 		add_agent()
