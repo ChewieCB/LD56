@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://boi7kbid2tuo4"
+path="res://.godot/imported/Jingling movement.mp3-4ffa5e791fc63d7b7a39dbf731e6515b.mp3str"
+
+[deps]
+
+source_file="res://src/entities/swarm/assets/sfx/Jingling movement.mp3"
+dest_files=["res://.godot/imported/Jingling movement.mp3-4ffa5e791fc63d7b7a39dbf731e6515b.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

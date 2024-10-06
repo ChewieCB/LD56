@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://s6yqtqflgx37"
+path="res://.godot/imported/New Member click 3.wav-fb8057df6654b6a5815603388dfa5118.sample"
+
+[deps]
+
+source_file="res://src/entities/swarm/assets/sfx/New Member click 3.wav"
+dest_files=["res://.godot/imported/New Member click 3.wav-fb8057df6654b6a5815603388dfa5118.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

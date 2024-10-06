@@ -78,6 +78,7 @@ func get_flock_status(flock: Array):
 	var align_vector := Vector2()
 	var avoid_vector := Vector2()
 	
+	flock = GameManager.clean_array(flock)
 	for f in flock:
 		var neighbor_pos: Vector2 = f.global_position
 
@@ -118,7 +119,9 @@ func _on_flock_view_body_entered(body: Node2D) -> void:
 
 func _on_flock_view_body_exited(body: Node2D) -> void:
 	if body is SwarmAgent:
-		_flock.remove_at(_flock.find(body))
+		_flock = GameManager.clean_array(_flock)
+		if _flock.has(body):
+			_flock.remove_at(_flock.find(body))
 
 
 func _on_movement_following_state_physics_processing(_delta: float) -> void:
