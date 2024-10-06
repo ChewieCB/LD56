@@ -2,29 +2,31 @@ extends Node2D
 class_name SwarmDirector
 
 @export var state_chart: StateChart
-
 @export var swarm_agent_scene: PackedScene
-
 @export var normal_separation: float = 0.5
 @export var close_separation: float = 0.2
 @export var far_separation: float = 4.0
+@export var swarm_agent_count: int = 50
+@export var target_movement_speed: float = 250.0
+@export var target_acceleration: float = 0.82
+@export var target_friction: float = 0.06
+
+@onready var target: CharacterBody2D = $TargetMarker
+@onready var centroid: Marker2D = $SwarmCentroidMarker
+@onready var debug_status_sprite: Sprite2D = $SwarmCentroidMarker/DEBUGStatus
 
 var swarm_agents: Array:
 	set(value):
 		swarm_agents = value
 		swarm_agent_count = swarm_agents.size()
-@export var swarm_agent_count: int = 50
-
-@onready var target: CharacterBody2D = $TargetMarker
-@onready var centroid: Marker2D = $SwarmCentroidMarker
-@export var target_movement_speed: float = 250.0
-@export var target_acceleration: float = 0.82
-@export var target_friction: float = 0.06
-
 var removed_agent_debug: Vector2
+var is_fire = false # Is on fire element, scare away predators
 
+signal swarm_status_changed
 
 func _ready() -> void:
+	debug_status_sprite.self_modulate = Color.GREEN
+	GameManager.swarm_director = self
 	for _i in range(swarm_agent_count):
 		randomize()
 		var agent = swarm_agent_scene.instantiate()
@@ -38,6 +40,16 @@ func _ready() -> void:
 	await get_tree().physics_frame
 	for obstacle in get_tree().get_nodes_in_group("obstacles"):
 		obstacle.damage_swarm_agent.connect(damage_agent)
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("DEBUG_player_toggle_fire_status"):
+		is_fire = !is_fire
+		swarm_status_changed.emit()
+		if is_fire:
+			debug_status_sprite.self_modulate = Color.ORANGE
+		else:
+			debug_status_sprite.self_modulate = Color.GREEN
 
 
 func _physics_process(delta: float) -> void:
@@ -64,7 +76,7 @@ func _physics_process(delta: float) -> void:
 		centroid.global_position = target.global_position
 
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_pressed("huddle"):
 		state_chart.send_event("clump_together")
 	elif Input.is_action_just_released("huddle"):
@@ -84,7 +96,7 @@ func _process(delta):
 	queue_redraw()
 
 
-func get_nav_path_for_swarm_agents(delta: float) -> void:
+func get_nav_path_for_swarm_agents(_delta: float) -> void:
 	var nav_map: RID = get_world_2d().get_navigation_map()
 	swarm_agents = GameManager.clean_array(swarm_agents)
 	for agent in swarm_agents:
@@ -120,6 +132,17 @@ func set_swarm_attributes(attributes: Dictionary) -> void:
 		if is_instance_valid(agent):
 			for key in attributes.keys():
 				agent.set(key, attributes[key])
+
+
+func get_furtherst_agent():
+	var chosen_agent = null
+	var max_dist = 0
+	for agent in swarm_agents:
+		var dist = centroid.global_position.distance_squared_to(agent.global_position)
+		if dist > max_dist:
+			max_dist = dist
+			chosen_agent = agent
+	return chosen_agent
 
 
 func _on_distribution_normal_state_entered() -> void:

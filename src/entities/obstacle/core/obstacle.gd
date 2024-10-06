@@ -12,4 +12,4 @@ func _ready() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is SwarmAgent:
-		emit_signal("damage_swarm_agent", body, damage)
+		damage_swarm_agent.emit(body, damage)
