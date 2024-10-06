@@ -1,4 +1,4 @@
-[gd_scene load_steps=294 format=3 uid="uid://dkbul75tbkjw2"]
+[gd_scene load_steps=291 format=3 uid="uid://dkbul75tbkjw2"]
 
 [ext_resource type="PackedScene" uid="uid://naoexqroboiq" path="res://src/entities/camera/FollowCamera.tscn" id="1_ia4y1"]
 [ext_resource type="Script" path="res://addons/rmsmartshape/shapes/shape_closed.gd" id="1_ltkcd"]
@@ -13,12 +13,9 @@
 [ext_resource type="Script" path="res://addons/rmsmartshape/normal_range.gd" id="10_ch0rs"]
 [ext_resource type="Texture2D" uid="uid://dbdok1vc4kmsi" path="res://assets/textures/grass/grass_corner.png" id="10_sp02w"]
 [ext_resource type="Texture2D" uid="uid://c3wdkfvoy5mav" path="res://assets/textures/dirt/dirt_seamless.png" id="12_0vrob"]
-[ext_resource type="Texture2D" uid="uid://wiqtysvbol1v" path="res://assets/bg/parallax/bg_parallax_1.png" id="14_emriw"]
-[ext_resource type="Texture2D" uid="uid://brct1kbsg135o" path="res://assets/bg/parallax/bg_parallax_0.png" id="15_u5lxc"]
+[ext_resource type="PackedScene" uid="uid://by45v52dchtht" path="res://src/scenes/BGParallax.tscn" id="14_tcfd0"]
 [ext_resource type="PackedScene" uid="uid://bm3vo4ufjrs7q" path="res://src/entities/enemies/basic_enemy/BasicEnemy.tscn" id="16_atsfw"]
-[ext_resource type="Texture2D" uid="uid://d4m2nj3qf4kvh" path="res://assets/bg/parallax/bg_parallax_6.png" id="17_2flpt"]
 [ext_resource type="PackedScene" uid="uid://y766oblqkpts" path="res://src/entities/obstacle/core/Obstacle.tscn" id="17_vi1ft"]
-[ext_resource type="Texture2D" uid="uid://califjsnesmsy" path="res://assets/bg/parallax/bg_parallax_2.png" id="20_1yuoq"]
 [ext_resource type="PackedScene" uid="uid://dosbbm6uk86ho" path="res://src/ui/game_ui/GameUI.tscn" id="20_po3vr"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5q2bw"]
@@ -2094,57 +2091,7 @@ collision_mask = 30
 visible = false
 polygon = PackedVector2Array(-347.805, 761.765, -13.4618, 863.765, 198.538, 823.765, 294.538, 727.765, 368.538, 557.765, 436.538, 395.765, 532.538, 307.765, 686.538, 333.765, 894.538, 483.765, 1062.34, 926.633, 1042.54, 1288.67, 825.655, 1335.21, 27.1348, 1449.89, -538.551, 1365.04, -535.722, 1062.4, -512.585, 792.81, -347.805, 761.765)
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scroll_ignore_camera_zoom = true
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-texture = ExtResource("15_u5lxc")
-centered = false
-
-[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.2, 0)
-motion_mirroring = Vector2(1920, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
-texture = ExtResource("14_emriw")
-centered = false
-
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.35, 0)
-motion_mirroring = Vector2(1920, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-texture = ExtResource("17_2flpt")
-centered = false
-
-[node name="ParallaxLayer7" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.6, 0)
-motion_mirroring = Vector2(1920, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer7"]
-texture = ExtResource("20_1yuoq")
-centered = false
-
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
-centered = false
-
-[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer6"]
-centered = false
-
-[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
-centered = false
+[node name="ParallaxBackground" parent="." instance=ExtResource("14_tcfd0")]
 
 [node name="BasicEnemy" parent="." instance=ExtResource("16_atsfw")]
 position = Vector2(1856, 1216)
@@ -2167,11 +2114,6 @@ scale = Vector2(0.619546, 0.619546)
 [node name="Obstacle6" parent="." instance=ExtResource("17_vi1ft")]
 position = Vector2(896, 944)
 rotation = -1.8326
-scale = Vector2(0.619546, 0.619546)
-
-[node name="Obstacle7" parent="." instance=ExtResource("17_vi1ft")]
-position = Vector2(1165, 816)
-rotation = -2.87979
 scale = Vector2(0.619546, 0.619546)
 
 [node name="Obstacle8" parent="." instance=ExtResource("17_vi1ft")]

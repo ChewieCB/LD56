@@ -1,15 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://yofeqq7oovkd"]
+[gd_scene load_steps=12 format=3 uid="uid://yofeqq7oovkd"]
 
-[ext_resource type="PackedScene" uid="uid://naoexqroboiq" path="res://src/entities/camera/FollowCamera.tscn" id="1_4drgy"]
-[ext_resource type="PackedScene" uid="uid://1bwiqif7rpyi" path="res://src/entities/swarm/SwarmDirector.tscn" id="2_pus5x"]
-[ext_resource type="PackedScene" uid="uid://bm3vo4ufjrs7q" path="res://src/entities/enemies/basic_enemy/BasicEnemy.tscn" id="4_2twyy"]
-[ext_resource type="PackedScene" uid="uid://djnji1v6uknmq" path="res://src/entities/environment/sealed_gate/SealedGateInput.tscn" id="5_4vus0"]
-[ext_resource type="Texture2D" uid="uid://ch2pnl1s0tl1n" path="res://assets/sprite/placeholder/square.png" id="5_u0sb1"]
-[ext_resource type="PackedScene" uid="uid://dmbvbsdlu4rjn" path="res://src/entities/environment/sealed_gate/EndLevelSealedVessel.tscn" id="6_68wp4"]
-[ext_resource type="PackedScene" uid="uid://y766oblqkpts" path="res://src/entities/obstacle/core/Obstacle.tscn" id="6_k3n7i"]
-[ext_resource type="PackedScene" uid="uid://dt6pvb0caalfy" path="res://src/entities/environment/sealed_gate/SealedGateDoor.tscn" id="6_q8q3c"]
-[ext_resource type="Texture2D" uid="uid://q5pp8mltm8v8" path="res://assets/sprite/bg1.png" id="7_elaou"]
-[ext_resource type="PackedScene" uid="uid://dosbbm6uk86ho" path="res://src/ui/game_ui/GameUI.tscn" id="12_avwj4"]
+[ext_resource type="PackedScene" uid="uid://naoexqroboiq" path="res://src/entities/camera/FollowCamera.tscn" id="1_wnrtv"]
+[ext_resource type="PackedScene" uid="uid://1bwiqif7rpyi" path="res://src/entities/swarm/SwarmDirector.tscn" id="2_7t3w0"]
+[ext_resource type="PackedScene" uid="uid://djnji1v6uknmq" path="res://src/entities/environment/sealed_gate/SealedGateInput.tscn" id="3_oxghv"]
+[ext_resource type="PackedScene" uid="uid://dt6pvb0caalfy" path="res://src/entities/environment/sealed_gate/SealedGateDoor.tscn" id="4_esryw"]
+[ext_resource type="PackedScene" uid="uid://dmbvbsdlu4rjn" path="res://src/entities/environment/sealed_gate/EndLevelSealedVessel.tscn" id="5_7hyk7"]
+[ext_resource type="PackedScene" uid="uid://y766oblqkpts" path="res://src/entities/obstacle/core/Obstacle.tscn" id="6_a716m"]
+[ext_resource type="Texture2D" uid="uid://ch2pnl1s0tl1n" path="res://assets/sprite/placeholder/square.png" id="7_bsgu8"]
+[ext_resource type="Texture2D" uid="uid://q5pp8mltm8v8" path="res://assets/sprite/bg1.png" id="8_g2h3u"]
+[ext_resource type="PackedScene" uid="uid://dosbbm6uk86ho" path="res://src/ui/game_ui/GameUI.tscn" id="9_gbfpw"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ofayr"]
 vertices = PackedVector2Array(1783.22, 352.781, 1783.22, 124.383, 2178.39, 125.883, 2183.55, 507.508, 1614.18, 478.977, 1614.18, 655.719, 127.039, 650.109, 126, 345.492, 2184.07, 656.25, 1783.22, 656.25, 1783.22, 478.977, 1614.18, 352.781, 953.891, 121.25, 1614.18, 123.742, 126, 121.25)
@@ -24,33 +23,31 @@ size = Vector2(63.9026, 68.9233)
 metadata/_edit_horizontal_guides_ = [43.0]
 metadata/_edit_vertical_guides_ = [-153.0]
 
-[node name="FollowCamera" parent="." node_paths=PackedStringArray("swarm_director") instance=ExtResource("1_4drgy")]
+[node name="FollowCamera" parent="." node_paths=PackedStringArray("swarm_director") instance=ExtResource("1_wnrtv")]
 position = Vector2(184, 376)
 swarm_director = NodePath("../SwarmDirector")
 
-[node name="SwarmDirector" parent="." instance=ExtResource("2_pus5x")]
+[node name="SwarmDirector" parent="." instance=ExtResource("2_7t3w0")]
 position = Vector2(176, 472)
-
-[node name="BasicEnemy" parent="." instance=ExtResource("4_2twyy")]
-position = Vector2(648, 152)
 
 [node name="GateHolder" type="Node2D" parent="."]
 
-[node name="SealedGateInput" parent="GateHolder" node_paths=PackedStringArray("sealed_gate_door") instance=ExtResource("5_4vus0")]
-position = Vector2(1648, 280)
+[node name="SealedGateInput" parent="GateHolder" node_paths=PackedStringArray("sealed_gate_door") instance=ExtResource("3_oxghv")]
+position = Vector2(1648, 216)
+rotation = -1.57079
 n_agent_required = 40
 sealed_gate_door = NodePath("../SealedGateDoor")
 
-[node name="SealedGateDoor" parent="GateHolder" instance=ExtResource("6_q8q3c")]
+[node name="SealedGateDoor" parent="GateHolder" instance=ExtResource("4_esryw")]
 position = Vector2(1696, 416)
 
-[node name="EndLevelSealedVessel" parent="GateHolder" instance=ExtResource("6_68wp4")]
+[node name="EndLevelSealedVessel" parent="GateHolder" instance=ExtResource("5_7hyk7")]
 position = Vector2(1968, 656)
 n_agent_required = 40
 
 [node name="ObstacleHolder" type="Node2D" parent="."]
 
-[node name="Obstacle2" parent="ObstacleHolder" instance=ExtResource("6_k3n7i")]
+[node name="Obstacle2" parent="ObstacleHolder" instance=ExtResource("6_a716m")]
 position = Vector2(1632, 680)
 rotation = 0.186735
 scale = Vector2(0.564141, 0.564141)
@@ -65,7 +62,7 @@ self_modulate = Color(0.429688, 0.168879, 0, 1)
 position = Vector2(1696, 664)
 rotation = 1.5708
 scale = Vector2(4.84803, 1.58203)
-texture = ExtResource("5_u0sb1")
+texture = ExtResource("7_bsgu8")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D/Geometry/Ground2"]
 collision_mask = 7
@@ -79,7 +76,7 @@ self_modulate = Color(0.429688, 0.168879, 0, 1)
 position = Vector2(1696, 168)
 rotation = 1.5708
 scale = Vector2(4.84803, 1.58203)
-texture = ExtResource("5_u0sb1")
+texture = ExtResource("7_bsgu8")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D/Geometry/Ground10"]
 collision_mask = 7
@@ -94,7 +91,7 @@ shape = SubResource("RectangleShape2D_6fjwu")
 self_modulate = Color(0.429688, 0.168879, 0, 1)
 position = Vector2(1152, 734)
 scale = Vector2(36, 1.32031)
-texture = ExtResource("5_u0sb1")
+texture = ExtResource("7_bsgu8")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D/WorldBoundary/Bound1"]
 collision_layer = 8
@@ -108,7 +105,7 @@ shape = SubResource("RectangleShape2D_6fjwu")
 self_modulate = Color(0.429688, 0.168879, 0, 1)
 position = Vector2(1152.79, 47.9999)
 scale = Vector2(35.9753, 1.32031)
-texture = ExtResource("5_u0sb1")
+texture = ExtResource("7_bsgu8")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D/WorldBoundary/Bound2"]
 collision_layer = 8
@@ -123,7 +120,7 @@ self_modulate = Color(0.429688, 0.168879, 0, 1)
 position = Vector2(48.4428, 400.848)
 rotation = 1.56736
 scale = Vector2(10.4771, 1.32031)
-texture = ExtResource("5_u0sb1")
+texture = ExtResource("7_bsgu8")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D/WorldBoundary/Bound3"]
 collision_layer = 8
@@ -138,7 +135,7 @@ self_modulate = Color(0.429688, 0.168879, 0, 1)
 position = Vector2(2256.43, 397.8)
 rotation = 1.56736
 scale = Vector2(10.3819, 1.32031)
-texture = ExtResource("5_u0sb1")
+texture = ExtResource("7_bsgu8")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D/WorldBoundary/Bound4"]
 collision_layer = 8
@@ -159,9 +156,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("7_elaou")
+texture = ExtResource("8_g2h3u")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 layer = 100
 
-[node name="GameUI" parent="CanvasLayer2" instance=ExtResource("12_avwj4")]
+[node name="GameUI" parent="CanvasLayer2" instance=ExtResource("9_gbfpw")]

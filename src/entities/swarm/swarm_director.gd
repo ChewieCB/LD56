@@ -89,12 +89,12 @@ func _ready() -> void:
 	for _i in range(swarm_agent_count):
 		await get_tree().create_timer(swarm_agent_count / 100).timeout
 		add_agent()
+	
+	state_chart.send_event("enable_idle")
 
 	await get_tree().physics_frame
 	for obstacle in get_tree().get_nodes_in_group("obstacles"):
 		obstacle.damage_swarm_agent.connect(damage_agent)
-	
-	state_chart.send_event("enable_idle")
 
 
 func _input(event: InputEvent) -> void:
@@ -292,7 +292,7 @@ func _on_moving_state_exited() -> void:
 
 
 func _on_idle_state_entered() -> void:
-	target_sprite.modulate = Color.DIM_GRAY
+	target_sprite.modulate = Color(1, 1, 1)
 
 
 func _on_idle_state_physics_processing(delta: float) -> void:

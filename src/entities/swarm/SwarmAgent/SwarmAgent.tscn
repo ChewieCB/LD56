@@ -15,6 +15,7 @@ radius = 2.0
 radius = 15.0
 
 [node name="SwarmAgent" type="CharacterBody2D" node_paths=PackedStringArray("state_chart")]
+z_index = 1
 collision_layer = 2
 collision_mask = 17
 motion_mode = 1

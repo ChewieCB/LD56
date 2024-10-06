@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="SS2D_Material_Shape" load_steps=11 format=3 uid="uid://yxfxi8l2knou"]
+
+[ext_resource type="Script" path="res://addons/rmsmartshape/materials/edge_material_metadata.gd" id="1_fgcmf"]
+[ext_resource type="Script" path="res://addons/rmsmartshape/materials/edge_material.gd" id="2_27d1i"]
+[ext_resource type="Texture2D" uid="uid://crv2prkyh8sqr" path="res://assets/textures/dirt/dirt_top_edge.png" id="3_ey26y"]
+[ext_resource type="Texture2D" uid="uid://dbdok1vc4kmsi" path="res://assets/textures/grass/grass_corner.png" id="4_q63gf"]
+[ext_resource type="Script" path="res://addons/rmsmartshape/normal_range.gd" id="5_f7oa6"]
+[ext_resource type="Texture2D" uid="uid://c3wdkfvoy5mav" path="res://assets/textures/dirt/dirt_seamless.png" id="6_lpjil"]
+[ext_resource type="Script" path="res://addons/rmsmartshape/materials/shape_material.gd" id="7_nfki3"]
+
+[sub_resource type="Resource" id="Resource_foxwb"]
+script = ExtResource("2_27d1i")
+textures = Array[Texture2D]([ExtResource("3_ey26y")])
+textures_corner_outer = Array[Texture2D]([ExtResource("4_q63gf")])
+textures_corner_inner = Array[Texture2D]([ExtResource("4_q63gf")])
+textures_taper_left = Array[Texture2D]([])
+textures_taper_right = Array[Texture2D]([])
+textures_taper_corner_left = Array[Texture2D]([])
+textures_taper_corner_right = Array[Texture2D]([])
+randomize_texture = false
+use_corner_texture = true
+use_taper_texture = true
+fit_mode = 0
+
+[sub_resource type="Resource" id="Resource_8224v"]
+script = ExtResource("5_f7oa6")
+begin = 0.0
+distance = 360.0
+edgeRendering = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_nr6um"]
+script = ExtResource("1_fgcmf")
+edge_material = SubResource("Resource_foxwb")
+normal_range = SubResource("Resource_8224v")
+weld = true
+taper_sharp_corners = true
+render = true
+z_index = 0
+z_as_relative = true
+offset = 0.0
+
+[resource]
+script = ExtResource("7_nfki3")
+_edge_meta_materials = Array[ExtResource("1_fgcmf")]([SubResource("Resource_nr6um")])
+fill_textures = Array[Texture2D]([ExtResource("6_lpjil")])
+fill_texture_z_index = -10
+fill_texture_show_behind_parent = false
+fill_texture_scale = 1.0
+fill_texture_absolute_position = false
+fill_texture_absolute_rotation = false
+fill_texture_offset = Vector2(0, 0)
+fill_texture_angle_offset = 0.0
+fill_mesh_offset = 0.0
+render_offset = 0.0
