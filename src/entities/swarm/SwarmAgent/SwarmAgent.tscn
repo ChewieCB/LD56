@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://vuj168p2lkjx"]
 
 [ext_resource type="Script" path="res://src/entities/swarm/SwarmAgent/swarm_agent.gd" id="1_dxyk5"]
-[ext_resource type="Texture2D" uid="uid://ccr58amjut7qw" path="res://assets/sprite/orb.png" id="2_bki8k"]
+[ext_resource type="Texture2D" uid="uid://dxxyxffr24eve" path="res://assets/sprite/swarm/swarm_sprite_1.png" id="2_3xttx"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_anpwf"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="4_3afhx"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="5_56egu"]
@@ -24,7 +24,7 @@ state_chart = NodePath("StateChart")
 
 [node name="Icon" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_bki8k")
+texture = ExtResource("2_3xttx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_sdb67")
