@@ -1,15 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://yofeqq7oovkd"]
+[gd_scene load_steps=14 format=3 uid="uid://yofeqq7oovkd"]
 
 [ext_resource type="PackedScene" uid="uid://naoexqroboiq" path="res://src/entities/camera/FollowCamera.tscn" id="1_4drgy"]
 [ext_resource type="PackedScene" uid="uid://1bwiqif7rpyi" path="res://src/entities/swarm/SwarmDirector.tscn" id="2_pus5x"]
 [ext_resource type="PackedScene" uid="uid://bm3vo4ufjrs7q" path="res://src/entities/enemies/basic_enemy/BasicEnemy.tscn" id="4_2twyy"]
 [ext_resource type="PackedScene" uid="uid://djnji1v6uknmq" path="res://src/entities/environment/sealed_gate/SealedGateInput.tscn" id="5_4vus0"]
 [ext_resource type="Texture2D" uid="uid://ch2pnl1s0tl1n" path="res://assets/sprite/placeholder/square.png" id="5_u0sb1"]
+[ext_resource type="PackedScene" uid="uid://dmbvbsdlu4rjn" path="res://src/entities/environment/sealed_gate/EndLevelSealedVessel.tscn" id="6_68wp4"]
 [ext_resource type="PackedScene" uid="uid://y766oblqkpts" path="res://src/entities/obstacle/core/Obstacle.tscn" id="6_k3n7i"]
 [ext_resource type="PackedScene" uid="uid://dt6pvb0caalfy" path="res://src/entities/environment/sealed_gate/SealedGateDoor.tscn" id="6_q8q3c"]
 [ext_resource type="Texture2D" uid="uid://q5pp8mltm8v8" path="res://assets/sprite/bg1.png" id="7_elaou"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="8_jpskl"]
-[ext_resource type="PackedScene" uid="uid://byj1y3wrwtdtq" path="res://src/ui/pause_ui/PauseUI.tscn" id="9_odwis"]
+[ext_resource type="PackedScene" uid="uid://dosbbm6uk86ho" path="res://src/ui/game_ui/GameUI.tscn" id="12_avwj4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ofayr"]
 vertices = PackedVector2Array(1783.22, 352.781, 1783.22, 124.383, 2178.39, 125.883, 2183.55, 507.508, 1614.18, 478.977, 1614.18, 655.719, 127.039, 650.109, 126, 345.492, 2184.07, 656.25, 1783.22, 656.25, 1783.22, 478.977, 1614.18, 352.781, 953.891, 121.25, 1614.18, 123.742, 126, 121.25)
@@ -43,6 +44,10 @@ sealed_gate_door = NodePath("../SealedGateDoor")
 
 [node name="SealedGateDoor" parent="GateHolder" instance=ExtResource("6_q8q3c")]
 position = Vector2(1696, 416)
+
+[node name="EndLevelSealedVessel" parent="GateHolder" instance=ExtResource("6_68wp4")]
+position = Vector2(1968, 656)
+n_agent_required = 40
 
 [node name="ObstacleHolder" type="Node2D" parent="."]
 
@@ -164,5 +169,4 @@ layer = 100
 offset_left = 832.0
 offset_bottom = -336.0
 
-[node name="PauseUI" parent="CanvasLayer2" instance=ExtResource("9_odwis")]
-visible = false
+[node name="GameUI" parent="CanvasLayer2" instance=ExtResource("12_avwj4")]

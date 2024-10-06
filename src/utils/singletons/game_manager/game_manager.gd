@@ -3,8 +3,8 @@ extends Node
 @export var level_list: Array[PackedScene]
 @export var title_screen: PackedScene
 
-var player: Player # Not used
 var pause_ui: PauseUI
+var game_ui: GameUI
 var swarm_director: SwarmDirector
 
 # Setting
@@ -16,10 +16,19 @@ var master_audio = 80
 var bgm_audio = 100
 var sfx_audio = 100
 var ui_audio = 100
+var level_finished = false
+
+# Level stats
+var level_timer = 0
+var faes_killed = 0
+var enemy_defeated = 0
 
 func _ready() -> void:
 	pass
 
+func _process(delta: float) -> void:
+	if not level_finished:
+		level_timer += delta
 
 func load_first_level():
 	get_tree().change_scene_to_packed(level_list[0])
@@ -29,6 +38,11 @@ func go_back_to_title_screen():
 	Engine.time_scale = 1
 	reset_data()
 	get_tree().change_scene_to_packed(title_screen)
+
+func finish_level():
+	game_ui.show_victory_screen()
+	level_finished = true
+	get_tree().paused = true
 
 
 func reset_data():
