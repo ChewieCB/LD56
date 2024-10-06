@@ -12,7 +12,6 @@ func _ready() -> void:
 	await get_tree().process_frame
 
 	camera_target = swarm_director.target
-	print("CACAC", camera_target)
 	if swarm_director is SwarmDirector:
 		swarm_director.close_formation.connect(set_fov.bind(1.5))
 		swarm_director.normal_formation.connect(set_fov.bind(1.3))

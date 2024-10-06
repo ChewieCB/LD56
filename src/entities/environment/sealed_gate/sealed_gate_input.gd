@@ -28,6 +28,7 @@ func _on_input_area_body_entered(body: Node2D) -> void:
 		if agent not in swarm_agents and swarm_agent_count < n_agent_required:
 			release_agent_timer.start()
 			agent.target = gate_target
+			agent.is_stored_in_sealed_gate = true
 			swarm_agents.append(agent)
 			swarm_agent_count = swarm_agents.size()
 			if swarm_agent_count >= n_agent_required:
@@ -44,6 +45,7 @@ func open_gate():
 func release_all_stored_agents():
 	for agent in swarm_agents:
 		agent.target = GameManager.swarm_director.target
+		agent.is_stored_in_sealed_gate = false
 	swarm_agents = []
 	swarm_agent_count = 0
 

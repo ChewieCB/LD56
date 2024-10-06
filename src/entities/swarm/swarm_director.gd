@@ -133,6 +133,7 @@ func set_swarm_attributes(attributes: Dictionary) -> void:
 
 
 func get_furtherst_agent():
+	swarm_agents = GameManager.clean_array(swarm_agents)
 	var chosen_agent = null
 	var max_dist = 0
 	for agent in swarm_agents:
