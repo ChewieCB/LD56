@@ -7,7 +7,7 @@ signal target_updated(agent: SwarmAgent, new_target: CharacterBody2D)
 @export var target: CharacterBody2D:
 	set(value):
 		target = value
-		emit_signal("target_updated", self, target)
+		target_updated.emit(self, target)
 @export var max_speed := 200.0
 @export var mouse_follow_force := 0.05
 @export var cohesion_force := 0.05
@@ -145,9 +145,9 @@ func _on_health_hurt_state_entered() -> void:
 func _on_health_dead_state_entered() -> void:
 	state_chart.send_event("disable_movement")
 	died.emit(self)
-
 	sprite.modulate = Color.BLACK
 	await get_tree().create_timer(0.4).timeout
+	GameManager.faes_killed += 1
 	call_deferred("queue_free")
 
 

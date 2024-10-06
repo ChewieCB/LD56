@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://dmbvbsdlu4rjn"]
+
+[ext_resource type="Script" path="res://src/entities/environment/sealed_gate/sealed_gate_input.gd" id="1_5vkoe"]
+[ext_resource type="Texture2D" uid="uid://ch2pnl1s0tl1n" path="res://assets/sprite/placeholder/square.png" id="2_j0vcd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o27pw"]
+size = Vector2(64, 64)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jt0bm"]
+radius = 192.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eduk7"]
+
+[node name="EndLevelSealedVessel" type="Node2D"]
+script = ExtResource("1_5vkoe")
+is_end_of_level = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0.933508, 0, 1)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_j0vcd")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D"]
+shape = SubResource("RectangleShape2D_o27pw")
+
+[node name="Label" type="Label" parent="."]
+z_index = 10
+offset_left = -32.0
+offset_top = -88.0
+offset_right = 32.0
+offset_bottom = -54.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "0/10"
+horizontal_alignment = 1
+
+[node name="InputArea" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InputArea"]
+shape = SubResource("CircleShape2D_jt0bm")
+
+[node name="SwarmTarget" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwarmTarget"]
+shape = SubResource("CircleShape2D_eduk7")
+
+[node name="ReleaseAgentTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="body_entered" from="InputArea" to="." method="_on_input_area_body_entered"]
+[connection signal="timeout" from="ReleaseAgentTimer" to="." method="_on_release_agent_timer_timeout"]

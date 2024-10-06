@@ -3,8 +3,8 @@ extends Node
 @export var level_list: Array[PackedScene]
 @export var title_screen: PackedScene
 
-var player: Player # Not used
 var pause_ui: PauseUI
+var game_ui: GameUI
 var swarm_director: SwarmDirector
 
 # Setting
@@ -17,23 +17,59 @@ var bgm_audio = 100
 var sfx_audio = 100
 var ui_audio = 100
 
+# Level stats
+var level_finished = false
+var level_timer = 0
+var faes_killed = 0
+var enemy_defeated = 0
+
+var current_level_id = 0
+
 func _ready() -> void:
 	pass
 
+func _process(delta: float) -> void:
+	if not level_finished:
+		level_timer += delta
 
 func load_first_level():
 	get_tree().change_scene_to_packed(level_list[0])
 
+func go_to_next_level():
+	get_tree().paused = false
+	current_level_id += 1
+	if current_level_id < level_list.size():
+		get_tree().change_scene_to_packed(level_list[current_level_id])
+
+func check_if_next_level_exist():
+	return current_level_id + 1 < level_list.size()
+
 func go_back_to_title_screen():
 	get_tree().paused = false
 	Engine.time_scale = 1
-	reset_data()
+	reset_all_data()
 	get_tree().change_scene_to_packed(title_screen)
 
+func finish_level():
+	game_ui.show_victory_screen()
+	level_finished = true
+	get_tree().paused = true
 
-func reset_data():
-	pass
 
+func retry_level():
+	reset_level_data()
+	get_tree().paused = false
+	get_tree().reload_current_scene()
+
+func reset_level_data():
+	level_timer = 0
+	faes_killed = 0
+	enemy_defeated = 0
+	level_finished = false
+
+func reset_all_data():
+	reset_level_data()
+	current_level_id = 0
 
 func clean_array(dirty_array: Array) -> Array:
 	var cleaned_array = []
