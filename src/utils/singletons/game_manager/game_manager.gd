@@ -51,10 +51,16 @@ func go_back_to_title_screen():
 	get_tree().change_scene_to_packed(title_screen)
 
 func finish_level():
+	await get_tree().create_timer(0.5).timeout
 	game_ui.show_victory_screen()
 	level_finished = true
 	get_tree().paused = true
 
+func game_over():
+	await get_tree().create_timer(0.5).timeout
+	game_ui.show_game_over_screen()
+	level_finished = true
+	get_tree().paused = true
 
 func retry_level():
 	reset_level_data()
