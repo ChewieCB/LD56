@@ -51,19 +51,19 @@ func _ready():
 
 func _move_boid() -> void:
 	var path_vector = global_position.direction_to(local_tracking_target) * max_speed * mouse_follow_force
-	
+
 	# get cohesion, alginment, and separation vectors
 	var vectors = get_flock_status(_flock)
-	
+
 	# steer towards vectors
 	var cohesion_vector = vectors[0] * cohesion_force
 	var align_vector = vectors[1] * algin_force
 	var separation_vector = vectors[2] * separation_force
 
 	var acceleration = cohesion_vector + align_vector + separation_vector + path_vector
-	
+
 	_velocity = (_velocity + acceleration).limit_length(max_speed)
-	
+
 	set_velocity(_velocity)
 	move_and_slide()
 	_velocity = velocity
@@ -74,7 +74,7 @@ func get_flock_status(flock: Array):
 	var flock_center := Vector2()
 	var align_vector := Vector2()
 	var avoid_vector := Vector2()
-	
+
 	for f in flock:
 		var neighbor_pos: Vector2 = f.global_position
 
@@ -84,7 +84,7 @@ func get_flock_status(flock: Array):
 		var d = global_position.distance_to(neighbor_pos)
 		if d > 0 and d < avoid_distance:
 			avoid_vector -= (neighbor_pos - global_position).normalized() * (avoid_distance / d * max_speed)
-	
+
 	var flock_size = flock.size()
 	if flock_size:
 		align_vector /= flock_size
@@ -115,7 +115,9 @@ func _on_flock_view_body_entered(body: Node2D) -> void:
 
 func _on_flock_view_body_exited(body: Node2D) -> void:
 	if body is SwarmAgent:
-		_flock.remove_at(_flock.find(body))
+		var agent_id = _flock.find(body) # Return -1 if not exist
+		if agent_id < _flock.size() and agent_id > 0:
+			_flock.remove_at(agent_id)
 
 
 func _on_movement_following_state_physics_processing(_delta: float) -> void:
@@ -136,10 +138,10 @@ func _on_health_hurt_state_entered() -> void:
 func _on_health_dead_state_entered() -> void:
 	state_chart.send_event("disable_movement")
 	died.emit(self)
-	
+
 	sprite.modulate = Color.BLACK
 	await get_tree().create_timer(0.4).timeout
-	queue_free()
+	call_deferred("queue_free")
 
 
 func _on_following_state_entered() -> void:
