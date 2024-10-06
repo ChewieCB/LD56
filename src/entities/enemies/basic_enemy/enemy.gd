@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Enemy
 
 @export var speed = 100
-@export var max_hp = 100
+@export var max_health: float = 100
 @export var min_wander_range = 100
 @export var max_wander_range = 500
 @export var detect_range = 256
@@ -18,7 +18,11 @@ class_name Enemy
 @onready var detect_collision_shape: CollisionShape2D = $PlayerDetectRange/CollisionShape2D
 @onready var los_raycast: RayCast2D = $LOSRaycast
 
-var current_hp = 100
+var current_health: float = max_health:
+	set(value):
+		current_health = clamp(value, 0, max_health)
+		if current_health == 0:
+			state_chart.send_event("death")
 var navigation_initialized = false
 var spawn_pos: Vector2
 var found_wander_pos = false
@@ -35,7 +39,7 @@ func _ready() -> void:
 	# Wait for important nodes to register themselves to GameManagers
 	await get_tree().physics_frame
 	await get_tree().physics_frame
-	current_hp = max_hp
+	current_health = max_health
 	spawn_pos = global_position
 	detect_collision_shape.shape.radius = detect_range
 	GameManager.swarm_director.swarm_status_changed.connect(check_swarm_status)
@@ -195,3 +199,8 @@ func _on_flee_state_physics_processing(delta: float) -> void:
 	velocity = direction_away * speed * FLEE_SPEED_MODIFIER
 	keep_looking_at_pos(delta, global_position + velocity)
 	move_and_slide()
+
+func damage(value: float) -> void:
+	if value > 0:
+		state_chart.send_event("take_damage")
+		current_health -= value

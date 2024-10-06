@@ -104,10 +104,10 @@ func set_collision_radius(radius: float):
 	agent_collider.shape.radius = radius
 
 
-func damaged(damage: float) -> void:
-	if damage > 0:
+func damage(value: float) -> void:
+	if value > 0:
 		state_chart.send_event("take_damage")
-		current_health -= damage
+		current_health -= value
 
 
 func _on_flock_view_body_entered(body: Node2D) -> void:

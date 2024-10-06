@@ -119,7 +119,7 @@ func add_agent(new_position: Vector2 = centroid.position) -> SwarmAgent:
 
 
 func damage_agent(agent: SwarmAgent, damage: float) -> void:
-	agent.damaged(damage)
+	agent.damage(damage)
 
 
 func remove_agent(agent: SwarmAgent) -> void:
