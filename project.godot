@@ -23,6 +23,10 @@ SoundManager="*res://addons/sound_manager/sound_manager.gd"
 BuildTag="*res://config/build_tag/build_tag.gd"
 GlobalSFX="*res://src/utils/singletons/global_sfx/GlobalSFX.tscn"
 
+[debug]
+
+gdscript/warnings/integer_division=0
+
 [display]
 
 window/size/viewport_width=1280

@@ -40,6 +40,7 @@ var target_path: PackedVector2Array:
 			#$Line2D.default_color = Color.RED
 			#$Line2D.width = 0.5
 var local_tracking_target: Vector2
+var is_stored_in_sealed_gate = false
 
 const ARRIVE_DISTANCE = 10.0
 
@@ -75,9 +76,9 @@ func get_flock_status(flock: Array):
 	var align_vector := Vector2()
 	var avoid_vector := Vector2()
 
+	flock = GameManager.clean_array(flock)
 	for f in flock:
 		var neighbor_pos: Vector2 = f.global_position
-
 		align_vector += f._velocity
 		flock_center += neighbor_pos
 
@@ -102,6 +103,8 @@ func set_collision_radius(radius: float):
 
 
 func damage(value: float) -> void:
+	if is_stored_in_sealed_gate:
+		return
 	if value > 0:
 		state_chart.send_event("take_damage")
 		current_health -= value
