@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://otcfvigl0d8u"
+path="res://.godot/imported/Swarm Shrink.wav-c1983120eea00482e8f5d56cd17d239b.sample"
+
+[deps]
+
+source_file="res://src/entities/swarm/assets/sfx/Swarm Shrink.wav"
+dest_files=["res://.godot/imported/Swarm Shrink.wav-c1983120eea00482e8f5d56cd17d239b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,11 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://bm3vo4ufjrs7q"]
+[gd_scene load_steps=16 format=3 uid="uid://bm3vo4ufjrs7q"]
 
 [ext_resource type="Script" path="res://src/entities/enemies/basic_enemy/enemy.gd" id="1_os4t1"]
+[ext_resource type="AudioStream" uid="uid://bedyrnfp4a4na" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_idle_loop.mp3" id="2_0sdi3"]
+[ext_resource type="AudioStream" uid="uid://cejolwltt0k2w" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_buzz.wav" id="2_5ts1g"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_kalrn"]
 [ext_resource type="Texture2D" uid="uid://bfodump4jvah5" path="res://assets/sprite/enemy/green_wasp.png" id="3_57noc"]
+[ext_resource type="AudioStream" uid="uid://d0nhxm6ohhowo" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_attack.mp3" id="3_qs20q"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="3_uci3j"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_gwh43"]
+[ext_resource type="AudioStream" uid="uid://c6uydg1kdt5ow" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_aggro1.mp3" id="4_y87e6"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_hfphn"]
+[ext_resource type="AudioStream" uid="uid://c2plaei2vj6is" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_die.mp3" id="5_xhkb6"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="7_2dfcw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ddoed"]
@@ -17,10 +22,15 @@ radius = 200.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2pffq"]
 size = Vector2(26, 32)
 
-[node name="BasicEnemy" type="CharacterBody2D"]
+[node name="BasicEnemy" type="CharacterBody2D" node_paths=PackedStringArray("idle_player")]
 collision_layer = 32
 collision_mask = 9
 script = ExtResource("1_os4t1")
+SFX_idle = ExtResource("2_5ts1g")
+SFX_attack = Array[AudioStream]([ExtResource("3_qs20q")])
+SFX_aggro = Array[AudioStream]([ExtResource("4_y87e6")])
+SFX_death = Array[AudioStream]([ExtResource("5_xhkb6")])
+idle_player = NodePath("IdleAudioPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(-0.212238, 0.212238)
@@ -216,6 +226,9 @@ to = NodePath("../../Cooldown")
 event = &"attack_finished"
 delay_in_seconds = "0.0"
 
+[node name="IdleAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_0sdi3")
+
 [connection signal="body_entered" from="PlayerDetectRange" to="." method="_on_detect_range_body_entered"]
 [connection signal="body_exited" from="PlayerDetectRange" to="." method="_on_player_detect_range_body_exited"]
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
@@ -224,10 +237,12 @@ delay_in_seconds = "0.0"
 [connection signal="state_entered" from="StateChart/Root/Movement/Wander" to="." method="_on_wander_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Wander" to="." method="_on_wander_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Movement/Track" to="." method="_on_track_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Movement/Track" to="." method="_on_track_state_exited"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Track" to="." method="_on_track_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Movement/Dash" to="." method="_on_dash_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Dash" to="." method="_on_dash_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Flee" to="." method="_on_flee_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Health/Dead" to="." method="_on_dead_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Attack/Cooldown" to="." method="_on_cooldown_state_entered"]
 [connection signal="state_processing" from="StateChart/Root/Attack/Cooldown" to="." method="_on_cooldown_state_processing"]
 [connection signal="state_entered" from="StateChart/Root/Attack/Attacking" to="." method="_on_attacking_state_entered"]

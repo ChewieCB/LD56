@@ -2,6 +2,7 @@ extends Node
 
 @export var level_list: Array[PackedScene]
 @export var title_screen: PackedScene
+@export var bgm: AudioStream
 
 var pause_ui: PauseUI
 var game_ui: GameUI
@@ -26,7 +27,8 @@ var enemy_defeated = 0
 var current_level_id = 0
 
 func _ready() -> void:
-	pass
+	if bgm:
+		SoundManager.play_music(bgm)
 
 func _process(delta: float) -> void:
 	if not level_finished:
