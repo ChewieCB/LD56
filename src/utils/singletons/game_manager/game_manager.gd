@@ -2,6 +2,7 @@ extends Node
 
 @export var level_list: Array[PackedScene]
 @export var title_screen: PackedScene
+@export var bgm: AudioStream
 
 var player: Player # Not used
 var pause_ui: PauseUI
@@ -18,7 +19,8 @@ var sfx_audio = 100
 var ui_audio = 100
 
 func _ready() -> void:
-	pass
+	if bgm:
+		SoundManager.play_music(bgm)
 
 
 func load_first_level():

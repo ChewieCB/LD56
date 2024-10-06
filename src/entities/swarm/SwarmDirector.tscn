@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://1bwiqif7rpyi"]
+[gd_scene load_steps=22 format=3 uid="uid://1bwiqif7rpyi"]
 
 [ext_resource type="Script" path="res://src/entities/swarm/swarm_director.gd" id="1_ol7n7"]
 [ext_resource type="PackedScene" uid="uid://vuj168p2lkjx" path="res://src/entities/swarm/SwarmAgent/SwarmAgent.tscn" id="2_0de42"]
@@ -11,7 +11,9 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_xwfoj"]
 [ext_resource type="AudioStream" uid="uid://clwxvi60yiq1u" path="res://src/entities/swarm/assets/sfx/Swarm Member Death 1.wav" id="5_1j2n4"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_02wus"]
+[ext_resource type="AudioStream" uid="uid://dk7kjytoj1rab" path="res://src/entities/swarm/assets/sfx/Swarm hurt sound.wav" id="5_3ivvn"]
 [ext_resource type="AudioStream" uid="uid://be0bvnlmucbbj" path="res://src/entities/swarm/assets/sfx/Swarm Member Death 3.wav" id="6_7hta1"]
+[ext_resource type="AudioStream" uid="uid://e2687da30p8" path="res://src/entities/swarm/assets/sfx/Swarm hurt sound 2.wav" id="6_ftd2k"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_s0myw"]
 [ext_resource type="AudioStream" uid="uid://dse55qf6lvl7j" path="res://src/entities/swarm/assets/sfx/Swarm Member Death 4.wav" id="7_ly5x6"]
 [ext_resource type="Texture2D" uid="uid://bvhed0lxktwe0" path="res://assets/sprite/placeholder/circle.png" id="8_q1cn2"]
@@ -24,6 +26,7 @@
 [node name="SwarmDirector" type="Node2D" node_paths=PackedStringArray("state_chart")]
 script = ExtResource("1_ol7n7")
 SFX_agent_spawn = Array[AudioStream]([ExtResource("2_6g8qx"), ExtResource("3_8a0u6"), ExtResource("4_vmf27")])
+SFX_agent_hurt = Array[AudioStream]([ExtResource("5_3ivvn"), ExtResource("6_ftd2k")])
 SFX_agent_death = Array[AudioStream]([ExtResource("5_1j2n4"), ExtResource("6_7hta1"), ExtResource("6_7hta1"), ExtResource("7_ly5x6")])
 SFX_swarm_expand = Array[AudioStream]([ExtResource("8_srbrl")])
 SFX_swarm_contract = Array[AudioStream]([ExtResource("10_o0sva")])

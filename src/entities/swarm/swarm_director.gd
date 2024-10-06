@@ -16,7 +16,7 @@ signal far_formation
 @export var SFX_swarm_move: AudioStream
 var active_movement_sfx_player: AudioStreamPlayer
 var movement_sfx_tween: Tween
-var max_simultaneous_sfx: int = 3
+var max_simultaneous_sfx: int = 100
 var active_hurt_sfx_players: Array[AudioStreamPlayer]
 var active_death_sfx_players: Array[AudioStreamPlayer]
 
@@ -161,7 +161,8 @@ func add_agent(new_position: Vector2 = centroid.position) -> SwarmAgent:
 	
 	new_agent.died.connect(func(agent):
 		GlobalSFX.play_batched_sfx(
-			SFX_agent_death, active_death_sfx_players, max_simultaneous_sfx, true
+			SFX_agent_death, active_death_sfx_players, 
+			max_simultaneous_sfx, -12.0, true
 		)
 	)
 	
@@ -182,7 +183,8 @@ func add_agent(new_position: Vector2 = centroid.position) -> SwarmAgent:
 func damage_agent(agent: SwarmAgent, damage: float) -> void:
 	agent.damage(damage)
 	GlobalSFX.play_batched_sfx(
-		SFX_agent_hurt, active_hurt_sfx_players, max_simultaneous_sfx
+		SFX_agent_hurt, active_hurt_sfx_players, 
+		max_simultaneous_sfx, -8.0
 	)
 
 
@@ -201,6 +203,7 @@ func set_swarm_attributes(attributes: Dictionary) -> void:
 func get_furthest_agent():
 	var chosen_agent = null
 	var max_dist = 0
+	swarm_agents = GameManager.clean_array(swarm_agents)
 	for agent in swarm_agents:
 		var dist = centroid.global_position.distance_squared_to(agent.global_position)
 		if dist > max_dist:
