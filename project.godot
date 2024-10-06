@@ -101,8 +101,8 @@ DEBUG_player_toggle_fire_status={
 [layer_names]
 
 2d_physics/layer_1="Environment"
-2d_physics/layer_2="Swarm Node"
-2d_physics/layer_3="Swarm Target"
+2d_physics/layer_2="Swarm Agent"
+2d_physics/layer_3="Swarm Leader"
 2d_physics/layer_4="World Boundary"
 2d_physics/layer_5="Area of Effect"
 2d_physics/layer_6="Enemy"

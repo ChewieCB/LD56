@@ -17,7 +17,7 @@ signal far_formation
 @onready var target: CharacterBody2D = $TargetMarker
 @onready var target_sprite: Sprite2D = $TargetMarker/Sprite2D
 @onready var centroid: Marker2D = $SwarmCentroidMarker
-@onready var debug_status_sprite: Sprite2D = $SwarmCentroidMarker/DEBUGStatus
+@onready var debug_status_sprite: Sprite2D = $TargetMarker/Sprite2D
 
 var swarm_agents: Array:
 	set(value):
@@ -54,10 +54,10 @@ func _ready() -> void:
 	debug_status_sprite.self_modulate = Color.GREEN
 	GameManager.swarm_director = self
 	for _i in range(swarm_agent_count):
-		await get_tree().create_timer(swarm_agent_count/100).timeout
+		await get_tree().create_timer(swarm_agent_count / 100).timeout
 		add_agent()
 	state_chart.send_event("start_moving")
-	
+
 	await get_tree().physics_frame
 	for obstacle in get_tree().get_nodes_in_group("obstacles"):
 		obstacle.damage_swarm_agent.connect(damage_agent)
@@ -75,14 +75,13 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	get_nav_path_for_swarm_agents(delta)
-	
+
 	# Get centroid position of swarm
 	var avg_agent_pos := Vector2.ZERO
 	if swarm_agents:
 		for agent in swarm_agents:
 			avg_agent_pos += agent.global_position
 		avg_agent_pos /= swarm_agents.size()
-		
 		centroid.global_position = avg_agent_pos
 	else:
 		centroid.global_position = target.global_position
@@ -106,14 +105,14 @@ func add_agent(new_position: Vector2 = centroid.position) -> SwarmAgent:
 	new_agent.position = new_position
 	new_agent.target = target
 	add_child(new_agent)
-	
+
 	if new_agent not in swarm_agents:
 		swarm_agents.append(new_agent)
 		swarm_agent_count = swarm_agents.size()
-	
+
 	for key in current_swarm_attributes.keys():
 		new_agent.set(key, current_swarm_attributes[key])
-	
+
 	return new_agent
 
 
@@ -148,8 +147,8 @@ func _on_distribution_normal_state_entered() -> void:
 	target_movement_speed = 230.0
 	set_swarm_attributes(SWARM_ATTRIBUTES_NORMAL)
 	# Hacky so we can set on agent add
-	current_swarm_attributes = SWARM_ATTRIBUTES_NORMAL
 	emit_signal("normal_formation")
+	normal_formation.emit()
 
 
 func _on_distribution_close_state_entered() -> void:
@@ -157,7 +156,7 @@ func _on_distribution_close_state_entered() -> void:
 	set_swarm_attributes(SWARM_ATTRIBUTES_CLOSE)
 	# Hacky so we can set on agent add
 	current_swarm_attributes = SWARM_ATTRIBUTES_CLOSE
-	emit_signal("close_formation")
+	close_formation.emit()
 
 
 func _on_distribution_far_state_entered() -> void:
@@ -165,20 +164,20 @@ func _on_distribution_far_state_entered() -> void:
 	set_swarm_attributes(SWARM_ATTRIBUTES_FAR)
 	# Hacky so we can set on agent add
 	current_swarm_attributes = SWARM_ATTRIBUTES_FAR
-	emit_signal("far_formation")
+	far_formation.emit()
 
 
-func _on_moving_state_physics_processing(delta: float) -> void:
+func _on_moving_state_physics_processing(_delta: float) -> void:
 	var direction = Vector2.ZERO
 	direction = Input.get_vector("left", "right", "up", "down").normalized()
-	
+
 	if direction != Vector2.ZERO:
 		target.velocity = lerp(target.velocity, direction * target_movement_speed, target_acceleration)
 	else:
 		target.velocity = lerp(target.velocity, Vector2.ZERO, target_friction)
-	
+
 	target.move_and_slide()
-	
+
 	if Input.is_action_pressed("huddle"):
 		state_chart.send_event("clump_together")
 	elif Input.is_action_just_released("huddle"):
@@ -187,8 +186,8 @@ func _on_moving_state_physics_processing(delta: float) -> void:
 		state_chart.send_event("spread_out")
 	elif Input.is_action_just_released("spread"):
 		state_chart.send_event("reset_distribution")
-	
-	
+
+
 	if Input.is_action_just_pressed("DEBUG_add_agent"):
 		add_agent()
 	elif Input.is_action_just_pressed("DEBUG_remove_agent"):
