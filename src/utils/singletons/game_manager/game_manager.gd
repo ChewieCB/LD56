@@ -3,8 +3,9 @@ extends Node
 @export var level_list: Array[PackedScene]
 @export var title_screen: PackedScene
 
-var player: Player
+var player: Player # Not used
 var pause_ui: PauseUI
+var swarm_director: SwarmDirector
 
 # Setting
 var fps_limit_index = 2 # From 0 to 5. Refer to EnumAutoload.FPS_LIMIT_ARRAY

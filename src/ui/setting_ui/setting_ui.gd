@@ -21,14 +21,20 @@ class_name SettingUI
 @onready var keybind_container: Control = $TabContainer/Control/ScrollContainer/VBoxContainer/KeybindingSection
 
 var pause_ui: PauseUI
+# Name on the left need to be exact same in Project Settings > Input Map.
+# Name on the right is the displayed name in Keybinding setting menu
 var keybindable_action_list = {
 	"up": "Move forward",
 	"down": "Move backward",
 	"left": "Move left",
 	"right": "Move right",
 	"pause_menu": "Pause Menu",
-	"huddle": "Huddle",
-	"spread": "Spread"
+	"huddle": "Huddle/Clump",
+	"spread": "Spread",
+	"DEBUG_add_agent": "DEBUG_add_agent",
+	"DEBUG_remove_agent": "DEBUG_remove_agent",
+	"DEBUG_player_toggle_fire_status": "DEBUG_player_toggle_fire_status",
+	
 }
 var is_remapping = false
 var action_to_remap = null
