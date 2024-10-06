@@ -1671,8 +1671,10 @@ target = NodePath("../SwarmDirector/SwarmCentroidMarker")
 [node name="SwarmDirector" parent="." instance=ExtResource("8_2tduy")]
 texture_repeat = 2
 position = Vector2(715, 246)
+swarm_agent_count = 10
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_lvxwa")
 
 [node name="LevelGeom" type="Node2D" parent="."]
