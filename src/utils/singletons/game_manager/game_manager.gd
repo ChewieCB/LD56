@@ -16,9 +16,9 @@ var master_audio = 80
 var bgm_audio = 100
 var sfx_audio = 100
 var ui_audio = 100
-var level_finished = false
 
 # Level stats
+var level_finished = false
 var level_timer = 0
 var faes_killed = 0
 var enemy_defeated = 0
@@ -36,6 +36,7 @@ func load_first_level():
 	get_tree().change_scene_to_packed(level_list[0])
 
 func go_to_next_level():
+	get_tree().paused = false
 	current_level_id += 1
 	if current_level_id < level_list.size():
 		get_tree().change_scene_to_packed(level_list[current_level_id])
@@ -57,12 +58,14 @@ func finish_level():
 
 func retry_level():
 	reset_level_data()
+	get_tree().paused = false
 	get_tree().reload_current_scene()
 
 func reset_level_data():
 	level_timer = 0
 	faes_killed = 0
 	enemy_defeated = 0
+	level_finished = false
 
 func reset_all_data():
 	reset_level_data()
