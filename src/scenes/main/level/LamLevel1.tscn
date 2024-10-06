@@ -159,6 +159,7 @@ texture = ExtResource("7_elaou")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 layer = 100
+visible = false
 
 [node name="StateChartDebugger" parent="CanvasLayer2" instance=ExtResource("8_jpskl")]
 offset_left = 832.0
