@@ -4,15 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://1bwiqif7rpyi" path="res://src/entities/swarm/SwarmDirector.tscn" id="2_pus5x"]
 [ext_resource type="PackedScene" uid="uid://vuj168p2lkjx" path="res://src/entities/swarm/SwarmAgent/SwarmAgent.tscn" id="3_nflla"]
 [ext_resource type="PackedScene" uid="uid://bm3vo4ufjrs7q" path="res://src/entities/enemies/basic_enemy/BasicEnemy.tscn" id="4_2twyy"]
-[ext_resource type="PackedScene" uid="uid://djnji1v6uknmq" path="res://src/entities/environment/sealed_gate_input/SealedGateInput.tscn" id="5_4vus0"]
+[ext_resource type="PackedScene" uid="uid://djnji1v6uknmq" path="res://src/entities/environment/sealed_gate/SealedGateInput.tscn" id="5_4vus0"]
 [ext_resource type="Texture2D" uid="uid://ch2pnl1s0tl1n" path="res://assets/sprite/placeholder/square.png" id="5_u0sb1"]
 [ext_resource type="PackedScene" uid="uid://y766oblqkpts" path="res://src/entities/obstacle/core/Obstacle.tscn" id="6_k3n7i"]
+[ext_resource type="PackedScene" uid="uid://dt6pvb0caalfy" path="res://src/entities/environment/sealed_gate/SealedGateDoor.tscn" id="6_q8q3c"]
 [ext_resource type="Texture2D" uid="uid://q5pp8mltm8v8" path="res://assets/sprite/bg1.png" id="7_elaou"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="8_jpskl"]
 [ext_resource type="PackedScene" uid="uid://byj1y3wrwtdtq" path="res://src/ui/pause_ui/PauseUI.tscn" id="9_odwis"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sndwj"]
-size = Vector2(64, 64)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ofayr"]
 vertices = PackedVector2Array(1783.22, 352.781, 1783.22, 124.383, 2178.39, 125.883, 2183.55, 507.508, 1614.18, 478.977, 1614.18, 655.719, 127.039, 650.109, 126, 345.492, 2184.07, 656.25, 1783.22, 656.25, 1783.22, 478.977, 1614.18, 352.781, 953.891, 121.25, 1614.18, 123.742, 126, 121.25)
@@ -41,21 +39,12 @@ position = Vector2(648, 152)
 
 [node name="GateHolder" type="Node2D" parent="."]
 
-[node name="SealedGateInput" parent="GateHolder" instance=ExtResource("5_4vus0")]
+[node name="SealedGateInput" parent="GateHolder" node_paths=PackedStringArray("sealed_gate_door") instance=ExtResource("5_4vus0")]
 position = Vector2(1648, 280)
+sealed_gate_door = NodePath("../SealedGateDoor")
 
-[node name="SealedGateDoor" type="Node2D" parent="GateHolder"]
-position = Vector2(1696, 408)
-
-[node name="Sprite2D" type="Sprite2D" parent="GateHolder/SealedGateDoor"]
-self_modulate = Color(0, 1, 0.509617, 1)
-scale = Vector2(1, 3.25)
-texture = ExtResource("5_u0sb1")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="GateHolder/SealedGateDoor/Sprite2D"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GateHolder/SealedGateDoor/Sprite2D/StaticBody2D"]
-shape = SubResource("RectangleShape2D_sndwj")
+[node name="SealedGateDoor" parent="GateHolder" instance=ExtResource("6_q8q3c")]
+position = Vector2(1696, 416)
 
 [node name="ObstacleHolder" type="Node2D" parent="."]
 

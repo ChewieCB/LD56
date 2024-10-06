@@ -2,6 +2,7 @@ extends Node2D
 class_name SealedGateInput
 
 @export var n_agent_required = 10
+@export var sealed_gate_door: SealedGateDoor
 
 @onready var require_label: Label = $Label
 @onready var gate_target: CharacterBody2D = $SwarmTarget
@@ -37,7 +38,7 @@ func open_gate():
 	release_agent_timer.stop()
 	is_fulfilled = true
 	release_all_stored_agents()
-	print("SEALED GATE OPENED")
+	sealed_gate_door.open()
 
 
 func release_all_stored_agents():
