@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/entities/enemies/basic_enemy/enemy.gd" id="1_os4t1"]
 [ext_resource type="AudioStream" uid="uid://bedyrnfp4a4na" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_idle_loop.mp3" id="2_0sdi3"]
-[ext_resource type="AudioStream" uid="uid://dmq5nvb25c1g8" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_idle_loop_synth.mp3" id="2_dmhw2"]
+[ext_resource type="AudioStream" uid="uid://cejolwltt0k2w" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_buzz.wav" id="2_5ts1g"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_kalrn"]
 [ext_resource type="Texture2D" uid="uid://bfodump4jvah5" path="res://assets/sprite/enemy/green_wasp.png" id="3_57noc"]
 [ext_resource type="AudioStream" uid="uid://d0nhxm6ohhowo" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_attack.mp3" id="3_qs20q"]
@@ -25,7 +25,7 @@ size = Vector2(26, 32)
 [node name="BasicEnemy" type="CharacterBody2D" node_paths=PackedStringArray("idle_player")]
 collision_layer = 32
 script = ExtResource("1_os4t1")
-SFX_idle = ExtResource("2_dmhw2")
+SFX_idle = ExtResource("2_5ts1g")
 SFX_attack = Array[AudioStream]([ExtResource("3_qs20q")])
 SFX_aggro = Array[AudioStream]([ExtResource("4_y87e6")])
 SFX_death = Array[AudioStream]([ExtResource("5_xhkb6")])
