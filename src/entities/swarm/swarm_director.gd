@@ -50,7 +50,7 @@ var swarm_agents: Array:
 		swarm_agents = value
 		if swarm_agents.size() != swarm_agent_count: 
 			swarm_agent_count = swarm_agents.size()
-		  GameManager.game_ui.update_agent_count_ui()
+			GameManager.game_ui.update_agent_count_ui()
 var removed_agent_debug: Vector2
 var is_fire = false # Is on fire element, scare away predators
 
