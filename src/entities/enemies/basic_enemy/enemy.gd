@@ -1,6 +1,15 @@
 extends CharacterBody2D
 class_name Enemy
 
+# SFX
+@export var SFX_idle: AudioStream
+@export var SFX_attack: Array[AudioStream]
+@export var SFX_aggro: Array[AudioStream]
+@export var SFX_death: Array[AudioStream]
+
+@export var idle_player: AudioStreamPlayer2D
+var aggro_sfx_player: AudioStreamPlayer
+
 @export var speed = 100
 @export var max_health: float = 100
 # Attack
@@ -46,11 +55,17 @@ func _ready() -> void:
 	# Wait for important nodes to register themselves to GameManagers
 	await get_tree().physics_frame
 	await get_tree().physics_frame
+	
 	current_health = max_health
 	spawn_pos = global_position
 	detect_collision_shape.shape.radius = detect_range
 	los_raycast.target_position = Vector2(range_to_dash, 0)
+	
+	if SFX_idle:
+		idle_player.stream = SFX_idle
+	
 	GameManager.swarm_director.swarm_status_changed.connect(check_swarm_status)
+	
 	call_deferred("actor_setup")
 
 
@@ -68,6 +83,8 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_idle_state_entered() -> void:
+	if idle_player.stream:
+		idle_player.play()
 	# It will wait for a second before start to wander
 	await get_tree().create_timer(1.0).timeout
 	state_chart.send_event("wander_started")
@@ -123,7 +140,11 @@ func get_new_wander_pos():
 
 
 func _on_track_state_entered() -> void:
-	targeted_swarm_agent = GameManager.swarm_director.get_furtherst_agent()
+	targeted_swarm_agent = GameManager.swarm_director.get_furthest_agent()
+	
+	if not aggro_sfx_player:
+		aggro_sfx_player = GlobalSFX.play_sfx_shuffled(SFX_aggro)
+	
 	if targeted_swarm_agent == null:
 		state_chart.send_event("stop_chase")
 		return
@@ -151,6 +172,19 @@ func _on_track_state_physics_processing(delta: float) -> void:
 	var target_angle = velocity.angle()
 	rotation = lerp_angle(rotation, target_angle, ROTATION_SPEED * delta)
 	move_and_slide()
+
+
+func _on_track_state_exited() -> void:
+	if aggro_sfx_player:
+		var tween = get_tree().create_tween()
+		tween.tween_property(
+			aggro_sfx_player,
+			"volume_db",
+			-100.0,
+			0.2
+		).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE)
+		tween.tween_callback(aggro_sfx_player.stop)
+		tween.tween_callback(aggro_sfx_player.queue_free)
 
 
 func _on_navigation_agent_2d_target_reached() -> void:
@@ -202,10 +236,12 @@ func _on_flee_state_physics_processing(delta: float) -> void:
 	keep_looking_at_pos(delta, global_position + velocity)
 	move_and_slide()
 
+
 func damage(value: float) -> void:
 	if value > 0:
 		state_chart.send_event("take_damage")
 		current_health -= value
+
 
 func _on_attack_range_body_entered(body: Node2D) -> void:
 	if body is SwarmAgent:
@@ -228,5 +264,10 @@ func _on_attacking_state_entered() -> void:
 	if targeted_swarm_agent != null:
 		print("DAMAGE SWARM AGENT ", targeted_swarm_agent.name)
 		targeted_swarm_agent.damage(attack_damage)
+		GlobalSFX.play_sfx_shuffled(SFX_attack)
 	await get_tree().create_timer(0.5).timeout
 	state_chart.send_event("attack_finished")
+
+
+func _on_dead_state_entered() -> void:
+	GlobalSFX.play_sfx_shuffled(SFX_death)

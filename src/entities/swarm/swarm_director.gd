@@ -40,6 +40,7 @@ var movement_sfx_tween: Tween
 @onready var target_sprite: Sprite2D = $TargetMarker/Sprite2D
 @onready var centroid: Marker2D = $SwarmCentroidMarker
 @onready var debug_status_sprite: Sprite2D = $SwarmCentroidMarker/DEBUGStatus
+@onready var audio_2d_listener: AudioListener2D = $AudioListener2D
 
 var swarm_agents: Array:
 	set(value):
@@ -133,6 +134,8 @@ func _physics_process(delta: float) -> void:
 		centroid.global_position = avg_agent_pos
 	else:
 		centroid.global_position = target.global_position
+	
+	audio_2d_listener.global_position = centroid.global_position
 
 
 func _process(_delta):
@@ -188,7 +191,7 @@ func set_swarm_attributes(attributes: Dictionary) -> void:
 				agent.set(key, attributes[key])
 
 
-func get_furtherst_agent():
+func get_furthest_agent():
 	var chosen_agent = null
 	var max_dist = 0
 	for agent in swarm_agents:
