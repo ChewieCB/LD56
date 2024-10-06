@@ -16,6 +16,9 @@ signal far_formation
 @export var SFX_swarm_move: AudioStream
 var active_movement_sfx_player: AudioStreamPlayer
 var movement_sfx_tween: Tween
+var max_simultaneous_sfx: int = 3
+var active_hurt_sfx_players: Array[AudioStreamPlayer]
+var active_death_sfx_players: Array[AudioStreamPlayer]
 
 @export var state_chart: StateChart
 @export var swarm_agent_scene: PackedScene
@@ -157,9 +160,11 @@ func add_agent(new_position: Vector2 = centroid.position) -> SwarmAgent:
 	new_agent.target = target
 	
 	new_agent.died.connect(func(agent):
-		GlobalSFX.play_sfx_shuffled(SFX_agent_death, "", true)
+		GlobalSFX.play_batched_sfx(
+			SFX_agent_death, active_death_sfx_players, max_simultaneous_sfx, true
+		)
 	)
-		
+	
 	add_child(new_agent)
 	
 	if new_agent not in swarm_agents:
@@ -176,7 +181,9 @@ func add_agent(new_position: Vector2 = centroid.position) -> SwarmAgent:
 
 func damage_agent(agent: SwarmAgent, damage: float) -> void:
 	agent.damage(damage)
-	GlobalSFX.play_sfx_shuffled(SFX_agent_hurt)
+	GlobalSFX.play_batched_sfx(
+		SFX_agent_hurt, active_hurt_sfx_players, max_simultaneous_sfx
+	)
 
 
 func remove_agent(agent: SwarmAgent) -> void:
