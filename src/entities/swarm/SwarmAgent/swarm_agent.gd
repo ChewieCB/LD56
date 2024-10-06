@@ -148,6 +148,7 @@ func _on_health_dead_state_entered() -> void:
 	sprite.modulate = Color.BLACK
 	await get_tree().create_timer(0.4).timeout
 	GameManager.faes_killed += 1
+	GameManager.swarm_director.check_game_over()
 	call_deferred("queue_free")
 
 

@@ -23,6 +23,7 @@ var swarm_agents: Array:
 	set(value):
 		swarm_agents = value
 		swarm_agent_count = swarm_agents.size()
+		GameManager.game_ui.update_agent_count_ui()
 var removed_agent_debug: Vector2
 var is_fire = false # Is on fire element, scare away predators
 
@@ -123,6 +124,14 @@ func damage_agent(agent: SwarmAgent, damage: float) -> void:
 func remove_agent(agent: SwarmAgent) -> void:
 	swarm_agents.erase(agent)
 	swarm_agent_count = swarm_agents.size()
+
+# Run on agent dead
+func check_game_over():
+	# Minus 1 because when we run this check, the died swarm agent still
+	# not queue_freed yet
+	var agent_left = swarm_agents.size() - 1
+	if agent_left <= 0:
+		GameManager.game_over()
 
 
 func set_swarm_attributes(attributes: Dictionary) -> void:
