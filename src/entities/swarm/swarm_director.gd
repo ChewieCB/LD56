@@ -64,7 +64,7 @@ func _physics_process(delta: float) -> void:
 		centroid.global_position = target.global_position
 
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_pressed("huddle"):
 		state_chart.send_event("clump_together")
 	elif Input.is_action_just_released("huddle"):
@@ -84,7 +84,7 @@ func _process(delta):
 	queue_redraw()
 
 
-func get_nav_path_for_swarm_agents(delta: float) -> void:
+func get_nav_path_for_swarm_agents(_delta: float) -> void:
 	var nav_map: RID = get_world_2d().get_navigation_map()
 	swarm_agents = GameManager.clean_array(swarm_agents)
 	for agent in swarm_agents:

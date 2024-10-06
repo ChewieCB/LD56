@@ -28,7 +28,7 @@ const TRACKING_ROTATION_SPEED = 3.0
 const FLEE_SPEED_MODIFIER = 0.75
 
 func _ready() -> void:
-	# Wait for GameManager finished finding important nodes
+	# Wait for important nodes to register themselves to GameManagers
 	await get_tree().physics_frame
 	await get_tree().physics_frame
 	GameManager.player.change_status.connect(check_player_status)

@@ -8,422 +8,17 @@
 [ext_resource type="PackedScene" uid="uid://byj1y3wrwtdtq" path="res://src/ui/pause_ui/PauseUI.tscn" id="6_5iwdd"]
 [ext_resource type="PackedScene" uid="uid://y766oblqkpts" path="res://src/entities/obstacle/core/Obstacle.tscn" id="7_ckelm"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6fjwu"]
-size = Vector2(63.9026, 68.9233)
-
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ocdpm"]
 vertices = PackedVector2Array(739.031, 286.391, 832.703, 276.07, 795.789, 341.508, 809.68, 372.07, 771.539, 435.172, 672.797, 536, 601.633, 340.461, 581.711, 273.094, 667.047, 279.727, 129.57, 507.109, 37.1562, 557.594, -24.9219, 547.969, -75.5391, 426.656, 15.1484, 418.023, 106.773, 423.547, 440.07, 472.898, 399.531, 410.742, 421.383, 230, 504.781, 262.531, 532.023, 355.773, 512.531, 479.867, 331.898, 369.898, 334.961, 392.883, 286.938, 505.461, 168.93, 591.727, 126.602, 262.75, 207.641, 149.109, 456.148, 671.953, 216.703, 671.023, 205.367, 651.938, 321.148, 562.477, 658.703, 536, 662.68, 672.656, 522.5, 668.281, 1348.59, 535.383, 1330.87, 745.289, 1281.75, 741.617, 1267.66, 643.891, 1198.27, 510.461, 1123.09, 349.898, 1171.66, 516.789, 1081.2, 501.102, 1038, 393.078, 910.609, 279.391, 960.602, 413.453, 863.578, 390.469, 1016.15, 525.617, 894.289, 673, 729.617, 673, 726.148, 583.883, 824.422, 482.492, 677.117, 171, 708.922, 171, 718.461, 270.219, 356.891, 206.438)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(2, 3, 4, 5, 6, 7, 8, 0), PackedInt32Array(9, 10, 11, 12, 13, 14), PackedInt32Array(15, 16, 17, 18, 19, 20), PackedInt32Array(21, 22, 23, 24, 9, 14, 25, 26), PackedInt32Array(15, 27, 28, 29, 30), PackedInt32Array(15, 30, 23, 22, 16), PackedInt32Array(31, 32, 33, 20, 19, 6), PackedInt32Array(34, 35, 36, 37), PackedInt32Array(34, 37, 38, 39), PackedInt32Array(39, 38, 40, 41, 42), PackedInt32Array(43, 39, 42, 44, 45), PackedInt32Array(46, 47, 48, 49, 50, 44), PackedInt32Array(45, 44, 50, 4), PackedInt32Array(3, 45, 4), PackedInt32Array(8, 51, 52, 53), PackedInt32Array(26, 54, 21), PackedInt32Array(5, 31, 6), PackedInt32Array(0, 8, 53)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(192, 649, 211, 681, 467, 682, 451, 484, 503, 489, 513, 678, 673, 683, 669, 546, 677, 546, 772, 449, 810, 483, 716, 580, 720, 683, 899, 683, 1028, 527, 975, 420, 1032, 405, 1074, 510, 1172, 527, 1193, 522, 1258, 647, 1273, 751, 1340, 756, 1359, 531, 1128, 341, 905, 267, 858, 378, 817, 364, 807, 342, 851, 264, 742, 276, 728, 265, 718, 161, 668, 161, 658, 269, 568, 262, 589, 333, 539, 344, 513, 255, 413, 216, 391, 398, 344, 385, 342, 370, 368, 200, 204, 137, 117, 259, 98, 413, 15, 408, -90, 418, -32, 557, 39, 568, 125, 521, 165, 607, 284, 520, 308, 560, 198, 645)])
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6fjwu"]
+size = Vector2(63.9026, 68.9233)
+
 [node name="Demo" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [43.0]
 metadata/_edit_vertical_guides_ = [-153.0]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = -1
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("5_rabt8")
-
-[node name="Geom" type="Node2D" parent="."]
-
-[node name="Ground1" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(620, 734)
-scale = Vector2(16.7156, 1.32031)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground1"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground1/StaticBody2D"]
-position = Vector2(-0.0243721, -1.7041)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground2" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(997.95, 662.017)
-rotation = -0.869431
-scale = Vector2(4.84803, 1.58203)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground2"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground2/StaticBody2D"]
-position = Vector2(-0.0243797, -1.70416)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground10" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(1282, 389)
-rotation = -2.45575
-scale = Vector2(4.84803, 1.58203)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground10"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground10/StaticBody2D"]
-position = Vector2(-0.0243797, -1.70416)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground11" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(1107.01, 572.139)
-rotation = -2.94821
-scale = Vector2(2.26893, 1.58203)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground11"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground11/StaticBody2D"]
-position = Vector2(-0.0243797, -1.70416)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground12" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(1175, 615)
-rotation = -2.05308
-scale = Vector2(2.26893, 1.58203)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground12"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground12/StaticBody2D"]
-position = Vector2(-0.0243797, -1.70416)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground13" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(1409.48, 658.497)
-rotation = -1.48542
-scale = Vector2(4.29181, 1.58203)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground13"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground13/StaticBody2D"]
-position = Vector2(-0.0243797, -1.70416)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground14" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(1409.48, 658.497)
-rotation = -1.48542
-scale = Vector2(4.29181, 1.58203)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground14"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground14/StaticBody2D"]
-position = Vector2(-0.0243797, -1.70416)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground15" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(1212.69, 733.604)
-rotation = -1.6615
-scale = Vector2(2.45942, 1.58203)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground15"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground15/StaticBody2D"]
-position = Vector2(-0.0243797, -1.70416)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground16" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(1320, 810)
-rotation = -3.07998
-scale = Vector2(2.45942, 1.58203)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground16"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground16/StaticBody2D"]
-position = Vector2(-0.0243797, -1.70416)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground17" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(-105, 358)
-rotation = -3.22383
-scale = Vector2(3.35164, 1.58203)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground17"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground17/StaticBody2D"]
-position = Vector2(-0.0243797, -1.70416)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground18" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(-31, 613)
-rotation = -2.97846
-scale = Vector2(3.35164, 1.58203)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground18"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground18/StaticBody2D"]
-position = Vector2(-0.0243797, -1.70416)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground19" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(-124, 492)
-rotation = -1.99909
-scale = Vector2(3.35164, 1.58203)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground19"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground19/StaticBody2D"]
-position = Vector2(-0.0243797, -1.70416)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground20" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(486, 603)
-rotation = -1.6347
-scale = Vector2(3.35164, 0.529014)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground20"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground20/StaticBody2D"]
-position = Vector2(-0.0243797, -1.70416)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground21" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(543, 262)
-rotation = -1.82708
-scale = Vector2(2.21891, 0.529014)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground21"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground21/StaticBody2D"]
-position = Vector2(-0.0243797, -1.70416)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground22" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(384, 272)
-rotation = -1.43114
-scale = Vector2(3.44876, 0.529014)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground22"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground22/StaticBody2D"]
-position = Vector2(-0.0243797, -1.70416)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground23" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(225.813, 593.368)
-rotation = -0.621802
-scale = Vector2(2.61016, 0.529014)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground23"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground23/StaticBody2D"]
-position = Vector2(-0.0243797, -1.70416)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground24" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(694, 625)
-rotation = 1.49017
-scale = Vector2(2.23422, 0.529014)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground24"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground24/StaticBody2D"]
-position = Vector2(-0.0243797, -1.70416)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground25" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(739, 521)
-rotation = 2.35218
-scale = Vector2(2.23422, 0.529014)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground25"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground25/StaticBody2D"]
-position = Vector2(-0.0243797, -1.70416)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground26" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(862, 299)
-rotation = 1.96074
-scale = Vector2(2.23422, 0.529014)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground26"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground26/StaticBody2D"]
-position = Vector2(-0.0243797, -1.70416)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground27" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(1030.76, 476.045)
-rotation = 1.12899
-scale = Vector2(1.92466, 0.529014)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground27"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground27/StaticBody2D"]
-position = Vector2(-0.0243797, -1.70416)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground28" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(689, 135)
-rotation = 3.16677
-scale = Vector2(1.92466, 0.529014)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground28"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground28/StaticBody2D"]
-position = Vector2(-0.0243797, -1.70416)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground3" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(129.175, 666.157)
-rotation = 1.08248
-scale = Vector2(3.9235, 1.58203)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground3"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground3/StaticBody2D"]
-position = Vector2(-0.0243721, -1.7041)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground4" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(46.3088, 312.798)
-rotation = 1.67077
-scale = Vector2(2.7678, 1.58203)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground4"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground4/StaticBody2D"]
-position = Vector2(-0.0243721, -1.7041)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground5" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(137.56, 117.633)
-rotation = 2.1966
-scale = Vector2(4.13143, 1.58203)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground5"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground5/StaticBody2D"]
-position = Vector2(-0.0243721, -1.7041)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground6" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(363, 128)
-rotation = 3.49913
-scale = Vector2(5.39224, 1.58203)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground6"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground6/StaticBody2D"]
-position = Vector2(-0.0243721, -1.7041)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground7" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(576.717, 196.214)
-rotation = 3.22576
-scale = Vector2(2.49815, 1.58203)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground7"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground7/StaticBody2D"]
-position = Vector2(-0.0243721, -1.7041)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground8" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(812, 201)
-rotation = 3.0236
-scale = Vector2(2.49815, 1.58203)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground8"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground8/StaticBody2D"]
-position = Vector2(-0.0243721, -1.7041)
-shape = SubResource("RectangleShape2D_6fjwu")
-
-[node name="Ground9" type="Sprite2D" parent="Geom"]
-self_modulate = Color(0.429688, 0.168879, 0, 1)
-position = Vector2(1029, 243)
-rotation = 3.47323
-scale = Vector2(4.34457, 1.58203)
-texture = ExtResource("1_3kvaa")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Geom/Ground9"]
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Geom/Ground9/StaticBody2D"]
-position = Vector2(-0.0243721, -1.7041)
-shape = SubResource("RectangleShape2D_6fjwu")
 
 [node name="FollowCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_jlwge")]
 position = Vector2(584, 376)
@@ -434,43 +29,404 @@ position = Vector2(615, 551)
 swarm_agent_scene = ExtResource("2_ghrsu")
 swarm_agent_count = 0
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="PauseUI" parent="CanvasLayer2" instance=ExtResource("6_5iwdd")]
-
-[node name="Obstacle" parent="." instance=ExtResource("7_ckelm")]
-position = Vector2(789, 474)
-rotation = 1.3417
-scale = Vector2(0.564141, 0.564141)
-
-[node name="Obstacle2" parent="." instance=ExtResource("7_ckelm")]
-position = Vector2(1003, 416)
-rotation = 0.186735
-scale = Vector2(0.564141, 0.564141)
-
-[node name="Obstacle3" parent="." instance=ExtResource("7_ckelm")]
-position = Vector2(909, 259)
-rotation = -2.57928
-scale = Vector2(0.564141, 0.564141)
-
-[node name="Obstacle4" parent="." instance=ExtResource("7_ckelm")]
-position = Vector2(559, 332)
-rotation = -2.72506
-scale = Vector2(0.564141, 0.564141)
-
-[node name="Obstacle5" parent="." instance=ExtResource("7_ckelm")]
-position = Vector2(484, 495)
-rotation = 0.507711
-scale = Vector2(0.564141, 0.564141)
-
-[node name="Obstacle6" parent="." instance=ExtResource("7_ckelm")]
-position = Vector2(293, 546)
-rotation = 1.52899
-scale = Vector2(0.564141, 0.564141)
+[node name="Sprite2D" parent="SwarmDirector/TargetMarker" index="0"]
+visible = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_ocdpm")
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="Ground1" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(620, 734)
+scale = Vector2(16.7156, 1.32031)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground1"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground1/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground2" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(997.95, 662.017)
+rotation = -0.869431
+scale = Vector2(4.84803, 1.58203)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground2"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground2/StaticBody2D"]
+position = Vector2(-0.0243797, -1.70416)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground10" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(1282, 389)
+rotation = -2.45575
+scale = Vector2(4.84803, 1.58203)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground10"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground10/StaticBody2D"]
+position = Vector2(-0.0243797, -1.70416)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground11" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(1107.01, 572.139)
+rotation = -2.94821
+scale = Vector2(2.26893, 1.58203)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground11"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground11/StaticBody2D"]
+position = Vector2(-0.0243797, -1.70416)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground12" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(1175, 615)
+rotation = -2.05308
+scale = Vector2(2.26893, 1.58203)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground12"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground12/StaticBody2D"]
+position = Vector2(-0.0243797, -1.70416)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground13" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(1409.48, 658.497)
+rotation = -1.48542
+scale = Vector2(4.29181, 1.58203)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground13"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground13/StaticBody2D"]
+position = Vector2(-0.0243797, -1.70416)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground14" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(1409.48, 658.497)
+rotation = -1.48542
+scale = Vector2(4.29181, 1.58203)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground14"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground14/StaticBody2D"]
+position = Vector2(-0.0243797, -1.70416)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground15" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(1212.69, 733.604)
+rotation = -1.6615
+scale = Vector2(2.45942, 1.58203)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground15"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground15/StaticBody2D"]
+position = Vector2(-0.0243797, -1.70416)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground16" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(1320, 810)
+rotation = -3.07998
+scale = Vector2(2.45942, 1.58203)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground16"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground16/StaticBody2D"]
+position = Vector2(-0.0243797, -1.70416)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground17" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(-105, 358)
+rotation = -3.22383
+scale = Vector2(3.35164, 1.58203)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground17"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground17/StaticBody2D"]
+position = Vector2(-0.0243797, -1.70416)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground18" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(-31, 613)
+rotation = -2.97846
+scale = Vector2(3.35164, 1.58203)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground18"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground18/StaticBody2D"]
+position = Vector2(-0.0243797, -1.70416)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground19" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(-124, 492)
+rotation = -1.99909
+scale = Vector2(3.35164, 1.58203)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground19"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground19/StaticBody2D"]
+position = Vector2(-0.0243797, -1.70416)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground20" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(486, 603)
+rotation = -1.6347
+scale = Vector2(3.35164, 0.529014)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground20"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground20/StaticBody2D"]
+position = Vector2(-0.0243797, -1.70416)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground21" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(543, 262)
+rotation = -1.82708
+scale = Vector2(2.21891, 0.529014)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground21"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground21/StaticBody2D"]
+position = Vector2(-0.0243797, -1.70416)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground22" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(384, 272)
+rotation = -1.43114
+scale = Vector2(3.44876, 0.529014)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground22"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground22/StaticBody2D"]
+position = Vector2(-0.0243797, -1.70416)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground23" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(225.813, 593.368)
+rotation = -0.621802
+scale = Vector2(2.61016, 0.529014)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground23"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground23/StaticBody2D"]
+position = Vector2(-0.0243797, -1.70416)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground24" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(694, 625)
+rotation = 1.49017
+scale = Vector2(2.23422, 0.529014)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground24"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground24/StaticBody2D"]
+position = Vector2(-0.0243797, -1.70416)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground25" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(739, 521)
+rotation = 2.35218
+scale = Vector2(2.23422, 0.529014)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground25"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground25/StaticBody2D"]
+position = Vector2(-0.0243797, -1.70416)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground26" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(862, 299)
+rotation = 1.96074
+scale = Vector2(2.23422, 0.529014)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground26"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground26/StaticBody2D"]
+position = Vector2(-0.0243797, -1.70416)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground27" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(1030.76, 476.045)
+rotation = 1.12899
+scale = Vector2(1.92466, 0.529014)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground27"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground27/StaticBody2D"]
+position = Vector2(-0.0243797, -1.70416)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground28" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(689, 135)
+rotation = 3.16677
+scale = Vector2(1.92466, 0.529014)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground28"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground28/StaticBody2D"]
+position = Vector2(-0.0243797, -1.70416)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground3" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(129.175, 666.157)
+rotation = 1.08248
+scale = Vector2(3.9235, 1.58203)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground3"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground3/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground4" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(46.3088, 312.798)
+rotation = 1.67077
+scale = Vector2(2.7678, 1.58203)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground4"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground4/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground5" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(137.56, 117.633)
+rotation = 2.1966
+scale = Vector2(4.13143, 1.58203)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground5"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground5/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground6" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(363, 128)
+rotation = 3.49913
+scale = Vector2(5.39224, 1.58203)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground6"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground6/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground7" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(576.717, 196.214)
+rotation = 3.22576
+scale = Vector2(2.49815, 1.58203)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground7"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground7/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground8" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(812, 201)
+rotation = 3.0236
+scale = Vector2(2.49815, 1.58203)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground8"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground8/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="Ground9" type="Sprite2D" parent="Geometry"]
+self_modulate = Color(0.429688, 0.168879, 0, 1)
+position = Vector2(1029, 243)
+rotation = 3.47323
+scale = Vector2(4.34457, 1.58203)
+texture = ExtResource("1_3kvaa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Geometry/Ground9"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Geometry/Ground9/StaticBody2D"]
+position = Vector2(-0.0243721, -1.7041)
+shape = SubResource("RectangleShape2D_6fjwu")
 
 [node name="WorldBoundary" type="Node2D" parent="."]
 
@@ -757,5 +713,55 @@ collision_mask = 6
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/Bound19/StaticBody2D"]
 position = Vector2(-0.0243721, -1.7041)
 shape = SubResource("RectangleShape2D_6fjwu")
+
+[node name="ObstacleHolder" type="Node2D" parent="."]
+
+[node name="Obstacle" parent="ObstacleHolder" instance=ExtResource("7_ckelm")]
+position = Vector2(789, 474)
+rotation = 1.3417
+scale = Vector2(0.564141, 0.564141)
+
+[node name="Obstacle2" parent="ObstacleHolder" instance=ExtResource("7_ckelm")]
+position = Vector2(1003, 416)
+rotation = 0.186735
+scale = Vector2(0.564141, 0.564141)
+
+[node name="Obstacle3" parent="ObstacleHolder" instance=ExtResource("7_ckelm")]
+position = Vector2(909, 259)
+rotation = -2.57928
+scale = Vector2(0.564141, 0.564141)
+
+[node name="Obstacle4" parent="ObstacleHolder" instance=ExtResource("7_ckelm")]
+position = Vector2(559, 332)
+rotation = -2.72506
+scale = Vector2(0.564141, 0.564141)
+
+[node name="Obstacle5" parent="ObstacleHolder" instance=ExtResource("7_ckelm")]
+position = Vector2(484, 495)
+rotation = 0.507711
+scale = Vector2(0.564141, 0.564141)
+
+[node name="Obstacle6" parent="ObstacleHolder" instance=ExtResource("7_ckelm")]
+position = Vector2(293, 546)
+rotation = 1.52899
+scale = Vector2(0.564141, 0.564141)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_rabt8")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="PauseUI" parent="CanvasLayer2" instance=ExtResource("6_5iwdd")]
+visible = false
 
 [editable path="SwarmDirector"]

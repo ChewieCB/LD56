@@ -35,8 +35,8 @@ func reset_data():
 
 
 func clean_array(dirty_array: Array) -> Array:
-	var clean_array := []
+	var cleaned_array = []
 	for item in dirty_array:
 		if is_instance_valid(item):
-			clean_array.append(item)
-	return clean_array
+			cleaned_array.append(item)
+	return cleaned_array

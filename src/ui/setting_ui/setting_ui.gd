@@ -27,6 +27,8 @@ var keybindable_action_list = {
 	"left": "Move left",
 	"right": "Move right",
 	"pause_menu": "Pause Menu",
+	"huddle": "Huddle",
+	"spread": "Spread"
 }
 var is_remapping = false
 var action_to_remap = null
