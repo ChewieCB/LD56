@@ -13,7 +13,7 @@ class_name SwarmDirector
 
 @onready var target: CharacterBody2D = $TargetMarker
 @onready var centroid: Marker2D = $SwarmCentroidMarker
-@onready var debug_status_sprite: Sprite2D = $SwarmCentroidMarker/DEBUGStatus
+@onready var debug_status_sprite: Sprite2D = $TargetMarker/Sprite2D
 
 var swarm_agents: Array:
 	set(value):

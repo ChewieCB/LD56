@@ -12,17 +12,17 @@
 radius = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f2j72"]
-radius = 256.0
+radius = 200.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2pffq"]
 size = Vector2(26, 32)
 
 [node name="BasicEnemy" type="CharacterBody2D"]
 collision_layer = 32
+collision_mask = 9
 script = ExtResource("1_os4t1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(0.789063, 0.0515291, 0, 1)
 scale = Vector2(-0.212238, 0.212238)
 texture = ExtResource("3_57noc")
 
@@ -30,6 +30,7 @@ texture = ExtResource("3_57noc")
 shape = SubResource("CircleShape2D_ddoed")
 
 [node name="PlayerDetectRange" type="Area2D" parent="."]
+position = Vector2(100, 0)
 collision_layer = 0
 collision_mask = 2
 
@@ -112,15 +113,9 @@ to = NodePath("../../Dash")
 event = &"dash_started"
 delay_in_seconds = "0.0"
 
-[node name="toIdle" type="Node" parent="StateChart/Root/Movement/Track"]
+[node name="toWander" type="Node" parent="StateChart/Root/Movement/Track"]
 script = ExtResource("7_2dfcw")
-to = NodePath("../../Idle")
-event = &"lost_player_sight"
-delay_in_seconds = "0.0"
-
-[node name="toIdle2" type="Node" parent="StateChart/Root/Movement/Track"]
-script = ExtResource("7_2dfcw")
-to = NodePath("../../Idle")
+to = NodePath("../../Wander")
 event = &"stop_chase"
 delay_in_seconds = "0.0"
 

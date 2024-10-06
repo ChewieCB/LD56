@@ -19,7 +19,7 @@ agent_radius = 30.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6fjwu"]
 size = Vector2(63.9026, 68.9233)
 
-[node name="Demo" type="Node2D"]
+[node name="Demo2" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [43.0]
 metadata/_edit_vertical_guides_ = [-153.0]
 
