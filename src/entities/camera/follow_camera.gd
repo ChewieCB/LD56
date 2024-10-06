@@ -8,9 +8,10 @@ var new_zoom_target: Vector2 = zoom
 func _ready() -> void:
 	var director = target.get_parent()
 	if director is SwarmDirector:
-		director.close_formation.connect(set_fov.bind(1.25))
-		director.normal_formation.connect(set_fov.bind(1.0))
-		director.far_formation.connect(set_fov.bind(0.75))
+		director.close_formation.connect(set_fov.bind(1.5))
+		director.normal_formation.connect(set_fov.bind(1.3))
+		director.far_formation.connect(set_fov.bind(0.9))
+	set_fov(1.3)
 
 
 func _physics_process(delta: float) -> void:
