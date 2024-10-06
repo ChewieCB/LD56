@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvg4r2wbo4tlj"]
+[gd_scene load_steps=9 format=3 uid="uid://dvg4r2wbo4tlj"]
 
 [ext_resource type="Texture2D" uid="uid://ch2pnl1s0tl1n" path="res://assets/sprite/placeholder/square.png" id="1_3kvaa"]
-[ext_resource type="PackedScene" uid="uid://vuj168p2lkjx" path="res://src/entities/swarm/SwarmAgent/SwarmAgent.tscn" id="2_ghrsu"]
 [ext_resource type="PackedScene" uid="uid://naoexqroboiq" path="res://src/entities/camera/FollowCamera.tscn" id="3_jlwge"]
 [ext_resource type="PackedScene" uid="uid://1bwiqif7rpyi" path="res://src/entities/swarm/SwarmDirector.tscn" id="4_tedsl"]
 [ext_resource type="Texture2D" uid="uid://q5pp8mltm8v8" path="res://assets/sprite/bg1.png" id="5_rabt8"]
@@ -27,11 +26,7 @@ target = NodePath("../SwarmDirector/SwarmCentroidMarker")
 
 [node name="SwarmDirector" parent="." instance=ExtResource("4_tedsl")]
 position = Vector2(615, 551)
-swarm_agent_scene = ExtResource("2_ghrsu")
 swarm_agent_count = 0
-
-[node name="Sprite2D" parent="SwarmDirector/TargetMarker" index="0"]
-visible = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_ocdpm")

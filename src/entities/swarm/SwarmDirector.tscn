@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://1bwiqif7rpyi"]
+[gd_scene load_steps=11 format=3 uid="uid://1bwiqif7rpyi"]
 
 [ext_resource type="Script" path="res://src/entities/swarm/swarm_director.gd" id="1_ol7n7"]
-[ext_resource type="Texture2D" uid="uid://d2an8sg7yxult" path="res://icon.svg" id="2_luj07"]
+[ext_resource type="PackedScene" uid="uid://vuj168p2lkjx" path="res://src/entities/swarm/SwarmAgent/SwarmAgent.tscn" id="2_0de42"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_od00x"]
+[ext_resource type="Texture2D" uid="uid://dj7feymuphnh2" path="res://assets/sprite/swarm/swarm_sprite_2.png" id="3_3wubg"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="3_rjk1i"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_xwfoj"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_02wus"]
@@ -14,9 +15,7 @@
 [node name="SwarmDirector" type="Node2D" node_paths=PackedStringArray("state_chart")]
 script = ExtResource("1_ol7n7")
 state_chart = NodePath("StateChart")
-normal_separation = 0.1
-close_separation = 0.05
-far_separation = 0.2
+swarm_agent_scene = ExtResource("2_0de42")
 swarm_agent_count = 60
 
 [node name="TargetMarker" type="CharacterBody2D" parent="."]
@@ -24,9 +23,8 @@ collision_layer = 4
 collision_mask = 9
 
 [node name="Sprite2D" type="Sprite2D" parent="TargetMarker"]
-position = Vector2(-2.38419e-07, -2.38419e-07)
-scale = Vector2(0.109375, 0.109375)
-texture = ExtResource("2_luj07")
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_3wubg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetMarker"]
 shape = SubResource("CircleShape2D_unkdd")
@@ -110,12 +108,16 @@ delay_in_seconds = "0.0"
 
 [node name="SwarmCentroidMarker" type="Marker2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="SwarmCentroidMarker"]
-self_modulate = Color(1, 0.954413, 0, 0.360784)
+[node name="DEBUGStatus" type="Sprite2D" parent="SwarmCentroidMarker"]
+visible = false
+self_modulate = Color(0.332899, 1, 0, 0.360784)
 position = Vector2(1.19209e-07, 1.19209e-07)
 scale = Vector2(0.125, 0.125)
 texture = ExtResource("8_q1cn2")
 
+[connection signal="state_entered" from="StateChart/Root/Movement/Idle" to="." method="_on_idle_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Movement/Moving" to="." method="_on_moving_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/Movement/Moving" to="." method="_on_moving_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Distribution/Normal" to="." method="_on_distribution_normal_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Distribution/Close" to="." method="_on_distribution_close_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Distribution/Far" to="." method="_on_distribution_far_state_entered"]

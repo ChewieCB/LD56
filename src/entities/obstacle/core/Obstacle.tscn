@@ -1,39 +1,96 @@
-[gd_scene load_steps=6 format=3 uid="uid://y766oblqkpts"]
+[gd_scene load_steps=11 format=3 uid="uid://y766oblqkpts"]
 
 [ext_resource type="Script" path="res://src/entities/obstacle/core/obstacle.gd" id="1_axooq"]
-[ext_resource type="Texture2D" uid="uid://bbgf5ya5bw4pj" path="res://assets/sprite/placeholder/construction_icon.png" id="1_ketlr"]
+[ext_resource type="Shader" path="res://src/entities/obstacle/core/wind_sway.gdshader" id="2_1lqf2"]
+[ext_resource type="Texture2D" uid="uid://bo2cfgk0l0bno" path="res://assets/sprite/env/mushroom_big.png" id="2_8syal"]
 [ext_resource type="Texture2D" uid="uid://bvhed0lxktwe0" path="res://assets/sprite/placeholder/circle.png" id="3_jhb84"]
+[ext_resource type="Texture2D" uid="uid://loc0t2sqvjcg" path="res://assets/sprite/particles/spore_particle_0.png" id="5_egh78"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3etib"]
+shader = ExtResource("2_1lqf2")
+shader_parameter/speed = 2.0
+shader_parameter/minStrength = 0.083
+shader_parameter/maxStrength = 0.278
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.075
+shader_parameter/heightOffset = null
+shader_parameter/offset = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cx0q8"]
-radius = 64.0078
+radius = 142.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c4gt8"]
-radius = 50.01
+radius = 67.0075
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aucra"]
+size = Vector2(46, 108)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_odmf5"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 2
+emission_sphere_radius = 142.0
+initial_velocity_min = 0.2
+initial_velocity_max = 0.3
+angular_velocity_min = -1.00002
+angular_velocity_max = 0.999984
+orbit_velocity_min = -0.0999999
+orbit_velocity_max = 0.1
+radial_velocity_min = -1.00002
+radial_velocity_max = 0.999978
+gravity = Vector3(0, -35, 0)
+radial_accel_min = -0.500002
+radial_accel_max = 0.499998
+scale_min = 10.0
+scale_max = 10.0
 
 [node name="Obstacle" type="Node2D"]
 script = ExtResource("1_axooq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_ketlr")
+material = SubResource("ShaderMaterial_3etib")
+position = Vector2(0, -96)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8syal")
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(-36, -42)
+position = Vector2(0, -210)
 collision_layer = 16
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, -2)
 shape = SubResource("CircleShape2D_cx0q8")
 debug_color = Color(0.959435, 0, 0.521641, 0.42)
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-modulate = Color(1, 0.14, 0.14, 0.470588)
-scale = Vector2(2, 2)
+visible = false
+modulate = Color(1, 0.14, 0.14, 0.152941)
+scale = Vector2(5, 5)
 texture = ExtResource("3_jhb84")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-2, -123)
 shape = SubResource("CircleShape2D_c4gt8")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-1, -45)
+shape = SubResource("RectangleShape2D_aucra")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(0.223167, 1, 0.21, 0.14902)
+position = Vector2(1, -211)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_odmf5")
+texture = ExtResource("5_egh78")
+lifetime = 2.4
+randomness = 0.29
+visibility_rect = Rect2(-71, 71, 142, 50)
+local_coords = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

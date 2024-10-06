@@ -91,7 +91,7 @@ func get_flock_status(flock: Array):
 		flock_center /= flock_size
 
 		var center_dir = global_position.direction_to(flock_center)
-		var center_speed = max_speed * (global_position.distance_to(flock_center) / $FlockView/ViewRadius.shape.radius)
+		var center_speed = max_speed * (global_position.distance_to(flock_center) / flock_view_collider.shape.radius)
 		center_vector = center_dir * center_speed
 
 	return [center_vector, align_vector, avoid_vector]

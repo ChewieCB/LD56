@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bccpk24iijj53"]
+[gd_scene load_steps=11 format=3 uid="uid://bccpk24iijj53"]
 
 [ext_resource type="PackedScene" uid="uid://naoexqroboiq" path="res://src/entities/camera/FollowCamera.tscn" id="1_dx0aq"]
 [ext_resource type="PackedScene" uid="uid://1bwiqif7rpyi" path="res://src/entities/swarm/SwarmDirector.tscn" id="2_if5kk"]
-[ext_resource type="PackedScene" uid="uid://vuj168p2lkjx" path="res://src/entities/swarm/SwarmAgent/SwarmAgent.tscn" id="3_xrdhd"]
 [ext_resource type="PackedScene" uid="uid://bm3vo4ufjrs7q" path="res://src/entities/enemies/basic_enemy/BasicEnemy.tscn" id="4_0cj81"]
 [ext_resource type="Texture2D" uid="uid://ch2pnl1s0tl1n" path="res://assets/sprite/placeholder/square.png" id="5_77k0a"]
 [ext_resource type="PackedScene" uid="uid://y766oblqkpts" path="res://src/entities/obstacle/core/Obstacle.tscn" id="6_rao30"]
@@ -29,14 +28,10 @@ target = NodePath("../SwarmDirector/SwarmCentroidMarker")
 
 [node name="SwarmDirector" parent="." instance=ExtResource("2_if5kk")]
 position = Vector2(615, 551)
-swarm_agent_scene = ExtResource("3_xrdhd")
 swarm_agent_count = 0
 
 [node name="TargetMarker" parent="SwarmDirector" index="0"]
 visible = false
-
-[node name="Sprite2D" parent="SwarmDirector/TargetMarker" index="0"]
-visible = true
 
 [node name="BasicEnemy" parent="." instance=ExtResource("4_0cj81")]
 position = Vector2(192, 360)
