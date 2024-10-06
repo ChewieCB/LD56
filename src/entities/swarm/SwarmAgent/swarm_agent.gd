@@ -2,8 +2,12 @@ extends CharacterBody2D
 class_name SwarmAgent
 
 signal died(agent: SwarmAgent)
+signal target_updated(agent: SwarmAgent, new_target: CharacterBody2D)
 
-@export var target: CharacterBody2D # Used in swarm director
+@export var target: CharacterBody2D:
+	set(value):
+		target = value
+		emit_signal("target_updated", self, target)
 @export var max_speed := 200.0
 @export var mouse_follow_force := 0.05
 @export var cohesion_force := 0.05

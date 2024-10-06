@@ -96,7 +96,7 @@ func get_nav_path_for_swarm_agents(_delta: float) -> void:
 	swarm_agents = GameManager.clean_array(swarm_agents)
 	for agent in swarm_agents:
 		var from_pos: Vector2 = agent.global_position
-		var to_pos: Vector2 = target.global_position
+		var to_pos: Vector2 = agent.target.global_position
 		agent.target_path = NavigationServer2D.map_get_path(nav_map, from_pos, to_pos, true)
 
 

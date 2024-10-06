@@ -20,9 +20,8 @@ size = Vector2(63.9026, 68.9233)
 metadata/_edit_horizontal_guides_ = [43.0]
 metadata/_edit_vertical_guides_ = [-153.0]
 
-[node name="FollowCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_jlwge")]
+[node name="FollowCamera" parent="." instance=ExtResource("3_jlwge")]
 position = Vector2(584, 376)
-target = NodePath("../SwarmDirector/SwarmCentroidMarker")
 
 [node name="SwarmDirector" parent="." instance=ExtResource("4_tedsl")]
 position = Vector2(615, 551)
