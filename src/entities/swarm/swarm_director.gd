@@ -50,6 +50,7 @@ var swarm_agents: Array:
 		swarm_agents = value
 		if swarm_agents.size() != swarm_agent_count: 
 			swarm_agent_count = swarm_agents.size()
+		  GameManager.game_ui.update_agent_count_ui()
 var removed_agent_debug: Vector2
 var is_fire = false # Is on fire element, scare away predators
 
@@ -86,9 +87,9 @@ func _ready() -> void:
 		active_movement_sfx_player.volume_db = linear_to_db(0)
 	
 	for _i in range(swarm_agent_count):
-		await get_tree().create_timer(swarm_agent_count/100).timeout
+		await get_tree().create_timer(swarm_agent_count / 100).timeout
 		add_agent()
-	
+
 	await get_tree().physics_frame
 	for obstacle in get_tree().get_nodes_in_group("obstacles"):
 		obstacle.damage_swarm_agent.connect(damage_agent)
@@ -126,14 +127,13 @@ func _physics_process(delta: float) -> void:
 			damage_agent(swarm_agents[randi_range(0, swarm_agents.size() - 1)], 2000)
 	
 	get_nav_path_for_swarm_agents(delta)
-	
+
 	# Get centroid position of swarm
 	var avg_agent_pos := Vector2.ZERO
 	if swarm_agents:
 		for agent in swarm_agents:
 			avg_agent_pos += agent.global_position
 		avg_agent_pos /= swarm_agents.size()
-		
 		centroid.global_position = avg_agent_pos
 	else:
 		centroid.global_position = target.global_position
@@ -150,7 +150,7 @@ func get_nav_path_for_swarm_agents(_delta: float) -> void:
 	swarm_agents = GameManager.clean_array(swarm_agents)
 	for agent in swarm_agents:
 		var from_pos: Vector2 = agent.global_position
-		var to_pos: Vector2 = target.global_position
+		var to_pos: Vector2 = agent.target.global_position
 		agent.target_path = NavigationServer2D.map_get_path(nav_map, from_pos, to_pos, true)
 
 
@@ -167,11 +167,11 @@ func add_agent(new_position: Vector2 = centroid.position) -> SwarmAgent:
 	)
 	
 	add_child(new_agent)
-	
+
 	if new_agent not in swarm_agents:
 		swarm_agents.append(new_agent)
 		swarm_agent_count = swarm_agents.size()
-	
+
 	for key in current_swarm_attributes.keys():
 		new_agent.set(key, current_swarm_attributes[key])
 	
@@ -191,6 +191,14 @@ func damage_agent(agent: SwarmAgent, damage: float) -> void:
 func remove_agent(agent: SwarmAgent) -> void:
 	swarm_agents.erase(agent)
 	swarm_agent_count = swarm_agents.size()
+
+# Run on agent dead
+func check_game_over():
+	# Minus 1 because when we run this check, the died swarm agent still
+	# not queue_freed yet
+	var agent_left = swarm_agents.size() - 1
+	if agent_left <= 0:
+		GameManager.game_over()
 
 
 func set_swarm_attributes(attributes: Dictionary) -> void:
@@ -216,8 +224,8 @@ func _on_distribution_normal_state_entered() -> void:
 	target_movement_speed = 230.0
 	set_swarm_attributes(SWARM_ATTRIBUTES_NORMAL)
 	# Hacky so we can set on agent add
-	current_swarm_attributes = SWARM_ATTRIBUTES_NORMAL
 	emit_signal("normal_formation")
+	normal_formation.emit()
 
 
 func _on_distribution_close_state_entered() -> void:
@@ -259,10 +267,10 @@ func _on_moving_state_entered() -> void:
 		#).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE)
 
 
-func _on_moving_state_physics_processing(delta: float) -> void:
+func _on_moving_state_physics_processing(_delta: float) -> void:
 	var direction = Vector2.ZERO
 	direction = Input.get_vector("left", "right", "up", "down").normalized()
-	
+
 	if direction != Vector2.ZERO:
 		target.velocity = lerp(target.velocity, direction * target_movement_speed, target_acceleration)
 	else:

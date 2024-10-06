@@ -18,13 +18,12 @@ agent_radius = 30.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6fjwu"]
 size = Vector2(63.9026, 68.9233)
 
-[node name="Demo" type="Node2D"]
+[node name="Demo2" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [43.0]
 metadata/_edit_vertical_guides_ = [-153.0]
 
-[node name="FollowCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_dx0aq")]
+[node name="FollowCamera" parent="." instance=ExtResource("1_dx0aq")]
 position = Vector2(584, 376)
-target = NodePath("../SwarmDirector/SwarmCentroidMarker")
 
 [node name="SwarmDirector" parent="." instance=ExtResource("2_if5kk")]
 position = Vector2(615, 551)

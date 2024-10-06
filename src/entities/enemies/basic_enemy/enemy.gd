@@ -19,17 +19,18 @@ var aggro_sfx_player: AudioStreamPlayer
 @export var min_wander_range = 100
 @export var max_wander_range = 500
 # Track
-@export var detect_range = 256
+@export var detect_range = 200
 @export var max_chase_range = 1000
 # Dash
-@export var range_to_dash = 150
-@export var dash_speed = 600
+@export var range_to_dash = 300
+@export var dash_speed = 700
 @export var dash_delay = 0.5 # Aka reaction time, time the enemy need to prepare before dash
 @export var dash_duration = 2
 @export var dash_decel_rate = 1.0
 
 @onready var state_chart: StateChart = $StateChart
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
+@onready var detect_area: Area2D = $PlayerDetectRange
 @onready var detect_collision_shape: CollisionShape2D = $PlayerDetectRange/CollisionShape2D
 @onready var los_raycast: RayCast2D = $LOSRaycast
 
@@ -59,6 +60,7 @@ func _ready() -> void:
 	current_health = max_health
 	spawn_pos = global_position
 	detect_collision_shape.shape.radius = detect_range
+	detect_area.position = Vector2(detect_range * 0.5, 0)
 	los_raycast.target_position = Vector2(range_to_dash, 0)
 	
 	if SFX_idle:
@@ -106,6 +108,11 @@ func _on_player_detect_range_body_exited(body: Node2D) -> void:
 
 func _on_wander_state_entered() -> void:
 	found_wander_pos = false
+	# If far from spawn point, go back there instead of wander
+	var dist_from_spawn = global_position.distance_to(spawn_pos)
+	if dist_from_spawn >= max_chase_range:
+		found_wander_pos = true
+		nav_agent.target_position = spawn_pos
 	while not found_wander_pos:
 		# Wait for 0.1s before repeatly look for wander spot to prevent lag
 		await get_tree().create_timer(0.1).timeout
@@ -203,6 +210,7 @@ func _on_dash_state_entered() -> void:
 func _on_dash_state_physics_processing(delta: float) -> void:
 	if targeted_swarm_agent == null:
 		state_chart.send_event("back_to_track")
+		return
 
 	dash_delay_timer -= delta
 	if dash_delay_timer > 0:
@@ -262,7 +270,6 @@ func _on_cooldown_state_processing(delta: float) -> void:
 func _on_attacking_state_entered() -> void:
 	# Play animation or something here. For now, it will just wait 0.5s
 	if targeted_swarm_agent != null:
-		print("DAMAGE SWARM AGENT ", targeted_swarm_agent.name)
 		targeted_swarm_agent.damage(attack_damage)
 		GlobalSFX.play_sfx_shuffled(SFX_attack)
 	await get_tree().create_timer(0.5).timeout

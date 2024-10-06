@@ -23,6 +23,10 @@ SoundManager="*res://addons/sound_manager/sound_manager.gd"
 BuildTag="*res://config/build_tag/build_tag.gd"
 GlobalSFX="*res://src/utils/singletons/global_sfx/GlobalSFX.tscn"
 
+[debug]
+
+gdscript/warnings/integer_division=0
+
 [display]
 
 window/size/viewport_width=1280
@@ -82,6 +86,11 @@ spread={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":2,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }
+donate_agent={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"key_label":0,"unicode":114,"location":0,"echo":false,"script":null)
+]
+}
 DEBUG_add_agent={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":81,"key_label":0,"unicode":113,"location":0,"echo":false,"script":null)
@@ -101,8 +110,8 @@ DEBUG_player_toggle_fire_status={
 [layer_names]
 
 2d_physics/layer_1="Environment"
-2d_physics/layer_2="Swarm Node"
-2d_physics/layer_3="Swarm Target"
+2d_physics/layer_2="Swarm Agent"
+2d_physics/layer_3="Swarm Leader"
 2d_physics/layer_4="World Boundary"
 2d_physics/layer_5="Area of Effect"
 2d_physics/layer_6="Enemy"
