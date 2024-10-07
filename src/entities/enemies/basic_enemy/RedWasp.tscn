@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dj0hbiapwuolw"]
+[gd_scene load_steps=31 format=3 uid="uid://dj0hbiapwuolw"]
 
 [ext_resource type="Script" path="res://src/entities/enemies/basic_enemy/enemy.gd" id="1_h1loq"]
 [ext_resource type="AudioStream" uid="uid://cejolwltt0k2w" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_buzz.wav" id="2_kfb0b"]
@@ -7,11 +7,22 @@
 [ext_resource type="AudioStream" uid="uid://c2plaei2vj6is" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_die.mp3" id="5_01yjj"]
 [ext_resource type="Texture2D" uid="uid://sr7codqc2kkl" path="res://assets/sprite/enemy/red_wasp.png" id="6_ow6y5"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="7_uuj1k"]
+[ext_resource type="Texture2D" uid="uid://b8hoj06kb2njg" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-1.png" id="7_x5gsg"]
+[ext_resource type="Texture2D" uid="uid://bm6ehydhjaxrt" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-2.png" id="8_lw3iy"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="8_sw82b"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="9_2am5w"]
+[ext_resource type="Texture2D" uid="uid://boo3kabghtxg4" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-3.png" id="9_i15e3"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="10_amemc"]
+[ext_resource type="Texture2D" uid="uid://da3tgb1ypp4pk" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-4.png" id="10_hbdo5"]
+[ext_resource type="Texture2D" uid="uid://5ujpbuh2ap0p" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-5.png" id="11_rsmot"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="11_ti3up"]
 [ext_resource type="AudioStream" uid="uid://bedyrnfp4a4na" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_idle_loop.mp3" id="12_bfwot"]
+[ext_resource type="Texture2D" uid="uid://da2vebe13h7sj" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-6.png" id="12_obum3"]
+[ext_resource type="Texture2D" uid="uid://blyos305pvth3" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-7.png" id="13_77m0n"]
+[ext_resource type="Texture2D" uid="uid://cj11jad0jql2x" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-8.png" id="14_gl6an"]
+[ext_resource type="Texture2D" uid="uid://dfxqoj63erfv3" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-9.png" id="15_fsbka"]
+[ext_resource type="Texture2D" uid="uid://d04iy5p66d2el" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-10.png" id="16_6rad8"]
+[ext_resource type="Texture2D" uid="uid://bfimgm73aqcm7" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-11.png" id="17_f016j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ddoed"]
 radius = 32.0
@@ -21,6 +32,253 @@ radius = 200.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2pffq"]
 size = Vector2(26, 32)
+
+[sub_resource type="Animation" id="Animation_pefxe"]
+resource_name = "fly"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaspSprite/Bug1-1:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.174533, 0.0, -0.174533, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WaspSprite/Bug1-11:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.0, 0.174533, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_xu0rq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaspSprite/Bug1-1:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WaspSprite/Bug1-11:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WaspSprite/Bug1-2:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WaspSprite/Bug1-4:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WaspSprite/Bug1-5:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WaspSprite/Bug1-6:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WaspSprite/Bug1-7:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WaspSprite/Bug1-8:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("WaspSprite/Bug1-9:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_3f1cr"]
+resource_name = "wiggle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaspSprite/Bug1-2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.174533, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WaspSprite/Bug1-3:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.174533, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WaspSprite/Bug1-4:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.733333, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.174533, -0.174533, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WaspSprite/Bug1-5:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.433333, 0.766667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, -0.0872665, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WaspSprite/Bug1-6:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.139626, -0.0698132, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WaspSprite/Bug1-7:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.10472, -0.191986, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WaspSprite/Bug1-8:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.666667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0698132, 0.15708, 0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WaspSprite/Bug1-9:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.466667, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7jcos"]
+_data = {
+"RESET": SubResource("Animation_xu0rq"),
+"fly": SubResource("Animation_pefxe"),
+"wiggle": SubResource("Animation_3f1cr")
+}
 
 [node name="RedWasp" type="CharacterBody2D" node_paths=PackedStringArray("idle_player")]
 collision_layer = 32
@@ -37,8 +295,45 @@ dash_delay = 1.0
 dash_duration = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(-0.4, 0.4)
 texture = ExtResource("6_ow6y5")
+
+[node name="WaspSprite" type="Node2D" parent="."]
+scale = Vector2(-0.4, 0.4)
+
+[node name="Bug1-1" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("7_x5gsg")
+
+[node name="Bug1-2" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("8_lw3iy")
+
+[node name="Bug1-3" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("9_i15e3")
+
+[node name="Bug1-4" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("10_hbdo5")
+
+[node name="Bug1-5" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("11_rsmot")
+
+[node name="Bug1-6" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("12_obum3")
+
+[node name="Bug1-7" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("13_77m0n")
+
+[node name="Bug1-8" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("14_gl6an")
+
+[node name="Bug1-9" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("15_fsbka")
+
+[node name="Bug1-10" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("16_6rad8")
+
+[node name="Bug1-11" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("17_f016j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ddoed")
@@ -232,6 +527,20 @@ delay_in_seconds = "0.0"
 
 [node name="IdleAudioPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_bfwot")
+
+[node name="WingAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7jcos")
+}
+autoplay = "fly"
+speed_scale = 6.0
+
+[node name="BodyAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7jcos")
+}
+autoplay = "wiggle"
+speed_scale = 0.5
 
 [connection signal="body_entered" from="PlayerDetectRange" to="." method="_on_detect_range_body_entered"]
 [connection signal="body_exited" from="PlayerDetectRange" to="." method="_on_player_detect_range_body_exited"]

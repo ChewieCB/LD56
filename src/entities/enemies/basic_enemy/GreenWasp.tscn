@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bm3vo4ufjrs7q"]
+[gd_scene load_steps=30 format=3 uid="uid://bm3vo4ufjrs7q"]
 
 [ext_resource type="Script" path="res://src/entities/enemies/basic_enemy/enemy.gd" id="1_phume"]
 [ext_resource type="AudioStream" uid="uid://cejolwltt0k2w" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_buzz.wav" id="2_t5eu1"]
@@ -6,12 +6,22 @@
 [ext_resource type="AudioStream" uid="uid://c6uydg1kdt5ow" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_aggro1.mp3" id="4_u1f3n"]
 [ext_resource type="AudioStream" uid="uid://c2plaei2vj6is" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_die.mp3" id="5_td3ij"]
 [ext_resource type="Texture2D" uid="uid://bfodump4jvah5" path="res://assets/sprite/enemy/green_wasp.png" id="6_3qpni"]
+[ext_resource type="Texture2D" uid="uid://bqaahcg5nubc7" path="res://assets/sprite/enemy/green-wasp-part/Bug_1-1.png" id="7_2qill"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="7_3o7c6"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="8_af0kd"]
+[ext_resource type="Texture2D" uid="uid://dndx74tc4aog1" path="res://assets/sprite/enemy/green-wasp-part/Bug_1-2.png" id="8_cyqbe"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="9_og2hm"]
+[ext_resource type="Texture2D" uid="uid://d4fl4f6qgmnd" path="res://assets/sprite/enemy/green-wasp-part/Bug_1-3.png" id="9_qpq4w"]
+[ext_resource type="Texture2D" uid="uid://5qbsuoh02f87" path="res://assets/sprite/enemy/green-wasp-part/Bug_1-4.png" id="10_gr6i4"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="10_kwsrt"]
+[ext_resource type="Texture2D" uid="uid://bajhr7wgrqtr1" path="res://assets/sprite/enemy/green-wasp-part/Bug_1-5.png" id="11_5ud26"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="11_ck2ri"]
 [ext_resource type="AudioStream" uid="uid://bedyrnfp4a4na" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_idle_loop.mp3" id="12_80ivt"]
+[ext_resource type="Texture2D" uid="uid://c8t8h71v60xa2" path="res://assets/sprite/enemy/green-wasp-part/Bug_1-6.png" id="12_y0n80"]
+[ext_resource type="Texture2D" uid="uid://bbdavvcbufbuo" path="res://assets/sprite/enemy/green-wasp-part/Bug_1-7.png" id="13_08dmt"]
+[ext_resource type="Texture2D" uid="uid://dvlbsqc4ec8x6" path="res://assets/sprite/enemy/green-wasp-part/Bug_1-8.png" id="14_jus7k"]
+[ext_resource type="Texture2D" uid="uid://cmjs6oh7u07dm" path="res://assets/sprite/enemy/green-wasp-part/Bug_1-9.png" id="15_ylfm8"]
+[ext_resource type="Texture2D" uid="uid://tg7cccalt3a3" path="res://assets/sprite/enemy/green-wasp-part/Bug_1-11.png" id="17_xbmvq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ddoed"]
 radius = 32.0
@@ -21,6 +31,253 @@ radius = 200.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2pffq"]
 size = Vector2(26, 32)
+
+[sub_resource type="Animation" id="Animation_pefxe"]
+resource_name = "fly"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaspSprite/Bug1-1:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.174533, 0.0, -0.174533, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WaspSprite/Bug1-11:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.0, 0.174533, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_xu0rq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaspSprite/Bug1-1:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WaspSprite/Bug1-11:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WaspSprite/Bug1-2:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WaspSprite/Bug1-4:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WaspSprite/Bug1-5:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WaspSprite/Bug1-6:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WaspSprite/Bug1-7:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WaspSprite/Bug1-8:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("WaspSprite/Bug1-9:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_3f1cr"]
+resource_name = "wiggle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaspSprite/Bug1-2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.174533, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WaspSprite/Bug1-3:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.174533, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WaspSprite/Bug1-4:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.733333, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.174533, -0.174533, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WaspSprite/Bug1-5:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.433333, 0.766667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, -0.0872665, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WaspSprite/Bug1-6:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.139626, -0.0698132, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WaspSprite/Bug1-7:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.10472, -0.191986, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WaspSprite/Bug1-8:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.666667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0698132, 0.15708, 0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WaspSprite/Bug1-9:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.466667, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7jcos"]
+_data = {
+"RESET": SubResource("Animation_xu0rq"),
+"fly": SubResource("Animation_pefxe"),
+"wiggle": SubResource("Animation_3f1cr")
+}
 
 [node name="GreenWasp" type="CharacterBody2D" node_paths=PackedStringArray("idle_player")]
 collision_layer = 32
@@ -33,21 +290,59 @@ SFX_death = Array[AudioStream]([ExtResource("5_td3ij")])
 idle_player = NodePath("IdleAudioPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(-0.4, 0.4)
 texture = ExtResource("6_3qpni")
 
+[node name="WaspSprite" type="Node2D" parent="."]
+scale = Vector2(-0.4, 0.4)
+
+[node name="Bug1-1" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("7_2qill")
+
+[node name="Bug1-2" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("8_cyqbe")
+
+[node name="Bug1-3" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("9_qpq4w")
+
+[node name="Bug1-4" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("10_gr6i4")
+
+[node name="Bug1-5" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("11_5ud26")
+
+[node name="Bug1-6" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("12_y0n80")
+
+[node name="Bug1-7" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("13_08dmt")
+
+[node name="Bug1-8" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("14_jus7k")
+
+[node name="Bug1-9" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("15_ylfm8")
+
+[node name="Bug1-11" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("17_xbmvq")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_ddoed")
 
 [node name="PlayerDetectRange" type="Area2D" parent="."]
+visible = false
 position = Vector2(100, 0)
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectRange"]
+visible = false
 shape = SubResource("CircleShape2D_f2j72")
 
 [node name="AttackRange" type="Area2D" parent="."]
+visible = false
 position = Vector2(8, 0)
 collision_layer = 64
 collision_mask = 2
@@ -228,6 +523,20 @@ delay_in_seconds = "0.0"
 
 [node name="IdleAudioPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_80ivt")
+
+[node name="WingAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7jcos")
+}
+autoplay = "fly"
+speed_scale = 6.0
+
+[node name="BodyAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7jcos")
+}
+autoplay = "wiggle"
+speed_scale = 0.5
 
 [connection signal="body_entered" from="PlayerDetectRange" to="." method="_on_detect_range_body_entered"]
 [connection signal="body_exited" from="PlayerDetectRange" to="." method="_on_player_detect_range_body_exited"]
