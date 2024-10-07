@@ -328,17 +328,14 @@ texture = ExtResource("15_ylfm8")
 texture = ExtResource("17_xbmvq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_ddoed")
 
 [node name="PlayerDetectRange" type="Area2D" parent="."]
-visible = false
 position = Vector2(100, 0)
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectRange"]
-visible = false
 shape = SubResource("CircleShape2D_f2j72")
 
 [node name="AttackRange" type="Area2D" parent="."]
@@ -537,6 +534,10 @@ libraries = {
 }
 autoplay = "wiggle"
 speed_scale = 0.5
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(96, 0)
+rect = Rect2(-200, -200, 400, 400)
 
 [connection signal="body_entered" from="PlayerDetectRange" to="." method="_on_detect_range_body_entered"]
 [connection signal="body_exited" from="PlayerDetectRange" to="." method="_on_player_detect_range_body_exited"]

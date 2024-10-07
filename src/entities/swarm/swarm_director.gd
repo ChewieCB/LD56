@@ -176,27 +176,25 @@ func get_nav_path_for_swarm_agents(_delta: float) -> void:
 
 
 func add_agent(new_position: Vector2 = centroid.global_position) -> SwarmAgent:
-	var new_agent: SwarmAgent
-	if swarm_agents.size() <= 100:
-		new_agent = swarm_agent_scene.instantiate()
-		new_agent.position = to_local(new_position)
-		new_agent.target = target
-		
-		new_agent.died.connect(func(_agent):
-			GlobalSFX.play_batched_sfx(
-				SFX_agent_death, active_death_sfx_players,
-				max_simultaneous_sfx, -12.0, true
-			)
+	var new_agent = swarm_agent_scene.instantiate()
+	new_agent.position = to_local(new_position)
+	new_agent.target = target
+	
+	new_agent.died.connect(func(_agent):
+		GlobalSFX.play_batched_sfx(
+			SFX_agent_death, active_death_sfx_players,
+			max_simultaneous_sfx, -12.0, true
 		)
-		
-		call_deferred("add_child", new_agent)
+	)
+	
+	call_deferred("add_child", new_agent)
 
-		if new_agent not in swarm_agents:
-			swarm_agents.append(new_agent)
-			swarm_agent_count = swarm_agents.size()
+	if new_agent not in swarm_agents:
+		swarm_agents.append(new_agent)
+		swarm_agent_count = swarm_agents.size()
 
-		for key in current_swarm_attributes.keys():
-			new_agent.set(key, current_swarm_attributes[key])
+	for key in current_swarm_attributes.keys():
+		new_agent.set(key, current_swarm_attributes[key])
 	
 	GlobalSFX.play_sfx_shuffled(SFX_agent_spawn, "", true)
 	GameManager.game_ui.update_agent_count_ui()
