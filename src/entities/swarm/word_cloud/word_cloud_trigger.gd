@@ -1,7 +1,7 @@
 extends Area2D
 class_name WorldCloudTrigger
 
-
+@export var SFX_voice: Array[AudioStream]
 @export var thought_word_prefab: PackedScene
 @export var world_list: Array[String] = []
 @export var auto_trigger: bool = false
@@ -24,6 +24,7 @@ func trigger() -> void:
 func spawn_thought_word():
 	var spawn_parent = GameManager.swarm_director.centroid
 	var last_word_spawn: Vector2
+	GlobalSFX.play_sfx_shuffled(SFX_voice)
 	for i in range(len(world_list)):
 		var inst: ThoughtWord = thought_word_prefab.instantiate()
 		var roll_range = 80 + GameManager.swarm_director.swarm_agent_count
