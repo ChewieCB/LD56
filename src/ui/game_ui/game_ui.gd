@@ -32,7 +32,7 @@ func show_game_over_screen():
 
 
 func update_agent_count_ui():
-	agent_count_label.text = "Faes left: {0}".format([GameManager.swarm_director.swarm_agents.size()])
+	agent_count_label.text = "Wisps remaining: {0}".format([GameManager.swarm_director.swarm_agents.size()])
 
 func convert_seconds_to_time_format(time_in_seconds: float) -> String:
 	var total_seconds = int(time_in_seconds) # Convert the float to an integer first

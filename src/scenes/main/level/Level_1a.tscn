@@ -1,4 +1,4 @@
-[gd_scene load_steps=2903 format=3 uid="uid://dqnsksromudtd"]
+[gd_scene load_steps=2906 format=3 uid="uid://dqnsksromudtd"]
 
 [ext_resource type="PackedScene" uid="uid://naoexqroboiq" path="res://src/entities/camera/FollowCamera.tscn" id="1_7s35v"]
 [ext_resource type="PackedScene" uid="uid://1bwiqif7rpyi" path="res://src/entities/swarm/SwarmDirector.tscn" id="2_nemqd"]
@@ -20018,6 +20018,15 @@ radius = 215.335
 [sub_resource type="CircleShape2D" id="CircleShape2D_yty8v"]
 radius = 136.033
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_dnwvl"]
+radius = 235.009
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lks2g"]
+radius = 147.218
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hao7k"]
+radius = 150.213
+
 [node name="Level1" type="Node2D"]
 metadata/_edit_vertical_guides_ = [-440.0]
 
@@ -22920,11 +22929,13 @@ position = Vector2(1122, 4970)
 position = Vector2(1217, 2902)
 rotation = 2.52982
 is_regenerative = true
+regen_time = 5.0
 
 [node name="SapPuddle2" parent="LevelGeometry/WaspRoom5/Sap" instance=ExtResource("12_a0fwh")]
 position = Vector2(1611, 3095)
 rotation = 4.64213
 is_regenerative = true
+regen_time = 5.0
 
 [node name="SapPuddle3" parent="LevelGeometry/WaspRoom5/Sap" instance=ExtResource("12_a0fwh")]
 position = Vector2(1532, 3238)
@@ -22935,11 +22946,13 @@ is_regenerative = true
 position = Vector2(768, 3426)
 rotation = 6.57658
 is_regenerative = true
+regen_time = 5.0
 
 [node name="SapPuddle5" parent="LevelGeometry/WaspRoom5/Sap" instance=ExtResource("12_a0fwh")]
 position = Vector2(285, 2984)
 rotation = 7.91778
 is_regenerative = true
+regen_time = 5.0
 
 [node name="SapPuddle6" parent="LevelGeometry/WaspRoom5/Sap" instance=ExtResource("12_a0fwh")]
 position = Vector2(866, 2416)
@@ -23029,28 +23042,6 @@ rotation = -0.750599
 [node name="LabelsPlaceholder" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
-[node name="Hives" type="Label" parent="LabelsPlaceholder"]
-offset_left = 2584.0
-offset_top = 3386.0
-offset_right = 2698.0
-offset_bottom = 3415.0
-scale = Vector2(2, 2)
-text = "Hives
-"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Stragglers" type="Label" parent="LabelsPlaceholder"]
-offset_left = 3097.0
-offset_top = 3825.0
-offset_right = 3211.0
-offset_bottom = 3848.0
-scale = Vector2(2, 2)
-text = "Stragglers
-"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Expand" type="Label" parent="LabelsPlaceholder"]
 offset_left = 2944.0
 offset_top = 4932.0
@@ -23063,6 +23054,39 @@ text = "Expand
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Expand2" type="Label" parent="LabelsPlaceholder"]
+offset_left = 665.0
+offset_top = 1359.0
+offset_right = 779.0
+offset_bottom = 1420.0
+scale = Vector2(2, 2)
+text = "hold RMB
+to expand
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Expand3" type="Label" parent="LabelsPlaceholder"]
+offset_left = 1332.0
+offset_top = 1812.0
+offset_right = 1488.0
+offset_bottom = 1873.0
+scale = Vector2(2, 2)
+text = "hold LMB to contract
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WASD" type="Label" parent="LabelsPlaceholder"]
+offset_left = -325.0
+offset_top = 613.0
+offset_right = -204.0
+offset_bottom = 674.0
+scale = Vector2(2, 2)
+text = "WASD to move"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Contract" type="Label" parent="LabelsPlaceholder"]
 offset_left = 6171.0
 offset_top = 2667.0
@@ -23072,26 +23096,6 @@ scale = Vector2(2, 2)
 text = "Contract
 (LMB)
 "
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Assemble" type="Label" parent="LabelsPlaceholder"]
-offset_left = 4261.0
-offset_top = 4368.0
-offset_right = 4375.0
-offset_bottom = 4417.0
-scale = Vector2(2, 2)
-text = "Assemble"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Locked" type="Label" parent="LabelsPlaceholder"]
-offset_left = 4112.0
-offset_top = 3870.0
-offset_right = 4226.0
-offset_bottom = 3919.0
-scale = Vector2(2, 2)
-text = "Locked"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -23173,10 +23177,90 @@ shape = SubResource("CircleShape2D_3uk5g")
 
 [node name="MotherlodeTrigger" parent="WordCloudTriggers" instance=ExtResource("28_uy3l0")]
 position = Vector2(5093, 4190)
-world_list = Array[String](["sap", "big", "huge", "friends", "party", "", "motherlode"])
+world_list = Array[String](["motherlode"])
 
 [node name="CollisionShape2D" parent="WordCloudTriggers/MotherlodeTrigger" index="0"]
 shape = SubResource("CircleShape2D_yty8v")
+
+[node name="Gate1Trigger" parent="WordCloudTriggers" instance=ExtResource("28_uy3l0")]
+position = Vector2(4441, 4486)
+world_list = Array[String](["gather", "together", "vessel!", "unite", "escapeq"])
+
+[node name="CollisionShape2D" parent="WordCloudTriggers/Gate1Trigger" index="0"]
+position = Vector2(-95, -103)
+shape = SubResource("CircleShape2D_dnwvl")
+
+[node name="DaylightTrigger" parent="WordCloudTriggers" instance=ExtResource("28_uy3l0")]
+position = Vector2(4128, 3378)
+world_list = Array[String](["light", "fresh", "air", "breeze"])
+
+[node name="CollisionShape2D" parent="WordCloudTriggers/DaylightTrigger" index="0"]
+position = Vector2(-95, -103)
+shape = SubResource("CircleShape2D_lks2g")
+
+[node name="HivesTrigger" parent="WordCloudTriggers" instance=ExtResource("28_uy3l0")]
+position = Vector2(2896, 3437)
+world_list = Array[String](["warm", "buzz", "nest", "hive", "insect"])
+
+[node name="CollisionShape2D" parent="WordCloudTriggers/HivesTrigger" index="0"]
+position = Vector2(-95, -103)
+shape = SubResource("CircleShape2D_lks2g")
+
+[node name="StragglersTrigger" parent="WordCloudTriggers" instance=ExtResource("28_uy3l0")]
+position = Vector2(3348, 3998)
+world_list = Array[String](["scouts?", "", "ambush!", "predators", "alone", "", "protectd", "stragglers"])
+
+[node name="CollisionShape2D" parent="WordCloudTriggers/StragglersTrigger" index="0"]
+position = Vector2(-95, -103)
+shape = SubResource("CircleShape2D_lks2g")
+
+[node name="ExpandTrigger" parent="WordCloudTriggers" instance=ExtResource("28_uy3l0")]
+position = Vector2(3200, 4925)
+world_list = Array[String](["make", "big", "expand", "spread", "intimidate", "scare", "offdw", "strength", "in", "numbers"])
+
+[node name="CollisionShape2D" parent="WordCloudTriggers/ExpandTrigger" index="0"]
+position = Vector2(-95, -103)
+shape = SubResource("CircleShape2D_lks2g")
+
+[node name="CrystalTrigger" parent="WordCloudTriggers" instance=ExtResource("28_uy3l0")]
+position = Vector2(769, 5027)
+world_list = Array[String](["strange", "charge", "energy", "arcane", "fey", "danger"])
+
+[node name="CollisionShape2D" parent="WordCloudTriggers/CrystalTrigger" index="0"]
+position = Vector2(-95, -103)
+shape = SubResource("CircleShape2D_lks2g")
+
+[node name="Gate2Trigger" parent="WordCloudTriggers" instance=ExtResource("28_uy3l0")]
+position = Vector2(807, 2906)
+world_list = Array[String](["rotten", "throne", "decay", "infestation", "cleanse", "danger"])
+
+[node name="CollisionShape2D" parent="WordCloudTriggers/Gate2Trigger" index="0"]
+position = Vector2(-95, -103)
+shape = SubResource("CircleShape2D_hao7k")
+
+[node name="Gate2Trigger2" parent="WordCloudTriggers" instance=ExtResource("28_uy3l0")]
+position = Vector2(1474, 3163)
+world_list = Array[String](["together", "free", "unite", "unlock", "escape", "alive"])
+
+[node name="CollisionShape2D" parent="WordCloudTriggers/Gate2Trigger2" index="0"]
+position = Vector2(-95, -103)
+shape = SubResource("CircleShape2D_hao7k")
+
+[node name="Gate2Trigger3" parent="WordCloudTriggers" instance=ExtResource("28_uy3l0")]
+position = Vector2(2376, 2804)
+world_list = Array[String](["free", "together", "...", "escape", "", "", "awakening!"])
+
+[node name="CollisionShape2D" parent="WordCloudTriggers/Gate2Trigger3" index="0"]
+position = Vector2(-95, -103)
+shape = SubResource("CircleShape2D_hao7k")
+
+[node name="CaveTrigger" parent="WordCloudTriggers" instance=ExtResource("28_uy3l0")]
+position = Vector2(4156, 2622)
+world_list = Array[String](["dank", "stale", "cave"])
+
+[node name="CollisionShape2D" parent="WordCloudTriggers/CaveTrigger" index="0"]
+position = Vector2(-95, -103)
+shape = SubResource("CircleShape2D_lks2g")
 
 [connection signal="body_entered" from="LevelGeometry/MushroomRoom3/Sap/BIGSapPuddle/Area2D" to="LevelGeometry/MushroomRoom3/Sap/BIGSapPuddle" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="LevelGeometry/WaspRoom1/Sap/BIGSapPuddle/Area2D" to="LevelGeometry/WaspRoom1/Sap/BIGSapPuddle" method="_on_area_2d_body_entered"]
@@ -23194,3 +23278,13 @@ shape = SubResource("CircleShape2D_yty8v")
 [editable path="WordCloudTriggers/ContractTrigger"]
 [editable path="WordCloudTriggers/PredatorTrigger"]
 [editable path="WordCloudTriggers/MotherlodeTrigger"]
+[editable path="WordCloudTriggers/Gate1Trigger"]
+[editable path="WordCloudTriggers/DaylightTrigger"]
+[editable path="WordCloudTriggers/HivesTrigger"]
+[editable path="WordCloudTriggers/StragglersTrigger"]
+[editable path="WordCloudTriggers/ExpandTrigger"]
+[editable path="WordCloudTriggers/CrystalTrigger"]
+[editable path="WordCloudTriggers/Gate2Trigger"]
+[editable path="WordCloudTriggers/Gate2Trigger2"]
+[editable path="WordCloudTriggers/Gate2Trigger3"]
+[editable path="WordCloudTriggers/CaveTrigger"]
