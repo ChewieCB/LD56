@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://yofeqq7oovkd"]
+[gd_scene load_steps=15 format=3 uid="uid://yofeqq7oovkd"]
 
 [ext_resource type="PackedScene" uid="uid://naoexqroboiq" path="res://src/entities/camera/FollowCamera.tscn" id="1_wnrtv"]
 [ext_resource type="PackedScene" uid="uid://1bwiqif7rpyi" path="res://src/entities/swarm/SwarmDirector.tscn" id="2_7t3w0"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://y766oblqkpts" path="res://src/entities/obstacle/core/Obstacle.tscn" id="6_a716m"]
 [ext_resource type="Texture2D" uid="uid://ch2pnl1s0tl1n" path="res://assets/sprite/placeholder/square.png" id="7_bsgu8"]
 [ext_resource type="PackedScene" uid="uid://cecvv23b1casj" path="res://src/entities/obstacle/zappy_crystal/ZappyCrystal.tscn" id="7_n7hvs"]
+[ext_resource type="PackedScene" uid="uid://ds1f8x3tdkm2l" path="res://src/entities/obstacle/zappy_crystal/ZappyCrystalAlt.tscn" id="8_af27y"]
 [ext_resource type="Texture2D" uid="uid://q5pp8mltm8v8" path="res://assets/sprite/bg1.png" id="8_g2h3u"]
 [ext_resource type="PackedScene" uid="uid://dosbbm6uk86ho" path="res://src/ui/game_ui/GameUI.tscn" id="9_gbfpw"]
 [ext_resource type="PackedScene" uid="uid://bm3vo4ufjrs7q" path="res://src/entities/enemies/basic_enemy/GreenWasp.tscn" id="10_85oaq"]
@@ -57,6 +58,9 @@ scale = Vector2(0.564141, 0.564141)
 
 [node name="ZappyCrystal" parent="ObstacleHolder" instance=ExtResource("7_n7hvs")]
 position = Vector2(592, 656)
+
+[node name="ZappyCrystalAlt" parent="ObstacleHolder" instance=ExtResource("8_af27y")]
+position = Vector2(888, 640)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_ofayr")
