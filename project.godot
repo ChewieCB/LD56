@@ -37,6 +37,10 @@ window/stretch/mode="canvas_items"
 
 enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg", "res://addons/rmsmartshape/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
 
+[gui]
+
+theme/custom_font="res://assets/fonts/HennyPenny-Regular.ttf"
+
 [gui_transitions]
 
 config/default/auto_start=true

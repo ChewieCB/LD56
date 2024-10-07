@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://y766oblqkpts"]
 
 [ext_resource type="Script" path="res://src/entities/obstacle/core/obstacle.gd" id="1_axooq"]
-[ext_resource type="Shader" path="res://src/entities/obstacle/core/wind_sway.gdshader" id="2_1lqf2"]
+[ext_resource type="Shader" path="res://src/utils/shader/wind_sway.gdshader" id="2_1lqf2"]
 [ext_resource type="Texture2D" uid="uid://bo2cfgk0l0bno" path="res://assets/sprite/env/mushroom_big.png" id="2_8syal"]
 [ext_resource type="Texture2D" uid="uid://bvhed0lxktwe0" path="res://assets/sprite/placeholder/circle.png" id="3_jhb84"]
 [ext_resource type="Texture2D" uid="uid://loc0t2sqvjcg" path="res://assets/sprite/particles/spore_particle_0.png" id="5_egh78"]
