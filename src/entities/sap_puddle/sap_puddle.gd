@@ -15,7 +15,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 
@@ -32,8 +32,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			var tween = get_tree().create_tween()
 			tween.tween_property(
 				puddle_mesh,
-				"scale.y",
+				"modulate:a", # scale:y don't work as we expected
 				0,
-				1.5
+				1
 			)
 			tween.tween_callback(self.queue_free)

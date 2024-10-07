@@ -15,7 +15,7 @@ func play_button_hover_sfx() -> void:
 	if not button_hover_sfx:
 		push_error("No AudioStream for button_hover_sfx")
 		return
-	SoundManager.play_sound(button_hover_sfx, "SFX") 
+	SoundManager.play_sound(button_hover_sfx, "SFX")
 
 
 func play_sfx_shuffled(
@@ -32,14 +32,13 @@ func play_sfx_shuffled(
 
 
 func play_batched_sfx(
-	sfx_array: Array[AudioStream], active_players: Array[AudioStreamPlayer], 
-	max_sfx: int = 50, volume_db :float = 0.0, randomize_pitch: bool = false
+	sfx_array: Array[AudioStream], active_players: Array[AudioStreamPlayer],
+	max_sfx: int = 50, volume_db: float = 0.0, randomize_pitch: bool = false
 ) -> void:
 	if active_players.size() < max_sfx:
 		var sfx_player: AudioStreamPlayer = GlobalSFX.play_sfx_shuffled(
 			sfx_array, "", randomize_pitch
 		)
-		
 		if sfx_player:
 			sfx_player.finished.connect(func(): active_players.erase(sfx_player))
 			active_players.append(sfx_player)
