@@ -39,7 +39,7 @@ func play_batched_sfx(
 		var sfx_player: AudioStreamPlayer = GlobalSFX.play_sfx_shuffled(
 			sfx_array, "", randomize_pitch
 		)
-		if sfx_player:
+		if sfx_player and not is_nan(volume_db):
 			sfx_player.finished.connect(func(): active_players.erase(sfx_player))
 			active_players.append(sfx_player)
 			sfx_player.volume_db = volume_db
