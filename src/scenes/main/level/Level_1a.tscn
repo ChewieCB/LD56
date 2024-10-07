@@ -1,4 +1,4 @@
-[gd_scene load_steps=2879 format=3 uid="uid://dqnsksromudtd"]
+[gd_scene load_steps=2897 format=3 uid="uid://dqnsksromudtd"]
 
 [ext_resource type="PackedScene" uid="uid://naoexqroboiq" path="res://src/entities/camera/FollowCamera.tscn" id="1_7s35v"]
 [ext_resource type="PackedScene" uid="uid://1bwiqif7rpyi" path="res://src/entities/swarm/SwarmDirector.tscn" id="2_nemqd"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dt6pvb0caalfy" path="res://src/entities/environment/sealed_gate/SealedGateDoor.tscn" id="4_5je41"]
 [ext_resource type="Script" path="res://addons/rmsmartshape/shapes/shape_closed.gd" id="5_uqsde"]
 [ext_resource type="Texture2D" uid="uid://dra801boi8wuf" path="res://assets/environment_assets/grass_blade.png" id="6_6pncg"]
+[ext_resource type="Texture2D" uid="uid://c3ufjnj0v0jep" path="res://assets/environment_assets/guardian.png" id="6_6qr23"]
 [ext_resource type="Texture2D" uid="uid://d4aoiqy31wxni" path="res://assets/sprite/env/finalk/tree_3.png" id="6_7alot"]
 [ext_resource type="Texture2D" uid="uid://chf7dmvotpcoy" path="res://assets/environment_assets/shell_dark.png" id="6_53med"]
 [ext_resource type="Script" path="res://addons/rmsmartshape/vertex_properties.gd" id="6_xbwi8"]
@@ -55,7 +56,14 @@
 [ext_resource type="Texture2D" uid="uid://b6orlj4s5m6or" path="res://assets/sprite/env/finalk/rock_alt_6.png" id="30_2x0ki"]
 [ext_resource type="Texture2D" uid="uid://ogd5w53380mb" path="res://assets/sprite/env/finalk/rock_alt_4.png" id="31_cjx6o"]
 [ext_resource type="Texture2D" uid="uid://b535kxeks30a5" path="res://assets/environment_assets/nest_3.png" id="33_suk66"]
+[ext_resource type="Texture2D" uid="uid://bnjao877nr5l6" path="res://assets/sprite/env/finalk/crystal_1.png" id="33_v823p"]
 [ext_resource type="Texture2D" uid="uid://bv44a3oq5xlsp" path="res://assets/sprite/env/finalk/rock_alt_5.png" id="34_ieqec"]
+[ext_resource type="Texture2D" uid="uid://dax1jc8mxrbfi" path="res://assets/environment_assets/mushroom.png" id="35_e14p3"]
+[ext_resource type="Texture2D" uid="uid://bwkccaraj0ic0" path="res://assets/sprite/env/finalk/crystal_2.png" id="36_wceyh"]
+[ext_resource type="Texture2D" uid="uid://865m8ysmxy14" path="res://assets/sprite/env/finalk/crystal_3.png" id="37_m1c75"]
+[ext_resource type="Texture2D" uid="uid://b4pp0t1ljqyhi" path="res://assets/sprite/env/finalk/crystal_4.png" id="38_5th3c"]
+[ext_resource type="Texture2D" uid="uid://vihtqfihp7xx" path="res://assets/environment_assets/grass_blade_2.png" id="39_m7vn4"]
+[ext_resource type="Texture2D" uid="uid://bj5peoslxdvty" path="res://assets/environment_assets/nest_cluster.png" id="41_7qgup"]
 [ext_resource type="Texture2D" uid="uid://dsqqem8qfbgvv" path="res://assets/environment_assets/vessel_broken.png" id="45_b5rv2"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ugqvo"]
@@ -17233,7 +17241,7 @@ width = 1.0
 
 [sub_resource type="Resource" id="Resource_brxhs"]
 script = ExtResource("7_bajb0")
-position = Vector2(-118.925, -28.8724)
+position = Vector2(-119.322, -16.9668)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
 properties = SubResource("Resource_ujkcu")
@@ -17279,7 +17287,7 @@ properties = SubResource("Resource_axar0")
 
 [sub_resource type="Resource" id="Resource_7tg6u"]
 script = ExtResource("6_xbwi8")
-texture_idx = 0
+texture_idx = -1
 flip = false
 width = 1.0
 
@@ -17389,7 +17397,7 @@ width = 1.0
 
 [sub_resource type="Resource" id="Resource_ij52l"]
 script = ExtResource("7_bajb0")
-position = Vector2(-91.1963, -56.0793)
+position = Vector2(-99.9272, -32.665)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
 properties = SubResource("Resource_errax")
@@ -17500,7 +17508,7 @@ properties = SubResource("Resource_3gtdp")
 
 [sub_resource type="Resource" id="Resource_j1hra"]
 script = ExtResource("6_xbwi8")
-texture_idx = 0
+texture_idx = -1
 flip = false
 width = 1.0
 
@@ -17584,10 +17592,62 @@ width = 1.0
 
 [sub_resource type="Resource" id="Resource_gk087"]
 script = ExtResource("7_bajb0")
-position = Vector2(-127.325, -10.728)
+position = Vector2(-123.753, 13.877)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
 properties = SubResource("Resource_oxmus")
+
+[sub_resource type="Resource" id="Resource_3x180"]
+script = ExtResource("6_xbwi8")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_wtu7x"]
+script = ExtResource("7_bajb0")
+position = Vector2(-122.403, -7.61572)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_3x180")
+
+[sub_resource type="Resource" id="Resource_kib6v"]
+script = ExtResource("6_xbwi8")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_3ppa2"]
+script = ExtResource("7_bajb0")
+position = Vector2(-94.623, -34.9985)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_kib6v")
+
+[sub_resource type="Resource" id="Resource_38k53"]
+script = ExtResource("6_xbwi8")
+texture_idx = -1
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_160nt"]
+script = ExtResource("7_bajb0")
+position = Vector2(-108.116, -26.2676)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_38k53")
+
+[sub_resource type="Resource" id="Resource_3dkv0"]
+script = ExtResource("6_xbwi8")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_2liqh"]
+script = ExtResource("7_bajb0")
+position = Vector2(-89.0674, -36.5854)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_3dkv0")
 
 [sub_resource type="Resource" id="Resource_3ncml"]
 script = ExtResource("8_8mo1g")
@@ -17626,13 +17686,17 @@ _points = {
 34: SubResource("Resource_gkpud"),
 35: SubResource("Resource_4t0uq"),
 37: SubResource("Resource_puocb"),
-38: SubResource("Resource_gk087")
+38: SubResource("Resource_gk087"),
+39: SubResource("Resource_wtu7x"),
+40: SubResource("Resource_3ppa2"),
+41: SubResource("Resource_160nt"),
+42: SubResource("Resource_2liqh")
 }
-_point_order = PackedInt32Array(19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 38, 7, 22, 6, 29, 21, 31, 5, 30, 23, 4, 32, 24, 26, 3, 33, 25, 34, 2, 35, 27, 1, 37, 28, 0)
+_point_order = PackedInt32Array(19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 38, 39, 7, 41, 22, 40, 42, 6, 29, 21, 31, 5, 30, 23, 4, 32, 24, 26, 3, 33, 25, 34, 2, 35, 27, 1, 37, 28, 0)
 _constraints = {
 Vector2i(0, 19): 15
 }
-_next_key = 39
+_next_key = 43
 _material_overrides = {}
 tessellation_stages = 3
 tessellation_tolerance = 6.0
@@ -19942,15 +20006,21 @@ radius = 166.301
 [sub_resource type="CircleShape2D" id="CircleShape2D_gb31m"]
 radius = 215.335
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_3uk5g"]
+radius = 215.335
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yty8v"]
+radius = 136.033
+
 [node name="Level1" type="Node2D"]
 metadata/_edit_vertical_guides_ = [-440.0]
 
 [node name="FollowCamera" parent="." node_paths=PackedStringArray("swarm_director") instance=ExtResource("1_7s35v")]
-position = Vector2(5435, 2643)
+position = Vector2(-786, 482)
 swarm_director = NodePath("../SwarmDirector")
 
 [node name="SwarmDirector" parent="." instance=ExtResource("2_nemqd")]
-position = Vector2(6012, 2928)
+position = Vector2(-209, 767)
 swarm_agent_count = 0
 
 [node name="NPCSwarms" type="Node2D" parent="."]
@@ -19965,7 +20035,7 @@ metadata/_edit_lock_ = true
 
 [node name="GoalInput" parent="SealedGates" instance=ExtResource("3_nlblt")]
 position = Vector2(3206, 2919)
-n_agent_required = 150
+n_agent_required = 100
 is_end_of_level = true
 
 [node name="SealedGateDoor2" parent="SealedGates" instance=ExtResource("4_5je41")]
@@ -20014,7 +20084,7 @@ sealed_gate_doors = [NodePath("../SealedGateDoor6"), NodePath("../SealedGateDoor
 [node name="SealedGateInput3" parent="SealedGates" node_paths=PackedStringArray("sealed_gate_doors") instance=ExtResource("3_nlblt")]
 position = Vector2(1218, 2659)
 rotation = -0.00477859
-n_agent_required = 100
+n_agent_required = 90
 sealed_gate_doors = [NodePath("../SealedGateDoor5"), NodePath("../SealedGateDoor8")]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
@@ -20023,6 +20093,17 @@ navigation_polygon = SubResource("NavigationPolygon_ugqvo")
 metadata/_edit_lock_ = true
 
 [node name="SetDressing" type="Node2D" parent="."]
+
+[node name="Guardian" type="Sprite2D" parent="SetDressing"]
+position = Vector2(3206, 2842)
+scale = Vector2(0.806035, 0.806035)
+texture = ExtResource("6_6qr23")
+
+[node name="Mushroom" type="Sprite2D" parent="SetDressing"]
+z_index = -3
+position = Vector2(4189, 4325)
+scale = Vector2(1.42006, 1.42006)
+texture = ExtResource("35_e14p3")
 
 [node name="RockAlt13" type="Sprite2D" parent="SetDressing"]
 position = Vector2(5980, 2790)
@@ -20157,6 +20238,12 @@ texture = ExtResource("11_e6gd7")
 position = Vector2(3348.11, 3098.54)
 rotation = -0.0211081
 texture = ExtResource("9_f7plc")
+
+[node name="RockAlt28" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4632, 4299)
+rotation = 2.90131
+scale = Vector2(1, 1)
+texture = ExtResource("34_ieqec")
 
 [node name="GrassMound1" type="Sprite2D" parent="SetDressing"]
 z_index = -1
@@ -20379,6 +20466,41 @@ rotation = -3.13481
 scale = Vector2(0.301243, 0.301243)
 texture = ExtResource("7_i8wwl")
 
+[node name="Leafy9" type="Sprite2D" parent="SetDressing"]
+z_index = 1
+position = Vector2(6088, 2578)
+rotation = -3.13481
+scale = Vector2(0.301243, 0.301243)
+texture = ExtResource("7_i8wwl")
+
+[node name="Leafy10" type="Sprite2D" parent="SetDressing"]
+z_index = 1
+position = Vector2(6883, 3191)
+rotation = -6.89618
+scale = Vector2(0.301243, 0.301243)
+texture = ExtResource("7_i8wwl")
+
+[node name="Leafy11" type="Sprite2D" parent="SetDressing"]
+z_index = 1
+position = Vector2(5659, 2826)
+rotation = -6.42466
+scale = Vector2(0.301243, 0.301243)
+texture = ExtResource("7_i8wwl")
+
+[node name="Leafy12" type="Sprite2D" parent="SetDressing"]
+z_index = 1
+position = Vector2(4038, 3575)
+rotation = -5.42656
+scale = Vector2(0.301243, 0.301243)
+texture = ExtResource("7_i8wwl")
+
+[node name="Leafy13" type="Sprite2D" parent="SetDressing"]
+z_index = 1
+position = Vector2(4403, 3947)
+rotation = -6.85116
+scale = Vector2(0.301243, 0.301243)
+texture = ExtResource("7_i8wwl")
+
 [node name="GrassBlade14" type="Sprite2D" parent="SetDressing"]
 position = Vector2(1827, 1782)
 rotation = -2.93207
@@ -20424,6 +20546,12 @@ rotation = 0.194224
 scale = Vector2(0.703671, 0.578212)
 texture = ExtResource("13_qon84")
 
+[node name="RockAlt27" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4588, 4294)
+rotation = -2.8923
+scale = Vector2(0.383305, 0.383305)
+texture = ExtResource("27_dj3b3")
+
 [node name="Tree4" type="Sprite2D" parent="SetDressing"]
 position = Vector2(3556, 2726)
 rotation = -2.54571
@@ -20452,6 +20580,11 @@ position = Vector2(3821, 2722)
 rotation = -0.406861
 scale = Vector2(0.460275, 0.460275)
 texture = ExtResource("20_71w5p")
+
+[node name="RockAlt23" type="Sprite2D" parent="SetDressing"]
+position = Vector2(6158, 4032)
+rotation = 2.72012
+texture = ExtResource("31_cjx6o")
 
 [node name="YellowBush1" type="Sprite2D" parent="SetDressing"]
 position = Vector2(2739, 2899)
@@ -20523,6 +20656,12 @@ rotation = 3.04802
 scale = Vector2(0.592791, 0.592791)
 texture = ExtResource("30_2x0ki")
 
+[node name="Crystal1" type="Sprite2D" parent="SetDressing"]
+position = Vector2(6995, 2626)
+rotation = -2.41843
+scale = Vector2(0.824455, 0.824455)
+texture = ExtResource("33_v823p")
+
 [node name="Nest3" type="Sprite2D" parent="SetDressing"]
 position = Vector2(6157, 4053)
 rotation = -0.214037
@@ -20558,9 +20697,26 @@ position = Vector2(6117, 4224)
 rotation = 0.336094
 texture = ExtResource("34_ieqec")
 
+[node name="RockAlt22" type="Sprite2D" parent="SetDressing"]
+position = Vector2(6040, 2559)
+rotation = -2.96634
+scale = Vector2(0.329307, 0.329307)
+texture = ExtResource("28_1884v")
+
 [node name="RockAlt9" type="Sprite2D" parent="SetDressing"]
 position = Vector2(6052, 4232)
 rotation = -0.456292
+scale = Vector2(0.820592, 0.820592)
+texture = ExtResource("30_2x0ki")
+
+[node name="RockAlt34" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4425, 3943)
+rotation = -0.78128
+texture = ExtResource("34_ieqec")
+
+[node name="RockAlt35" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4400, 4016)
+rotation = -1.46021
 scale = Vector2(0.820592, 0.820592)
 texture = ExtResource("30_2x0ki")
 
@@ -20573,6 +20729,423 @@ texture = ExtResource("30_2x0ki")
 position = Vector2(5731, 2769)
 scale = Vector2(0.564752, 0.564752)
 texture = ExtResource("27_dj3b3")
+
+[node name="Crystal2" type="Sprite2D" parent="SetDressing"]
+position = Vector2(7064, 2692)
+rotation = -2.88446
+texture = ExtResource("36_wceyh")
+
+[node name="Crystal3" type="Sprite2D" parent="SetDressing"]
+position = Vector2(6563, 3461)
+rotation = -3.85679
+texture = ExtResource("36_wceyh")
+
+[node name="Crystal4" type="Sprite2D" parent="SetDressing"]
+position = Vector2(6934, 3427)
+rotation = -2.83487
+scale = Vector2(0.751323, 0.751323)
+texture = ExtResource("37_m1c75")
+
+[node name="Crystal5" type="Sprite2D" parent="SetDressing"]
+position = Vector2(6812, 3899)
+rotation = 2.30128
+scale = Vector2(0.612229, 0.612229)
+texture = ExtResource("38_5th3c")
+
+[node name="Crystal6" type="Sprite2D" parent="SetDressing"]
+position = Vector2(6272, 3847)
+rotation = 2.03883
+texture = ExtResource("33_v823p")
+
+[node name="Nest8" type="Sprite2D" parent="SetDressing"]
+position = Vector2(5009, 3787)
+rotation = 0.54974
+scale = Vector2(0.108745, 0.108745)
+texture = ExtResource("33_suk66")
+
+[node name="Nest9" type="Sprite2D" parent="SetDressing"]
+position = Vector2(5030, 3791)
+rotation = 0.169463
+scale = Vector2(0.122597, 0.122597)
+texture = ExtResource("33_suk66")
+
+[node name="Nest10" type="Sprite2D" parent="SetDressing"]
+position = Vector2(5060, 3876)
+rotation = 0.114624
+scale = Vector2(-0.1021, 0.1021)
+texture = ExtResource("33_suk66")
+
+[node name="Nest11" type="Sprite2D" parent="SetDressing"]
+position = Vector2(5058, 3862)
+rotation = 0.374474
+scale = Vector2(-0.0721427, 0.0721427)
+texture = ExtResource("33_suk66")
+
+[node name="Nest12" type="Sprite2D" parent="SetDressing"]
+position = Vector2(5050, 3868)
+rotation = 0.582906
+scale = Vector2(0.104063, 0.104063)
+texture = ExtResource("33_suk66")
+
+[node name="Nest13" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4908, 3928)
+rotation = 0.0638915
+scale = Vector2(0.109756, 0.109756)
+texture = ExtResource("33_suk66")
+
+[node name="Nest14" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4956, 3928)
+rotation = -0.347401
+scale = Vector2(0.0808406, 0.0808406)
+texture = ExtResource("33_suk66")
+
+[node name="Nest15" type="Sprite2D" parent="SetDressing"]
+position = Vector2(5027, 3952)
+rotation = -0.0535198
+scale = Vector2(-0.0570512, 0.0570512)
+texture = ExtResource("33_suk66")
+
+[node name="Nest16" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4770, 3920)
+rotation = -0.148658
+scale = Vector2(-0.140917, 0.140917)
+texture = ExtResource("33_suk66")
+
+[node name="Nest17" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4797, 3902)
+rotation = -0.558488
+scale = Vector2(-0.104653, 0.104653)
+texture = ExtResource("33_suk66")
+
+[node name="RockAlt14" type="Sprite2D" parent="SetDressing"]
+position = Vector2(7009, 3411)
+rotation = 2.98072
+scale = Vector2(0.258404, 0.258404)
+texture = ExtResource("27_dj3b3")
+
+[node name="RockAlt15" type="Sprite2D" parent="SetDressing"]
+position = Vector2(6969, 3396)
+rotation = -2.88866
+scale = Vector2(0.700003, 0.700003)
+texture = ExtResource("31_cjx6o")
+
+[node name="Crystal7" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4869.58, 4736.35)
+rotation = 0.0608439
+scale = Vector2(0.751323, 0.751323)
+texture = ExtResource("37_m1c75")
+
+[node name="RockAlt36" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4941.58, 4764.35)
+rotation = -0.0144486
+scale = Vector2(0.258404, 0.258404)
+texture = ExtResource("27_dj3b3")
+
+[node name="RockAlt37" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4902.58, 4784.35)
+rotation = 0.177912
+scale = Vector2(0.700003, 0.700003)
+texture = ExtResource("31_cjx6o")
+
+[node name="RockAlt16" type="Sprite2D" parent="SetDressing"]
+position = Vector2(6581, 3368)
+rotation = 2.26318
+scale = Vector2(0.862729, 0.485395)
+texture = ExtResource("30_2x0ki")
+
+[node name="RockAlt17" type="Sprite2D" parent="SetDressing"]
+position = Vector2(6477, 3453)
+rotation = 2.82804
+texture = ExtResource("34_ieqec")
+
+[node name="RockAlt18" type="Sprite2D" parent="SetDressing"]
+position = Vector2(6791, 3919)
+rotation = 2.62629
+scale = Vector2(0.219909, 0.219909)
+texture = ExtResource("28_1884v")
+
+[node name="RockAlt19" type="Sprite2D" parent="SetDressing"]
+position = Vector2(6840, 4084)
+rotation = -1.02002
+scale = Vector2(0.786989, 0.786989)
+texture = ExtResource("29_2skur")
+
+[node name="RockAlt21" type="Sprite2D" parent="SetDressing"]
+position = Vector2(6902, 4014)
+rotation = -0.472269
+scale = Vector2(1.01678, 1.01678)
+texture = ExtResource("30_2x0ki")
+
+[node name="RockAlt20" type="Sprite2D" parent="SetDressing"]
+position = Vector2(6966, 3979)
+rotation = 0.0242028
+texture = ExtResource("34_ieqec")
+
+[node name="GrassMound10" type="Sprite2D" parent="SetDressing"]
+position = Vector2(6597, 3189)
+rotation = 1.13954
+scale = Vector2(0.592584, 0.592584)
+texture = ExtResource("12_7lo6a")
+
+[node name="GrassMound11" type="Sprite2D" parent="SetDressing"]
+position = Vector2(6994, 3871)
+rotation = 4.95685
+scale = Vector2(0.592584, 0.592584)
+texture = ExtResource("12_7lo6a")
+
+[node name="GrassMound12" type="Sprite2D" parent="SetDressing"]
+position = Vector2(7005, 3780)
+rotation = -1.54806
+scale = Vector2(0.284635, 0.284635)
+texture = ExtResource("21_cwftb")
+
+[node name="GrassBlade17" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4340, 2571)
+rotation = 0.285759
+scale = Vector2(0.249468, 0.249468)
+texture = ExtResource("39_m7vn4")
+
+[node name="GrassBlade18" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4289, 2551)
+rotation = -0.0800146
+scale = Vector2(0.319176, 0.319176)
+texture = ExtResource("39_m7vn4")
+
+[node name="GrassBlade19" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4195, 2534)
+rotation = 0.0236039
+scale = Vector2(-0.22295, 0.22295)
+texture = ExtResource("6_6pncg")
+
+[node name="GrassBlade20" type="Sprite2D" parent="SetDressing"]
+position = Vector2(6866, 3729)
+rotation = 0.285759
+scale = Vector2(0.249468, 0.249468)
+texture = ExtResource("39_m7vn4")
+
+[node name="GrassBlade21" type="Sprite2D" parent="SetDressing"]
+position = Vector2(6865, 3786)
+rotation = 1.10158
+scale = Vector2(0.319176, 0.319176)
+texture = ExtResource("39_m7vn4")
+
+[node name="GrassBlade22" type="Sprite2D" parent="SetDressing"]
+position = Vector2(6818, 3683)
+rotation = 0.92037
+scale = Vector2(-0.22295, 0.22295)
+texture = ExtResource("6_6pncg")
+
+[node name="RockAlt24" type="Sprite2D" parent="SetDressing"]
+position = Vector2(6202, 4004)
+rotation = 2.35619
+scale = Vector2(0.48067, 0.48067)
+texture = ExtResource("29_2skur")
+
+[node name="NestCluster" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4608, 4281)
+rotation = 0.0981236
+scale = Vector2(0.117372, 0.117372)
+texture = ExtResource("41_7qgup")
+
+[node name="RockAlt39" type="Sprite2D" parent="SetDressing"]
+position = Vector2(3924, 4449)
+rotation = 0.726263
+texture = ExtResource("31_cjx6o")
+
+[node name="RockAlt25" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4533, 4252)
+rotation = -2.71879
+scale = Vector2(0.303166, 0.303166)
+texture = ExtResource("28_1884v")
+
+[node name="RockAlt26" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4664, 4261)
+rotation = 2.73607
+scale = Vector2(0.27344, 0.27344)
+texture = ExtResource("29_2skur")
+
+[node name="RockAlt29" type="Sprite2D" parent="SetDressing"]
+position = Vector2(5046, 3729)
+rotation = 3.35188
+texture = ExtResource("34_ieqec")
+
+[node name="RockAlt41" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4088, 4040)
+rotation = 2.10575
+scale = Vector2(0.889292, 0.889292)
+texture = ExtResource("30_2x0ki")
+
+[node name="RockAlt40" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4062, 4109)
+rotation = 2.00343
+texture = ExtResource("34_ieqec")
+
+[node name="RockAlt30" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4779, 3811)
+rotation = 2.22061
+scale = Vector2(1.53329, 1.53329)
+texture = ExtResource("34_ieqec")
+
+[node name="RockAlt31" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4980, 3727)
+rotation = 3.19219
+scale = Vector2(0.746323, 0.746323)
+texture = ExtResource("31_cjx6o")
+
+[node name="RockAlt32" type="Sprite2D" parent="SetDressing"]
+position = Vector2(5085, 3791)
+rotation = -2.29774
+scale = Vector2(0.602974, 0.602974)
+texture = ExtResource("29_2skur")
+
+[node name="RockAlt33" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4760, 3859)
+rotation = 2.03989
+scale = Vector2(0.510891, 0.510891)
+texture = ExtResource("30_2x0ki")
+
+[node name="Tree7" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4914, 3847)
+rotation = 0.882252
+scale = Vector2(0.373291, 0.373291)
+texture = ExtResource("14_34e2s")
+
+[node name="RockAlt43" type="Sprite2D" parent="SetDressing"]
+position = Vector2(5332, 4666)
+rotation = 0.321582
+scale = Vector2(0.428818, 0.428818)
+texture = ExtResource("30_2x0ki")
+
+[node name="Crystal8" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4045, 4173)
+rotation = 2.33109
+scale = Vector2(0.743457, 0.743457)
+texture = ExtResource("38_5th3c")
+
+[node name="Crystal9" type="Sprite2D" parent="SetDressing"]
+position = Vector2(3968, 4463)
+rotation = 0.954569
+texture = ExtResource("36_wceyh")
+
+[node name="Crystal10" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4030, 4535)
+rotation = 0.564846
+texture = ExtResource("33_v823p")
+
+[node name="RockAlt42" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4527, 4586)
+rotation = -0.130187
+texture = ExtResource("31_cjx6o")
+
+[node name="RockAlt44" type="Sprite2D" parent="SetDressing"]
+position = Vector2(5276, 4632)
+rotation = 0.42945
+scale = Vector2(0.574796, 0.574796)
+texture = ExtResource("29_2skur")
+
+[node name="Tree8" type="Sprite2D" parent="SetDressing"]
+position = Vector2(5653, 4245)
+rotation = -2.83879
+texture = ExtResource("19_xbm40")
+
+[node name="RockAlt45" type="Sprite2D" parent="SetDressing"]
+position = Vector2(5309, 3990)
+rotation = 3.19242
+scale = Vector2(0.413702, 0.413702)
+texture = ExtResource("29_2skur")
+
+[node name="RockAlt46" type="Sprite2D" parent="SetDressing"]
+position = Vector2(5268, 3985)
+rotation = 2.36777
+texture = ExtResource("31_cjx6o")
+
+[node name="RockAlt47" type="Sprite2D" parent="SetDressing"]
+position = Vector2(5228, 4023)
+rotation = 2.42237
+scale = Vector2(0.574104, 0.574104)
+texture = ExtResource("30_2x0ki")
+
+[node name="GrassMound13" type="Sprite2D" parent="SetDressing"]
+position = Vector2(3821, 3242)
+rotation = 0.458359
+scale = Vector2(0.808035, 0.808035)
+texture = ExtResource("13_qon84")
+
+[node name="GrassMound14" type="Sprite2D" parent="SetDressing"]
+position = Vector2(3904, 3235)
+rotation = 0.0631305
+scale = Vector2(0.49321, 0.49321)
+texture = ExtResource("20_71w5p")
+
+[node name="GrassMound15" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4098, 3259)
+rotation = -2.18676
+scale = Vector2(0.307494, 0.307494)
+texture = ExtResource("21_cwftb")
+
+[node name="Rock20" type="Sprite2D" parent="SetDressing"]
+position = Vector2(3756, 3235)
+texture = ExtResource("9_f7plc")
+
+[node name="Rock21" type="Sprite2D" parent="SetDressing"]
+position = Vector2(3946, 3129)
+rotation = -2.39026
+scale = Vector2(0.499882, 0.499882)
+texture = ExtResource("10_nsbin")
+
+[node name="RockAlt38" type="Sprite2D" parent="SetDressing"]
+position = Vector2(3996, 3141)
+rotation = -2.77679
+scale = Vector2(0.598106, 0.598106)
+texture = ExtResource("34_ieqec")
+
+[node name="RockAlt48" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4047, 3204)
+rotation = -2.00155
+scale = Vector2(0.519107, 0.519107)
+texture = ExtResource("30_2x0ki")
+
+[node name="RockAlt49" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4017, 3694)
+rotation = 1.37496
+scale = Vector2(0.467627, 0.467627)
+texture = ExtResource("29_2skur")
+
+[node name="RockAlt50" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4027, 3626)
+rotation = 1.61743
+scale = Vector2(0.371222, 0.337354)
+texture = ExtResource("28_1884v")
+
+[node name="RockAlt51" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4172, 3468)
+rotation = -1.15366
+scale = Vector2(0.314458, 0.314458)
+texture = ExtResource("27_dj3b3")
+
+[node name="GrassBlade23" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4086, 3362)
+rotation = 0.692591
+scale = Vector2(0.146171, 0.146171)
+texture = ExtResource("39_m7vn4")
+
+[node name="GrassBlade24" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4080, 3340)
+rotation = 0.770764
+scale = Vector2(0.146762, 0.146762)
+texture = ExtResource("6_6pncg")
+
+[node name="GrassBlade25" type="Sprite2D" parent="SetDressing"]
+position = Vector2(4036, 3314)
+rotation = 0.277479
+scale = Vector2(-0.147, 0.147)
+texture = ExtResource("6_6pncg")
+
+[node name="RockAlt39" type="Sprite2D" parent="."]
+position = Vector2(4041, 4581)
+rotation = 0.245531
+scale = Vector2(0.39931, 0.39931)
+texture = ExtResource("28_1884v")
 
 [node name="LevelGeometry" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -21071,7 +21644,7 @@ scale = Vector2(0.8, 0.8)
 [node name="BIGSapPuddle" type="Node2D" parent="LevelGeometry/MushroomRoom3/Sap"]
 position = Vector2(5124, 4250)
 script = ExtResource("13_n667g")
-agents_count = 30
+agents_count = 12
 is_regenerative = true
 SFX_sap_collected = Array[AudioStream]([ExtResource("14_v82md"), ExtResource("15_tprvh"), ExtResource("16_luie1"), ExtResource("17_khdxr")])
 metadata/_edit_horizontal_guides_ = [-49.0]
@@ -21283,7 +21856,7 @@ position = Vector2(2547, 5591)
 position = Vector2(1920, 5501)
 rotation = 0.830394
 script = ExtResource("13_n667g")
-agents_count = 25
+agents_count = 15
 is_regenerative = true
 SFX_sap_collected = Array[AudioStream]([ExtResource("14_v82md"), ExtResource("15_tprvh"), ExtResource("16_luie1"), ExtResource("17_khdxr")])
 metadata/_edit_horizontal_guides_ = [-49.0]
@@ -21321,7 +21894,7 @@ disabled = true
 position = Vector2(1541, 5661)
 rotation = 0.830394
 script = ExtResource("13_n667g")
-agents_count = 25
+agents_count = 15
 is_regenerative = true
 SFX_sap_collected = Array[AudioStream]([ExtResource("14_v82md"), ExtResource("15_tprvh"), ExtResource("16_luie1"), ExtResource("17_khdxr")])
 metadata/_edit_horizontal_guides_ = [-49.0]
@@ -21359,7 +21932,7 @@ disabled = true
 position = Vector2(714, 5753)
 rotation = 0.830394
 script = ExtResource("13_n667g")
-agents_count = 25
+agents_count = 15
 is_regenerative = true
 SFX_sap_collected = Array[AudioStream]([ExtResource("14_v82md"), ExtResource("15_tprvh"), ExtResource("16_luie1"), ExtResource("17_khdxr")])
 metadata/_edit_horizontal_guides_ = [-49.0]
@@ -21396,26 +21969,6 @@ disabled = true
 [node name="SapPuddle1" parent="LevelGeometry/WaspRoom3/Sap" instance=ExtResource("12_a0fwh")]
 position = Vector2(2120, 5060)
 rotation = -2.28345
-
-[node name="SapPuddle2" parent="LevelGeometry/WaspRoom3/Sap" instance=ExtResource("12_a0fwh")]
-position = Vector2(2051, 5649)
-rotation = -0.62575
-
-[node name="SapPuddle3" parent="LevelGeometry/WaspRoom3/Sap" instance=ExtResource("12_a0fwh")]
-position = Vector2(1703, 5567)
-rotation = -4.04473
-
-[node name="SapPuddle4" parent="LevelGeometry/WaspRoom3/Sap" instance=ExtResource("12_a0fwh")]
-position = Vector2(1310, 5951)
-rotation = -6.61609
-
-[node name="SapPuddle5" parent="LevelGeometry/WaspRoom3/Sap" instance=ExtResource("12_a0fwh")]
-position = Vector2(887, 5778)
-rotation = -4.81823
-
-[node name="SapPuddle6" parent="LevelGeometry/WaspRoom3/Sap" instance=ExtResource("12_a0fwh")]
-position = Vector2(715, 5216)
-rotation = -4.01711
 
 [node name="Mushrooms" type="Node2D" parent="LevelGeometry/WaspRoom3"]
 
@@ -21529,10 +22082,6 @@ rotation = -4.06717
 
 [node name="Sap" type="Node2D" parent="LevelGeometry/WaspRoom4"]
 
-[node name="SapPuddle" parent="LevelGeometry/WaspRoom4/Sap" instance=ExtResource("12_a0fwh")]
-position = Vector2(260, 4765)
-rotation = -3.15168
-
 [node name="SapPuddle2" parent="LevelGeometry/WaspRoom4/Sap" instance=ExtResource("12_a0fwh")]
 position = Vector2(101, 4921)
 rotation = -5.88038
@@ -21542,16 +22091,8 @@ position = Vector2(431, 4993)
 rotation = -6.11418
 
 [node name="SapPuddle4" parent="LevelGeometry/WaspRoom4/Sap" instance=ExtResource("12_a0fwh")]
-position = Vector2(121, 4428)
-rotation = -3.25046
-
-[node name="SapPuddle5" parent="LevelGeometry/WaspRoom4/Sap" instance=ExtResource("12_a0fwh")]
-position = Vector2(487, 4544)
-rotation = -1.75117
-
-[node name="SapPuddle6" parent="LevelGeometry/WaspRoom4/Sap" instance=ExtResource("12_a0fwh")]
-position = Vector2(696, 4799)
-rotation = -2.5755
+position = Vector2(-2, 4567)
+rotation = -4.77476
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("11_exrt4")]
 
@@ -21610,16 +22151,6 @@ text = "Contract
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Motherlode" type="Label" parent="LabelsPlaceholder"]
-offset_left = 4990.0
-offset_top = 4072.0
-offset_right = 5104.0
-offset_bottom = 4121.0
-scale = Vector2(2, 2)
-text = "Motherlode"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Assemble" type="Label" parent="LabelsPlaceholder"]
 offset_left = 4261.0
 offset_top = 4368.0
@@ -21640,16 +22171,6 @@ text = "Locked"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Predator" type="Label" parent="LabelsPlaceholder"]
-offset_left = 4810.0
-offset_top = 3828.0
-offset_right = 4924.0
-offset_bottom = 3877.0
-scale = Vector2(2, 2)
-text = "Predator"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="WordCloudTriggers" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
@@ -21661,7 +22182,7 @@ metadata/_edit_lock_ = true
 
 [node name="AloneTrigger" parent="WordCloudTriggers" instance=ExtResource("28_uy3l0")]
 position = Vector2(935, 1816)
-world_list = Array[String](["alone?", "lonely", "empty", "lost?", "guardian"])
+world_list = Array[String](["alone?", "lonely", "empty", "lost?"])
 
 [node name="CollisionShape2D" parent="WordCloudTriggers/AloneTrigger" index="0"]
 shape = SubResource("CircleShape2D_8uvde")
@@ -21699,7 +22220,7 @@ shape = SubResource("CircleShape2D_cjg7f")
 
 [node name="SporesTrigger" parent="WordCloudTriggers" instance=ExtResource("28_uy3l0")]
 position = Vector2(4732, 2546)
-world_list = Array[String](["spores", "toxic", "poison", "hurt", "aird"])
+world_list = Array[String](["spores", "toxic", "air", "poison", "hurt"])
 
 [node name="CollisionShape2D" parent="WordCloudTriggers/SporesTrigger" index="0"]
 position = Vector2(2, -20)
@@ -21707,7 +22228,7 @@ shape = SubResource("CircleShape2D_luwyw")
 
 [node name="SapTrigger" parent="WordCloudTriggers" instance=ExtResource("28_uy3l0")]
 position = Vector2(5346, 2604)
-world_list = Array[String](["sap", "friends!", "stuck?", "goop", "free", "join"])
+world_list = Array[String](["friends!", "stuck?", "goop", "sap", "free"])
 
 [node name="CollisionShape2D" parent="WordCloudTriggers/SapTrigger" index="0"]
 shape = SubResource("CircleShape2D_cxcrm")
@@ -21718,6 +22239,20 @@ world_list = Array[String](["tight", "narrow", "danger", "close", "clump", "clus
 
 [node name="CollisionShape2D" parent="WordCloudTriggers/ContractTrigger" index="0"]
 shape = SubResource("CircleShape2D_gb31m")
+
+[node name="PredatorTrigger" parent="WordCloudTriggers" instance=ExtResource("28_uy3l0")]
+position = Vector2(4925, 3830)
+world_list = Array[String](["fruit?", "bulb?", "flower?", "seed", "nest", "hive", "...", "", "...", "", "predator"])
+
+[node name="CollisionShape2D" parent="WordCloudTriggers/PredatorTrigger" index="0"]
+shape = SubResource("CircleShape2D_3uk5g")
+
+[node name="MotherlodeTrigger" parent="WordCloudTriggers" instance=ExtResource("28_uy3l0")]
+position = Vector2(5093, 4190)
+world_list = Array[String](["sap", "big", "huge", "friends", "party", "", "motherlode"])
+
+[node name="CollisionShape2D" parent="WordCloudTriggers/MotherlodeTrigger" index="0"]
+shape = SubResource("CircleShape2D_yty8v")
 
 [connection signal="body_entered" from="LevelGeometry/MushroomRoom3/Sap/BIGSapPuddle/Area2D" to="LevelGeometry/MushroomRoom3/Sap/BIGSapPuddle" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="LevelGeometry/WaspRoom1/Sap/BIGSapPuddle/Area2D" to="LevelGeometry/WaspRoom1/Sap/BIGSapPuddle" method="_on_area_2d_body_entered"]
@@ -21733,3 +22268,5 @@ shape = SubResource("CircleShape2D_gb31m")
 [editable path="WordCloudTriggers/SporesTrigger"]
 [editable path="WordCloudTriggers/SapTrigger"]
 [editable path="WordCloudTriggers/ContractTrigger"]
+[editable path="WordCloudTriggers/PredatorTrigger"]
+[editable path="WordCloudTriggers/MotherlodeTrigger"]

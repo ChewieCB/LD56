@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwcwoputkkqi6"
-path="res://.godot/imported/nest_drop_2.png-dd41824e2b04a7736f22d4a81bae161d.ctex"
+uid="uid://b4pp0t1ljqyhi"
+path="res://.godot/imported/crystal_4.png-a28b276ca7ddce93602c9b3872fc6f69.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/environment_assets/nest_drop_2.png"
-dest_files=["res://.godot/imported/nest_drop_2.png-dd41824e2b04a7736f22d4a81bae161d.ctex"]
+source_file="res://assets/sprite/env/finalk/crystal_4.png"
+dest_files=["res://.godot/imported/crystal_4.png-a28b276ca7ddce93602c9b3872fc6f69.ctex"]
 
 [params]
 
