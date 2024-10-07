@@ -2,6 +2,7 @@ extends Node2D
 class_name SapPuddle
 
 @export var agents_count: int = 5
+@export var regen_time: float = 30.0
 
 @export var SFX_sap_collected: Array[AudioStream]
 
@@ -37,14 +38,14 @@ func regenerate() -> void:
 		puddle_mesh,
 		"scale:y",
 		1,
-		4.0
+		regen_time
 	).set_trans(Tween.TRANS_SINE)
 	tween.set_parallel()
 	tween.tween_property(
 		puddle_mesh,
 		"scale:x",
 		1,
-		4.0
+		regen_time
 	).set_trans(Tween.TRANS_LINEAR)
 	tween.chain()
 	for marker in agent_markers_node.get_children():
@@ -53,14 +54,14 @@ func regenerate() -> void:
 			marker_sprite,
 			"modulate",
 			Color(0.31, 0.31, 0.31, 1),
-			0.6
+			0.3
 		).set_trans(Tween.TRANS_LINEAR)
 		tween.set_parallel()
 		tween.tween_property(
 			marker_sprite,
 			"position",
 			marker_sprite.position - Vector2.UP.rotated(self.rotation) * 4,
-			0.6
+			0.4
 		).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
 	tween.tween_callback(
 		func(): 
