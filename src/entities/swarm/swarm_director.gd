@@ -42,7 +42,7 @@ var active_death_sfx_players: Array[AudioStreamPlayer]
 @onready var target: CharacterBody2D = $TargetMarker
 @onready var target_sprite: Sprite2D = $TargetMarker/Sprite2D
 @onready var centroid: Marker2D = $SwarmCentroidMarker
-@onready var debug_status_sprite: Sprite2D = $SwarmCentroidMarker/DEBUGStatus
+@onready var debug_status_sprite: Sprite2D = $SwarmCentroidMarker/Sprite2D
 @onready var audio_2d_listener: AudioListener2D = $AudioListener2D
 
 var swarm_agents: Array:
