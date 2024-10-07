@@ -154,9 +154,9 @@ func get_nav_path_for_swarm_agents(_delta: float) -> void:
 		agent.target_path = NavigationServer2D.map_get_path(nav_map, from_pos, to_pos, true)
 
 
-func add_agent(new_position: Vector2 = centroid.position) -> SwarmAgent:
+func add_agent(new_position: Vector2 = centroid.global_position) -> SwarmAgent:
 	var new_agent = swarm_agent_scene.instantiate()
-	new_agent.position = new_position
+	new_agent.position = to_local(new_position)
 	new_agent.target = target
 	
 	new_agent.died.connect(func(agent):

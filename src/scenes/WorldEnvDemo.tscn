@@ -1,4 +1,4 @@
-[gd_scene load_steps=291 format=3 uid="uid://dkbul75tbkjw2"]
+[gd_scene load_steps=292 format=3 uid="uid://dkbul75tbkjw2"]
 
 [ext_resource type="PackedScene" uid="uid://naoexqroboiq" path="res://src/entities/camera/FollowCamera.tscn" id="1_ia4y1"]
 [ext_resource type="Script" path="res://addons/rmsmartshape/shapes/shape_closed.gd" id="1_ltkcd"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://by45v52dchtht" path="res://src/scenes/BGParallax.tscn" id="14_tcfd0"]
 [ext_resource type="PackedScene" uid="uid://bm3vo4ufjrs7q" path="res://src/entities/enemies/basic_enemy/BasicEnemy.tscn" id="16_atsfw"]
 [ext_resource type="PackedScene" uid="uid://y766oblqkpts" path="res://src/entities/obstacle/core/Obstacle.tscn" id="17_vi1ft"]
+[ext_resource type="PackedScene" uid="uid://clc3hhclkd2ay" path="res://src/entities/sap_puddle/SapPuddle.tscn" id="18_b6g5n"]
 [ext_resource type="PackedScene" uid="uid://dosbbm6uk86ho" path="res://src/ui/game_ui/GameUI.tscn" id="20_po3vr"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5q2bw"]
@@ -103,7 +104,7 @@ properties = SubResource("Resource_bg487")
 
 [sub_resource type="Resource" id="Resource_ebl1i"]
 script = ExtResource("2_2q1xi")
-texture_idx = 0
+texture_idx = 3
 flip = false
 width = 1.0
 
@@ -1995,7 +1996,38 @@ swarm_director = NodePath("../SwarmDirector")
 [node name="SwarmDirector" parent="." instance=ExtResource("8_2tduy")]
 texture_repeat = 2
 position = Vector2(715, 246)
-swarm_agent_count = 35
+swarm_agent_count = 5
+
+[node name="SapPuddle" parent="." instance=ExtResource("18_b6g5n")]
+z_index = 1
+position = Vector2(378, 483)
+rotation = 0.117211
+
+[node name="SapPuddle2" parent="." instance=ExtResource("18_b6g5n")]
+z_index = 1
+position = Vector2(568, 516)
+rotation = 0.117211
+
+[node name="SapPuddle3" parent="." instance=ExtResource("18_b6g5n")]
+z_index = 1
+position = Vector2(709, 564)
+rotation = 0.240003
+
+[node name="SapPuddle4" parent="." instance=ExtResource("18_b6g5n")]
+z_index = 1
+position = Vector2(378, 90)
+rotation = 2.78447
+
+[node name="SapPuddle5" parent="." instance=ExtResource("18_b6g5n")]
+z_index = 1
+position = Vector2(548, 61)
+rotation = 3.08267
+
+[node name="SapPuddle6" parent="." instance=ExtResource("18_b6g5n")]
+z_index = 1
+position = Vector2(779, 106)
+rotation = -2.80168
+scale = Vector2(1, 1)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 visible = false
