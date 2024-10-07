@@ -62,18 +62,18 @@ func _ready() -> void:
 	# Wait for important nodes to register themselves to GameManagers
 	await get_tree().physics_frame
 	await get_tree().physics_frame
-	
+
 	current_health = max_health
 	spawn_pos = global_position
 	detect_collision_shape.shape.radius = detect_range
 	detect_area.position = Vector2(detect_range * 0.5, 0)
 	los_raycast.target_position = Vector2(range_to_dash, 0)
-	
+
 	if SFX_idle:
 		idle_player.stream = SFX_idle
-	
+
 	GameManager.swarm_director.swarm_status_changed.connect(check_swarm_status)
-	
+
 	call_deferred("actor_setup")
 
 
@@ -156,10 +156,10 @@ func get_new_wander_pos():
 
 func _on_track_state_entered() -> void:
 	targeted_swarm_agent = GameManager.swarm_director.get_furthest_agent()
-	
+
 	if not aggro_sfx_player:
 		aggro_sfx_player = GlobalSFX.play_sfx_shuffled(SFX_aggro)
-	
+
 	if targeted_swarm_agent == null:
 		state_chart.send_event("stop_chase")
 		return
@@ -188,7 +188,7 @@ func _on_track_state_physics_processing(delta: float) -> void:
 
 
 func _on_track_state_exited() -> void:
-	if aggro_sfx_player:
+	if aggro_sfx_player and is_instance_valid(aggro_sfx_player):
 		var tween = get_tree().create_tween()
 		tween.tween_property(
 			aggro_sfx_player,
@@ -296,5 +296,3 @@ func _on_attacking_state_entered() -> void:
 
 func _on_dead_state_entered() -> void:
 	GlobalSFX.play_sfx_shuffled(SFX_death)
-
-
