@@ -22,7 +22,7 @@ func play_sfx_shuffled(
 	source_arr: Array[AudioStream], override_bus: String = "", randomize_pitch: bool = false
 ) -> AudioStreamPlayer:
 	if source_arr.is_empty():
-		push_error("No audio streams in sfx array!")
+		push_warning("No audio streams in sfx array!")
 		return
 	var shuffled_arr = source_arr.duplicate()
 	shuffled_arr.shuffle()

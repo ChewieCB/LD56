@@ -60,8 +60,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 20
 text = "Statistics:
 Time: {0}
-Faes lost: {1}
-Enemy defeated: {2}"
+Faes lost: {1}"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -145,8 +144,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 20
 text = "Statistics:
 Time: {0}
-Faes lost: {1}
-Enemy defeated: {2}"
+Faes lost: {1}"
 horizontal_alignment = 1
 vertical_alignment = 1
 
