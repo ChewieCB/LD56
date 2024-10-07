@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://byj1y3wrwtdtq"]
+[gd_scene load_steps=4 format=3 uid="uid://byj1y3wrwtdtq"]
 
 [ext_resource type="PackedScene" uid="uid://biqm56x6ewbmo" path="res://src/ui/setting_ui/SettingUI.tscn" id="1_oj67h"]
 [ext_resource type="Script" path="res://src/ui/pause_ui/pause_ui.gd" id="1_y22bm"]
+[ext_resource type="Texture2D" uid="uid://d3x86mfebqrp7" path="res://addons/kenney_fantasy_ui_border/Border/panel-border-005.png" id="2_8kgdi"]
 
 [node name="PauseUI" type="Control"]
 process_mode = 3
@@ -23,20 +24,20 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.298039)
 
 [node name="PauseOptionBG" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(500, 300)
+custom_minimum_size = Vector2(400, 300)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -250.0
+offset_left = -200.0
 offset_top = -150.0
-offset_right = 250.0
+offset_right = 200.0
 offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.478431, 0.478431, 0.478431, 0.533333)
+color = Color(0.503906, 0.199825, 0, 0.843137)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PauseOptionBG"]
 layout_mode = 1
@@ -51,30 +52,51 @@ offset_right = 81.0
 offset_bottom = 105.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 10
+
+[node name="RetryButton" type="Button" parent="PauseOptionBG/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Retry"
 
 [node name="SettingButton" type="Button" parent="PauseOptionBG/VBoxContainer"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 28
 text = "Settings"
 
 [node name="TitleScreenButton" type="Button" parent="PauseOptionBG/VBoxContainer"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 28
 text = "Title screen"
 
 [node name="ExitButton" type="Button" parent="PauseOptionBG/VBoxContainer"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 28
 text = "Quit game"
+
+[node name="Border" type="NinePatchRect" parent="PauseOptionBG"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8kgdi")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
 
 [node name="SettingUI" parent="." instance=ExtResource("1_oj67h")]
 visible = false
 layout_mode = 1
 
+[connection signal="mouse_entered" from="PauseOptionBG/VBoxContainer/RetryButton" to="." method="play_ui_hover_sound"]
+[connection signal="pressed" from="PauseOptionBG/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
 [connection signal="mouse_entered" from="PauseOptionBG/VBoxContainer/SettingButton" to="." method="play_ui_hover_sound"]
 [connection signal="pressed" from="PauseOptionBG/VBoxContainer/SettingButton" to="." method="_on_setting_button_pressed"]
 [connection signal="mouse_entered" from="PauseOptionBG/VBoxContainer/TitleScreenButton" to="." method="play_ui_hover_sound"]
