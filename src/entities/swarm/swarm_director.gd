@@ -22,6 +22,7 @@ var active_death_sfx_players: Array[AudioStreamPlayer]
 
 @export var state_chart: StateChart
 @export var swarm_agent_scene: PackedScene
+var invuln_flag: bool = true
 @export var swarm_agent_count: int = 0:
 	set(value):
 		swarm_agent_count = value
@@ -50,7 +51,9 @@ var swarm_agents: Array:
 		swarm_agents = value
 		if swarm_agents.size() != swarm_agent_count:
 			swarm_agent_count = swarm_agents.size()
-			GameManager.game_ui.update_agent_count_ui()
+		GameManager.game_ui.update_agent_count_ui()
+		if swarm_agent_count == 0 and not invuln_flag:
+			GameManager.swarm_director.check_game_over()
 var removed_agent_debug: Vector2
 var is_fire = false # Is on fire element, scare away predators
 var navigation_initialized = false
@@ -87,11 +90,10 @@ func _ready() -> void:
 		active_movement_sfx_player = SoundManager.play_sound(SFX_swarm_move)
 		active_movement_sfx_player.volume_db = 0
 	
-	for _i in range(swarm_agent_count):
-		await get_tree().create_timer(swarm_agent_count / 100).timeout
-		add_agent()
-	
-	state_chart.send_event("enable_idle")
+	if swarm_agent_count > 0:
+		for _i in range(swarm_agent_count):
+			await get_tree().create_timer(swarm_agent_count / 100).timeout
+			add_agent()
 
 	await get_tree().physics_frame
 	for obstacle in get_tree().get_nodes_in_group("obstacles"):
@@ -104,6 +106,7 @@ func actor_setup():
 	await get_tree().physics_frame
 	await get_tree().physics_frame
 	navigation_initialized = true
+	state_chart.send_event("enable_idle")
 
 
 func _input(event: InputEvent) -> void:

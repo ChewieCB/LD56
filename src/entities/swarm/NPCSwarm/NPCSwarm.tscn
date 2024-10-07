@@ -1,20 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://duljiwq73wyfy"]
+[gd_scene load_steps=7 format=3 uid="uid://duljiwq73wyfy"]
 
 [ext_resource type="Script" path="res://src/entities/swarm/NPCSwarm/npc_swarm.gd" id="1_v1l6d"]
 [ext_resource type="PackedScene" uid="uid://vuj168p2lkjx" path="res://src/entities/swarm/SwarmAgent/SwarmAgent.tscn" id="13_ualb1"]
 [ext_resource type="Texture2D" uid="uid://dj7feymuphnh2" path="res://assets/sprite/swarm/swarm_sprite_2.png" id="14_flj6a"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="15_ckild"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="16_v40q1"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="17_y2y48"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="18_6k3i2"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="19_qrvue"]
 [ext_resource type="Texture2D" uid="uid://bvhed0lxktwe0" path="res://assets/sprite/placeholder/circle.png" id="20_433c3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_unkdd"]
 
-[node name="NPCSwarm" type="Node2D" node_paths=PackedStringArray("state_chart")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ums1y"]
+radius = 200.0
+
+[node name="NPCSwarm" type="Node2D" node_paths=PackedStringArray("gather_area_collider")]
 script = ExtResource("1_v1l6d")
-state_chart = NodePath("StateChart")
+gather_area_collider = NodePath("GatherArea/CollisionShape2D")
 swarm_agent_scene = ExtResource("13_ualb1")
 
 [node name="TargetMarker" type="CharacterBody2D" parent="."]
@@ -28,98 +26,6 @@ texture = ExtResource("14_flj6a")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetMarker"]
 shape = SubResource("CircleShape2D_unkdd")
 
-[node name="StateChart" type="Node" parent="."]
-script = ExtResource("15_ckild")
-
-[node name="Root" type="Node" parent="StateChart"]
-script = ExtResource("16_v40q1")
-
-[node name="Movement" type="Node" parent="StateChart/Root"]
-script = ExtResource("17_y2y48")
-initial_state = NodePath("Disabled")
-
-[node name="Idle" type="Node" parent="StateChart/Root/Movement"]
-script = ExtResource("18_6k3i2")
-
-[node name="toMoving" type="Node" parent="StateChart/Root/Movement/Idle"]
-script = ExtResource("19_qrvue")
-to = NodePath("../../Moving")
-event = &"start_moving"
-delay_in_seconds = "0.0"
-
-[node name="Moving" type="Node" parent="StateChart/Root/Movement"]
-script = ExtResource("18_6k3i2")
-
-[node name="toIdle" type="Node" parent="StateChart/Root/Movement/Moving"]
-script = ExtResource("19_qrvue")
-to = NodePath("../../Idle")
-event = &"stop_moving"
-delay_in_seconds = "0.0"
-
-[node name="Disabled" type="Node" parent="StateChart/Root/Movement"]
-script = ExtResource("18_6k3i2")
-
-[node name="toIdle" type="Node" parent="StateChart/Root/Movement/Disabled"]
-script = ExtResource("19_qrvue")
-to = NodePath("../../Idle")
-event = &"enable_idle"
-delay_in_seconds = "0.0"
-
-[node name="toMoving" type="Node" parent="StateChart/Root/Movement/Disabled"]
-script = ExtResource("19_qrvue")
-to = NodePath("../../Moving")
-event = &"enable_moving"
-delay_in_seconds = "0.0"
-
-[node name="Distribution" type="Node" parent="StateChart/Root"]
-script = ExtResource("17_y2y48")
-initial_state = NodePath("Normal")
-
-[node name="Normal" type="Node" parent="StateChart/Root/Distribution"]
-script = ExtResource("18_6k3i2")
-
-[node name="toClose" type="Node" parent="StateChart/Root/Distribution/Normal"]
-script = ExtResource("19_qrvue")
-to = NodePath("../../Close")
-event = &"clump_together"
-delay_in_seconds = "0.0"
-
-[node name="toFar" type="Node" parent="StateChart/Root/Distribution/Normal"]
-script = ExtResource("19_qrvue")
-to = NodePath("../../Far")
-event = &"spread_out"
-delay_in_seconds = "0.0"
-
-[node name="Close" type="Node" parent="StateChart/Root/Distribution"]
-script = ExtResource("18_6k3i2")
-
-[node name="toNormal" type="Node" parent="StateChart/Root/Distribution/Close"]
-script = ExtResource("19_qrvue")
-to = NodePath("../../Normal")
-event = &"reset_distribution"
-delay_in_seconds = "0.0"
-
-[node name="toFar" type="Node" parent="StateChart/Root/Distribution/Close"]
-script = ExtResource("19_qrvue")
-to = NodePath("../../Far")
-event = &"spread_out"
-delay_in_seconds = "0.0"
-
-[node name="Far" type="Node" parent="StateChart/Root/Distribution"]
-script = ExtResource("18_6k3i2")
-
-[node name="toNormal" type="Node" parent="StateChart/Root/Distribution/Far"]
-script = ExtResource("19_qrvue")
-to = NodePath("../../Normal")
-event = &"reset_distribution"
-delay_in_seconds = "0.0"
-
-[node name="toClose" type="Node" parent="StateChart/Root/Distribution/Far"]
-script = ExtResource("19_qrvue")
-to = NodePath("../../Close")
-event = &"clump_together"
-delay_in_seconds = "0.0"
-
 [node name="SwarmCentroidMarker" type="Marker2D" parent="."]
 
 [node name="DEBUGStatus" type="Sprite2D" parent="SwarmCentroidMarker"]
@@ -131,14 +37,12 @@ texture = ExtResource("20_433c3")
 
 [node name="SwarmAudio2D" type="AudioStreamPlayer2D" parent="."]
 
-[connection signal="state_entered" from="StateChart/Root/Movement/Idle" to="." method="_on_idle_state_entered"]
-[connection signal="state_physics_processing" from="StateChart/Root/Movement/Idle" to="." method="_on_idle_state_physics_processing"]
-[connection signal="state_entered" from="StateChart/Root/Movement/Moving" to="." method="_on_moving_state_entered"]
-[connection signal="state_exited" from="StateChart/Root/Movement/Moving" to="." method="_on_moving_state_exited"]
-[connection signal="state_physics_processing" from="StateChart/Root/Movement/Moving" to="." method="_on_moving_state_physics_processing"]
-[connection signal="state_entered" from="StateChart/Root/Movement/Disabled" to="." method="_on_disabled_state_entered"]
-[connection signal="state_entered" from="StateChart/Root/Distribution/Normal" to="." method="_on_distribution_normal_state_entered"]
-[connection signal="state_entered" from="StateChart/Root/Distribution/Close" to="." method="_on_distribution_close_state_entered"]
-[connection signal="state_exited" from="StateChart/Root/Distribution/Close" to="." method="_on_distribution_close_state_exited"]
-[connection signal="state_entered" from="StateChart/Root/Distribution/Far" to="." method="_on_distribution_far_state_entered"]
-[connection signal="state_exited" from="StateChart/Root/Distribution/Far" to="." method="_on_distribution_far_state_exited"]
+[node name="GatherArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GatherArea"]
+shape = SubResource("CircleShape2D_ums1y")
+
+[connection signal="body_entered" from="GatherArea" to="." method="_on_gather_area_body_entered"]
+[connection signal="body_exited" from="GatherArea" to="." method="_on_gather_area_body_exited"]

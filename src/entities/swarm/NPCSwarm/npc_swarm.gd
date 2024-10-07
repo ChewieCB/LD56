@@ -11,10 +11,7 @@ signal swarm_status_changed
 			for agent in swarm_agents:
 				if agent.swarm_id != swarm_id:
 					agent.swarm_id = swarm_id
-@export var swarm_join_range: float = 200:
-	set(value):
-		swarm_join_range = value
-		# TODO - add an area 2d trigger and update the range with this
+@export var swarm_join_range: float = 200
 # SFX
 @export var SFX_agent_spawn: Array[AudioStream]
 @export var SFX_agent_hurt: Array[AudioStream]
@@ -29,7 +26,7 @@ var max_simultaneous_sfx: int = 100
 var active_hurt_sfx_players: Array[AudioStreamPlayer]
 var active_death_sfx_players: Array[AudioStreamPlayer]
 
-@export var state_chart: StateChart
+@export var gather_area_collider: CollisionShape2D
 @export var swarm_agent_scene: PackedScene
 @export var swarm_agent_count: int = 0:
 	set(value):
@@ -91,6 +88,7 @@ func _ready() -> void:
 	randomize()
 	target.visible = false
 	debug_status_sprite.self_modulate = Color.GREEN
+	gather_area_collider.shape.radius = swarm_join_range
 	
 	swarm_audio_player.play()
 	
@@ -98,8 +96,6 @@ func _ready() -> void:
 		var _agent = add_agent()
 		_agent.sprite.modulate = Color.PURPLE
 	
-	state_chart.send_event("enable_idle")
-
 	await get_tree().physics_frame
 	call_deferred("actor_setup")
 
@@ -130,13 +126,11 @@ func _physics_process(delta: float) -> void:
 	
 	swarm_audio_player.global_position = centroid.global_position
 	
-	if Input.is_action_just_pressed("DEBUG_release_npc_swarm"):
-		var test0 = self.target.global_position.distance_to(swarm_director.target.global_position)
-		print(test0)
-		if self.target.global_position.distance_to(
-			swarm_director.target.global_position
-		) < swarm_join_range:
-			release_all_agents_to_director()
+	#if Input.is_action_just_pressed("DEBUG_release_npc_swarm"):
+		#if self.target.global_position.distance_to(
+			#swarm_director.target.global_position
+		#) < swarm_join_range:
+			#release_all_agents_to_director()
 
 
 func get_nav_path_for_swarm_agents(_delta: float) -> void:
@@ -156,6 +150,8 @@ func add_agent(new_position: Vector2 = centroid.global_position) -> SwarmAgent:
 	new_agent.swarm_id = swarm_id
 	new_agent.target = target
 	
+	new_agent.collision_layer = int(pow(2, 9 - 1))
+	
 	new_agent.died.connect(func(_agent):
 		GlobalSFX.play_batched_sfx(
 			SFX_agent_death, active_death_sfx_players,
@@ -164,6 +160,7 @@ func add_agent(new_position: Vector2 = centroid.global_position) -> SwarmAgent:
 	)
 	
 	call_deferred("add_child", new_agent)
+	call_deferred("set_agent_color", new_agent, Color.PURPLE)
 
 	if new_agent not in swarm_agents:
 		swarm_agents.append(new_agent)
@@ -173,6 +170,20 @@ func add_agent(new_position: Vector2 = centroid.global_position) -> SwarmAgent:
 		new_agent.set(key, current_swarm_attributes[key])
 	
 	return new_agent
+
+
+func set_agent_color(agent: SwarmAgent, color: Color) -> void:
+	agent.sprite.modulate = color
+
+
+func set_agent_close(agent: SwarmAgent):
+	for key in SWARM_ATTRIBUTES_CLOSE.keys():
+		agent.set(key, SWARM_ATTRIBUTES_CLOSE[key])
+
+
+func set_agent_normal(agent: SwarmAgent):
+	for key in SWARM_ATTRIBUTES_NORMAL.keys():
+		agent.set(key, SWARM_ATTRIBUTES_NORMAL[key])
 
 
 func remove_agent(agent: SwarmAgent) -> void:
@@ -194,6 +205,8 @@ func release_all_agents_to_director():
 		swarm_director.swarm_agents.append(agent)
 		agent.target = swarm_director.target
 		agent.sprite.modulate = Color(1, 1, 1)
+		agent.collision_layer = int(pow(2, 2 - 1))
+		set_agent_normal(agent)
 	
 	swarm_agents = []
 	swarm_agent_count = 0
@@ -224,3 +237,8 @@ func _on_distribution_far_state_exited() -> void:
 
 func _on_disabled_state_entered() -> void:
 	target_sprite.modulate = Color.RED
+
+
+func _on_gather_area_body_entered(body: Node2D) -> void:
+	if body.get_parent() is SwarmDirector:
+		release_all_agents_to_director()
