@@ -19,8 +19,7 @@ func _ready() -> void:
 func show_victory_screen():
 	victory_level_stats_label.text = victory_level_stats_label.text.format([
 		convert_seconds_to_time_format(GameManager.level_timer),
-		GameManager.faes_killed,
-		GameManager.enemy_defeated])
+		GameManager.faes_killed])
 	if not GameManager.check_if_next_level_exist():
 		next_level_button.visible = false
 	victory_screen.visible = true
@@ -28,8 +27,7 @@ func show_victory_screen():
 func show_game_over_screen():
 	gameover_level_stats_label.text = gameover_level_stats_label.text.format([
 		convert_seconds_to_time_format(GameManager.level_timer),
-		GameManager.faes_killed,
-		GameManager.enemy_defeated])
+		GameManager.faes_killed])
 	game_over_screen.visible = true
 
 
