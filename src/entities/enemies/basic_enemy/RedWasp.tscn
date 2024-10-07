@@ -1,27 +1,28 @@
-[gd_scene load_steps=30 format=3 uid="uid://bm3vo4ufjrs7q"]
+[gd_scene load_steps=31 format=3 uid="uid://dj0hbiapwuolw"]
 
-[ext_resource type="Script" path="res://src/entities/enemies/basic_enemy/enemy.gd" id="1_phume"]
-[ext_resource type="AudioStream" uid="uid://cejolwltt0k2w" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_buzz.wav" id="2_t5eu1"]
-[ext_resource type="AudioStream" uid="uid://d0nhxm6ohhowo" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_attack.mp3" id="3_78b0e"]
-[ext_resource type="AudioStream" uid="uid://c6uydg1kdt5ow" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_aggro1.mp3" id="4_u1f3n"]
-[ext_resource type="AudioStream" uid="uid://c2plaei2vj6is" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_die.mp3" id="5_td3ij"]
-[ext_resource type="Texture2D" uid="uid://bfodump4jvah5" path="res://assets/sprite/enemy/green_wasp.png" id="6_3qpni"]
-[ext_resource type="Texture2D" uid="uid://bqaahcg5nubc7" path="res://assets/sprite/enemy/green-wasp-part/Bug_1-1.png" id="7_2qill"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="7_3o7c6"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="8_af0kd"]
-[ext_resource type="Texture2D" uid="uid://dndx74tc4aog1" path="res://assets/sprite/enemy/green-wasp-part/Bug_1-2.png" id="8_cyqbe"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="9_og2hm"]
-[ext_resource type="Texture2D" uid="uid://d4fl4f6qgmnd" path="res://assets/sprite/enemy/green-wasp-part/Bug_1-3.png" id="9_qpq4w"]
-[ext_resource type="Texture2D" uid="uid://5qbsuoh02f87" path="res://assets/sprite/enemy/green-wasp-part/Bug_1-4.png" id="10_gr6i4"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="10_kwsrt"]
-[ext_resource type="Texture2D" uid="uid://bajhr7wgrqtr1" path="res://assets/sprite/enemy/green-wasp-part/Bug_1-5.png" id="11_5ud26"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="11_ck2ri"]
-[ext_resource type="AudioStream" uid="uid://bedyrnfp4a4na" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_idle_loop.mp3" id="12_80ivt"]
-[ext_resource type="Texture2D" uid="uid://c8t8h71v60xa2" path="res://assets/sprite/enemy/green-wasp-part/Bug_1-6.png" id="12_y0n80"]
-[ext_resource type="Texture2D" uid="uid://bbdavvcbufbuo" path="res://assets/sprite/enemy/green-wasp-part/Bug_1-7.png" id="13_08dmt"]
-[ext_resource type="Texture2D" uid="uid://dvlbsqc4ec8x6" path="res://assets/sprite/enemy/green-wasp-part/Bug_1-8.png" id="14_jus7k"]
-[ext_resource type="Texture2D" uid="uid://cmjs6oh7u07dm" path="res://assets/sprite/enemy/green-wasp-part/Bug_1-9.png" id="15_ylfm8"]
-[ext_resource type="Texture2D" uid="uid://tg7cccalt3a3" path="res://assets/sprite/enemy/green-wasp-part/Bug_1-11.png" id="17_xbmvq"]
+[ext_resource type="Script" path="res://src/entities/enemies/basic_enemy/enemy.gd" id="1_h1loq"]
+[ext_resource type="AudioStream" uid="uid://cejolwltt0k2w" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_buzz.wav" id="2_kfb0b"]
+[ext_resource type="AudioStream" uid="uid://d0nhxm6ohhowo" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_attack.mp3" id="3_t7uc6"]
+[ext_resource type="AudioStream" uid="uid://c6uydg1kdt5ow" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_aggro1.mp3" id="4_3xsju"]
+[ext_resource type="AudioStream" uid="uid://c2plaei2vj6is" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_die.mp3" id="5_01yjj"]
+[ext_resource type="Texture2D" uid="uid://sr7codqc2kkl" path="res://assets/sprite/enemy/red_wasp.png" id="6_ow6y5"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="7_uuj1k"]
+[ext_resource type="Texture2D" uid="uid://b8hoj06kb2njg" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-1.png" id="7_x5gsg"]
+[ext_resource type="Texture2D" uid="uid://bm6ehydhjaxrt" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-2.png" id="8_lw3iy"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="8_sw82b"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="9_2am5w"]
+[ext_resource type="Texture2D" uid="uid://boo3kabghtxg4" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-3.png" id="9_i15e3"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="10_amemc"]
+[ext_resource type="Texture2D" uid="uid://da3tgb1ypp4pk" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-4.png" id="10_hbdo5"]
+[ext_resource type="Texture2D" uid="uid://5ujpbuh2ap0p" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-5.png" id="11_rsmot"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="11_ti3up"]
+[ext_resource type="AudioStream" uid="uid://bedyrnfp4a4na" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_idle_loop.mp3" id="12_bfwot"]
+[ext_resource type="Texture2D" uid="uid://da2vebe13h7sj" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-6.png" id="12_obum3"]
+[ext_resource type="Texture2D" uid="uid://blyos305pvth3" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-7.png" id="13_77m0n"]
+[ext_resource type="Texture2D" uid="uid://cj11jad0jql2x" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-8.png" id="14_gl6an"]
+[ext_resource type="Texture2D" uid="uid://dfxqoj63erfv3" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-9.png" id="15_fsbka"]
+[ext_resource type="Texture2D" uid="uid://d04iy5p66d2el" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-10.png" id="16_6rad8"]
+[ext_resource type="Texture2D" uid="uid://bfimgm73aqcm7" path="res://assets/sprite/enemy/red-wasp-part/Bug_2-11.png" id="17_f016j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ddoed"]
 radius = 32.0
@@ -279,70 +280,73 @@ _data = {
 "wiggle": SubResource("Animation_3f1cr")
 }
 
-[node name="GreenWasp" type="CharacterBody2D" node_paths=PackedStringArray("idle_player")]
+[node name="RedWasp" type="CharacterBody2D" node_paths=PackedStringArray("idle_player")]
 collision_layer = 32
 collision_mask = 137
-script = ExtResource("1_phume")
-SFX_idle = ExtResource("2_t5eu1")
-SFX_attack = Array[AudioStream]([ExtResource("3_78b0e")])
-SFX_aggro = Array[AudioStream]([ExtResource("4_u1f3n")])
-SFX_death = Array[AudioStream]([ExtResource("5_td3ij")])
+script = ExtResource("1_h1loq")
+SFX_idle = ExtResource("2_kfb0b")
+SFX_attack = Array[AudioStream]([ExtResource("3_t7uc6")])
+SFX_aggro = Array[AudioStream]([ExtResource("4_3xsju")])
+SFX_death = Array[AudioStream]([ExtResource("5_01yjj")])
 idle_player = NodePath("IdleAudioPlayer")
+max_agent_per_attack = 8
+dash_speed = 900
+dash_delay = 1.0
+dash_duration = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 scale = Vector2(-0.4, 0.4)
-texture = ExtResource("6_3qpni")
+texture = ExtResource("6_ow6y5")
 
 [node name="WaspSprite" type="Node2D" parent="."]
 scale = Vector2(-0.4, 0.4)
 
 [node name="Bug1-1" type="Sprite2D" parent="WaspSprite"]
-texture = ExtResource("7_2qill")
+texture = ExtResource("7_x5gsg")
 
 [node name="Bug1-2" type="Sprite2D" parent="WaspSprite"]
-texture = ExtResource("8_cyqbe")
+texture = ExtResource("8_lw3iy")
 
 [node name="Bug1-3" type="Sprite2D" parent="WaspSprite"]
-texture = ExtResource("9_qpq4w")
+texture = ExtResource("9_i15e3")
 
 [node name="Bug1-4" type="Sprite2D" parent="WaspSprite"]
-texture = ExtResource("10_gr6i4")
+texture = ExtResource("10_hbdo5")
 
 [node name="Bug1-5" type="Sprite2D" parent="WaspSprite"]
-texture = ExtResource("11_5ud26")
+texture = ExtResource("11_rsmot")
 
 [node name="Bug1-6" type="Sprite2D" parent="WaspSprite"]
-texture = ExtResource("12_y0n80")
+texture = ExtResource("12_obum3")
 
 [node name="Bug1-7" type="Sprite2D" parent="WaspSprite"]
-texture = ExtResource("13_08dmt")
+texture = ExtResource("13_77m0n")
 
 [node name="Bug1-8" type="Sprite2D" parent="WaspSprite"]
-texture = ExtResource("14_jus7k")
+texture = ExtResource("14_gl6an")
 
 [node name="Bug1-9" type="Sprite2D" parent="WaspSprite"]
-texture = ExtResource("15_ylfm8")
+texture = ExtResource("15_fsbka")
+
+[node name="Bug1-10" type="Sprite2D" parent="WaspSprite"]
+texture = ExtResource("16_6rad8")
 
 [node name="Bug1-11" type="Sprite2D" parent="WaspSprite"]
-texture = ExtResource("17_xbmvq")
+texture = ExtResource("17_f016j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_ddoed")
 
 [node name="PlayerDetectRange" type="Area2D" parent="."]
-visible = false
 position = Vector2(100, 0)
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectRange"]
-visible = false
 shape = SubResource("CircleShape2D_f2j72")
 
 [node name="AttackRange" type="Area2D" parent="."]
-visible = false
 position = Vector2(8, 0)
 collision_layer = 64
 collision_mask = 2
@@ -358,171 +362,171 @@ debug_color = Color(0.7, 0.0343752, 0, 0.42)
 target_position = Vector2(150, 0)
 
 [node name="StateChart" type="Node" parent="."]
-script = ExtResource("7_3o7c6")
+script = ExtResource("7_uuj1k")
 
 [node name="Root" type="Node" parent="StateChart"]
-script = ExtResource("8_af0kd")
+script = ExtResource("8_sw82b")
 
 [node name="Movement" type="Node" parent="StateChart/Root"]
-script = ExtResource("9_og2hm")
+script = ExtResource("9_2am5w")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateChart/Root/Movement"]
-script = ExtResource("10_kwsrt")
+script = ExtResource("10_amemc")
 
 [node name="toWander" type="Node" parent="StateChart/Root/Movement/Idle"]
-script = ExtResource("11_ck2ri")
+script = ExtResource("11_ti3up")
 to = NodePath("../../Wander")
 event = &"wander_started"
 delay_in_seconds = "0.0"
 
 [node name="toTrack" type="Node" parent="StateChart/Root/Movement/Idle"]
-script = ExtResource("11_ck2ri")
+script = ExtResource("11_ti3up")
 to = NodePath("../../Track")
 event = &"player_spotted"
 delay_in_seconds = "0.0"
 
 [node name="toFlee" type="Node" parent="StateChart/Root/Movement/Idle"]
-script = ExtResource("11_ck2ri")
+script = ExtResource("11_ti3up")
 to = NodePath("../../Flee")
 event = &"flee_from_player"
 delay_in_seconds = "0.0"
 
 [node name="Wander" type="Node" parent="StateChart/Root/Movement"]
-script = ExtResource("10_kwsrt")
+script = ExtResource("10_amemc")
 
 [node name="toTrack" type="Node" parent="StateChart/Root/Movement/Wander"]
-script = ExtResource("11_ck2ri")
+script = ExtResource("11_ti3up")
 to = NodePath("../../Track")
 event = &"player_spotted"
 delay_in_seconds = "0.0"
 
 [node name="toFlee" type="Node" parent="StateChart/Root/Movement/Wander"]
-script = ExtResource("11_ck2ri")
+script = ExtResource("11_ti3up")
 to = NodePath("../../Flee")
 event = &"flee_from_player"
 delay_in_seconds = "0.0"
 
 [node name="toIdle" type="Node" parent="StateChart/Root/Movement/Wander"]
-script = ExtResource("11_ck2ri")
+script = ExtResource("11_ti3up")
 to = NodePath("../../Idle")
 event = &"target_reached"
 delay_in_seconds = "0.0"
 
 [node name="Track" type="Node" parent="StateChart/Root/Movement"]
-script = ExtResource("10_kwsrt")
+script = ExtResource("10_amemc")
 
 [node name="toDash" type="Node" parent="StateChart/Root/Movement/Track"]
-script = ExtResource("11_ck2ri")
+script = ExtResource("11_ti3up")
 to = NodePath("../../Dash")
 event = &"dash_started"
 delay_in_seconds = "0.0"
 
 [node name="toWander" type="Node" parent="StateChart/Root/Movement/Track"]
-script = ExtResource("11_ck2ri")
+script = ExtResource("11_ti3up")
 to = NodePath("../../Wander")
 event = &"stop_chase"
 delay_in_seconds = "0.0"
 
 [node name="toFlee" type="Node" parent="StateChart/Root/Movement/Track"]
-script = ExtResource("11_ck2ri")
+script = ExtResource("11_ti3up")
 to = NodePath("../../Flee")
 event = &"flee_from_player"
 delay_in_seconds = "0.0"
 
 [node name="Dash" type="Node" parent="StateChart/Root/Movement"]
-script = ExtResource("10_kwsrt")
+script = ExtResource("10_amemc")
 
 [node name="toTrack" type="Node" parent="StateChart/Root/Movement/Dash"]
-script = ExtResource("11_ck2ri")
+script = ExtResource("11_ti3up")
 to = NodePath("../../Track")
 event = &"back_to_track"
 delay_in_seconds = "0.0"
 
 [node name="toFlee" type="Node" parent="StateChart/Root/Movement/Dash"]
-script = ExtResource("11_ck2ri")
+script = ExtResource("11_ti3up")
 to = NodePath("../../Flee")
 event = &"flee_from_player"
 delay_in_seconds = "0.0"
 
 [node name="Flee" type="Node" parent="StateChart/Root/Movement"]
-script = ExtResource("10_kwsrt")
+script = ExtResource("10_amemc")
 
 [node name="toIdle" type="Node" parent="StateChart/Root/Movement/Flee"]
-script = ExtResource("11_ck2ri")
+script = ExtResource("11_ti3up")
 to = NodePath("../../Idle")
 event = &"stop_fleeing"
 delay_in_seconds = "0.0"
 
 [node name="Health" type="Node" parent="StateChart/Root"]
-script = ExtResource("9_og2hm")
+script = ExtResource("9_2am5w")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateChart/Root/Health"]
-script = ExtResource("10_kwsrt")
+script = ExtResource("10_amemc")
 
 [node name="toDead" type="Node" parent="StateChart/Root/Health/Idle"]
-script = ExtResource("11_ck2ri")
+script = ExtResource("11_ti3up")
 to = NodePath("../../Dead")
 event = &"death"
 delay_in_seconds = "0.0"
 
 [node name="toHurt" type="Node" parent="StateChart/Root/Health/Idle"]
-script = ExtResource("11_ck2ri")
+script = ExtResource("11_ti3up")
 to = NodePath("../../Hurt")
 event = &"take_damage"
 delay_in_seconds = "0.0"
 
 [node name="Hurt" type="Node" parent="StateChart/Root/Health"]
-script = ExtResource("10_kwsrt")
+script = ExtResource("10_amemc")
 
 [node name="toDead" type="Node" parent="StateChart/Root/Health/Hurt"]
-script = ExtResource("11_ck2ri")
+script = ExtResource("11_ti3up")
 to = NodePath("../../Dead")
 event = &"death"
 delay_in_seconds = "0.0"
 
 [node name="toIdle" type="Node" parent="StateChart/Root/Health/Hurt"]
-script = ExtResource("11_ck2ri")
+script = ExtResource("11_ti3up")
 to = NodePath("../../Idle")
 delay_in_seconds = "0.0"
 
 [node name="Dead" type="Node" parent="StateChart/Root/Health"]
-script = ExtResource("10_kwsrt")
+script = ExtResource("10_amemc")
 
 [node name="Attack" type="Node" parent="StateChart/Root"]
-script = ExtResource("9_og2hm")
+script = ExtResource("9_2am5w")
 initial_state = NodePath("Ready")
 
 [node name="Cooldown" type="Node" parent="StateChart/Root/Attack"]
-script = ExtResource("10_kwsrt")
+script = ExtResource("10_amemc")
 
 [node name="toReady" type="Node" parent="StateChart/Root/Attack/Cooldown"]
-script = ExtResource("11_ck2ri")
+script = ExtResource("11_ti3up")
 to = NodePath("../../Ready")
 event = &"attack_ready"
 delay_in_seconds = "0.0"
 
 [node name="Ready" type="Node" parent="StateChart/Root/Attack"]
-script = ExtResource("10_kwsrt")
+script = ExtResource("10_amemc")
 
 [node name="toAttacking" type="Node" parent="StateChart/Root/Attack/Ready"]
-script = ExtResource("11_ck2ri")
+script = ExtResource("11_ti3up")
 to = NodePath("../../Attacking")
 event = &"attack_player"
 delay_in_seconds = "0.0"
 
 [node name="Attacking" type="Node" parent="StateChart/Root/Attack"]
-script = ExtResource("10_kwsrt")
+script = ExtResource("10_amemc")
 
 [node name="toCooldown" type="Node" parent="StateChart/Root/Attack/Attacking"]
-script = ExtResource("11_ck2ri")
+script = ExtResource("11_ti3up")
 to = NodePath("../../Cooldown")
 event = &"attack_finished"
 delay_in_seconds = "0.0"
 
 [node name="IdleAudioPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("12_80ivt")
+stream = ExtResource("12_bfwot")
 
 [node name="WingAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

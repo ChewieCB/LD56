@@ -51,7 +51,7 @@ var active_death_sfx_players: Array[AudioStreamPlayer]
 @onready var target: CharacterBody2D = $TargetMarker
 @onready var target_sprite: Sprite2D = $TargetMarker/Sprite2D
 @onready var centroid: Marker2D = $SwarmCentroidMarker
-@onready var debug_status_sprite: Sprite2D = $SwarmCentroidMarker/DEBUGStatus
+@onready var debug_status_sprite: Sprite2D = $SwarmCentroidMarker/Sprite2D
 @onready var audio_2d_listener: AudioListener2D = $AudioListener2D
 
 var swarm_agents: Array:
@@ -63,7 +63,7 @@ var swarm_agents: Array:
 		if swarm_agent_count == 0 and not invuln_flag:
 			GameManager.swarm_director.check_game_over()
 var removed_agent_debug: Vector2
-var is_fire = false # Is on fire element, scare away predators
+var is_spread_out = false # Is in spread out formation, scare away predators
 var navigation_initialized = false
 
 var current_swarm_attributes: Dictionary
@@ -117,16 +117,6 @@ func actor_setup():
 	state_chart.send_event("enable_idle")
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("DEBUG_player_toggle_fire_status"):
-		is_fire = !is_fire
-		swarm_status_changed.emit()
-		if is_fire:
-			debug_status_sprite.self_modulate = Color.ORANGE
-		else:
-			debug_status_sprite.self_modulate = Color.GREEN
-
-
 func _physics_process(delta: float) -> void:
 	target.move_and_slide()
 	
@@ -135,8 +125,12 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_just_released("huddle"):
 		state_chart.send_event("reset_distribution")
 	elif Input.is_action_just_pressed("spread"):
+		is_spread_out = true
+		swarm_status_changed.emit()
 		state_chart.send_event("spread_out")
 	elif Input.is_action_just_released("spread"):
+		is_spread_out = false
+		swarm_status_changed.emit()
 		state_chart.send_event("reset_distribution")
 	
 	

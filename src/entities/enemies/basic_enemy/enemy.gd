@@ -6,15 +6,14 @@ class_name Enemy
 @export var SFX_attack: Array[AudioStream]
 @export var SFX_aggro: Array[AudioStream]
 @export var SFX_death: Array[AudioStream]
-
 @export var idle_player: AudioStreamPlayer2D
-var aggro_sfx_player: AudioStreamPlayer
 
 @export var speed = 100
 @export var max_health: float = 100
 # Attack
 @export var attack_damage = 50
 @export var time_between_attack = 1
+@export var max_agent_per_attack = 3
 # Wander
 @export var min_wander_range = 100
 @export var max_wander_range = 500
@@ -27,13 +26,16 @@ var aggro_sfx_player: AudioStreamPlayer
 @export var dash_delay = 0.5 # Aka reaction time, time the enemy need to prepare before dash
 @export var dash_duration = 2
 @export var dash_decel_rate = 1.0
+# Flee
+@export var min_agent_to_flee = 10
+@export var min_flee_time = 2.0
 
 @onready var state_chart: StateChart = $StateChart
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var detect_area: Area2D = $PlayerDetectRange
 @onready var detect_collision_shape: CollisionShape2D = $PlayerDetectRange/CollisionShape2D
 @onready var los_raycast: RayCast2D = $LOSRaycast
-@onready var enemy_sprite: Sprite2D = $Sprite2D
+@onready var wasp_sprite: Node2D = $WaspSprite
 
 var current_health: float = max_health:
 	set(value):
@@ -45,30 +47,33 @@ var spawn_pos: Vector2
 var found_wander_pos = false
 var dash_timer = 0
 var dash_delay_timer = 0
+var flee_timer = 0
 var attack_cooldown_timer = 0
 var dash_velocity: Vector2 = Vector2.ZERO
-var swarm_agent_within_range = false
+var n_swarm_agent_within_range = 0
 var targeted_swarm_agent: SwarmAgent = null
+var aggro_sfx_player: AudioStreamPlayer
+var n_agent_killed_this_attack = 0
 
 const ROTATION_SPEED = 4.0
-const FLEE_SPEED_MODIFIER = 1.5
+const FLEE_SPEED_MODIFIER = 2
 
 func _ready() -> void:
 	# Wait for important nodes to register themselves to GameManagers
 	await get_tree().physics_frame
 	await get_tree().physics_frame
-	
+
 	current_health = max_health
 	spawn_pos = global_position
 	detect_collision_shape.shape.radius = detect_range
 	detect_area.position = Vector2(detect_range * 0.5, 0)
 	los_raycast.target_position = Vector2(range_to_dash, 0)
-	
+
 	if SFX_idle:
 		idle_player.stream = SFX_idle
-	
+
 	GameManager.swarm_director.swarm_status_changed.connect(check_swarm_status)
-	
+
 	call_deferred("actor_setup")
 
 
@@ -85,9 +90,9 @@ func _process(_delta: float) -> void:
 		state_chart.send_event("stop_chase")
 
 	if rotation_degrees > -90 and rotation_degrees < 90:
-		enemy_sprite.scale.y = 0.4  # Facing right
+		wasp_sprite.scale.y = 0.4  # Facing right
 	else:
-		enemy_sprite.scale.y = -0.4   # Facing left
+		wasp_sprite.scale.y = -0.4   # Facing left
 
 func _on_idle_state_entered() -> void:
 	if idle_player.stream:
@@ -98,17 +103,17 @@ func _on_idle_state_entered() -> void:
 
 
 func _on_detect_range_body_entered(body: Node2D) -> void:
-	if body is SwarmAgent:
-		swarm_agent_within_range = true
-		if GameManager.swarm_director.is_fire:
+	if body is SwarmAgent and not body.is_in_sealed_vessel:
+		n_swarm_agent_within_range += 1
+		if GameManager.swarm_director.is_spread_out \
+			and GameManager.swarm_director.swarm_agent_count >= min_agent_to_flee:
 			state_chart.send_event("flee_from_player")
 		else:
 			state_chart.send_event("player_spotted")
 
 func _on_player_detect_range_body_exited(body: Node2D) -> void:
-	if body is SwarmAgent:
-		swarm_agent_within_range = false
-		state_chart.send_event("player_faraway")
+	if body is SwarmAgent and not body.is_in_sealed_vessel:
+		n_swarm_agent_within_range -= 1
 
 
 func _on_wander_state_entered() -> void:
@@ -151,10 +156,10 @@ func get_new_wander_pos():
 
 func _on_track_state_entered() -> void:
 	targeted_swarm_agent = GameManager.swarm_director.get_furthest_agent()
-	
+
 	if not aggro_sfx_player:
 		aggro_sfx_player = GlobalSFX.play_sfx_shuffled(SFX_aggro)
-	
+
 	if targeted_swarm_agent == null:
 		state_chart.send_event("stop_chase")
 		return
@@ -183,7 +188,7 @@ func _on_track_state_physics_processing(delta: float) -> void:
 
 
 func _on_track_state_exited() -> void:
-	if aggro_sfx_player:
+	if aggro_sfx_player and is_instance_valid(aggro_sfx_player):
 		var tween = get_tree().create_tween()
 		tween.tween_property(
 			aggro_sfx_player,
@@ -236,13 +241,21 @@ func keep_looking_at_pos(delta: float, target_pos: Vector2):
 	rotation = lerp_angle(rotation, target_angle, ROTATION_SPEED * delta)
 
 func check_swarm_status():
-	if GameManager.swarm_director.is_fire and swarm_agent_within_range:
+	if GameManager.swarm_director.is_spread_out \
+		and n_swarm_agent_within_range > 0 \
+		and GameManager.swarm_director.swarm_agent_count >= min_agent_to_flee:
 		state_chart.send_event("flee_from_player")
 
+func _on_flee_state_entered() -> void:
+	flee_timer = 0
+
 func _on_flee_state_physics_processing(delta: float) -> void:
-	var direction_away = (global_position - GameManager.swarm_director.centroid.global_position).normalized()
+	flee_timer += delta
+	if flee_timer > min_flee_time:
+		state_chart.send_event("stop_fleeing")
+	var direction_away = (global_position - GameManager.swarm_director.target.global_position).normalized()
 	velocity = direction_away * speed * FLEE_SPEED_MODIFIER
-	keep_looking_at_pos(delta, global_position + velocity)
+	keep_looking_at_pos(delta, global_position + direction_away)
 	move_and_slide()
 
 
@@ -253,9 +266,12 @@ func damage(value: float) -> void:
 
 
 func _on_attack_range_body_entered(body: Node2D) -> void:
-	if body is SwarmAgent:
+	if body is SwarmAgent and not body.is_in_sealed_vessel:
 		var agent: SwarmAgent = body as SwarmAgent
-		targeted_swarm_agent = agent
+		if n_agent_killed_this_attack < max_agent_per_attack:
+			n_agent_killed_this_attack += 1
+			agent.damage(attack_damage)
+			GlobalSFX.play_sfx_shuffled(SFX_attack)
 		state_chart.send_event("attack_player")
 
 
@@ -268,11 +284,12 @@ func _on_cooldown_state_processing(delta: float) -> void:
 		state_chart.send_event("attack_ready")
 
 
+func _on_ready_state_entered() -> void:
+	n_agent_killed_this_attack = 0
+
+
 func _on_attacking_state_entered() -> void:
 	# Play animation or something here. For now, it will just wait 0.5s
-	if targeted_swarm_agent != null:
-		targeted_swarm_agent.damage(attack_damage)
-		GlobalSFX.play_sfx_shuffled(SFX_attack)
 	await get_tree().create_timer(0.5).timeout
 	state_chart.send_event("attack_finished")
 

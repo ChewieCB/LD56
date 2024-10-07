@@ -23,7 +23,17 @@ signal target_updated(agent: SwarmAgent, new_target: CharacterBody2D)
 @export var sprite: Sprite2D
 @onready var agent_collider: CollisionShape2D = $CollisionShape2D
 
-var swarm_id: int = 0
+
+var is_in_sealed_vessel = false
+var swarm_id: int = 0:
+	set(value):
+		swarm_id = value
+		if swarm_id != 0:
+			sprite.modulate = Color.YELLOW
+			is_in_sealed_vessel = true
+		else:
+			sprite.modulate = Color(1, 1, 1)
+			is_in_sealed_vessel = false
 var is_in_player_swarm: bool = true
 
 var collision_radius: float:

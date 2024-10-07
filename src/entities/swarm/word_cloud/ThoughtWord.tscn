@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqdi45i7wymux"]
+
+[ext_resource type="Script" path="res://src/entities/swarm/word_cloud/thought_word.gd" id="1_4ni3h"]
+
+[node name="ThoughtWord" type="Label"]
+z_index = 100
+offset_left = -128.0
+offset_top = -32.0
+offset_right = 128.0
+offset_bottom = 32.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 30
+text = "Friend"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_4ni3h")
