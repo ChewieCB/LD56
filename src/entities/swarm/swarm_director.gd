@@ -71,21 +71,21 @@ const SWARM_ATTRIBUTES_CLOSE: Dictionary = {
 	"mouse_follow_force": 0.2,
 	"cohesive_force": 0.5,
 	"separation_force": 0.5,
-	"max_speed": 250,
+	"max_speed": 270,
 	"avoid_distance": 5.,
 }
 const SWARM_ATTRIBUTES_NORMAL: Dictionary = {
 	"mouse_follow_force": 0.2,
 	"cohesive_force": 0.5,
 	"separation_force": 0.5,
-	"max_speed": 200,
+	"max_speed": 230,
 	"avoid_distance": 15.,
 }
 const SWARM_ATTRIBUTES_FAR: Dictionary = {
 	"mouse_follow_force": 0.3,
 	"cohesion_force": 0.25,
 	"separation_force": 0.8,
-	"max_speed": 180,
+	"max_speed": 200,
 	"avoid_distance": 30.,
 }
 

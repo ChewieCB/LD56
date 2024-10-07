@@ -267,7 +267,7 @@ fill_mesh_offset = 0.0
 render_offset = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4or5r"]
-radius = 69.029
+radius = 45.2214
 
 [node name="SapPuddle" type="Node2D"]
 script = ExtResource("1_m3v0x")
