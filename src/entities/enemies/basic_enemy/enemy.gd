@@ -35,7 +35,7 @@ class_name Enemy
 @onready var detect_area: Area2D = $PlayerDetectRange
 @onready var detect_collision_shape: CollisionShape2D = $PlayerDetectRange/CollisionShape2D
 @onready var los_raycast: RayCast2D = $LOSRaycast
-@onready var enemy_sprite: Sprite2D = $Sprite2D
+@onready var wasp_sprite: Node2D = $WaspSprite
 
 var current_health: float = max_health:
 	set(value):
@@ -90,9 +90,9 @@ func _process(_delta: float) -> void:
 		state_chart.send_event("stop_chase")
 
 	if rotation_degrees > -90 and rotation_degrees < 90:
-		enemy_sprite.scale.y = 0.4  # Facing right
+		wasp_sprite.scale.y = 0.4  # Facing right
 	else:
-		enemy_sprite.scale.y = -0.4   # Facing left
+		wasp_sprite.scale.y = -0.4   # Facing left
 
 func _on_idle_state_entered() -> void:
 	if idle_player.stream:
