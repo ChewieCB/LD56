@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dyay8iskwl6c2"]
+[gd_scene load_steps=6 format=3 uid="uid://dyay8iskwl6c2"]
 
 [ext_resource type="Script" path="res://src/utils/singletons/game_manager/game_manager.gd" id="1_5p7w6"]
 [ext_resource type="PackedScene" uid="uid://dqnsksromudtd" path="res://src/scenes/main/level/Level_1a.tscn" id="2_wgm1w"]
+[ext_resource type="AudioStream" uid="uid://cy70vylc0p5kp" path="res://assets/bgm/lachlan-sketch2-60bpm-Abmin-0.2.mp3" id="4_a5sml"]
 [ext_resource type="AudioStream" uid="uid://bd6oyxxuowqbj" path="res://assets/bgm/LD56 Medley 1.0.mp3" id="4_gfy7q"]
 [ext_resource type="PackedScene" uid="uid://baeg7c16aji2u" path="res://src/scenes/main/title_screen/TitleScreen.tscn" id="5_navqj"]
 
@@ -9,4 +10,5 @@
 script = ExtResource("1_5p7w6")
 level_list = Array[PackedScene]([ExtResource("2_wgm1w")])
 title_screen = ExtResource("5_navqj")
-bgm = ExtResource("4_gfy7q")
+title_bgm = ExtResource("4_a5sml")
+level_bgm = ExtResource("4_gfy7q")

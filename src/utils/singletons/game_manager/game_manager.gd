@@ -2,7 +2,8 @@ extends Node
 
 @export var level_list: Array[PackedScene]
 @export var title_screen: PackedScene
-@export var bgm: AudioStream
+@export var title_bgm: AudioStream
+@export var level_bgm: AudioStream
 
 var pause_ui: PauseUI
 var game_ui: GameUI
@@ -27,8 +28,7 @@ var enemy_defeated = 0
 var current_level_id = 0
 
 func _ready() -> void:
-	if bgm:
-		SoundManager.play_music(bgm)
+	SoundManager.play_music(title_bgm)
 
 func _process(delta: float) -> void:
 	if not level_finished:
@@ -36,6 +36,7 @@ func _process(delta: float) -> void:
 
 func load_first_level():
 	get_tree().change_scene_to_packed(level_list[0])
+	SoundManager.play_music(level_bgm)
 
 func go_to_next_level():
 	get_tree().paused = false
