@@ -5,7 +5,7 @@ class_name SealedGateInput
 @export var is_disabled: bool = false
 
 # Only 1 of the 2 below is required
-@export var sealed_gate_door: SealedGateDoor
+@export var sealed_gate_doors: Array[SealedGateDoor]
 @export var gate_id: int = 1
 @export var is_end_of_level = false
 
@@ -109,11 +109,11 @@ func open_gate():
 		GameManager.finish_level()
 	else:
 		release_all_stored_agents()
-		sealed_gate_door.open()
+		for door in sealed_gate_doors:
+			door.open()
 
 
 func release_all_stored_agents():
-	await get_tree().create_timer(3.0).timeout
 	input_area.monitoring = false
 	for agent in swarm_agents:
 		agent.swarm_id = 0

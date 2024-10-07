@@ -26,6 +26,7 @@ var active_death_sfx_players: Array[AudioStreamPlayer]
 @export var swarm_agent_count: int = 0:
 	set(value):
 		swarm_agent_count = value
+		
 		var swarm_volume_linear: float = clamp(float(swarm_agent_count) / 50, 0.0, 1.0)
 		if active_movement_sfx_player:
 			movement_sfx_tween = get_tree().create_tween()
@@ -56,10 +57,13 @@ var active_death_sfx_players: Array[AudioStreamPlayer]
 
 var swarm_agents: Array:
 	set(value):
+		var prev_swarm_count = swarm_agent_count
 		swarm_agents = value
 		if swarm_agents.size() != swarm_agent_count:
 			swarm_agent_count = swarm_agents.size()
 		GameManager.game_ui.update_agent_count_ui()
+		if prev_swarm_count == 0 and swarm_agent_count > 0 and invuln_flag:
+			invuln_flag = false
 		if swarm_agent_count == 0 and not invuln_flag:
 			GameManager.swarm_director.check_game_over()
 var removed_agent_debug: Vector2
@@ -134,11 +138,11 @@ func _physics_process(delta: float) -> void:
 		state_chart.send_event("reset_distribution")
 	
 	
-	if Input.is_action_just_pressed("DEBUG_add_agent"):
-		add_agent()
-	elif Input.is_action_just_pressed("DEBUG_remove_agent"):
-		if swarm_agents:
-			damage_agent(swarm_agents[randi_range(0, swarm_agents.size() - 1)], 2000)
+	#if Input.is_action_just_pressed("DEBUG_add_agent"):
+		#add_agent()
+	#elif Input.is_action_just_pressed("DEBUG_remove_agent"):
+		#if swarm_agents:
+			#damage_agent(swarm_agents[randi_range(0, swarm_agents.size() - 1)], 2000)
 	
 	get_nav_path_for_swarm_agents(delta)
 
