@@ -25,11 +25,11 @@ metadata/_edit_horizontal_guides_ = [43.0]
 metadata/_edit_vertical_guides_ = [-153.0]
 
 [node name="FollowCamera" parent="." node_paths=PackedStringArray("swarm_director") instance=ExtResource("1_wnrtv")]
-position = Vector2(184, 376)
+position = Vector2(1216, 400)
 swarm_director = NodePath("../SwarmDirector")
 
 [node name="SwarmDirector" parent="." instance=ExtResource("2_7t3w0")]
-position = Vector2(176, 472)
+position = Vector2(1208, 496)
 
 [node name="GateHolder" type="Node2D" parent="."]
 
@@ -40,7 +40,8 @@ n_agent_required = 40
 sealed_gate_door = NodePath("../SealedGateDoor")
 
 [node name="SealedGateDoor" parent="GateHolder" instance=ExtResource("4_esryw")]
-position = Vector2(1696, 416)
+position = Vector2(1704, 416)
+scale = Vector2(0.364565, 0.364565)
 
 [node name="EndLevelSealedVessel" parent="GateHolder" instance=ExtResource("5_7hyk7")]
 position = Vector2(1968, 656)
@@ -165,4 +166,4 @@ layer = 100
 [node name="GameUI" parent="CanvasLayer2" instance=ExtResource("9_gbfpw")]
 
 [node name="BasicEnemy" parent="." instance=ExtResource("10_85oaq")]
-position = Vector2(416, 272)
+position = Vector2(208, 223)

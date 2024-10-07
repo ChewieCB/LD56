@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://jowj0owcoo1i"
+path="res://.godot/imported/Fae Rattle (entering gate_).mp3-fbb5cf7dbd7f06fc0a6b5ea2f008a6fd.mp3str"
+
+[deps]
+
+source_file="res://src/entities/environment/sealed_gate/assets/sfx/Fae Rattle (entering gate_).mp3"
+dest_files=["res://.godot/imported/Fae Rattle (entering gate_).mp3-fbb5cf7dbd7f06fc0a6b5ea2f008a6fd.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

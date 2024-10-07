@@ -23,6 +23,13 @@ signal target_updated(agent: SwarmAgent, new_target: CharacterBody2D)
 @onready var sprite: Sprite2D = $Icon
 @onready var agent_collider: CollisionShape2D = $CollisionShape2D
 
+var swarm_id: int = 0:
+	set(value):
+		swarm_id = value
+		if swarm_id != 0:
+			sprite.modulate = Color.YELLOW
+		else:
+			sprite.modulate = Color(1, 1, 1)
 var is_in_player_swarm: bool = true
 
 var collision_radius: float:
@@ -120,14 +127,16 @@ func damage(value: float) -> void:
 func _on_flock_view_body_entered(body: Node2D) -> void:
 	if body is SwarmAgent:
 		if self != body:
-			_flock.append(body)
+			if body.swarm_id == self.swarm_id:
+				_flock.append(body)
 
 
 func _on_flock_view_body_exited(body: Node2D) -> void:
 	if body is SwarmAgent:
-		var agent_id = _flock.find(body) # Return -1 if not exist
-		if agent_id < _flock.size() and agent_id > 0:
-			_flock.remove_at(agent_id)
+		if body.swarm_id == self.swarm_id:
+			var agent_id = _flock.find(body) # Return -1 if not exist
+			if agent_id < _flock.size() and agent_id > 0:
+				_flock.remove_at(agent_id)
 
 
 func _on_movement_following_state_physics_processing(_delta: float) -> void:

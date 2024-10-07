@@ -24,7 +24,7 @@ size = Vector2(26, 32)
 
 [node name="GreenWasp" type="CharacterBody2D" node_paths=PackedStringArray("idle_player")]
 collision_layer = 32
-collision_mask = 9
+collision_mask = 137
 script = ExtResource("1_phume")
 SFX_idle = ExtResource("2_t5eu1")
 SFX_attack = Array[AudioStream]([ExtResource("3_78b0e")])

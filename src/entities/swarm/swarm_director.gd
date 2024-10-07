@@ -105,6 +105,7 @@ func actor_setup():
 	await get_tree().physics_frame
 	navigation_initialized = true
 
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("DEBUG_player_toggle_fire_status"):
 		is_fire = !is_fire

@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://djnji1v6uknmq"]
+[gd_scene load_steps=13 format=3 uid="uid://djnji1v6uknmq"]
 
 [ext_resource type="Script" path="res://src/entities/environment/sealed_gate/sealed_gate_input.gd" id="1_1rouk"]
+[ext_resource type="AudioStream" uid="uid://jowj0owcoo1i" path="res://src/entities/environment/sealed_gate/assets/sfx/Fae Rattle (entering gate_).mp3" id="2_ea7nb"]
 [ext_resource type="Texture2D" uid="uid://d1wf3q5v73njh" path="res://assets/sprite/gate/recepticle/vessel_2.png" id="2_p0tm5"]
 [ext_resource type="Texture2D" uid="uid://bcee1yupgr4aw" path="res://assets/sprite/gate/recepticle/vessel_0.png" id="3_t2gm8"]
 [ext_resource type="Texture2D" uid="uid://c46vsn1xllapd" path="res://assets/sprite/gate/recepticle/vessel_1.png" id="4_060iw"]
@@ -32,6 +33,7 @@ size = Vector2(126, 10)
 
 [node name="SealedGateInput" type="Node2D"]
 script = ExtResource("1_1rouk")
+SFX_gate_fill = Array[AudioStream]([ExtResource("2_ea7nb")])
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_lh43c")
@@ -105,6 +107,7 @@ collision_mask = 256
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwarmTarget/TargetArea"]
 position = Vector2(-3, -11)
 shape = SubResource("CircleShape2D_g5b4a")
+debug_color = Color(0, 0.635406, 0.417574, 0.42)
 
 [node name="ReleaseAgentTimer" type="Timer" parent="."]
 wait_time = 5.0
