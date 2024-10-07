@@ -29,12 +29,20 @@ var invuln_flag: bool = true
 		var swarm_volume_linear: float = clamp(float(swarm_agent_count) / 50, 0.0, 1.0)
 		if active_movement_sfx_player:
 			movement_sfx_tween = get_tree().create_tween()
-			movement_sfx_tween.tween_property(
-				active_movement_sfx_player,
-				"volume_db",
-				linear_to_db(clamp(float(swarm_volume_linear) / 20, 0, 1)),
-				0.01
-			)
+			if swarm_agent_count > 0:
+				movement_sfx_tween.tween_property(
+					active_movement_sfx_player,
+					"volume_db",
+					linear_to_db(clamp(float(swarm_volume_linear) / 20, 0, 1)),
+					0.01
+				)
+			else:
+				movement_sfx_tween.tween_property(
+					active_movement_sfx_player,
+					"volume_db",
+					linear_to_db(0),
+					0.01
+				)
 @export var target_max_speed: float = 250.0
 @export var target_movement_speed: float = 230.0
 @export var target_acceleration: float = 0.82
@@ -88,7 +96,7 @@ func _ready() -> void:
 	
 	if SFX_swarm_move:
 		active_movement_sfx_player = SoundManager.play_sound(SFX_swarm_move)
-		active_movement_sfx_player.volume_db = 0
+		active_movement_sfx_player.volume_db = -80
 	
 	if swarm_agent_count > 0:
 		for _i in range(swarm_agent_count):

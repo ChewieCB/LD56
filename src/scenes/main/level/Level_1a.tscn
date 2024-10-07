@@ -6255,6 +6255,10 @@ swarm_director = NodePath("../SwarmDirector")
 [node name="SwarmDirector" parent="." instance=ExtResource("2_nemqd")]
 position = Vector2(2231, 1737)
 swarm_agent_count = 0
+target_max_speed = 250.0
+target_movement_speed = 230.0
+target_acceleration = 0.82
+target_friction = 0.06
 
 [node name="NPCSwarms" type="Node2D" parent="."]
 

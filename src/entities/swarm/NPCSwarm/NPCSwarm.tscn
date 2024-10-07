@@ -36,6 +36,8 @@ scale = Vector2(0.125, 0.125)
 texture = ExtResource("20_433c3")
 
 [node name="SwarmAudio2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = -40.0
+attenuation = 0.535887
 
 [node name="GatherArea" type="Area2D" parent="."]
 collision_layer = 0

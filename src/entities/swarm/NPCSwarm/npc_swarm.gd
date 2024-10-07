@@ -111,6 +111,15 @@ func _physics_process(delta: float) -> void:
 	if swarm_agent_count == 0:
 		return
 	
+	var swarm_volume_linear: float = clamp(float(swarm_agent_count) / 50, 0.0, 1.0)
+	movement_sfx_tween = get_tree().create_tween()
+	movement_sfx_tween.tween_property(
+		swarm_audio_player,
+		"volume_db",
+		linear_to_db(clamp(float(swarm_volume_linear) / 20, 0, 1)),
+		0.01
+	)
+	
 	target.move_and_slide()
 	get_nav_path_for_swarm_agents(delta)
 
