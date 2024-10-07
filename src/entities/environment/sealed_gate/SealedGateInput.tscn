@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://djnji1v6uknmq"]
+[gd_scene load_steps=12 format=3 uid="uid://djnji1v6uknmq"]
 
 [ext_resource type="Script" path="res://src/entities/environment/sealed_gate/sealed_gate_input.gd" id="1_1rouk"]
 [ext_resource type="AudioStream" uid="uid://jowj0owcoo1i" path="res://src/entities/environment/sealed_gate/assets/sfx/Fae Rattle (entering gate_).mp3" id="2_ea7nb"]
@@ -7,26 +7,22 @@
 [ext_resource type="Texture2D" uid="uid://c46vsn1xllapd" path="res://assets/sprite/gate/recepticle/vessel_1.png" id="4_060iw"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_lh43c"]
-vertices = PackedVector2Array(56, -22, 63, -7, 65, 0, -64, 0, -60, -12, -53, -31, 39, -52, 43.3203, -46.3906, 49, -39, -46, -44, -41, -53, -51, -156, -43, -186, 42, -186, 50, -156, -62, -98, -43, -60, 43, -63, -49, -74, 47, -71, 53, -81, -56, -88, 59, -93, 66, -140, 68, -130, 69, -122, 67, -109, -68, -112, -69, -125, -67, -139, -55, -153)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 0, 5, 9, 10), PackedInt32Array(11, 12, 13, 14, 15), PackedInt32Array(6, 10, 16, 17), PackedInt32Array(17, 16, 18, 19), PackedInt32Array(20, 19, 18, 21, 22), PackedInt32Array(23, 24, 25, 26, 22, 21, 15, 14), PackedInt32Array(11, 15, 27, 28, 29, 30)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-64, 0, -60, -12, -53, -31, -46, -44, -41, -53, -43, -60, -49, -74, -56, -88, -62, -98, -68, -112, -69, -125, -67, -139, -55, -153, -51, -156, -43, -186, 42, -186, 50, -156, 66, -140, 68, -130, 69, -122, 67, -109, 59, -93, 53, -81, 47, -71, 43, -63, 39, -52, 43.3175, -46.3873, 49, -39, 56, -22, 63, -7, 65, 0)])
-agent_radius = 0.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_padhp"]
-radius = 20.8
-height = 49.7778
+vertices = PackedVector2Array(40.7031, -33.2109, 46.2969, -18.2891, 50, -8.10938, 50, -7.13281, -50.3906, -9.79688, -49.4297, -11.9688, -41.4922, -29.8281, -34.5078, -42.7969, 34.9688, -38.9609, 28.5234, -50.5703, -29.7109, -53.5781, 33.4375, -64.0781, -34.2969, -70.7812, -44, -149.828, -40.8906, -156.031, 38.4062, -156.953, 40.5391, -150.57, -48.8438, -96.7812, -56.2578, -106.977, -58.0703, -117.859, 38.6719, -73.5, -40.6328, -83.4297, 48.3438, -95.8672, 44.3906, -83.0469, 52.6797, -135.398, 56.3672, -127.094, 58.75, -120.75, 56.3125, -111.797, -55.6094, -137.508, -50.3438, -144.531, -59.8125, -127.43)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8), PackedInt32Array(9, 8, 7, 10), PackedInt32Array(11, 9, 10, 12), PackedInt32Array(13, 14, 15, 16, 17, 18, 19), PackedInt32Array(20, 11, 12, 21), PackedInt32Array(22, 23, 20, 21, 17), PackedInt32Array(24, 25, 26, 27, 22, 17, 16), PackedInt32Array(28, 29, 13, 19, 30)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-58, -5, -54, -14, -46, -32, -39, -45, -35, -54, -39, -69, -45, -81, -53, -94, -61, -105, -63, -117, -65, -128, -60, -140, -54, -148, -48, -153, -44, -161, 42, -162, 45, -153, 57, -138, 61, -129, 64, -121, 61, -110, 53, -94, 49, -81, 43, -71, 38, -62, 34, -51, 39, -42, 45, -36, 51, -20, 55, -9, 55, -2)])
+agent_radius = 5.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhe26"]
 size = Vector2(222.4, 23.1111)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pop0m"]
-radius = 72.0
+radius = 54.0
 height = 224.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1c81m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g5b4a"]
-radius = 50.0
+radius = 40.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c3nsh"]
 size = Vector2(126, 10)
@@ -37,7 +33,6 @@ SFX_gate_fill = Array[AudioStream]([ExtResource("2_ea7nb")])
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_lh43c")
-navigation_layers = 3
 
 [node name="VesselBase" type="Sprite2D" parent="."]
 position = Vector2(0, -87)
@@ -60,8 +55,11 @@ position = Vector2(4, -20)
 scale = Vector2(0.625, 1.125)
 collision_mask = 258
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("CapsuleShape2D_padhp")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-104, -125.333, -108.8, -122.667, -113.6, -118.222, -121.6, -108.444, -126.4, -98.6667, -128, -92.4444, -124.8, -81.7778, -121.6, -73.7778, -113.6, -64, -97.6, -48, -83.2, -37.3333, -80, -30.2222, -88, -23.1111, -105.6, -4.44444, -112, 4.44445, -115.2, 12.4444, -115.2, 18.6667, -108.8, 17.7778, -108.8, 14.2222, -99.2, -0.888887, -89.6, -10.6667, -83.2, -18.6667, -75.2, -24, -73.6, -32, -88, -50.6667, -94.4, -57.7778, -100.8, -63.1111, -113.6, -80.8889, -115.2, -87.1111, -116.8, -93.3333, -113.6, -106.667, -100.8, -113.778, -89.6, -119.111, -84.8, -121.778, -88, -124.444)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(96, 17.7778, 104, 17.7778, 102.4, 10.6667, 96, -0.888887, 88, -9.77778, 83.2, -16, 73.6, -24, 67.2, -29.3333, 68.8, -33.7778, 73.6, -39.1111, 80, -43.5556, 89.6, -53.3333, 104, -66.6667, 107.2, -72.8889, 113.6, -80.8889, 115.2, -89.7778, 113.6, -99.5556, 110.4, -107.556, 102.4, -112, 100.8, -116.444, 99.2, -120.889, 91.2, -125.333, 86.4, -125.333, 88, -123.556, 92.8, -120, 97.6, -109.333, 100.8, -104.889, 102.4, -97.7778, 104, -91.5556, 102.4, -85.3333, 97.6, -76.4444, 92.8, -69.3333, 88, -64.8889, 81.6, -58.6667, 75.2, -53.3333, 68.8, -48, 59.2, -37.3333, 59.2, -28.4444, 68.8, -19.5556, 76.8, -10.6667, 88, 0.888889, 92.8, 9.77778)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-5.6, 29.3333)
@@ -79,7 +77,7 @@ horizontal_alignment = 1
 [node name="InputArea" type="Area2D" parent="."]
 position = Vector2(0, -128)
 collision_layer = 16
-collision_mask = 2
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InputArea"]
 position = Vector2(0, -32)
@@ -104,7 +102,7 @@ shape = SubResource("CircleShape2D_g5b4a")
 debug_color = Color(0, 0.635406, 0.417574, 0.42)
 
 [node name="ReleaseAgentTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 3.0
 one_shot = true
 
 [node name="SwarmNodeOnlyGate" type="StaticBody2D" parent="."]

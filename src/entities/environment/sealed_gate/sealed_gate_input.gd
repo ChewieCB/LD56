@@ -2,6 +2,7 @@ extends Node2D
 class_name SealedGateInput
 
 @export var n_agent_required = 10
+@export var is_disabled: bool = false
 
 # Only 1 of the 2 below is required
 @export var sealed_gate_door: SealedGateDoor
@@ -12,6 +13,7 @@ class_name SealedGateInput
 
 @onready var require_label: Label = $Label
 @onready var gate_target: CharacterBody2D = $SwarmTarget
+@onready var input_area: Area2D = $InputArea
 # If no more agent stored during this timer, release all agent to prevent softlock
 @onready var release_agent_timer: Timer = $ReleaseAgentTimer
 
@@ -46,33 +48,37 @@ func _ready() -> void:
 
 
 func _on_input_area_body_entered(body: Node2D) -> void:
-	if is_fulfilled:
+	if is_fulfilled or is_disabled:
 		return
 	if body is SwarmAgent:
-		var agent: SwarmAgent = body as SwarmAgent
-		GlobalSFX.play_sfx_shuffled(SFX_gate_fill)
-		if agent not in swarm_agents and swarm_agent_count < n_agent_required:
-			# Only follow other nodes in captured flock
-			agent.collision_layer = int(pow(2, 9 - 1))
-			agent.flock_view.collision_mask = int(pow(2, 9 - 1))
-			
-			agent.target = gate_target
-			agent.swarm_id = gate_id
-			
-			var agent_idx: int = swarm_director.swarm_agents.find(agent)
-			swarm_director.swarm_agents.remove_at(agent_idx)
-			agent.is_stored_in_sealed_gate = true
-			
-			swarm_agents.append(agent)
-			swarm_agent_count = swarm_agents.size()
-			
-			set_agent_close(agent)
-			
-			#var director_swarm_agents = GameManager.swarm_director.swarm_agents
-			release_agent_timer.start()
+		if body.swarm_id == 0:
+			var agent: SwarmAgent = body as SwarmAgent
+			GlobalSFX.play_sfx_shuffled(SFX_gate_fill)
+			if agent not in swarm_agents and swarm_agent_count < n_agent_required:
+				# Only follow other nodes in captured flock
+				agent.collision_layer = int(pow(2, 9 - 1))
+				agent.flock_view.collision_mask = int(pow(2, 9 - 1))
+				
+				agent.target = gate_target
+				agent.swarm_id = gate_id
+				
+				var agent_idx: int = swarm_director.swarm_agents.find(agent)
+				swarm_director.swarm_agents.remove_at(agent_idx)
+				agent.is_stored_in_sealed_gate = true
+				agent.sprite.modulate = Color.YELLOW
+				
+				swarm_agents.append(agent)
+				swarm_agent_count = swarm_agents.size()
+				
+				set_agent_close(agent)
+				
+				#var director_swarm_agents = GameManager.swarm_director.swarm_agents
+				release_agent_timer.start()
 
 
 func _physics_process(delta: float) -> void:
+	if is_disabled:
+		return
 	get_nav_path_for_swarm_agents(delta)
 
 
@@ -108,6 +114,7 @@ func open_gate():
 
 func release_all_stored_agents():
 	await get_tree().create_timer(3.0).timeout
+	input_area.monitoring = false
 	for agent in swarm_agents:
 		agent.swarm_id = 0
 		swarm_director.swarm_agents.append(agent)
@@ -117,10 +124,16 @@ func release_all_stored_agents():
 		agent.collision_layer = int(pow(2, 2 - 1))
 		agent.flock_view.collision_mask = int(pow(2, 1 - 1) + pow(2, 2 - 1))
 		set_agent_normal(agent)
+		agent.sprite.modulate = Color(1, 1, 1)
 		
 	swarm_agents = []
 	swarm_agent_count = 0
+	
+	await get_tree().create_timer(3.0).timeout
+	input_area.monitoring = true
 
 func _on_release_agent_timer_timeout() -> void:
+	if is_disabled:
+		return
 	if swarm_agent_count < n_agent_required:
 		release_all_stored_agents()

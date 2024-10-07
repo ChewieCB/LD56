@@ -2,6 +2,7 @@ extends Node2D
 class_name SapPuddle
 
 @export var agents_count: int = 5
+@export var is_regenerative: bool = false
 @export var regen_time: float = 30.0
 
 @export var SFX_sap_collected: Array[AudioStream]
@@ -104,4 +105,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			
 			await tween.finished
 			
-			regenerate()
+			if is_regenerative:
+				regenerate()
+			else:
+				self.queue_free()

@@ -33,11 +33,12 @@ SFX_swarm_contract = Array[AudioStream]([ExtResource("10_o0sva")])
 SFX_swarm_move = ExtResource("10_4e32d")
 state_chart = NodePath("StateChart")
 swarm_agent_scene = ExtResource("2_0de42")
-swarm_agent_count = 60
+swarm_agent_count = 1
 
 [node name="TargetMarker" type="CharacterBody2D" parent="."]
+z_index = 1
 collision_layer = 4
-collision_mask = 137
+collision_mask = 9
 
 [node name="Sprite2D" type="Sprite2D" parent="TargetMarker"]
 scale = Vector2(0.25, 0.25)
