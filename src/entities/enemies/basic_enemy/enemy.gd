@@ -33,6 +33,7 @@ var aggro_sfx_player: AudioStreamPlayer
 @onready var detect_area: Area2D = $PlayerDetectRange
 @onready var detect_collision_shape: CollisionShape2D = $PlayerDetectRange/CollisionShape2D
 @onready var los_raycast: RayCast2D = $LOSRaycast
+@onready var enemy_sprite: Sprite2D = $Sprite2D
 
 var current_health: float = max_health:
 	set(value):
@@ -78,11 +79,15 @@ func actor_setup():
 	navigation_initialized = true
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	var dist_from_spawn = global_position.distance_to(spawn_pos)
 	if dist_from_spawn >= max_chase_range:
 		state_chart.send_event("stop_chase")
 
+	if rotation_degrees > -90 and rotation_degrees < 90:
+		enemy_sprite.scale.y = 0.4  # Facing right
+	else:
+		enemy_sprite.scale.y = -0.4   # Facing left
 
 func _on_idle_state_entered() -> void:
 	if idle_player.stream:
@@ -126,9 +131,7 @@ func _on_wander_state_physics_processing(delta: float) -> void:
 	var next_position = nav_agent.get_next_path_position()
 	var move_dir = (next_position - current_position).normalized()
 	velocity = move_dir * speed
-	# Look at moving position
-	var target_angle = velocity.angle()
-	rotation = lerp_angle(rotation, target_angle, ROTATION_SPEED * delta)
+	keep_looking_at_pos(delta, next_position)
 	move_and_slide()
 
 
@@ -175,9 +178,7 @@ func _on_track_state_physics_processing(delta: float) -> void:
 	var next_position = nav_agent.get_next_path_position()
 	var move_dir = (next_position - current_position).normalized()
 	velocity = move_dir * speed
-	# Look at moving position
-	var target_angle = velocity.angle()
-	rotation = lerp_angle(rotation, target_angle, ROTATION_SPEED * delta)
+	keep_looking_at_pos(delta, next_position)
 	move_and_slide()
 
 
