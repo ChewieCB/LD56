@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://by45v52dchtht"]
+
+[ext_resource type="Texture2D" uid="uid://brct1kbsg135o" path="res://assets/bg/parallax/bg_parallax_0.png" id="1_sgmld"]
+[ext_resource type="Texture2D" uid="uid://wiqtysvbol1v" path="res://assets/bg/parallax/bg_parallax_1.png" id="2_a1v67"]
+[ext_resource type="Texture2D" uid="uid://d4m2nj3qf4kvh" path="res://assets/bg/parallax/bg_parallax_6.png" id="3_8vm2b"]
+[ext_resource type="Texture2D" uid="uid://califjsnesmsy" path="res://assets/bg/parallax/bg_parallax_2.png" id="4_tm2uu"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+texture = ExtResource("1_sgmld")
+centered = false
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.2, 0)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer5"]
+texture = ExtResource("2_a1v67")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.35, 0)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2"]
+texture = ExtResource("3_8vm2b")
+centered = false
+
+[node name="ParallaxLayer7" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.6, 0)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer7"]
+texture = ExtResource("4_tm2uu")
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3"]
+centered = false
+
+[node name="ParallaxLayer6" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer6"]
+centered = false
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4"]
+centered = false

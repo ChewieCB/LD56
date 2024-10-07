@@ -116,6 +116,8 @@ DEBUG_player_toggle_fire_status={
 2d_physics/layer_5="Area of Effect"
 2d_physics/layer_6="Enemy"
 2d_physics/layer_7="Enemy Attack"
+2d_physics/layer_8="Swarm Controller Barrier"
+2d_physics/layer_9="Non-Managed Swarm"
 
 [rendering]
 

@@ -18,9 +18,12 @@ signal target_updated(agent: SwarmAgent, new_target: CharacterBody2D)
 @export var state_chart: StateChart
 @export var max_health: float = 40.0
 
+@onready var flock_view: Area2D = $FlockView
 @onready var flock_view_collider: CollisionShape2D = $FlockView/CollisionShape2D
 @onready var sprite: Sprite2D = $Icon
 @onready var agent_collider: CollisionShape2D = $CollisionShape2D
+
+var is_in_player_swarm: bool = true
 
 var collision_radius: float:
 	set(value):
