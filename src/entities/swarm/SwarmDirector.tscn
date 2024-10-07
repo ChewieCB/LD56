@@ -37,7 +37,7 @@ swarm_agent_count = 1
 
 [node name="TargetMarker" type="CharacterBody2D" parent="."]
 collision_layer = 4
-collision_mask = 137
+collision_mask = 9
 
 [node name="Sprite2D" type="Sprite2D" parent="TargetMarker"]
 scale = Vector2(0.25, 0.25)

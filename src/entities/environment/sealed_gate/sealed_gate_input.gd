@@ -13,6 +13,7 @@ class_name SealedGateInput
 
 @onready var require_label: Label = $Label
 @onready var gate_target: CharacterBody2D = $SwarmTarget
+@onready var input_area: Area2D = $InputArea
 # If no more agent stored during this timer, release all agent to prevent softlock
 @onready var release_agent_timer: Timer = $ReleaseAgentTimer
 
@@ -113,6 +114,7 @@ func open_gate():
 
 func release_all_stored_agents():
 	await get_tree().create_timer(3.0).timeout
+	input_area.monitoring = false
 	for agent in swarm_agents:
 		agent.swarm_id = 0
 		swarm_director.swarm_agents.append(agent)
@@ -126,6 +128,9 @@ func release_all_stored_agents():
 		
 	swarm_agents = []
 	swarm_agent_count = 0
+	
+	await get_tree().create_timer(3.0).timeout
+	input_area.monitoring = true
 
 func _on_release_agent_timer_timeout() -> void:
 	if is_disabled:
