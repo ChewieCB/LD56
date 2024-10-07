@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://baeg7c16aji2u"]
+[gd_scene load_steps=24 format=3 uid="uid://baeg7c16aji2u"]
 
 [ext_resource type="Script" path="res://src/scenes/main/title_screen/title_screen.gd" id="1_uqkmj"]
 [ext_resource type="Texture2D" uid="uid://brct1kbsg135o" path="res://assets/bg/parallax/bg_parallax_0.png" id="2_6yv16"]
@@ -9,8 +9,11 @@
 [ext_resource type="Shader" path="res://src/utils/shader/wind_sway.gdshader" id="5_r4idp"]
 [ext_resource type="Texture2D" uid="uid://ccgrg4sfll718" path="res://assets/sprite/env/lightbulb_grass.png" id="5_sh6h8"]
 [ext_resource type="Texture2D" uid="uid://dj7feymuphnh2" path="res://assets/sprite/swarm/swarm_sprite_2.png" id="8_14033"]
+[ext_resource type="Texture2D" uid="uid://bmm3mvrjx1y1b" path="res://addons/kenney_fantasy_ui_border/Divider Fade/divider-fade-002.png" id="9_by5rm"]
 [ext_resource type="Texture2D" uid="uid://dxxyxffr24eve" path="res://assets/sprite/swarm/swarm_sprite_1.png" id="9_h8py5"]
+[ext_resource type="Texture2D" uid="uid://ux86tl6nm3i1" path="res://addons/kenney_fantasy_ui_border/Divider Fade/divider-fade-001.png" id="9_w8c77"]
 [ext_resource type="AudioStream" uid="uid://cy70vylc0p5kp" path="res://assets/bgm/lachlan-sketch2-60bpm-Abmin-0.2.mp3" id="10_ahqvm"]
+[ext_resource type="Texture2D" uid="uid://d3x86mfebqrp7" path="res://addons/kenney_fantasy_ui_border/Border/panel-border-005.png" id="11_6g5pd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g8ysj"]
 shader = ExtResource("3_55loa")
@@ -207,6 +210,28 @@ text = "Will o' the Wisp"
 horizontal_alignment = 1
 autowrap_mode = 3
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="TitleMenu"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 64.0
+offset_top = -136.0
+offset_right = -56.0
+offset_bottom = -116.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="TitleMenu/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("9_by5rm")
+
+[node name="TextureRect2" type="TextureRect" parent="TitleMenu/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("9_by5rm")
+flip_h = true
+
 [node name="VBoxContainer" type="VBoxContainer" parent="TitleMenu"]
 layout_mode = 1
 anchors_preset = 8
@@ -214,10 +239,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -102.5
-offset_top = 64.0
-offset_right = 97.5
-offset_bottom = 276.0
+offset_left = -100.0
+offset_top = 26.0
+offset_right = 100.0
+offset_bottom = 286.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -245,20 +270,33 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Quit"
 
-[node name="VersionLabel" type="Label" parent="TitleMenu"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TitleMenu"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -76.0
-offset_top = -23.0
-offset_right = 76.0
+offset_left = -117.0
+offset_top = -45.0
+offset_right = 117.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="Divider" type="TextureRect" parent="TitleMenu/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_w8c77")
+
+[node name="VersionLabel" type="Label" parent="TitleMenu/HBoxContainer"]
+layout_mode = 2
 text = "v0.1"
 horizontal_alignment = 1
+
+[node name="Divider2" type="TextureRect" parent="TitleMenu/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_w8c77")
+flip_h = true
 
 [node name="CreditPanel" type="ColorRect" parent="."]
 visible = false
@@ -295,6 +333,19 @@ Artist: Redvirus, Grace, Ashwok
 Story: Everyone"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CreditPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_6g5pd")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(640, 200)

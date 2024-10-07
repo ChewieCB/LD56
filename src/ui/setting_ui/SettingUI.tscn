@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://biqm56x6ewbmo"]
+[gd_scene load_steps=5 format=3 uid="uid://biqm56x6ewbmo"]
 
 [ext_resource type="Script" path="res://src/ui/setting_ui/setting_ui.gd" id="1_05qbb"]
 [ext_resource type="PackedScene" uid="uid://cnuglobw5ctj7" path="res://src/ui/setting_ui/KeybindButton.tscn" id="2_b71wb"]
+[ext_resource type="Texture2D" uid="uid://dorrpthe48fap" path="res://addons/kenney_fantasy_ui_border/Border/panel-border-010.png" id="3_1swbd"]
+[ext_resource type="Texture2D" uid="uid://ux86tl6nm3i1" path="res://addons/kenney_fantasy_ui_border/Divider Fade/divider-fade-001.png" id="3_jminc"]
 
 [node name="SettingUI" type="Control"]
 custom_minimum_size = Vector2(400, 400)
@@ -36,18 +38,30 @@ current_tab = 0
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Title" type="Label" parent="TabContainer/Control"]
+[node name="TitleSection" type="HBoxContainer" parent="TabContainer/Control"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -72.0
-offset_right = 72.0
-offset_bottom = 55.0
+offset_left = -168.0
+offset_right = 168.0
+offset_bottom = 72.0
 grow_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Control/TitleSection"]
+layout_mode = 2
+texture = ExtResource("3_jminc")
+
+[node name="Title" type="Label" parent="TabContainer/Control/TitleSection"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Control"
 horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="TabContainer/Control/TitleSection"]
+layout_mode = 2
+texture = ExtResource("3_jminc")
+flip_h = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Control"]
 custom_minimum_size = Vector2(0, 100)
@@ -92,18 +106,30 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="Title" type="Label" parent="TabContainer/Graphic"]
+[node name="TitleSection" type="HBoxContainer" parent="TabContainer/Graphic"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -75.5
-offset_right = 75.5
-offset_bottom = 55.0
+offset_left = -168.0
+offset_right = 168.0
+offset_bottom = 72.0
 grow_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Graphic/TitleSection"]
+layout_mode = 2
+texture = ExtResource("3_jminc")
+
+[node name="Title" type="Label" parent="TabContainer/Graphic/TitleSection"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Graphic"
 horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="TabContainer/Graphic/TitleSection"]
+layout_mode = 2
+texture = ExtResource("3_jminc")
+flip_h = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Graphic"]
 layout_mode = 0
@@ -234,18 +260,30 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="Title" type="Label" parent="TabContainer/Audio"]
+[node name="TitleSection" type="HBoxContainer" parent="TabContainer/Audio"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -71.0
-offset_right = 71.0
-offset_bottom = 55.0
+offset_left = -168.5
+offset_right = 168.5
+offset_bottom = 72.0
 grow_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Audio/TitleSection"]
+layout_mode = 2
+texture = ExtResource("3_jminc")
+
+[node name="Title" type="Label" parent="TabContainer/Audio/TitleSection"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Audio"
 horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="TabContainer/Audio/TitleSection"]
+layout_mode = 2
+texture = ExtResource("3_jminc")
+flip_h = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Audio"]
 layout_mode = 0
@@ -395,14 +433,46 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -60.5
-offset_top = -100.0
-offset_right = 60.5
-offset_bottom = -50.0
+offset_left = -64.0
+offset_top = -88.0
+offset_right = 57.0
+offset_bottom = -38.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 22
 text = "Close"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="BackButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_1swbd")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -408.0
+offset_top = -208.0
+offset_right = 388.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_1swbd")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
 
 [connection signal="tab_clicked" from="TabContainer" to="." method="_on_tab_container_tab_clicked"]
 [connection signal="tab_hovered" from="TabContainer" to="." method="_on_tab_container_tab_hovered"]

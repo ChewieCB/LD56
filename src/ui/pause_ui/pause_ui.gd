@@ -50,3 +50,7 @@ func _on_title_screen_button_pressed() -> void:
 
 func play_ui_hover_sound():
 	SoundManager.play_button_hover_sfx()
+
+
+func _on_retry_button_pressed() -> void:
+	GameManager.retry_level()
