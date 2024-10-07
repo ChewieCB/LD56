@@ -63,6 +63,7 @@ func _on_input_area_body_entered(body: Node2D) -> void:
 				agent.swarm_id = gate_id
 				
 				var agent_idx: int = swarm_director.swarm_agents.find(agent)
+				swarm_director.swarms_agents_captured += 1
 				swarm_director.swarm_agents.remove_at(agent_idx)
 				agent.is_stored_in_sealed_gate = true
 				agent.sprite.modulate = Color.YELLOW
@@ -118,6 +119,7 @@ func release_all_stored_agents():
 	for agent in swarm_agents:
 		agent.swarm_id = 0
 		swarm_director.swarm_agents.append(agent)
+		swarm_director.swarms_agents_captured -= 1
 		agent.target = swarm_director.target
 		agent.is_stored_in_sealed_gate = false
 		# Follow original flock again
