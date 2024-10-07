@@ -6,7 +6,7 @@
 [ext_resource type="Shader" path="res://src/utils/shader/scrolling_background.gdshader" id="3_55loa"]
 [ext_resource type="Texture2D" uid="uid://d4m2nj3qf4kvh" path="res://assets/bg/parallax/bg_parallax_6.png" id="3_ajfpa"]
 [ext_resource type="Texture2D" uid="uid://califjsnesmsy" path="res://assets/bg/parallax/bg_parallax_2.png" id="4_f1my6"]
-[ext_resource type="Shader" path="res://src/utils/shader/2d_wind_sway.gdshader" id="5_757qd"]
+[ext_resource type="Shader" path="res://src/utils/shader/wind_sway.gdshader" id="5_r4idp"]
 [ext_resource type="Texture2D" uid="uid://ccgrg4sfll718" path="res://assets/sprite/env/lightbulb_grass.png" id="5_sh6h8"]
 [ext_resource type="Texture2D" uid="uid://dj7feymuphnh2" path="res://assets/sprite/swarm/swarm_sprite_2.png" id="8_14033"]
 [ext_resource type="Texture2D" uid="uid://dxxyxffr24eve" path="res://assets/sprite/swarm/swarm_sprite_1.png" id="9_h8py5"]
@@ -19,7 +19,7 @@ shader_parameter/scale = 1.0
 shader_parameter/offset = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3gfmc"]
-shader = ExtResource("5_757qd")
+shader = ExtResource("5_r4idp")
 shader_parameter/speed = 1.0
 shader_parameter/minStrength = 0.05
 shader_parameter/maxStrength = 0.01
@@ -31,7 +31,7 @@ shader_parameter/heightOffset = null
 shader_parameter/offset = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cskjw"]
-shader = ExtResource("5_757qd")
+shader = ExtResource("5_r4idp")
 shader_parameter/speed = 1.0
 shader_parameter/minStrength = 0.05
 shader_parameter/maxStrength = 0.01
@@ -43,7 +43,7 @@ shader_parameter/heightOffset = 0.0
 shader_parameter/offset = 10.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b4rlw"]
-shader = ExtResource("5_757qd")
+shader = ExtResource("5_r4idp")
 shader_parameter/speed = 1.0
 shader_parameter/minStrength = 0.05
 shader_parameter/maxStrength = 0.01
