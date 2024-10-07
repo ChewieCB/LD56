@@ -58,7 +58,7 @@ func finish_level():
 	level_finished = true
 	get_tree().paused = true
 
-func game_oveeeer():
+func game_over():
 	await get_tree().create_timer(0.5).timeout
 	game_ui.show_game_over_screen()
 	level_finished = true

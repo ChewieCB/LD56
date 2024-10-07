@@ -22,7 +22,7 @@ var active_death_sfx_players: Array[AudioStreamPlayer]
 
 @export var state_chart: StateChart
 @export var swarm_agent_scene: PackedScene
-var invuln_flag: bool = true
+@export var invuln_flag: bool = true
 @export var swarm_agent_count: int = 0:
 	set(value):
 		swarm_agent_count = value

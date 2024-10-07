@@ -94,7 +94,7 @@ properties = SubResource("Resource_ii7ad")
 
 [sub_resource type="Resource" id="Resource_ww2vf"]
 script = ExtResource("2_ofw45")
-texture_idx = 0
+texture_idx = 3
 flip = false
 width = 1.0
 
