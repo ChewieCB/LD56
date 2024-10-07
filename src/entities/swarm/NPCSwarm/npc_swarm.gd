@@ -1,8 +1,6 @@
 extends Node2D
 class_name NPCSwarm
 
-signal swarm_status_changed
-
 @export var swarm_id: int = 2:
 	set(value):
 		var changed = swarm_id != value
@@ -58,7 +56,6 @@ var swarm_agents: Array:
 		if swarm_agents.size() != swarm_agent_count:
 			swarm_agent_count = swarm_agents.size()
 var removed_agent_debug: Vector2
-var is_fire = false # Is on fire element, scare away predators
 var navigation_initialized = false
 
 var current_swarm_attributes: Dictionary
