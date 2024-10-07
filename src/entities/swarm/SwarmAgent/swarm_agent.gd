@@ -20,8 +20,9 @@ signal target_updated(agent: SwarmAgent, new_target: CharacterBody2D)
 
 @onready var flock_view: Area2D = $FlockView
 @onready var flock_view_collider: CollisionShape2D = $FlockView/CollisionShape2D
-@onready var sprite: Sprite2D = $Icon
+@export var sprite: Sprite2D
 @onready var agent_collider: CollisionShape2D = $CollisionShape2D
+
 
 var is_in_sealed_vessel = false
 var swarm_id: int = 0:
@@ -163,7 +164,6 @@ func _on_health_dead_state_entered() -> void:
 	sprite.modulate = Color.BLACK
 	await get_tree().create_timer(0.4).timeout
 	GameManager.faes_killed += 1
-	GameManager.swarm_director.check_game_over()
 	call_deferred("queue_free")
 
 

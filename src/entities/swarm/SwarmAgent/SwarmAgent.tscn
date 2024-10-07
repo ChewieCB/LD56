@@ -14,7 +14,7 @@ radius = 2.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_tbyxv"]
 radius = 15.0
 
-[node name="SwarmAgent" type="CharacterBody2D" node_paths=PackedStringArray("state_chart")]
+[node name="SwarmAgent" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "sprite")]
 z_index = 1
 collision_layer = 2
 collision_mask = 17
@@ -23,6 +23,7 @@ script = ExtResource("1_dxyk5")
 max_speed = 350.0
 algin_force = 0.02
 state_chart = NodePath("StateChart")
+sprite = NodePath("Icon")
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(-0.5, 0)

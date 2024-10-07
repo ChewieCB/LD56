@@ -11,6 +11,12 @@ class_name SealedGateDoor
 @onready var door_open_pos: Marker2D = $DoorOpenPos
 @onready var door_closed_pos: Marker2D = $DoorClosedPos
 
+@export var is_open: bool = false
+
+func _ready():
+	if is_open:
+		open()
+
 
 func open():
 	var tween = get_tree().create_tween()
