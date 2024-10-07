@@ -2107,22 +2107,27 @@ rotation = 0.117211
 [node name="SapPuddle2" parent="SapPuddleHolder" instance=ExtResource("18_b6g5n")]
 position = Vector2(556, 509)
 rotation = 0.117211
+agents_count = 3
 
 [node name="SapPuddle3" parent="SapPuddleHolder" instance=ExtResource("18_b6g5n")]
 position = Vector2(716, 549)
 rotation = 0.240003
+agents_count = 4
 
 [node name="SapPuddle4" parent="SapPuddleHolder" instance=ExtResource("18_b6g5n")]
 position = Vector2(378, 101)
 rotation = 2.78447
+agents_count = 7
 
 [node name="SapPuddle5" parent="SapPuddleHolder" instance=ExtResource("18_b6g5n")]
 position = Vector2(541, 73)
 rotation = 3.08267
+agents_count = 3
 
 [node name="SapPuddle6" parent="SapPuddleHolder" instance=ExtResource("18_b6g5n")]
 position = Vector2(783, 118)
 rotation = -2.80168
+agents_count = 8
 
 [node name="ObstacleHolder" type="Node2D" parent="."]
 

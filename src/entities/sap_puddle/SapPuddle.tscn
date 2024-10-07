@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://addons/rmsmartshape/materials/edge_material_metadata.gd" id="5_vtssg"]
 [ext_resource type="Script" path="res://addons/rmsmartshape/materials/shape_material.gd" id="7_0gky3"]
 [ext_resource type="Texture2D" uid="uid://7us5spab1un" path="res://assets/sprite/sap/sap_texture_64.png" id="11_ahkcq"]
-[ext_resource type="Texture2D" uid="uid://dxxyxffr24eve" path="res://assets/sprite/swarm/swarm_sprite_1.png" id="13_vgpu6"]
+[ext_resource type="PackedScene" uid="uid://cdd0eibgoqno0" path="res://src/entities/sap_puddle/AgentMarker.tscn" id="13_v0r4v"]
 
 [sub_resource type="Resource" id="Resource_e1ua0"]
 script = ExtResource("2_ofw45")
@@ -300,49 +300,6 @@ disabled = true
 
 [node name="AgentMarkers" type="Node2D" parent="."]
 
-[node name="Marker2D" type="Marker2D" parent="AgentMarkers"]
-position = Vector2(-26, -9)
-
-[node name="SwarmSprite" type="Sprite2D" parent="AgentMarkers/Marker2D"]
-modulate = Color(0.31, 0.31, 0.31, 1)
-position = Vector2(-0.5, 0)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("13_vgpu6")
-
-[node name="Marker2D2" type="Marker2D" parent="AgentMarkers"]
-position = Vector2(-9, -23)
-
-[node name="SwarmSprite" type="Sprite2D" parent="AgentMarkers/Marker2D2"]
-modulate = Color(0.31, 0.31, 0.31, 1)
-position = Vector2(-0.5, 0)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("13_vgpu6")
-
-[node name="Marker2D3" type="Marker2D" parent="AgentMarkers"]
-position = Vector2(6, -10)
-
-[node name="SwarmSprite" type="Sprite2D" parent="AgentMarkers/Marker2D3"]
-modulate = Color(0.31, 0.31, 0.31, 1)
-position = Vector2(-0.5, 0)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("13_vgpu6")
-
-[node name="Marker2D4" type="Marker2D" parent="AgentMarkers"]
-position = Vector2(16, -23)
-
-[node name="SwarmSprite" type="Sprite2D" parent="AgentMarkers/Marker2D4"]
-modulate = Color(0.31, 0.31, 0.31, 1)
-position = Vector2(-0.5, 0)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("13_vgpu6")
-
-[node name="Marker2D5" type="Marker2D" parent="AgentMarkers"]
-position = Vector2(28, -11)
-
-[node name="SwarmSprite" type="Sprite2D" parent="AgentMarkers/Marker2D5"]
-modulate = Color(0.31, 0.31, 0.31, 1)
-position = Vector2(-0.5, 0)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("13_vgpu6")
+[node name="Marker2D" parent="AgentMarkers" instance=ExtResource("13_v0r4v")]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
