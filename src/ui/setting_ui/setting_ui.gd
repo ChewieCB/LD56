@@ -31,10 +31,6 @@ var keybindable_action_list = {
 	"pause_menu": "Pause Menu",
 	"huddle": "Huddle/Clump",
 	"spread": "Spread",
-	"DEBUG_add_agent": "DEBUG_add_agent",
-	"DEBUG_remove_agent": "DEBUG_remove_agent",
-	"DEBUG_player_toggle_fire_status": "DEBUG_player_toggle_fire_status",
-	
 }
 var is_remapping = false
 var action_to_remap = null
