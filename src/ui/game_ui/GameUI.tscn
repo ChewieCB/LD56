@@ -229,7 +229,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 40
-text = "Faes left: 10"
+text = "Wisps remaining: 10"
 
 [connection signal="pressed" from="VictoryScreen/HBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
 [connection signal="pressed" from="VictoryScreen/HBoxContainer/TitleButton" to="." method="_on_title_button_pressed"]

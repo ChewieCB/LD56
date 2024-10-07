@@ -83,7 +83,7 @@ position = Vector2(-1, -45)
 shape = SubResource("RectangleShape2D_aucra")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-modulate = Color(0.223167, 1, 0.21, 0.14902)
+modulate = Color(0.588, 0.549, 0.196, 0.21)
 position = Vector2(0, -208)
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_odmf5")

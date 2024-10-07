@@ -23,6 +23,7 @@ var active_death_sfx_players: Array[AudioStreamPlayer]
 @export var state_chart: StateChart
 @export var swarm_agent_scene: PackedScene
 @export var invuln_flag: bool = true
+var swarms_agents_captured: int = 0
 @export var swarm_agent_count: int = 0:
 	set(value):
 		swarm_agent_count = value
@@ -64,7 +65,7 @@ var swarm_agents: Array:
 		GameManager.game_ui.update_agent_count_ui()
 		if prev_swarm_count == 0 and swarm_agent_count > 0 and invuln_flag:
 			invuln_flag = false
-		if swarm_agent_count == 0 and not invuln_flag:
+		if swarm_agent_count == 0 and not invuln_flag and swarms_agents_captured == 0:
 			GameManager.swarm_director.check_game_over()
 var removed_agent_debug: Vector2
 var is_spread_out = false # Is in spread out formation, scare away predators
@@ -175,25 +176,27 @@ func get_nav_path_for_swarm_agents(_delta: float) -> void:
 
 
 func add_agent(new_position: Vector2 = centroid.global_position) -> SwarmAgent:
-	var new_agent = swarm_agent_scene.instantiate()
-	new_agent.position = to_local(new_position)
-	new_agent.target = target
-	
-	new_agent.died.connect(func(_agent):
-		GlobalSFX.play_batched_sfx(
-			SFX_agent_death, active_death_sfx_players,
-			max_simultaneous_sfx, -12.0, true
+	var new_agent: SwarmAgent
+	if swarm_agents.size() <= 100:
+		new_agent = swarm_agent_scene.instantiate()
+		new_agent.position = to_local(new_position)
+		new_agent.target = target
+		
+		new_agent.died.connect(func(_agent):
+			GlobalSFX.play_batched_sfx(
+				SFX_agent_death, active_death_sfx_players,
+				max_simultaneous_sfx, -12.0, true
+			)
 		)
-	)
-	
-	call_deferred("add_child", new_agent)
+		
+		call_deferred("add_child", new_agent)
 
-	if new_agent not in swarm_agents:
-		swarm_agents.append(new_agent)
-		swarm_agent_count = swarm_agents.size()
+		if new_agent not in swarm_agents:
+			swarm_agents.append(new_agent)
+			swarm_agent_count = swarm_agents.size()
 
-	for key in current_swarm_attributes.keys():
-		new_agent.set(key, current_swarm_attributes[key])
+		for key in current_swarm_attributes.keys():
+			new_agent.set(key, current_swarm_attributes[key])
 	
 	GlobalSFX.play_sfx_shuffled(SFX_agent_spawn, "", true)
 	GameManager.game_ui.update_agent_count_ui()

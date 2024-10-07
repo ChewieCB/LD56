@@ -206,7 +206,7 @@ offset_right = 157.5
 offset_bottom = 168.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 50
-text = "Will of the Wisp"
+text = "Will o' the Wisp"
 horizontal_alignment = 1
 autowrap_mode = 3
 
@@ -327,9 +327,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 24
 text = "Made with love by
-Programmers: ChewieCB, Lam Nguyen
-Musicians:Stead, Lachlan James
-Artists: Redvirus, Grace Althea, Akashdeep Hehar"
+Programmers: Jack McCaffrey, Lam Nguyen
+Musician: Lachlan James, Josh Stead
+Artist: Redvirus, Grace, Ashwok
+Story: Everyone"
 horizontal_alignment = 1
 vertical_alignment = 1
 
