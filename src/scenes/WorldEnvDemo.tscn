@@ -415,7 +415,7 @@ normal_range = SubResource("Resource_i6apn")
 weld = true
 taper_sharp_corners = true
 render = true
-z_index = 0
+z_index = -1
 z_as_relative = true
 offset = 0.0
 
@@ -1999,33 +1999,27 @@ position = Vector2(715, 246)
 swarm_agent_count = 5
 
 [node name="SapPuddle" parent="." instance=ExtResource("18_b6g5n")]
-z_index = 1
 position = Vector2(378, 483)
 rotation = 0.117211
 
 [node name="SapPuddle2" parent="." instance=ExtResource("18_b6g5n")]
-z_index = 1
-position = Vector2(568, 516)
+position = Vector2(556, 509)
 rotation = 0.117211
 
 [node name="SapPuddle3" parent="." instance=ExtResource("18_b6g5n")]
-z_index = 1
-position = Vector2(709, 564)
+position = Vector2(716, 549)
 rotation = 0.240003
 
 [node name="SapPuddle4" parent="." instance=ExtResource("18_b6g5n")]
-z_index = 1
-position = Vector2(378, 90)
+position = Vector2(378, 101)
 rotation = 2.78447
 
 [node name="SapPuddle5" parent="." instance=ExtResource("18_b6g5n")]
-z_index = 1
-position = Vector2(548, 61)
+position = Vector2(541, 73)
 rotation = 3.08267
 
 [node name="SapPuddle6" parent="." instance=ExtResource("18_b6g5n")]
-z_index = 1
-position = Vector2(779, 106)
+position = Vector2(783, 118)
 rotation = -2.80168
 scale = Vector2(1, 1)
 

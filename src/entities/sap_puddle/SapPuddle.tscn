@@ -201,7 +201,6 @@ script = ExtResource("1_m3v0x")
 SFX_sap_collected = Array[AudioStream]([ExtResource("2_qyjyw"), ExtResource("3_2o824")])
 
 [node name="PuddleMesh" type="Node2D" parent="."]
-modulate = Color(1, 1, 1, 0.505882)
 position = Vector2(-105, -36)
 script = ExtResource("1_044su")
 _points = SubResource("Resource_mjycp")
