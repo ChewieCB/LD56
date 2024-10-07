@@ -26,6 +26,9 @@ class_name Enemy
 @export var dash_delay = 0.5 # Aka reaction time, time the enemy need to prepare before dash
 @export var dash_duration = 2
 @export var dash_decel_rate = 1.0
+# Flee
+@export var min_agent_to_flee = 10
+@export var min_flee_time = 2.0
 
 @onready var state_chart: StateChart = $StateChart
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
@@ -44,15 +47,16 @@ var spawn_pos: Vector2
 var found_wander_pos = false
 var dash_timer = 0
 var dash_delay_timer = 0
+var flee_timer = 0
 var attack_cooldown_timer = 0
 var dash_velocity: Vector2 = Vector2.ZERO
-var swarm_agent_within_range = false
+var n_swarm_agent_within_range = 0
 var targeted_swarm_agent: SwarmAgent = null
 var aggro_sfx_player: AudioStreamPlayer
 var n_agent_killed_this_attack = 0
 
 const ROTATION_SPEED = 4.0
-const FLEE_SPEED_MODIFIER = 1.5
+const FLEE_SPEED_MODIFIER = 2
 
 func _ready() -> void:
 	# Wait for important nodes to register themselves to GameManagers
@@ -100,16 +104,16 @@ func _on_idle_state_entered() -> void:
 
 func _on_detect_range_body_entered(body: Node2D) -> void:
 	if body is SwarmAgent and not body.is_in_sealed_vessel:
-		swarm_agent_within_range = true
-		if GameManager.swarm_director.is_fire:
+		n_swarm_agent_within_range += 1
+		if GameManager.swarm_director.is_spread_out \
+			and GameManager.swarm_director.swarm_agent_count >= min_agent_to_flee:
 			state_chart.send_event("flee_from_player")
 		else:
 			state_chart.send_event("player_spotted")
 
 func _on_player_detect_range_body_exited(body: Node2D) -> void:
 	if body is SwarmAgent and not body.is_in_sealed_vessel:
-		swarm_agent_within_range = false
-		state_chart.send_event("player_faraway")
+		n_swarm_agent_within_range -= 1
 
 
 func _on_wander_state_entered() -> void:
@@ -237,13 +241,21 @@ func keep_looking_at_pos(delta: float, target_pos: Vector2):
 	rotation = lerp_angle(rotation, target_angle, ROTATION_SPEED * delta)
 
 func check_swarm_status():
-	if GameManager.swarm_director.is_fire and swarm_agent_within_range:
+	if GameManager.swarm_director.is_spread_out \
+		and n_swarm_agent_within_range > 0 \
+		and GameManager.swarm_director.swarm_agent_count >= min_agent_to_flee:
 		state_chart.send_event("flee_from_player")
 
+func _on_flee_state_entered() -> void:
+	flee_timer = 0
+
 func _on_flee_state_physics_processing(delta: float) -> void:
-	var direction_away = (global_position - GameManager.swarm_director.centroid.global_position).normalized()
+	flee_timer += delta
+	if flee_timer > min_flee_time:
+		state_chart.send_event("stop_fleeing")
+	var direction_away = (global_position - GameManager.swarm_director.target.global_position).normalized()
 	velocity = direction_away * speed * FLEE_SPEED_MODIFIER
-	keep_looking_at_pos(delta, global_position + velocity)
+	keep_looking_at_pos(delta, global_position + direction_away)
 	move_and_slide()
 
 
@@ -284,3 +296,5 @@ func _on_attacking_state_entered() -> void:
 
 func _on_dead_state_entered() -> void:
 	GlobalSFX.play_sfx_shuffled(SFX_death)
+
+

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://yofeqq7oovkd"]
+[gd_scene load_steps=18 format=3 uid="uid://yofeqq7oovkd"]
 
 [ext_resource type="PackedScene" uid="uid://naoexqroboiq" path="res://src/entities/camera/FollowCamera.tscn" id="1_wnrtv"]
 [ext_resource type="PackedScene" uid="uid://1bwiqif7rpyi" path="res://src/entities/swarm/SwarmDirector.tscn" id="2_7t3w0"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://q5pp8mltm8v8" path="res://assets/sprite/bg1.png" id="8_g2h3u"]
 [ext_resource type="PackedScene" uid="uid://dosbbm6uk86ho" path="res://src/ui/game_ui/GameUI.tscn" id="9_gbfpw"]
 [ext_resource type="PackedScene" uid="uid://bm3vo4ufjrs7q" path="res://src/entities/enemies/basic_enemy/GreenWasp.tscn" id="10_85oaq"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="13_v7dl8"]
 [ext_resource type="PackedScene" uid="uid://dj0hbiapwuolw" path="res://src/entities/enemies/basic_enemy/RedWasp.tscn" id="14_vg6ee"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ofayr"]
@@ -184,6 +185,11 @@ texture = ExtResource("8_g2h3u")
 layer = 100
 
 [node name="GameUI" parent="CanvasLayer2" instance=ExtResource("9_gbfpw")]
+
+[node name="StateChartDebugger" parent="CanvasLayer2" instance=ExtResource("13_v7dl8")]
+offset_left = 736.0
+offset_bottom = -304.0
+initial_node_to_watch = NodePath("../../GreenWasp")
 
 [node name="GreenWasp" parent="." instance=ExtResource("10_85oaq")]
 position = Vector2(208, 223)

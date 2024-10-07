@@ -156,7 +156,7 @@ script = ExtResource("10_kwsrt")
 [node name="toIdle" type="Node" parent="StateChart/Root/Movement/Flee"]
 script = ExtResource("11_ck2ri")
 to = NodePath("../../Idle")
-event = &"player_faraway"
+event = &"stop_fleeing"
 delay_in_seconds = "0.0"
 
 [node name="Health" type="Node" parent="StateChart/Root"]
@@ -241,6 +241,7 @@ stream = ExtResource("12_80ivt")
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Track" to="." method="_on_track_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Movement/Dash" to="." method="_on_dash_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Dash" to="." method="_on_dash_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Movement/Flee" to="." method="_on_flee_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Flee" to="." method="_on_flee_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Health/Dead" to="." method="_on_dead_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Attack/Cooldown" to="." method="_on_cooldown_state_entered"]

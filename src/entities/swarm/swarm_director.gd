@@ -52,7 +52,7 @@ var swarm_agents: Array:
 			swarm_agent_count = swarm_agents.size()
 			GameManager.game_ui.update_agent_count_ui()
 var removed_agent_debug: Vector2
-var is_fire = false # Is on fire element, scare away predators
+var is_spread_out = false # Is in spread out formation, scare away predators
 var navigation_initialized = false
 
 var current_swarm_attributes: Dictionary
@@ -106,16 +106,6 @@ func actor_setup():
 	navigation_initialized = true
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("DEBUG_player_toggle_fire_status"):
-		is_fire = !is_fire
-		swarm_status_changed.emit()
-		if is_fire:
-			debug_status_sprite.self_modulate = Color.ORANGE
-		else:
-			debug_status_sprite.self_modulate = Color.GREEN
-
-
 func _physics_process(delta: float) -> void:
 	target.move_and_slide()
 	
@@ -124,8 +114,12 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_just_released("huddle"):
 		state_chart.send_event("reset_distribution")
 	elif Input.is_action_just_pressed("spread"):
+		is_spread_out = true
+		swarm_status_changed.emit()
 		state_chart.send_event("spread_out")
 	elif Input.is_action_just_released("spread"):
+		is_spread_out = false
+		swarm_status_changed.emit()
 		state_chart.send_event("reset_distribution")
 	
 	
