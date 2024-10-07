@@ -106,6 +106,7 @@ func set_agent_normal(agent: SwarmAgent):
 func open_gate():
 	release_agent_timer.stop()
 	is_fulfilled = true
+	await get_tree().create_timer(1.6).timeout
 	if is_end_of_level:
 		GameManager.finish_level()
 	else:
