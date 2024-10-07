@@ -5,7 +5,6 @@ signal damage_swarm_agent(agent: SwarmAgent, damage: float)
 
 @export var damage: float = 20.0
 
-
 func _ready() -> void:
 	add_to_group("obstacles")
 

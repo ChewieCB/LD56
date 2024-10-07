@@ -1,0 +1,80 @@
+[gd_scene load_steps=13 format=3 uid="uid://cecvv23b1casj"]
+
+[ext_resource type="Script" path="res://src/entities/obstacle/zappy_crystal/zappy_crystal.gd" id="1_1f15v"]
+[ext_resource type="Texture2D" uid="uid://cpn55jtfb7gc3" path="res://assets/sprite/env/crystal2.png" id="2_08fm5"]
+[ext_resource type="Shader" path="res://src/utils/shader/electrical_effect.gdshader" id="3_bd60f"]
+[ext_resource type="Texture2D" uid="uid://bvhed0lxktwe0" path="res://assets/sprite/placeholder/circle.png" id="4_etq4h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cx0q8"]
+radius = 108.042
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_s3kj7"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t44vq"]
+width = 256
+height = 256
+seamless = true
+noise = SubResource("FastNoiseLite_s3kj7")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_j2h3t"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wbrmb"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_j2h3t")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4yg33"]
+shader = ExtResource("3_bd60f")
+shader_parameter/brightness = 1.0
+shader_parameter/time_scale = 1.0
+shader_parameter/noise = SubResource("NoiseTexture2D_t44vq")
+shader_parameter/noise2 = SubResource("NoiseTexture2D_wbrmb")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aucra"]
+size = Vector2(38, 121)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1po61"]
+size = Vector2(34.5, 74)
+
+[node name="ZappyCrystal" type="Node2D"]
+script = ExtResource("1_1f15v")
+damage = 50.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_08fm5")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(1, 0)
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_cx0q8")
+debug_color = Color(0.959435, 0, 0.521641, 0.42)
+
+[node name="ElectricEffect" type="Sprite2D" parent="Area2D"]
+modulate = Color(0.32549, 0.654902, 1, 1)
+material = SubResource("ShaderMaterial_4yg33")
+scale = Vector2(6.37891, 6.37891)
+texture = ExtResource("4_etq4h")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-14, -3.5)
+shape = SubResource("RectangleShape2D_aucra")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(17.75, 20)
+shape = SubResource("RectangleShape2D_1po61")
+
+[node name="LightingTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="LightingTimer" to="." method="_on_lighting_fade_timer_timeout"]
