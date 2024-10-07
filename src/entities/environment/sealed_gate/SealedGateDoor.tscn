@@ -1,20 +1,44 @@
-[gd_scene load_steps=4 format=3 uid="uid://dt6pvb0caalfy"]
+[gd_scene load_steps=12 format=3 uid="uid://dt6pvb0caalfy"]
 
 [ext_resource type="Script" path="res://src/entities/environment/sealed_gate/sealed_gate_door.gd" id="1_28vbm"]
-[ext_resource type="Texture2D" uid="uid://ch2pnl1s0tl1n" path="res://assets/sprite/placeholder/square.png" id="1_x6rqh"]
+[ext_resource type="Texture2D" uid="uid://dpy2wn6kvml3w" path="res://assets/sprite/gate/gate_0.png" id="2_tbi7l"]
+[ext_resource type="AudioStream" uid="uid://cnlq8pkixosgb" path="res://src/entities/environment/sealed_gate/assets/sfx/gate-pass-1.mp3" id="2_vrooo"]
+[ext_resource type="AudioStream" uid="uid://clfiggbtcdogk" path="res://src/entities/environment/sealed_gate/assets/sfx/gate-pass-2.mp3" id="3_8wydv"]
+[ext_resource type="Texture2D" uid="uid://cppvqraxa1gwi" path="res://assets/sprite/gate/gate_1.png" id="3_cq12m"]
+[ext_resource type="AudioStream" uid="uid://blp8khs7g0p25" path="res://src/entities/environment/sealed_gate/assets/sfx/gate-pass-3.mp3" id="4_omx5b"]
+[ext_resource type="AudioStream" uid="uid://e45gq3b401jt" path="res://src/entities/environment/sealed_gate/assets/sfx/gate-pass-4.mp3" id="5_5cdam"]
+[ext_resource type="AudioStream" uid="uid://cr5t24cwuhmfn" path="res://src/entities/environment/sealed_gate/assets/sfx/gate-pass-5.mp3" id="6_7o3gb"]
+[ext_resource type="AudioStream" uid="uid://brajl1jhfbmk" path="res://src/entities/environment/sealed_gate/assets/sfx/gate-pass-6.mp3" id="7_hjl5g"]
+[ext_resource type="AudioStream" uid="uid://014aikajikqk" path="res://src/entities/environment/sealed_gate/assets/sfx/gate-pass-7.mp3" id="8_dced7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sndwj"]
-size = Vector2(64, 64)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yvy02"]
+size = Vector2(363, 93)
 
 [node name="SealedGateDoor" type="Node2D"]
 script = ExtResource("1_28vbm")
+SFX_door = Array[AudioStream]([ExtResource("2_vrooo"), ExtResource("3_8wydv"), ExtResource("4_omx5b"), ExtResource("5_5cdam"), ExtResource("6_7o3gb"), ExtResource("7_hjl5g"), ExtResource("8_dced7")])
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(0, 1, 0.509617, 1)
-scale = Vector2(1, 3.25)
-texture = ExtResource("1_x6rqh")
+[node name="DoorSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_tbi7l")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+[node name="StaticBody2D" type="StaticBody2D" parent="DoorSprite"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D"]
-shape = SubResource("RectangleShape2D_sndwj")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DoorSprite/StaticBody2D"]
+polygon = PackedVector2Array(-78, -162, -75, 4, -32, -32, 35, 11, 73, -20, 74, -161)
+
+[node name="FrameSprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_cq12m")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="FrameSprite"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FrameSprite/StaticBody2D"]
+polygon = PackedVector2Array(-181, 158, -180, 259, 180, 256, 179, 158, 73, 156, 73, -20, 33, 5, -34, -36, -76, 2, -75, 157)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FrameSprite/StaticBody2D"]
+position = Vector2(1.5, -210.5)
+shape = SubResource("RectangleShape2D_yvy02")
+
+[node name="DoorOpenPos" type="Marker2D" parent="."]
+position = Vector2(0, -145)
+
+[node name="DoorClosedPos" type="Marker2D" parent="."]
