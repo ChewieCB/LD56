@@ -25,13 +25,13 @@ var active_death_sfx_players: Array[AudioStreamPlayer]
 @export var swarm_agent_count: int = 0:
 	set(value):
 		swarm_agent_count = value
-		var swarm_volume_linear: float = clamp(float(swarm_agent_count)/50, 0.0, 1.0)
+		var swarm_volume_linear: float = clamp(float(swarm_agent_count) / 50, 0.0, 1.0)
 		if active_movement_sfx_player:
 			movement_sfx_tween = get_tree().create_tween()
 			movement_sfx_tween.tween_property(
 				active_movement_sfx_player,
 				"volume_db",
-				linear_to_db(clamp(float(swarm_volume_linear)/20, 0, 1)),
+				linear_to_db(clamp(float(swarm_volume_linear) / 20, 0, 1)),
 				0.01
 			)
 @export var target_max_speed: float = 250.0
@@ -48,11 +48,12 @@ var active_death_sfx_players: Array[AudioStreamPlayer]
 var swarm_agents: Array:
 	set(value):
 		swarm_agents = value
-		if swarm_agents.size() != swarm_agent_count: 
+		if swarm_agents.size() != swarm_agent_count:
 			swarm_agent_count = swarm_agents.size()
 			GameManager.game_ui.update_agent_count_ui()
 var removed_agent_debug: Vector2
 var is_fire = false # Is on fire element, scare away predators
+var navigation_initialized = false
 
 var current_swarm_attributes: Dictionary
 const SWARM_ATTRIBUTES_CLOSE: Dictionary = {
@@ -84,7 +85,7 @@ func _ready() -> void:
 	
 	if SFX_swarm_move:
 		active_movement_sfx_player = SoundManager.play_sound(SFX_swarm_move)
-		active_movement_sfx_player.volume_db = linear_to_db(0)
+		active_movement_sfx_player.volume_db = 0
 	
 	for _i in range(swarm_agent_count):
 		await get_tree().create_timer(swarm_agent_count / 100).timeout
@@ -95,7 +96,14 @@ func _ready() -> void:
 	await get_tree().physics_frame
 	for obstacle in get_tree().get_nodes_in_group("obstacles"):
 		obstacle.damage_swarm_agent.connect(damage_agent)
+	call_deferred("actor_setup")
 
+
+func actor_setup():
+	# Wait for navigation map finished initialize
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	navigation_initialized = true
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("DEBUG_player_toggle_fire_status"):
@@ -146,6 +154,8 @@ func _process(_delta):
 
 
 func get_nav_path_for_swarm_agents(_delta: float) -> void:
+	if not navigation_initialized:
+		return
 	var nav_map: RID = get_world_2d().get_navigation_map()
 	swarm_agents = GameManager.clean_array(swarm_agents)
 	for agent in swarm_agents:
@@ -159,9 +169,9 @@ func add_agent(new_position: Vector2 = centroid.global_position) -> SwarmAgent:
 	new_agent.position = to_local(new_position)
 	new_agent.target = target
 	
-	new_agent.died.connect(func(agent):
+	new_agent.died.connect(func(_agent):
 		GlobalSFX.play_batched_sfx(
-			SFX_agent_death, active_death_sfx_players, 
+			SFX_agent_death, active_death_sfx_players,
 			max_simultaneous_sfx, -12.0, true
 		)
 	)
@@ -176,6 +186,7 @@ func add_agent(new_position: Vector2 = centroid.global_position) -> SwarmAgent:
 		new_agent.set(key, current_swarm_attributes[key])
 	
 	GlobalSFX.play_sfx_shuffled(SFX_agent_spawn, "", true)
+	GameManager.game_ui.update_agent_count_ui()
 	
 	return new_agent
 
@@ -183,7 +194,7 @@ func add_agent(new_position: Vector2 = centroid.global_position) -> SwarmAgent:
 func damage_agent(agent: SwarmAgent, damage: float) -> void:
 	agent.damage(damage)
 	GlobalSFX.play_batched_sfx(
-		SFX_agent_hurt, active_hurt_sfx_players, 
+		SFX_agent_hurt, active_hurt_sfx_players,
 		max_simultaneous_sfx, -8.0
 	)
 
@@ -191,6 +202,8 @@ func damage_agent(agent: SwarmAgent, damage: float) -> void:
 func remove_agent(agent: SwarmAgent) -> void:
 	swarm_agents.erase(agent)
 	swarm_agent_count = swarm_agents.size()
+	GameManager.game_ui.update_agent_count_ui()
+
 
 # Run on agent dead
 func check_game_over():
@@ -224,7 +237,6 @@ func _on_distribution_normal_state_entered() -> void:
 	target_movement_speed = 230.0
 	set_swarm_attributes(SWARM_ATTRIBUTES_NORMAL)
 	# Hacky so we can set on agent add
-	emit_signal("normal_formation")
 	normal_formation.emit()
 
 
@@ -233,7 +245,7 @@ func _on_distribution_close_state_entered() -> void:
 	set_swarm_attributes(SWARM_ATTRIBUTES_CLOSE)
 	# Hacky so we can set on agent add
 	current_swarm_attributes = SWARM_ATTRIBUTES_CLOSE
-	emit_signal("close_formation")
+	close_formation.emit()
 	GlobalSFX.play_sfx_shuffled(SFX_swarm_contract)
 
 func _on_distribution_close_state_exited() -> void:
@@ -245,7 +257,7 @@ func _on_distribution_far_state_entered() -> void:
 	set_swarm_attributes(SWARM_ATTRIBUTES_FAR)
 	# Hacky so we can set on agent add
 	current_swarm_attributes = SWARM_ATTRIBUTES_FAR
-	emit_signal("far_formation")
+	far_formation.emit()
 	GlobalSFX.play_sfx_shuffled(SFX_swarm_expand)
 
 func _on_distribution_far_state_exited() -> void:
@@ -295,7 +307,7 @@ func _on_idle_state_entered() -> void:
 	target_sprite.modulate = Color(1, 1, 1)
 
 
-func _on_idle_state_physics_processing(delta: float) -> void:
+func _on_idle_state_physics_processing(_delta: float) -> void:
 	var direction = Vector2.ZERO
 	direction = Input.get_vector("left", "right", "up", "down").normalized()
 	

@@ -45,8 +45,8 @@ func _on_input_area_body_entered(body: Node2D) -> void:
 		var agent: SwarmAgent = body as SwarmAgent
 		if agent not in swarm_agents and swarm_agent_count < n_agent_required:
 			# Only follow other nodes in captured flock
-			agent.collision_layer = pow(2, 9-1)
-			agent.flock_view.collision_mask = pow(2, 9-1)
+			agent.collision_layer = int(pow(2, 9 - 1))
+			agent.flock_view.collision_mask = int(pow(2, 9 - 1))
 			agent.target = gate_target
 			agent.is_stored_in_sealed_gate = true
 			set_agent_close(agent)
@@ -76,15 +76,15 @@ func open_gate():
 
 
 func release_all_stored_agents():
-	await get_tree().create_timer(5.0)
+	await get_tree().create_timer(5.0).timeout
 	for agent in swarm_agents:
 		#GameManager.swarm_director.add_agent(agent.position)
 		#agent.queue_free()
 		agent.target = GameManager.swarm_director.target
 		agent.is_stored_in_sealed_gate = false
 		# Follow original flock again
-		agent.collision_layer = pow(2, 2-1)
-		agent.flock_view.collision_mask = pow(2, 1-1) + pow(2, 2-1)
+		agent.collision_layer = int(pow(2, 2 - 1))
+		agent.flock_view.collision_mask = int(pow(2, 1 - 1) + pow(2, 2 - 1))
 		set_agent_normal(agent)
 	swarm_agents = []
 	swarm_agent_count = 0

@@ -31,7 +31,7 @@ size = Vector2(46, 108)
 particle_flag_disable_z = true
 particle_flag_damping_as_friction = true
 emission_shape = 2
-emission_sphere_radius = 142.0
+emission_sphere_radius = 130.0
 initial_velocity_min = 0.2
 initial_velocity_max = 0.3
 angular_velocity_min = -1.00002
@@ -84,13 +84,13 @@ shape = SubResource("RectangleShape2D_aucra")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 modulate = Color(0.223167, 1, 0.21, 0.14902)
-position = Vector2(1, -211)
-amount = 100
+position = Vector2(0, -208)
+amount = 50
 process_material = SubResource("ParticleProcessMaterial_odmf5")
 texture = ExtResource("5_egh78")
-lifetime = 2.4
+lifetime = 2.2
 randomness = 0.29
-visibility_rect = Rect2(-71, 71, 142, 50)
+visibility_rect = Rect2(-150, -150, 300, 300)
 local_coords = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

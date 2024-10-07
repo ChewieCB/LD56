@@ -1,20 +1,20 @@
 [gd_scene load_steps=16 format=3 uid="uid://bm3vo4ufjrs7q"]
 
-[ext_resource type="Script" path="res://src/entities/enemies/basic_enemy/enemy.gd" id="1_os4t1"]
-[ext_resource type="AudioStream" uid="uid://bedyrnfp4a4na" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_idle_loop.mp3" id="2_0sdi3"]
-[ext_resource type="AudioStream" uid="uid://cejolwltt0k2w" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_buzz.wav" id="2_5ts1g"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_kalrn"]
-[ext_resource type="Texture2D" uid="uid://bfodump4jvah5" path="res://assets/sprite/enemy/green_wasp.png" id="3_57noc"]
-[ext_resource type="AudioStream" uid="uid://d0nhxm6ohhowo" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_attack.mp3" id="3_qs20q"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="3_uci3j"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_gwh43"]
-[ext_resource type="AudioStream" uid="uid://c6uydg1kdt5ow" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_aggro1.mp3" id="4_y87e6"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_hfphn"]
-[ext_resource type="AudioStream" uid="uid://c2plaei2vj6is" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_die.mp3" id="5_xhkb6"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="7_2dfcw"]
+[ext_resource type="Script" path="res://src/entities/enemies/basic_enemy/enemy.gd" id="1_phume"]
+[ext_resource type="AudioStream" uid="uid://cejolwltt0k2w" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_buzz.wav" id="2_t5eu1"]
+[ext_resource type="AudioStream" uid="uid://d0nhxm6ohhowo" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_attack.mp3" id="3_78b0e"]
+[ext_resource type="AudioStream" uid="uid://c6uydg1kdt5ow" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_aggro1.mp3" id="4_u1f3n"]
+[ext_resource type="AudioStream" uid="uid://c2plaei2vj6is" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_die.mp3" id="5_td3ij"]
+[ext_resource type="Texture2D" uid="uid://bfodump4jvah5" path="res://assets/sprite/enemy/green_wasp.png" id="6_3qpni"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="7_3o7c6"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="8_af0kd"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="9_og2hm"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="10_kwsrt"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="11_ck2ri"]
+[ext_resource type="AudioStream" uid="uid://bedyrnfp4a4na" path="res://src/entities/enemies/basic_enemy/assets/sfx/wasp_idle_loop.mp3" id="12_80ivt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ddoed"]
-radius = 24.0
+radius = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f2j72"]
 radius = 200.0
@@ -22,19 +22,19 @@ radius = 200.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2pffq"]
 size = Vector2(26, 32)
 
-[node name="BasicEnemy" type="CharacterBody2D" node_paths=PackedStringArray("idle_player")]
+[node name="GreenWasp" type="CharacterBody2D" node_paths=PackedStringArray("idle_player")]
 collision_layer = 32
 collision_mask = 9
-script = ExtResource("1_os4t1")
-SFX_idle = ExtResource("2_5ts1g")
-SFX_attack = Array[AudioStream]([ExtResource("3_qs20q")])
-SFX_aggro = Array[AudioStream]([ExtResource("4_y87e6")])
-SFX_death = Array[AudioStream]([ExtResource("5_xhkb6")])
+script = ExtResource("1_phume")
+SFX_idle = ExtResource("2_t5eu1")
+SFX_attack = Array[AudioStream]([ExtResource("3_78b0e")])
+SFX_aggro = Array[AudioStream]([ExtResource("4_u1f3n")])
+SFX_death = Array[AudioStream]([ExtResource("5_td3ij")])
 idle_player = NodePath("IdleAudioPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(-0.212238, 0.212238)
-texture = ExtResource("3_57noc")
+scale = Vector2(-0.4, 0.4)
+texture = ExtResource("6_3qpni")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ddoed")
@@ -63,171 +63,171 @@ debug_color = Color(0.7, 0.0343752, 0, 0.42)
 target_position = Vector2(150, 0)
 
 [node name="StateChart" type="Node" parent="."]
-script = ExtResource("2_kalrn")
+script = ExtResource("7_3o7c6")
 
 [node name="Root" type="Node" parent="StateChart"]
-script = ExtResource("3_uci3j")
+script = ExtResource("8_af0kd")
 
 [node name="Movement" type="Node" parent="StateChart/Root"]
-script = ExtResource("4_gwh43")
+script = ExtResource("9_og2hm")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateChart/Root/Movement"]
-script = ExtResource("5_hfphn")
+script = ExtResource("10_kwsrt")
 
 [node name="toWander" type="Node" parent="StateChart/Root/Movement/Idle"]
-script = ExtResource("7_2dfcw")
+script = ExtResource("11_ck2ri")
 to = NodePath("../../Wander")
 event = &"wander_started"
 delay_in_seconds = "0.0"
 
 [node name="toTrack" type="Node" parent="StateChart/Root/Movement/Idle"]
-script = ExtResource("7_2dfcw")
+script = ExtResource("11_ck2ri")
 to = NodePath("../../Track")
 event = &"player_spotted"
 delay_in_seconds = "0.0"
 
 [node name="toFlee" type="Node" parent="StateChart/Root/Movement/Idle"]
-script = ExtResource("7_2dfcw")
+script = ExtResource("11_ck2ri")
 to = NodePath("../../Flee")
 event = &"flee_from_player"
 delay_in_seconds = "0.0"
 
 [node name="Wander" type="Node" parent="StateChart/Root/Movement"]
-script = ExtResource("5_hfphn")
+script = ExtResource("10_kwsrt")
 
 [node name="toTrack" type="Node" parent="StateChart/Root/Movement/Wander"]
-script = ExtResource("7_2dfcw")
+script = ExtResource("11_ck2ri")
 to = NodePath("../../Track")
 event = &"player_spotted"
 delay_in_seconds = "0.0"
 
 [node name="toFlee" type="Node" parent="StateChart/Root/Movement/Wander"]
-script = ExtResource("7_2dfcw")
+script = ExtResource("11_ck2ri")
 to = NodePath("../../Flee")
 event = &"flee_from_player"
 delay_in_seconds = "0.0"
 
 [node name="toIdle" type="Node" parent="StateChart/Root/Movement/Wander"]
-script = ExtResource("7_2dfcw")
+script = ExtResource("11_ck2ri")
 to = NodePath("../../Idle")
 event = &"target_reached"
 delay_in_seconds = "0.0"
 
 [node name="Track" type="Node" parent="StateChart/Root/Movement"]
-script = ExtResource("5_hfphn")
+script = ExtResource("10_kwsrt")
 
 [node name="toDash" type="Node" parent="StateChart/Root/Movement/Track"]
-script = ExtResource("7_2dfcw")
+script = ExtResource("11_ck2ri")
 to = NodePath("../../Dash")
 event = &"dash_started"
 delay_in_seconds = "0.0"
 
 [node name="toWander" type="Node" parent="StateChart/Root/Movement/Track"]
-script = ExtResource("7_2dfcw")
+script = ExtResource("11_ck2ri")
 to = NodePath("../../Wander")
 event = &"stop_chase"
 delay_in_seconds = "0.0"
 
 [node name="toFlee" type="Node" parent="StateChart/Root/Movement/Track"]
-script = ExtResource("7_2dfcw")
+script = ExtResource("11_ck2ri")
 to = NodePath("../../Flee")
 event = &"flee_from_player"
 delay_in_seconds = "0.0"
 
 [node name="Dash" type="Node" parent="StateChart/Root/Movement"]
-script = ExtResource("5_hfphn")
+script = ExtResource("10_kwsrt")
 
 [node name="toTrack" type="Node" parent="StateChart/Root/Movement/Dash"]
-script = ExtResource("7_2dfcw")
+script = ExtResource("11_ck2ri")
 to = NodePath("../../Track")
 event = &"back_to_track"
 delay_in_seconds = "0.0"
 
 [node name="toFlee" type="Node" parent="StateChart/Root/Movement/Dash"]
-script = ExtResource("7_2dfcw")
+script = ExtResource("11_ck2ri")
 to = NodePath("../../Flee")
 event = &"flee_from_player"
 delay_in_seconds = "0.0"
 
 [node name="Flee" type="Node" parent="StateChart/Root/Movement"]
-script = ExtResource("5_hfphn")
+script = ExtResource("10_kwsrt")
 
 [node name="toIdle" type="Node" parent="StateChart/Root/Movement/Flee"]
-script = ExtResource("7_2dfcw")
+script = ExtResource("11_ck2ri")
 to = NodePath("../../Idle")
 event = &"player_faraway"
 delay_in_seconds = "0.0"
 
 [node name="Health" type="Node" parent="StateChart/Root"]
-script = ExtResource("4_gwh43")
+script = ExtResource("9_og2hm")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateChart/Root/Health"]
-script = ExtResource("5_hfphn")
+script = ExtResource("10_kwsrt")
 
 [node name="toDead" type="Node" parent="StateChart/Root/Health/Idle"]
-script = ExtResource("7_2dfcw")
+script = ExtResource("11_ck2ri")
 to = NodePath("../../Dead")
 event = &"death"
 delay_in_seconds = "0.0"
 
 [node name="toHurt" type="Node" parent="StateChart/Root/Health/Idle"]
-script = ExtResource("7_2dfcw")
+script = ExtResource("11_ck2ri")
 to = NodePath("../../Hurt")
 event = &"take_damage"
 delay_in_seconds = "0.0"
 
 [node name="Hurt" type="Node" parent="StateChart/Root/Health"]
-script = ExtResource("5_hfphn")
+script = ExtResource("10_kwsrt")
 
 [node name="toDead" type="Node" parent="StateChart/Root/Health/Hurt"]
-script = ExtResource("7_2dfcw")
+script = ExtResource("11_ck2ri")
 to = NodePath("../../Dead")
 event = &"death"
 delay_in_seconds = "0.0"
 
 [node name="toIdle" type="Node" parent="StateChart/Root/Health/Hurt"]
-script = ExtResource("7_2dfcw")
+script = ExtResource("11_ck2ri")
 to = NodePath("../../Idle")
 delay_in_seconds = "0.0"
 
 [node name="Dead" type="Node" parent="StateChart/Root/Health"]
-script = ExtResource("5_hfphn")
+script = ExtResource("10_kwsrt")
 
 [node name="Attack" type="Node" parent="StateChart/Root"]
-script = ExtResource("4_gwh43")
+script = ExtResource("9_og2hm")
 initial_state = NodePath("Ready")
 
 [node name="Cooldown" type="Node" parent="StateChart/Root/Attack"]
-script = ExtResource("5_hfphn")
+script = ExtResource("10_kwsrt")
 
 [node name="toReady" type="Node" parent="StateChart/Root/Attack/Cooldown"]
-script = ExtResource("7_2dfcw")
+script = ExtResource("11_ck2ri")
 to = NodePath("../../Ready")
 event = &"attack_ready"
 delay_in_seconds = "0.0"
 
 [node name="Ready" type="Node" parent="StateChart/Root/Attack"]
-script = ExtResource("5_hfphn")
+script = ExtResource("10_kwsrt")
 
 [node name="toAttacking" type="Node" parent="StateChart/Root/Attack/Ready"]
-script = ExtResource("7_2dfcw")
+script = ExtResource("11_ck2ri")
 to = NodePath("../../Attacking")
 event = &"attack_player"
 delay_in_seconds = "0.0"
 
 [node name="Attacking" type="Node" parent="StateChart/Root/Attack"]
-script = ExtResource("5_hfphn")
+script = ExtResource("10_kwsrt")
 
 [node name="toCooldown" type="Node" parent="StateChart/Root/Attack/Attacking"]
-script = ExtResource("7_2dfcw")
+script = ExtResource("11_ck2ri")
 to = NodePath("../../Cooldown")
 event = &"attack_finished"
 delay_in_seconds = "0.0"
 
 [node name="IdleAudioPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_0sdi3")
+stream = ExtResource("12_80ivt")
 
 [connection signal="body_entered" from="PlayerDetectRange" to="." method="_on_detect_range_body_entered"]
 [connection signal="body_exited" from="PlayerDetectRange" to="." method="_on_player_detect_range_body_exited"]
