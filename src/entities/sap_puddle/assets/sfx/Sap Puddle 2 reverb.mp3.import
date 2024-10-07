@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://6j2vw1w520f"
+path="res://.godot/imported/Sap Puddle 2 reverb.mp3-f4f0a384b6e2fd66516bedce27d2df8d.mp3str"
+
+[deps]
+
+source_file="res://src/entities/sap_puddle/assets/sfx/Sap Puddle 2 reverb.mp3"
+dest_files=["res://.godot/imported/Sap Puddle 2 reverb.mp3-f4f0a384b6e2fd66516bedce27d2df8d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

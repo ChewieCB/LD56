@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dbgrrvkbnca0s"
+path="res://.godot/imported/Sap Puddle 3.mp3-5794c17d7f0834b1628bc76329eb8867.mp3str"
+
+[deps]
+
+source_file="res://src/entities/sap_puddle/assets/sfx/Sap Puddle 3.mp3"
+dest_files=["res://.godot/imported/Sap Puddle 3.mp3-5794c17d7f0834b1628bc76329eb8867.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
