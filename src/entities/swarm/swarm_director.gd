@@ -166,7 +166,7 @@ func add_agent(new_position: Vector2 = centroid.global_position) -> SwarmAgent:
 		)
 	)
 	
-	add_child(new_agent)
+	call_deferred("add_child", new_agent)
 
 	if new_agent not in swarm_agents:
 		swarm_agents.append(new_agent)

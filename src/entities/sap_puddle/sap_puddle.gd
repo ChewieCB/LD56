@@ -31,9 +31,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			
 			var tween = get_tree().create_tween()
 			tween.tween_property(
-				puddle_mesh,
-				"scale.y",
-				0,
-				1.5
+				self,
+				"modulate",
+				Color(1, 1, 1, 0),
+				0.4
 			)
 			tween.tween_callback(self.queue_free)
