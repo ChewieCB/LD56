@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://baeg7c16aji2u"]
+[gd_scene load_steps=23 format=3 uid="uid://baeg7c16aji2u"]
 
 [ext_resource type="Script" path="res://src/scenes/main/title_screen/title_screen.gd" id="1_uqkmj"]
 [ext_resource type="Texture2D" uid="uid://brct1kbsg135o" path="res://assets/bg/parallax/bg_parallax_0.png" id="2_6yv16"]
@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://bmm3mvrjx1y1b" path="res://addons/kenney_fantasy_ui_border/Divider Fade/divider-fade-002.png" id="9_by5rm"]
 [ext_resource type="Texture2D" uid="uid://dxxyxffr24eve" path="res://assets/sprite/swarm/swarm_sprite_1.png" id="9_h8py5"]
 [ext_resource type="Texture2D" uid="uid://ux86tl6nm3i1" path="res://addons/kenney_fantasy_ui_border/Divider Fade/divider-fade-001.png" id="9_w8c77"]
-[ext_resource type="AudioStream" uid="uid://cy70vylc0p5kp" path="res://assets/bgm/lachlan-sketch2-60bpm-Abmin-0.2.mp3" id="10_ahqvm"]
 [ext_resource type="Texture2D" uid="uid://d3x86mfebqrp7" path="res://addons/kenney_fantasy_ui_border/Border/panel-border-005.png" id="11_6g5pd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g8ysj"]
@@ -359,11 +358,6 @@ visibility_rect = Rect2(0, 0, 0, 0)
 visible = false
 layout_mode = 1
 offset_left = 461.0
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_ahqvm")
-volume_db = 10.0
-autoplay = true
 
 [connection signal="mouse_entered" from="TitleMenu/VBoxContainer/StartButton" to="." method="play_button_hover_sfx"]
 [connection signal="pressed" from="TitleMenu/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
