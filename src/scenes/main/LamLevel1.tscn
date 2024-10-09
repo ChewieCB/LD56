@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://q5pp8mltm8v8" path="res://assets/sprite/bg1.png" id="8_g2h3u"]
 [ext_resource type="PackedScene" uid="uid://dosbbm6uk86ho" path="res://src/ui/game_ui/GameUI.tscn" id="9_gbfpw"]
 [ext_resource type="PackedScene" uid="uid://bm3vo4ufjrs7q" path="res://src/entities/enemies/basic_enemy/GreenWasp.tscn" id="10_85oaq"]
-[ext_resource type="PackedScene" path="res://src/entities/enemies/basic_enemy/RedWasp.tscn" id="14_vg6ee"]
+[ext_resource type="PackedScene" uid="uid://dj0hbiapwuolw" path="res://src/entities/enemies/basic_enemy/RedWasp.tscn" id="14_vg6ee"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ofayr"]
 vertices = PackedVector2Array(1783.22, 352.781, 1783.22, 124.383, 2178.39, 125.883, 2183.55, 507.508, 1614.18, 478.977, 1614.18, 655.719, 127.039, 650.109, 126, 345.492, 2184.07, 656.25, 1783.22, 656.25, 1783.22, 478.977, 1614.18, 352.781, 953.891, 121.25, 1614.18, 123.742, 126, 121.25)
