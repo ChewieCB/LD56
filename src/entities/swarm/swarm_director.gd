@@ -58,15 +58,14 @@ var swarms_agents_captured: int = 0
 
 var swarm_agents: Array:
 	set(value):
-		var prev_swarm_count = swarm_agent_count
 		swarm_agents = value
 		if swarm_agents.size() != swarm_agent_count:
 			swarm_agent_count = swarm_agents.size()
 		GameManager.game_ui.update_agent_count_ui()
-		if prev_swarm_count == 0 and swarm_agent_count > 0 and invuln_flag:
+		if swarm_agent_count > 0 and invuln_flag:
 			invuln_flag = false
 		if swarm_agent_count == 0 and not invuln_flag and swarms_agents_captured == 0:
-			GameManager.swarm_director.check_game_over()
+			check_game_over()
 var removed_agent_debug: Vector2
 var is_spread_out = false # Is in spread out formation, scare away predators
 var navigation_initialized = false
@@ -98,7 +97,7 @@ func _ready() -> void:
 	randomize()
 	debug_status_sprite.self_modulate = Color.GREEN
 	GameManager.swarm_director = self
-	if GameManager.checkpoint_activated:
+	if GameManager.checkpoint_activated_name_list.size() > 0:
 		swarm_agent_count = GameManager.checkpoint_n_agents
 		global_position = GameManager.checkpoint_position
 	
@@ -221,11 +220,8 @@ func remove_agent(agent: SwarmAgent) -> void:
 	GameManager.game_ui.update_agent_count_ui()
 
 
-# Run on agent dead
 func check_game_over():
-	# Minus 1 because when we run this check, the died swarm agent still
-	# not queue_freed yet
-	var agent_left = swarm_agents.size() - 1
+	var agent_left = swarm_agents.size()
 	if agent_left <= 0:
 		GameManager.game_over()
 
