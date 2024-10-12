@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://blvboaq4wyv1t"]
+
+[ext_resource type="Texture2D" uid="uid://ch2pnl1s0tl1n" path="res://assets/sprite/placeholder/square.png" id="1_23h3k"]
+[ext_resource type="Script" path="res://src/entities/environment/checkpoint/checkpoint.gd" id="1_pleuo"]
+[ext_resource type="AudioStream" uid="uid://c0nfoaf30y1rd" path="res://src/entities/environment/checkpoint/checkpoint_activated.mp3" id="3_nsxya"]
+[ext_resource type="PackedScene" uid="uid://c8e64246ajs0j" path="res://src/entities/swarm/word_cloud/WordCloudTrigger.tscn" id="4_auiht"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sywps"]
+radius = 112.285
+
+[node name="Checkpoint" type="Area2D"]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("1_pleuo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sywps")
+
+[node name="Sprite" type="Node2D" parent="."]
+
+[node name="Flag" type="Sprite2D" parent="Sprite"]
+self_modulate = Color(1, 0.0776376, 0, 1)
+position = Vector2(19, -16)
+scale = Vector2(0.65625, 0.5)
+texture = ExtResource("1_23h3k")
+
+[node name="Pole" type="Sprite2D" parent="Sprite"]
+self_modulate = Color(0.460938, 0.177833, 0, 1)
+scale = Vector2(0.125, 1)
+texture = ExtResource("1_23h3k")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_nsxya")
+bus = &"SFX"
+
+[node name="WordCloudTrigger" parent="." instance=ExtResource("4_auiht")]
+world_list = Array[String](["checkpoint", "rest", "respite"])
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

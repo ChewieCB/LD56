@@ -30,7 +30,7 @@ func spawn_thought_word():
 		var roll_range = 80 + GameManager.swarm_director.swarm_agent_count
 		var spawn_pos = spawn_parent.global_position + Vector2(
 			randf_range(-roll_range, roll_range),
-			randf_range(-roll_range, roll_range) 
+			randf_range(-roll_range, roll_range)
 		)
 		if last_word_spawn:
 			if spawn_pos.distance_to_last_word_spawn < 40:
@@ -38,7 +38,8 @@ func spawn_thought_word():
 		
 		spawn_parent.get_parent().add_child(inst)
 		inst.assign_text(world_list[i], spawn_pos)
-		await get_tree().create_timer(1).timeout
+		var random_time_between_word = randf_range(-0.25, 0.25)
+		await get_tree().create_timer(1 + random_time_between_word).timeout
 
 
 func _on_body_entered(_body: Node2D) -> void:

@@ -9,6 +9,7 @@ class_name GameUI
 @onready var gameover_level_stats_label: Label = $GameOverScreen/LevelStatistics
 @onready var next_level_button: Button = $VictoryScreen/HBoxContainer/NextButton
 @onready var agent_count_label: Label = $SwarmAgentCount
+@onready var retry_checkpoint_button: Button = $GameOverScreen/HBoxContainer/CheckpointButton
 
 func _ready() -> void:
 	GameManager.game_ui = self
@@ -19,7 +20,8 @@ func _ready() -> void:
 func show_victory_screen():
 	victory_level_stats_label.text = victory_level_stats_label.text.format([
 		convert_seconds_to_time_format(GameManager.level_timer),
-		GameManager.faes_killed])
+		GameManager.faes_killed,
+		GameManager.retry_time])
 	if not GameManager.check_if_next_level_exist():
 		next_level_button.visible = false
 	victory_screen.visible = true
@@ -27,8 +29,13 @@ func show_victory_screen():
 func show_game_over_screen():
 	gameover_level_stats_label.text = gameover_level_stats_label.text.format([
 		convert_seconds_to_time_format(GameManager.level_timer),
-		GameManager.faes_killed])
+		GameManager.faes_killed,
+		GameManager.retry_time])
 	game_over_screen.visible = true
+	if GameManager.checkpoint_activated_name_list.size() > 0:
+		retry_checkpoint_button.disabled = false
+	else:
+		retry_checkpoint_button.disabled = true
 
 
 func update_agent_count_ui():
@@ -56,3 +63,7 @@ func _on_retry_button_pressed() -> void:
 
 func play_ui_hover_sound():
 	SoundManager.play_button_hover_sfx()
+
+
+func _on_checkpoint_button_pressed() -> void:
+	GameManager.retry_last_checkpoint()

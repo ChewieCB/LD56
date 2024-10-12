@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://q5pp8mltm8v8" path="res://assets/sprite/bg1.png" id="8_g2h3u"]
 [ext_resource type="PackedScene" uid="uid://dosbbm6uk86ho" path="res://src/ui/game_ui/GameUI.tscn" id="9_gbfpw"]
 [ext_resource type="PackedScene" uid="uid://bm3vo4ufjrs7q" path="res://src/entities/enemies/basic_enemy/GreenWasp.tscn" id="10_85oaq"]
-[ext_resource type="PackedScene" path="res://src/entities/enemies/basic_enemy/RedWasp.tscn" id="14_vg6ee"]
+[ext_resource type="PackedScene" uid="uid://blvboaq4wyv1t" path="res://src/entities/environment/checkpoint/Checkpoint.tscn" id="15_5s6xv"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ofayr"]
 vertices = PackedVector2Array(1783.22, 352.781, 1783.22, 124.383, 2178.39, 125.883, 2183.55, 507.508, 1614.18, 478.977, 1614.18, 655.719, 127.039, 650.109, 126, 345.492, 2184.07, 656.25, 1783.22, 656.25, 1783.22, 478.977, 1614.18, 352.781, 953.891, 121.25, 1614.18, 123.742, 126, 121.25)
@@ -29,21 +29,18 @@ metadata/_edit_horizontal_guides_ = [43.0]
 metadata/_edit_vertical_guides_ = [-153.0]
 
 [node name="FollowCamera" parent="." node_paths=PackedStringArray("swarm_director") instance=ExtResource("1_wnrtv")]
-position = Vector2(1216, 400)
+position = Vector2(144, 288)
 swarm_director = NodePath("../SwarmDirector")
 
 [node name="WordCloudHolder" type="Node2D" parent="."]
-
-[node name="WordCloudTrigger" parent="WordCloudHolder" instance=ExtResource("6_p0we1")]
-position = Vector2(1336, 424)
-world_list = Array[String](["friend", "trapped", "help", "relief", "join"])
 
 [node name="WordCloudTrigger2" parent="WordCloudHolder" instance=ExtResource("6_p0we1")]
 position = Vector2(616, 376)
 world_list = Array[String](["enemy", "hurt", "afraid", "together"])
 
 [node name="SwarmDirector" parent="." instance=ExtResource("2_7t3w0")]
-position = Vector2(944, 624)
+position = Vector2(152, 384)
+swarm_agent_count = 50
 
 [node name="GateHolder" type="Node2D" parent="."]
 
@@ -72,6 +69,15 @@ position = Vector2(200, 656)
 
 [node name="ZappyCrystalAlt" parent="ObstacleHolder" instance=ExtResource("8_af27y")]
 position = Vector2(496, 640)
+
+[node name="CheckpointHolder" type="Node2D" parent="."]
+
+[node name="Checkpoint" parent="CheckpointHolder" instance=ExtResource("15_5s6xv")]
+position = Vector2(1440, 664)
+
+[node name="Checkpoint2" parent="CheckpointHolder" instance=ExtResource("15_5s6xv")]
+position = Vector2(856, 120)
+rotation = 3.12959
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_ofayr")
@@ -185,9 +191,4 @@ layer = 100
 [node name="GameUI" parent="CanvasLayer2" instance=ExtResource("9_gbfpw")]
 
 [node name="GreenWasp" parent="." instance=ExtResource("10_85oaq")]
-position = Vector2(208, 223)
-
-[node name="RedWasp" parent="." instance=ExtResource("14_vg6ee")]
-position = Vector2(536, 184)
-dash_delay = 1.5
-dash_duration = 4
+position = Vector2(1064, 128)

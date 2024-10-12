@@ -35,7 +35,7 @@ state_chart = NodePath("StateChart")
 swarm_agent_scene = ExtResource("2_0de42")
 swarm_agent_count = 1
 
-[node name="TargetMarker" type="CharacterBody2D" parent="."]
+[node name="TargetMarker" type="CharacterBody2D" parent="." groups=["SwarmLeader"]]
 z_index = 1
 collision_layer = 4
 collision_mask = 9

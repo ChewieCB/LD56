@@ -63,7 +63,8 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 20
 text = "Statistics:
 Time: {0}
-Faes lost: {1}"
+Faes lost: {1}
+Retried times: {2}"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -160,7 +161,8 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 20
 text = "Statistics:
 Time: {0}
-Faes lost: {1}"
+Faes lost: {1}
+Retried times: {2}"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -183,7 +185,13 @@ theme_override_constants/separation = 20
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Retry"
+text = "Retry level"
+
+[node name="CheckpointButton" type="Button" parent="GameOverScreen/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Retry last checkpoint"
 
 [node name="TitleButton" type="Button" parent="GameOverScreen/HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
@@ -211,20 +219,20 @@ layout_mode = 1
 [node name="UIDecoration" type="TextureRect" parent="."]
 self_modulate = Color(0, 0, 0, 0.403922)
 layout_mode = 0
-offset_left = -176.0
-offset_top = -111.0
-offset_right = 327.0
-offset_bottom = 147.0
+offset_left = -151.0
+offset_top = -112.0
+offset_right = 476.0
+offset_bottom = 146.0
 rotation = -0.08328
 texture = ExtResource("3_nx313")
 
 [node name="SwarmAgentCount" type="Label" parent="."]
 layout_mode = 1
-offset_left = 16.0
-offset_top = 48.0
-offset_right = 245.0
-offset_bottom = 103.0
-rotation = -0.131126
+offset_left = 1.0
+offset_top = 45.0
+offset_right = 365.0
+offset_bottom = 117.0
+rotation = -0.114845
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
@@ -235,4 +243,5 @@ text = "Wisps remaining: 10"
 [connection signal="pressed" from="VictoryScreen/HBoxContainer/TitleButton" to="." method="_on_title_button_pressed"]
 [connection signal="pressed" from="VictoryScreen/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="pressed" from="GameOverScreen/HBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="GameOverScreen/HBoxContainer/CheckpointButton" to="." method="_on_checkpoint_button_pressed"]
 [connection signal="pressed" from="GameOverScreen/HBoxContainer/TitleButton" to="." method="_on_title_button_pressed"]

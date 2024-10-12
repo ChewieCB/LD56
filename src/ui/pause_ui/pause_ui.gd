@@ -3,6 +3,7 @@ class_name PauseUI
 
 @onready var pause_option_list: Control = $PauseOptionBG
 @onready var setting_ui: SettingUI = $SettingUI
+@onready var retry_last_checkpoint_button: Button = $PauseOptionBG/VBoxContainer/CheckpointButton
 
 var is_paused = false
 var is_in_submenu = false
@@ -13,6 +14,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause_menu") and not GameManager.level_finished:
+		print("is_in_submenu ", is_in_submenu, " is_paused ", is_paused)
 		if is_in_submenu:
 			setting_ui.close_menu()
 			SoundManager.play_button_hover_sfx()
@@ -22,6 +24,10 @@ func _input(event: InputEvent) -> void:
 			is_paused = not is_paused
 			get_tree().paused = is_paused
 			visible = is_paused
+			if GameManager.checkpoint_activated_name_list.size() > 0:
+				retry_last_checkpoint_button.disabled = false
+			else:
+				retry_last_checkpoint_button.disabled = true
 
 
 func close_pause_menu():
@@ -54,3 +60,7 @@ func play_ui_hover_sound():
 
 func _on_retry_button_pressed() -> void:
 	GameManager.retry_level()
+
+
+func _on_checkpoint_button_pressed() -> void:
+	GameManager.retry_last_checkpoint()
