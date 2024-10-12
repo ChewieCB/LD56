@@ -40,6 +40,7 @@ world_list = Array[String](["enemy", "hurt", "afraid", "together"])
 
 [node name="SwarmDirector" parent="." instance=ExtResource("2_7t3w0")]
 position = Vector2(152, 384)
+swarm_agent_count = 20
 
 [node name="GateHolder" type="Node2D" parent="."]
 

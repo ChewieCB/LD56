@@ -63,7 +63,8 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 20
 text = "Statistics:
 Time: {0}
-Faes lost: {1}"
+Faes lost: {1}
+Retried times: {2}"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -160,7 +161,8 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 20
 text = "Statistics:
 Time: {0}
-Faes lost: {1}"
+Faes lost: {1}
+Retried times: {2}"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -183,7 +185,13 @@ theme_override_constants/separation = 20
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Retry"
+text = "Retry level"
+
+[node name="CheckpointButton" type="Button" parent="GameOverScreen/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Retry last checkpoint"
 
 [node name="TitleButton" type="Button" parent="GameOverScreen/HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
@@ -235,4 +243,5 @@ text = "Wisps remaining: 10"
 [connection signal="pressed" from="VictoryScreen/HBoxContainer/TitleButton" to="." method="_on_title_button_pressed"]
 [connection signal="pressed" from="VictoryScreen/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="pressed" from="GameOverScreen/HBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="GameOverScreen/HBoxContainer/CheckpointButton" to="." method="_on_checkpoint_button_pressed"]
 [connection signal="pressed" from="GameOverScreen/HBoxContainer/TitleButton" to="." method="_on_title_button_pressed"]

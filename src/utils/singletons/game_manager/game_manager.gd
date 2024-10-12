@@ -23,6 +23,7 @@ var ui_audio = 100
 var level_finished = false
 var level_timer = 0
 var faes_killed = 0
+var retry_time = 0
 var checkpoint_activated = false
 var checkpoint_n_agents = 0
 var checkpoint_position = Vector2.ZERO
@@ -75,6 +76,7 @@ func retry_level():
 func retry_last_checkpoint():
 	if not checkpoint_activated:
 		retry_level()
+	retry_time += 1
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 
@@ -83,6 +85,7 @@ func reset_level_data():
 	level_timer = 0
 	faes_killed = 0
 	level_finished = false
+	retry_time = 0
 	checkpoint_activated = false
 	checkpoint_n_agents = 0
 	checkpoint_position = Vector2.ZERO
