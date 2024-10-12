@@ -98,6 +98,9 @@ func _ready() -> void:
 	randomize()
 	debug_status_sprite.self_modulate = Color.GREEN
 	GameManager.swarm_director = self
+	if GameManager.checkpoint_activated:
+		swarm_agent_count = GameManager.checkpoint_n_agents
+		global_position = GameManager.checkpoint_position
 	
 	if SFX_swarm_move:
 		active_movement_sfx_player = SoundManager.play_sound(SFX_swarm_move)
