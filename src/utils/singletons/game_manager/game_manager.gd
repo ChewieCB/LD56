@@ -76,6 +76,7 @@ func retry_level():
 func retry_last_checkpoint():
 	if checkpoint_activated_name_list.size() == 0:
 		retry_level()
+	level_finished = false
 	retry_time += 1
 	get_tree().paused = false
 	get_tree().reload_current_scene()

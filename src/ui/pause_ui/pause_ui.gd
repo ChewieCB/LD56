@@ -14,6 +14,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause_menu") and not GameManager.level_finished:
+		print("is_in_submenu ", is_in_submenu, " is_paused ", is_paused)
 		if is_in_submenu:
 			setting_ui.close_menu()
 			SoundManager.play_button_hover_sfx()
