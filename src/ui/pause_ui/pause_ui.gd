@@ -23,7 +23,7 @@ func _input(event: InputEvent) -> void:
 			is_paused = not is_paused
 			get_tree().paused = is_paused
 			visible = is_paused
-			if GameManager.checkpoint_activated:
+			if GameManager.checkpoint_activated_name_list.size() > 0:
 				retry_last_checkpoint_button.disabled = false
 			else:
 				retry_last_checkpoint_button.disabled = true

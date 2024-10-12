@@ -24,7 +24,7 @@ var level_finished = false
 var level_timer = 0
 var faes_killed = 0
 var retry_time = 0
-var checkpoint_activated = false
+var checkpoint_activated_name_list = []
 var checkpoint_n_agents = 0
 var checkpoint_position = Vector2.ZERO
 
@@ -74,7 +74,7 @@ func retry_level():
 	get_tree().reload_current_scene()
 
 func retry_last_checkpoint():
-	if not checkpoint_activated:
+	if checkpoint_activated_name_list.size() == 0:
 		retry_level()
 	retry_time += 1
 	get_tree().paused = false
@@ -86,7 +86,7 @@ func reset_level_data():
 	faes_killed = 0
 	level_finished = false
 	retry_time = 0
-	checkpoint_activated = false
+	checkpoint_activated_name_list = []
 	checkpoint_n_agents = 0
 	checkpoint_position = Vector2.ZERO
 

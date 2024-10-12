@@ -32,7 +32,7 @@ func show_game_over_screen():
 		GameManager.faes_killed,
 		GameManager.retry_time])
 	game_over_screen.visible = true
-	if GameManager.checkpoint_activated:
+	if GameManager.checkpoint_activated_name_list.size() > 0:
 		retry_checkpoint_button.disabled = false
 	else:
 		retry_checkpoint_button.disabled = true

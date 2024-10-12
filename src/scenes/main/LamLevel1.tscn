@@ -40,7 +40,7 @@ world_list = Array[String](["enemy", "hurt", "afraid", "together"])
 
 [node name="SwarmDirector" parent="." instance=ExtResource("2_7t3w0")]
 position = Vector2(152, 384)
-swarm_agent_count = 20
+swarm_agent_count = 50
 
 [node name="GateHolder" type="Node2D" parent="."]
 
@@ -74,6 +74,10 @@ position = Vector2(496, 640)
 
 [node name="Checkpoint" parent="CheckpointHolder" instance=ExtResource("15_5s6xv")]
 position = Vector2(1440, 664)
+
+[node name="Checkpoint2" parent="CheckpointHolder" instance=ExtResource("15_5s6xv")]
+position = Vector2(856, 120)
+rotation = 3.12959
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_ofayr")
