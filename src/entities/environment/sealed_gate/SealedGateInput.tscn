@@ -86,10 +86,6 @@ position = Vector2(-3, -11)
 shape = SubResource("CircleShape2D_g5b4a")
 debug_color = Color(0, 0.635406, 0.417574, 0.42)
 
-[node name="ReleaseAgentTimer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
-
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(0, -152)
 collision_layer = 128
@@ -99,6 +95,9 @@ collision_mask = 6
 position = Vector2(2, -5)
 shape = SubResource("RectangleShape2D_c3nsh")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_ea7nb")
+
 [connection signal="body_entered" from="InputArea" to="." method="_on_input_area_body_entered"]
+[connection signal="body_exited" from="InputArea" to="." method="_on_input_area_body_exited"]
 [connection signal="body_entered" from="SwarmTarget/TargetArea" to="." method="_on_target_area_body_entered"]
-[connection signal="timeout" from="ReleaseAgentTimer" to="." method="_on_release_agent_timer_timeout"]

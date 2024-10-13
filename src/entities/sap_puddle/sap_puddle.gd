@@ -12,6 +12,7 @@ class_name SapPuddle
 @onready var agent_markers_node: Node2D = $AgentMarkers
 @onready var agent_marker_scene: PackedScene = preload("res://src/entities/sap_puddle/AgentMarker.tscn")
 var is_consumed: bool = false
+var swarm_director: SwarmDirector
 
 
 # Called when the node enters the scene tree for the first time.
@@ -26,6 +27,7 @@ func _ready() -> void:
 			marker_pos = random_point_gen.get_random_point()
 		marker.position = marker_pos
 		agent_markers_node.add_child(marker)
+	swarm_director = GameManager.swarm_director
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -73,13 +75,18 @@ func regenerate() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if not is_consumed:
 		if body.get_parent() is SwarmDirector:
-			GlobalSFX.play_sfx_shuffled(SFX_sap_collected)
-			
-			collider.call_deferred("set_disabled", true)
-			is_consumed = true
-			
-			for marker: Marker2D in agent_markers_node.get_children():
-				GameManager.swarm_director.add_agent(marker.global_position)
+			if swarm_director.swarm_agent_count < swarm_director.max_agent_count:
+				GlobalSFX.play_sfx_shuffled(SFX_sap_collected)
+				collider.call_deferred("set_disabled", true)
+				is_consumed = true
+				for marker: Marker2D in agent_markers_node.get_children():
+					if swarm_director.swarm_agent_count < swarm_director.max_agent_count:
+						swarm_director.add_agent(marker.global_position)
+					else:
+						# TODO - add shake anim and sfx for when swarm is full
+						pass
+			else:
+				return
 			
 			var tween = get_tree().create_tween()
 			tween.tween_property(

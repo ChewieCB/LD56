@@ -205,17 +205,25 @@ func set_swarm_attributes(attributes: Dictionary) -> void:
 				agent.set(key, attributes[key])
 
 
-func release_all_agents_to_director():
+func release_agents_to_director():
+	var agents_to_erase: Array = []
 	for agent in swarm_agents:
-		agent.swarm_id = 0
-		swarm_director.swarm_agents.append(agent)
-		agent.target = swarm_director.target
-		agent.sprite.modulate = Color(1, 1, 1)
-		agent.collision_layer = int(pow(2, 2 - 1))
-		set_agent_normal(agent)
-	
-	swarm_agents = []
-	swarm_agent_count = 0
+		if GameManager.swarm_director.swarm_agent_count < GameManager.swarm_director.max_agent_count:
+			agent.swarm_id = 0
+			swarm_director.swarm_agents.append(agent)
+			swarm_director.swarm_agent_count = swarm_director.swarm_agents.size()
+			agent.target = swarm_director.target
+			agent.sprite.modulate = Color(1, 1, 1)
+			agent.collision_layer = int(pow(2, 2 - 1))
+			set_agent_normal(agent)
+			swarm_agents.erase(agent)
+			swarm_agent_count -= 1
+			# HACK hack horrible hack, re-design this from scratch with signals you shit
+			await get_tree().process_frame
+			GlobalSFX.play_sfx_shuffled(GameManager.swarm_director.SFX_agent_spawn)
+		else:
+			break
+
 
 func _on_distribution_normal_state_entered() -> void:
 	target_movement_speed = 230.0
@@ -247,4 +255,4 @@ func _on_disabled_state_entered() -> void:
 
 func _on_gather_area_body_entered(body: Node2D) -> void:
 	if body.get_parent() is SwarmDirector:
-		release_all_agents_to_director()
+		release_agents_to_director()
