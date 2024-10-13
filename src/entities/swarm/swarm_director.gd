@@ -142,12 +142,12 @@ func _physics_process(delta: float) -> void:
 		swarm_status_changed.emit()
 		state_chart.send_event("reset_distribution")
 	
-	if Input.is_action_just_pressed("DEBUG_add_agent"):
-		if swarm_agent_count < max_agent_count:
-			add_agent()
-	elif Input.is_action_just_pressed("DEBUG_remove_agent"):
-		if swarm_agents:
-			damage_agent(swarm_agents[randi_range(0, swarm_agents.size() - 1)], 2000)
+	#if Input.is_action_just_pressed("DEBUG_add_agent"):
+		#if swarm_agent_count < max_agent_count:
+			#add_agent()
+	#elif Input.is_action_just_pressed("DEBUG_remove_agent"):
+		#if swarm_agents:
+			#damage_agent(swarm_agents[randi_range(0, swarm_agents.size() - 1)], 2000)
 	
 	get_nav_path_for_swarm_agents(delta)
 

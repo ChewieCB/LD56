@@ -20031,12 +20031,12 @@ radius = 150.213
 metadata/_edit_vertical_guides_ = [-440.0]
 
 [node name="FollowCamera" parent="." node_paths=PackedStringArray("swarm_director") instance=ExtResource("1_7s35v")]
-position = Vector2(1899, 1636)
+position = Vector2(2744, 2523)
 swarm_director = NodePath("../SwarmDirector")
 
 [node name="SwarmDirector" parent="." instance=ExtResource("2_nemqd")]
-position = Vector2(2181, 1720)
-initial_agent_count = 45
+position = Vector2(3026, 2607)
+initial_agent_count = 50
 
 [node name="NPCSwarms" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -20049,7 +20049,7 @@ swarm_agent_count = 10
 metadata/_edit_lock_ = true
 
 [node name="GoalInput" parent="SealedGates" instance=ExtResource("3_nlblt")]
-position = Vector2(3206, 2919)
+position = Vector2(3209, 2938)
 n_agent_required = 90
 is_end_of_level = true
 
@@ -20110,6 +20110,7 @@ metadata/_edit_lock_ = true
 [node name="SetDressing" type="Node2D" parent="."]
 
 [node name="Guardian" type="Sprite2D" parent="SetDressing"]
+z_index = -12
 position = Vector2(3206, 2842)
 scale = Vector2(0.806035, 0.806035)
 texture = ExtResource("6_6qr23")
@@ -23070,6 +23071,17 @@ offset_bottom = 1873.0
 scale = Vector2(2, 2)
 text = "hold LMB to contract
 "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GateControls" type="Label" parent="LabelsPlaceholder"]
+offset_left = 3055.0
+offset_top = 2513.0
+offset_right = 3211.0
+offset_bottom = 2574.0
+scale = Vector2(2, 2)
+text = "Q to add sprite
+E to retrieve sprite"
 horizontal_alignment = 1
 vertical_alignment = 1
 

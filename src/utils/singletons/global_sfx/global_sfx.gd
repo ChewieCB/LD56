@@ -31,6 +31,11 @@ func play_sfx_shuffled(
 	)
 
 
+func play_sfx_staggered(sfx_array: Array[AudioStream], randomize_pitch: bool = false):
+	await get_tree().process_frame
+	play_sfx_shuffled(sfx_array, "", randomize_pitch)
+
+
 func play_batched_sfx(
 	sfx_array: Array[AudioStream], active_players: Array[AudioStreamPlayer],
 	max_sfx: int = 50, volume_db: float = 0.0, randomize_pitch: bool = false
