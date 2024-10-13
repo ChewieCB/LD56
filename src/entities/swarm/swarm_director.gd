@@ -24,7 +24,9 @@ var active_death_sfx_players: Array[AudioStreamPlayer]
 @export var swarm_agent_scene: PackedScene
 @export var invuln_flag: bool = true
 var swarms_agents_captured: int = 0
-@export var swarm_agent_count: int = 0:
+@export var max_agent_count: int = 50
+@export var initial_agent_count: int = 0
+var swarm_agent_count: int:
 	set(value):
 		swarm_agent_count = value
 		
@@ -100,15 +102,15 @@ func _ready() -> void:
 	if GameManager.checkpoint_activated_name_list.size() > 0:
 		swarm_agent_count = GameManager.checkpoint_n_agents
 		global_position = GameManager.checkpoint_position
+	current_swarm_attributes = SWARM_ATTRIBUTES_NORMAL
 	
 	if SFX_swarm_move:
 		active_movement_sfx_player = SoundManager.play_sound(SFX_swarm_move)
 		active_movement_sfx_player.volume_db = -80
 	
-	if swarm_agent_count > 0:
-		for _i in range(swarm_agent_count):
-			await get_tree().create_timer(swarm_agent_count / 100).timeout
-			add_agent()
+	for _i in range(initial_agent_count):
+		await get_tree().create_timer(swarm_agent_count / 100).timeout
+		add_agent()
 
 	await get_tree().physics_frame
 	for obstacle in get_tree().get_nodes_in_group("obstacles"):
@@ -140,12 +142,12 @@ func _physics_process(delta: float) -> void:
 		swarm_status_changed.emit()
 		state_chart.send_event("reset_distribution")
 	
-	
-	#if Input.is_action_just_pressed("DEBUG_add_agent"):
-		#add_agent()
-	#elif Input.is_action_just_pressed("DEBUG_remove_agent"):
-		#if swarm_agents:
-			#damage_agent(swarm_agents[randi_range(0, swarm_agents.size() - 1)], 2000)
+	if Input.is_action_just_pressed("DEBUG_add_agent"):
+		if swarm_agent_count < max_agent_count:
+			add_agent()
+	elif Input.is_action_just_pressed("DEBUG_remove_agent"):
+		if swarm_agents:
+			damage_agent(swarm_agents[randi_range(0, swarm_agents.size() - 1)], 2000)
 	
 	get_nav_path_for_swarm_agents(delta)
 

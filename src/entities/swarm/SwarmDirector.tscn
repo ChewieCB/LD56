@@ -33,7 +33,6 @@ SFX_swarm_contract = Array[AudioStream]([ExtResource("10_o0sva")])
 SFX_swarm_move = ExtResource("10_4e32d")
 state_chart = NodePath("StateChart")
 swarm_agent_scene = ExtResource("2_0de42")
-swarm_agent_count = 1
 
 [node name="TargetMarker" type="CharacterBody2D" parent="." groups=["SwarmLeader"]]
 z_index = 1
