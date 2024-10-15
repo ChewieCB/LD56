@@ -44,12 +44,16 @@ var swarm_agent_count: int = 0:
 		require_label.text = "{0}/{1}".format([swarm_agent_count, n_agent_required])
 		if swarm_agent_count == n_agent_required:
 			open_gate()
+			if name not in GameManager.opened_gate_list:
+				GameManager.opened_gate_list.append(name)
 var swarm_agents: Array = []
 var is_fulfilled = false
 
 
 func _ready() -> void:
 	require_label.text = "{0}/{1}".format([swarm_agent_count, n_agent_required])
+	if name in GameManager.opened_gate_list:
+		open_gate()
 
 
 func _on_input_area_body_entered(body: Node2D) -> void:
@@ -57,7 +61,6 @@ func _on_input_area_body_entered(body: Node2D) -> void:
 		return
 	if body is SwarmAgent:
 		if body.swarm_id == 0:
-			var agent: SwarmAgent = body as SwarmAgent
 			if not is_active:
 				is_active = true
 
@@ -101,7 +104,7 @@ func release_agent() -> void:
 func get_nearby_agents(nearby_agents) -> Array:
 	var sorted_agents = nearby_agents.filter(func(x): return x is SwarmAgent)
 	sorted_agents.sort_custom(
-		func(a, b): 
+		func(a, b):
 			var dist_a = a.global_position.distance_to(self.global_position)
 			var dist_b = b.global_position.distance_to(self.global_position)
 			return dist_a < dist_b
@@ -211,6 +214,6 @@ func release_all_stored_agents():
 	swarm_agent_count = 0
 
 
-func _on_input_area_body_exited(body: Node2D) -> void:
+func _on_input_area_body_exited(_body: Node2D) -> void:
 	if not input_area.get_overlapping_bodies():
 		is_active = false

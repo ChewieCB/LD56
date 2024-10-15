@@ -40,14 +40,15 @@ world_list = Array[String](["enemy", "hurt", "afraid", "together"])
 
 [node name="SwarmDirector" parent="." instance=ExtResource("2_7t3w0")]
 position = Vector2(152, 384)
-swarm_agent_count = 50
+initial_agent_count = 50
 
 [node name="GateHolder" type="Node2D" parent="."]
 
-[node name="SealedGateInput" parent="GateHolder" instance=ExtResource("3_oxghv")]
+[node name="SealedGateInput" parent="GateHolder" node_paths=PackedStringArray("sealed_gate_doors") instance=ExtResource("3_oxghv")]
 position = Vector2(1648, 216)
 rotation = -1.57079
 n_agent_required = 40
+sealed_gate_doors = [NodePath("../SealedGateDoor")]
 
 [node name="SealedGateDoor" parent="GateHolder" instance=ExtResource("4_esryw")]
 position = Vector2(1704, 416)
