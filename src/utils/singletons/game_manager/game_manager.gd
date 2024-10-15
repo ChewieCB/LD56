@@ -25,6 +25,7 @@ var level_timer = 0
 var faes_killed = 0
 var retry_time = 0
 var checkpoint_activated_name_list = []
+var opened_gate_list = []
 var checkpoint_n_agents = 0
 var checkpoint_position = Vector2.ZERO
 
@@ -88,6 +89,7 @@ func reset_level_data():
 	level_finished = false
 	retry_time = 0
 	checkpoint_activated_name_list = []
+	opened_gate_list = []
 	checkpoint_n_agents = 0
 	checkpoint_position = Vector2.ZERO
 

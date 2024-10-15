@@ -31,6 +31,8 @@ var keybindable_action_list = {
 	"pause_menu": "Pause Menu",
 	"huddle": "Huddle/Clump",
 	"spread": "Spread",
+	"DEBUG_add_agent": "Banking wisps",
+	"DEBUG_remove_agent": "Retrieve wisps"
 }
 var is_remapping = false
 var action_to_remap = null

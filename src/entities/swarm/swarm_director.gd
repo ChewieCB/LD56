@@ -100,7 +100,7 @@ func _ready() -> void:
 	debug_status_sprite.self_modulate = Color.GREEN
 	GameManager.swarm_director = self
 	if GameManager.checkpoint_activated_name_list.size() > 0:
-		swarm_agent_count = GameManager.checkpoint_n_agents
+		initial_agent_count = GameManager.checkpoint_n_agents
 		global_position = GameManager.checkpoint_position
 	current_swarm_attributes = SWARM_ATTRIBUTES_NORMAL
 	
